@@ -1,0 +1,144 @@
+\documentclass[12pt, a4paper, twoside]{article}
+
+
+\usepackage{microtype}
+\usepackage{newpxtext, newpxmath}
+\usepackage[T1]{fontenc}
+%\usepackage[margin=3cm]{geometry}
+\usepackage{geometry}
+  \geometry{
+    includemp,
+    inner=2.5cm,
+    outer=1.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    marginparwidth=3cm,
+  }
+\usepackage{setspace}
+  \setstretch{1.1}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{fontawesome}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[font=small, labelfont=bf]{caption}
+
+%\usepackage{xspace}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref}
+  \hypersetup{
+    colorlinks=true,
+    linkcolor=BrickRed,
+    filecolor=BrickRed,
+    citecolor=BrickRed,
+    urlcolor=RoyalBlue,
+  }
+\usepackage[figure]{hypcap}
+\usepackage[super, comma]{natbib}
+  \setlength{\bibsep}{0.3ex plus 0.2ex}
+  \renewcommand{\bibfont}{\small}
+%\usepackage[disable]{todonotes}
+\usepackage{todonotes}
+  \setuptodonotes{
+    backgroundcolor=lightgray!50,
+    linecolor=lightgray,
+    bordercolor=none,
+    tickmarkheight=0.3ex,
+  }
+  \newcommand{\todoin}[2][]{\todo[inline, #1]{#2}}
+\usepackage{marginnote}
+  \let\marginpar\marginnote
+\usepackage[left]{lineno}  % needed for Nature
+%  \linenumbers
+
+
+% journals
+\newcommand{\mnras}{{\em Mon. Not. Roy. Astron. Soc. }}
+\newcommand{\apjl}{{\em Astrophys. J. Let. }}
+\newcommand{\apjs}{ApJS}
+\newcommand{\jcap}{JCAP}
+\newcommand{\nat}{{\em Nature}}
+\newcommand{\physrep}{{\em Phys. Rept. }}
+\newcommand{\aap}{{\em Astron. Astrophys. }}
+\newcommand{\aj}{AJ }
+\newcommand{\apj}{ApJ}
+\newcommand{\pasp}{PASP}
+\newcommand{\pasj}{PASJ}
+\newcommand{\prl}{\em Phys. Rev. Lett. }
+\newcommand{\ssr}{\em Space Sci. Rev.}
+\newcommand{\araa}{Annual Review of Astron and Astrophys}
+\def\prd{{\em Phys. Rev. }{\bf D }}
+\def\pr{{Phys.\ Rev.\ }}
+\def\astropart{{Astro-particle Phys.~}}
+\def\rvmp{{Rev.\ Mod.\ Phys.\ }}
+
+\renewcommand{\figureautorefname}{Figure}
+
+% useful commands
+\bmdefine{\vtheta}{\theta}
+\newcommand{\As}{A_\mathrm{s}}
+\newcommand{\ns}{n_\mathrm{s}}
+\newcommand{\Omegam}{\Omega_\mathrm{m}}
+\newcommand{\Omegac}{\Omega_\mathrm{c}}
+\newcommand{\Omegab}{\Omega_\mathrm{b}}
+\newcommand{\OmegaL}{\Omega_\Lambda}
+\newcommand{\zetaUV}{\zeta_\mathrm{UV}}
+\newcommand{\HI}{\mathrm{HI}}
+\newcommand{\He}{\mathrm{He}}
+\newcommand{\HeII}{\mathrm{HeII}}
+\newcommand{\e}{\mathrm{e}}
+%\newcommand{\Mpc}{\mathrm{Mpc}}
+\newcommand{\re}{\mathrm{re}}
+\newcommand{\reio}{\mathrm{reio}}
+\newcommand{\rec}{\mathrm{rec}}
+\newcommand{\ap}{\alpha}
+\newcommand{\tilt}{\beta}
+\newcommand{\ar}{\tilde{a}}
+\newcommand{\Gomp}{\mathrm{Gomp}}
+
+\newcommand{\paulo}[1]{{\bfseries\textcolor{cyan}{[PMC: #1]}}}
+\newcommand{\PMCtodo}[2][]{\todo[backgroundcolor=Green!20, linecolor=Green!50, #1]{PMC: #2}}
+\newcommand{\YL}[1]{\textcolor{Bittersweet}{#1}}
+\newcommand{\YLtodo}[2][]{\todo[backgroundcolor=Bittersweet!20, linecolor=Bittersweet!50, #1]{YL: #2}}
+
+
+% title is limited to 75 characters so think carefully
+\title{Five parameters are all you need\\(in $\Lambda$CDM)\YLtodo{standard
+cosmology or just $\Lambda$CDM, if we want to be precise?}}
+
+
+\author{The Authors}
+
+
+\date{}
+
+
+\begin{document}
+\maketitle
+
+\flushbottom
+
+
+% requirements for abstract are sort of annoying
+\input{abstract.tex}
+
+
+% main article (aiming for Nature Astronomy limited to 2500 words and 4 figures.
+\input{body.tex}
+
+
+\appendix
+% extra material limited to 3000 words
+\input{methods.tex}
+
+
+\input{acknowledgements.tex} % will change this to include all others declarations that are required.
+
+
+\bibliographystyle{JHEP}
+{\singlespacing
+\bibliography{main}
+}
+
+
+\end{document}
