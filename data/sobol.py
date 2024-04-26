@@ -87,7 +87,7 @@ def plt_proj(filename, max_rows=None, max_cols=None,
             axes[i, j].remove()
 
     filename = os.path.splitext(filename)[0] + str(n) + '.pdf'
-    fig.savefig('../figs/' + filename)
+    fig.savefig(filename)
     plt.close(fig)
 
 
