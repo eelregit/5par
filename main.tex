@@ -22,8 +22,6 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage[font=small, labelfont=bf]{caption}
-
-%\usepackage{xspace}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{hyperref}
   \hypersetup{
@@ -37,6 +35,8 @@
 \usepackage[super, comma]{natbib}
   \setlength{\bibsep}{0.3ex plus 0.2ex}
   \renewcommand{\bibfont}{\small}
+\usepackage{authblk}
+  \renewcommand\Affilfont{\itshape\normalsize}
 %\usepackage[disable]{todonotes}
 \usepackage{todonotes}
   \setuptodonotes{
@@ -103,11 +103,15 @@
 
 
 % title is limited to 75 characters so think carefully
-\title{Five parameters are all you need\\(in $\Lambda$CDM)\YLtodo{standard
-cosmology or just $\Lambda$CDM, if we want to be precise?}}
+\title{Five parameters are all you need\\(in $\Lambda$CDM)\vspace{3ex}}
 
 
-\author{The Authors}
+\author[1]{Paulo Montero Camacho\thanks{\texttt{pmontero@pcl.ac.cn}}}
+\author[1]{Yin Li\thanks{\texttt{eelregit@gmail.com}}}
+\author[2]{Miles Cranmer}
+\affil[1]{Department of Mathematics and Theory, Peng Cheng Laboratory,
+\newline Shenzhen, Guangdong, China}
+\affil[2]{Data Intensive Science, University of Cambridge, Cambridge, UK}
 
 
 \date{}
@@ -116,11 +120,10 @@ cosmology or just $\Lambda$CDM, if we want to be precise?}}
 \begin{document}
 \maketitle
 
-\flushbottom
-
 
 % requirements for abstract are sort of annoying
 \input{abstract.tex}
+\newpage
 
 
 % main article (aiming for Nature Astronomy limited to 2500 words and 4 figures.
