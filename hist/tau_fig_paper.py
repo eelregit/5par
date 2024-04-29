@@ -21,7 +21,7 @@ for i in range(len(tau)):
 # handles
 handles, p_labels = ax1.get_legend_handles_labels()
 handles = [h[0] for h in handles]
-ax1.set_xlabel(r'$\tau$')
+ax1.set_xlabel(r'$\tau_{\rm reio}$')
 ax1.set_yticklabels([])
 ax1.set_yticks([])
 ax1.legend(handles, labels, loc='center left',bbox_to_anchor=(1.,0.5))
