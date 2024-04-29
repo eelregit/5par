@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 """
     Generate current tau constraints taken from Planck data (different analyses most have reccent CMB data some even include WMAP)
-    
+
 """
 
 tau = np.array([0.051, 0.054, 0.058, 0.059, 0.066, 0.069, 0.080])
@@ -25,4 +25,4 @@ ax1.set_xlabel(r'$\tau_{\rm reio}$')
 ax1.set_yticklabels([])
 ax1.set_yticks([])
 ax1.legend(handles, labels, loc='center left',bbox_to_anchor=(1.,0.5))
-plt.savefig('../figs/tau_fig.pdf',bbox_inches="tight")
+plt.savefig('../figs/tau_fig.pdf')
