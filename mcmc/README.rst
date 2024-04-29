@@ -18,16 +18,16 @@ Chaining log:
 * modify thermodynamics_reionization_fuction to include gomp instead of
   tanh
 * adjust z_start in class:
-    * z_start = z_mid in inputs hopfully not confusing
+  + z_start = z_mid in inputs hopfully not confusing
 * achieve functional code
 * preliminary comparison of Gomp vs Tanh (look at Cl's)
-    * matched optical depths (0.05660 vs 0.05657),
-    * situation would be different if matched z(xHI=0.5) since tanh reio
-      does a poor job
+  + matched optical depths (0.05660 vs 0.05657),
+  + situation would be different if matched z(xHI=0.5) since tanh reio
+    does a poor job
 * Allow for tau_reio input (with As): find pivot with bisection
 * Choose actual pivot/tilt implementation
-    * use 0226 and 0227 (simple)
+  + use 0226 and 0227 (simple)
 * cobaya test run
-    * which likelihood?
+  + which likelihood?
 * bias
 * constraint improvement
