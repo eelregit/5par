@@ -40,7 +40,7 @@ $\vtheta$-space, with the following lower and upper bounds:
 \vtheta_\mathrm{max} &= \{0.90, 1.00, 0.73, 0.06, 0.40, 30\}.
 \end{align}
 %
-The distribution of our simulations is displayed in \autoref{fig:sobol}.
+The distribution of our simulations is displayed in \Cref{fig:sobol}.
 
 \begin{figure}
 \centering
@@ -74,9 +74,9 @@ reionizations contribute to the Thomson optical depth to reionization
 $\tau_\reio$, although HeII ionization contribute relatively little in
 comparison to HI and HeI ionizations \cite{Liu2016}.
 
-To include the impact of helium reionization in our Gompertz CLASS, we
-follow the approach used for the $\tanh$ model, i.e.\ the free electron
-fraction $x_\e$is given by
+To include the impact of helium reionization in our Gompertz
+\texttt{CLASS}, we follow the approach used for the $\tanh$ model, i.e.\
+the free electron fraction $x_\e$is given by
 %
 \begin{equation}
 \label{eq:xe_H_He}
@@ -85,7 +85,7 @@ x_\e =  \left(1 + \frac{Y_\He}{C (1 - Y_\He)} - x^\rec_\e\right) x_\e^\Gomp + x^
 %
 where $Y_\He$ is the helium mass fraction, $C\approx4$ is the helium to
 hydrogen mass ratio, $x_\e^\Gomp$ corresponds to the contribution of
-free electrons due to Eq.~(\ref{eq:uni}), and $x^\rec_\e \approx
+free electrons due to \cref{eq:uni}, and $x^\rec_\e \approx
 10^{-4}$ is the leftover free electrons from after recombination.
 
 Given the relatively small impact on $\tau_\reio$, the current
@@ -102,7 +102,7 @@ x_\e^\mathrm{Tot} = x_\e + \frac{Y_\He}{2C(1 - Y_\He)} \left(\tanh{\left(\frac{z
 where $z_\re^\HeII = 3.5$ and $\Delta z^\HeII = 0.5$ are the midpoint
 and duration of the second helium reionization, respectively.
 Note that the chosen values correspond to the default values used by
-CLASS.
+\texttt{CLASS}.
 
 \subsection*{Shape}
 \label{ssec:shape}
@@ -113,12 +113,12 @@ caption/body of the paper.}
 
 \begin{figure}
 \centering
-\includegraphics{figs/shape_6.pdf}
+\includegraphics[width=0.6\linewidth]{figs/shape_6.pdf}
 \caption{\textbf{Universal shape for $x_\HI$.}
 \emph{(Top)} $x_\HI$ profiles as cumulative probability distribution as
 a function of scale factor and rescale $\ar = (a/\ap)^\tilt$.
 The blue curve correspond to the Gompertz curve with a six-degree
-polynomial fit presented in Eq.~(\ref{eq:uni}).
+polynomial fit presented in \cref{eq:uni}.
 \emph{(Middle)} Probability density function, that is the derivative of
 the cumulative probability distribution with respect to $\ln\ar$.
 \emph{(Bottom)} Inverse of Gompertz curve as a function of rescale.
@@ -128,7 +128,7 @@ spread of our $x_\HI$ data.}
 \end{figure}
 
 
-\subsection*{PySR score}
+\subsection*{\texttt{PySR} score}
 \label{ssec:pysr}
 
 SR learns from data using analytic expressions, unlike traditional
@@ -193,18 +193,18 @@ from cosmological dependence to reionization history in these results.}
 \end{table}
 
 
-\subsection*{PySR alternative mapping}
+\subsection*{\texttt{PySR} alternative mapping}
 \label{ssec:0226}
 
 The mapping between neutral hydrogen profiles and cosmology is not
 unique.
-Through a run of PySR,  we generate families of expressions capable of
-representing the simulated $x_\HI$ data with increasing complexity and
-slightly improved performance (lower loss).
-See \ref{ssec:pysr} for details on selecting the best-performing
+Through a run of \texttt{PySR}, we generate families of expressions
+capable of representing the simulated $x_\HI$ data with increasing
+complexity and slightly improved performance (lower loss).
+See \nameref{ssec:pysr} for details on selecting the best-performing
 analytic expression.
 Evidently, the resulting expressions for the tilt $\tilt(\vtheta)$ and
-pivot $\ap(\vtheta)$ in Eq.~(\ref{eq:map}), obtained using symbolic
+pivot $\ap(\vtheta)$ in \cref{eq:map}, obtained using symbolic
 regression, depend on the available simulated data.
 
 To investigate the impact of the sampling of simulated data, which
@@ -225,17 +225,17 @@ Furthermore, the pivot is given by
 \ln\ap(\vtheta) = (1.0389123 + \sigma_8) (\Omegab - \Omegam h  - \ns).
 \end{equation}
 %
-Unsurprisingly, Eq.~(\ref{eq:SR0226}) recovers the cosmological trends
-present in Eq.~(\ref{eq:SR}).
+Unsurprisingly, \cref{eq:SR0226} recovers the cosmological trends
+present in \cref{eq:SR}.
 Specifically, increasing $\ns$, $\Omegam$, and $\sigma_8$ leads to an
 earlier reionization scenario, while a higher value of $\Omegab$
 slightly delays reionization.
 Furthermore, the impact of the Hubble constant is once again linked to
 the matter density, albeit not in the same manner as in
-Eq.~(\ref{eq:SR}).
-This is likely evidence that the role of $h$ is limited, and PySR
-considers its influence in conjunction with $\Omegam$ without increasing
-the complexity of the analytic expression.
+\cref{eq:SR}.
+This is likely evidence that the role of $h$ is limited, and
+\texttt{PySR} considers its influence in conjunction with $\Omegam$
+without increasing the complexity of the analytic expression.
 
 \begin{table}
 \centering
@@ -261,23 +261,23 @@ $z_\re$ & 7.40 & 7.41 & 7.62 $\pm$ 0.74 & 7.67 $\pm$ 0.73 \\
 \bottomrule
 \end{tabular}}
 \caption{\textbf{Parameter constraints from Planck CMB II.}
-Similar to Table \ref{tab:tau_comp} but including the cosmological
-mapping to reionization histories.
+Similar to \Cref{tab:tau_comp} but including the cosmological mapping
+to reionization histories.
 Note that the midpoint of reionization $z_\re$ is not a derived
 parameter of the model nor a sampled parameter in the Gompertz models;
-instead, it is obtained directly with Eq.~(\ref{eq:uni}).
+instead, it is obtained directly with \cref{eq:uni}.
 Furthermore, the $\tanh$ model included here samples over $z_\re$
 instead of $\tau_\reio$.}
 \label{tab:para}
 \end{table}
 
-Applying Eq.~(\ref{eq:SR0226}) we reanalyze the CMB data following the
-same approach as with Eq.~(\ref{eq:SR}).
-The results are summarized in Table \ref{tab:para}.
+Applying \cref{eq:SR0226} we reanalyze the CMB data following the
+same approach as with \cref{eq:SR}.
+The results are summarized in \Cref{tab:para}.
 Comparing these findings to our previous results, we observe strikingly
 similar values for all cosmological parameters, albeit with smaller
 deviations from the Planck results.
 The consistency between our results using the full $x_\HI$ data and
 those using only half the data indicates that our symbolic
 regression-based mapping performs well given the priors of our simulated
-data (see \ref{ssec:sims}).
+data (see \nameref{ssec:sims}).

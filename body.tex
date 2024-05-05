@@ -53,7 +53,7 @@ without affecting high-$\ell$ measurements has proven challenging.
 This challenge may ultimately require adopting a comprehensive Bayesian
 framework to jointly consider cosmology, astrophysics, and instrument
 systematics \cite{Paradiso2023}.
-\autoref{fig:tau} illustrates current representative constraints on
+\Cref{fig:tau} illustrates current representative constraints on
 $\tau_\reio$.\YLtodo{feels a bit out of place here}
 
 \begin{figure}
@@ -65,16 +65,15 @@ data.}
 The error bars indicate the 1$\sigma$ uncertainties.
 Various analyses may employ distinct data sets or vary in the parameters
 considered.
-For instance, the inclusion of WMAP data in Refs.
-\cite{Natale2020, Paradiso2023} (circle and square) or ACT in
-combination with other external data sets \cite{Giare2023} (triangle),
-expanded sky coverage \cite{Paradiso2023} (square), incorporation of
-high-$\ell$ data \cite{Pagano2020, Planck2020a, Giare2023} (pentagon,
-star, and triangle),
-marginalization over small set of strongly correlated parameters
-\cite{Natale2020} (circle), and the implementation of an end-to-end
-Bayesian framework that marginalizes over astrophysics and instrumental
-systematics \cite{Paradiso2023} (square).}
+For instance, the inclusion of WMAP data in Refs.~ \cite{Natale2020,
+Paradiso2023} (circle and square) or ACT in combination with other
+external data sets \cite{Giare2023} (triangle), expanded sky coverage
+\cite{Paradiso2023} (square), incorporation of high-$\ell$ data
+\cite{Pagano2020, Planck2020a, Giare2023} (pentagon, star, and
+triangle), marginalization over small set of strongly correlated
+parameters \cite{Natale2020} (circle), and the implementation of an
+end-to-end Bayesian framework that marginalizes over astrophysics and
+instrumental systematics \cite{Paradiso2023} (square).}
 \label{fig:tau}
 \end{figure}
 
@@ -82,14 +81,15 @@ Given the challenges posed by $\tau_\reio$ in CMB analyses and the
 anticipated advancements in constraining the reionization timeline
 \cite{Montero2021, Hera2022}, now is an opportune moment to reassess its
 role.
-Cosmic reionization should be uniquely determined given a specific
+In theory, cosmic reionization is uniquely determined given a specific
 cosmology, i.e.\ by the other five cosmological parameters.
 Specifically, the evolution of the global fraction of neutral hydrogen
 can be written as
 %
 \begin{equation}
 \label{eq:premise}
-x_\HI = f(\sigma_8, \ns, h, \Omegab, \Omegam) \quad \Rightarrow \quad
+x_\HI(a) = f(a; \sigma_8, \ns, h, \Omegab, \Omegam)
+\quad \Rightarrow \quad
 \tau_\reio = g(\sigma_8, \ns, h, \Omegab, \Omegam),
 \end{equation}
 %
@@ -97,16 +97,15 @@ where $\ns$, $h$, $\Omegab$, and $\Omegam$ are the tilt of the
 primordial power spectrum, dimensionless Hubble constant, and present
 baryon and matter densities, respectively.
 $\sigma_8$ is the present linear rms relative density fluctuation in a
-sphere of radius $8 h^{-1}$ Mpc.
-In principle, This parametrization chosen for convenience fully
-determines $x_\HI$, but the incomplete understanding of cosmic
-reionization complicates this mapping, necessitating the introduction of
-$\tau_\reio$ in CMB analyses.
+sphere of radius $8 \, h^{-1}\mathrm{Mpc}$.
+This parametrization chosen for convenience fully determines $x_\HI$,
+but the incomplete understanding of cosmic reionization obscures this
+mapping, necessitating the introduction of $\tau_\reio$ in CMB analyses.
 However, our understanding of the astrophysical processes governing
-reionization has significantly improved
-\cite{Gnedin2022, Kannan2022, Murray2020, Fan2023} since the inclusion
-of $\tau_\reio$ became a standard practice.
-Ongoing and forthcoming observations promise to further refine our
+reionization has significantly improved \cite{Gnedin2022, Kannan2022,
+Murray2020, Fan2023} since the inclusion of $\tau_\reio$ became a
+standard practice.
+Ongoing and forthcoming observations promise to further our
 understanding and reduce inherent modeling uncertainties.
 Motivated by these developments, we use symbolic regression (SR)
 \cite{Cranmer2023} to construct a mapping between cosmology and
@@ -114,14 +113,14 @@ reionization timeline, aiming to demote $\tau_\reio$ from an independent
 to a derived cosmological parameter.
 
 Accurately measuring the optical depth to reionization could
-significantly enhance tighten CMB parameter constraints, especially as
+significantly tighten cosmological parameter constraints, especially as
 $\tau_\reio$ remains the only independent cosmological parameter not
 constrained to sub-percent precision \cite{Planck2020b}.
 To achieve this precision, sensitivity to E-mode polarization at levels
-of $\lesssim 10^{-2} \ \mu$K$^2$ and meticulous control of systematic
+$\lesssim 10^{-2} \, \mu$K$^2$ and meticulous control of systematic
 effects and foregrounds residuals are essential.
 
-Eq.~(\ref{eq:premise}) introduces a novel avenue to constrain cosmology
+\cref{eq:premise} introduces a novel avenue to constrain cosmology
 by examining the dependence of $x_\HI(z)$ on cosmological parameters.
 This mapping can enhance parameter constraints and shed light on
 reionization astrophysics.
@@ -132,77 +131,82 @@ $x_\HI$.
 
 \section*{Results}
 
-Here, we present a universal shape for the evolution of the neutral
-hydrogen as a function of cosmology, derived through SR on simulated
+Here, we present a universality in the neutral hydrogen time evolution,
+and derive through SR its dependence on cosmology on simulated
 reionization histories from 21cmFAST \cite{Murray2020}.
-We integrate this shape into CLASS \cite{Blas2011}, a popular Boltzmann
-solver for CMB analyses.
-We then evaluate the modified CLASS alongside cobaya \cite{Torrado2020},
-a speed-aware sampler\footnote{With fast-dragging as in
-\cite{Neal2005}.} \cite{Lewis2002, Lewis2013}, showcasing its ability to
+We integrate this shape into \texttt{CLASS} \cite{Blas2011}, a popular
+Boltzmann solver for CMB analyses.
+We then evaluate the modified \texttt{CLASS} alongside \texttt{Cobaya}
+\cite{Torrado2020}, a speed-aware sampler\footnote{With fast-dragging as
+in \cite{Neal2005}.} \cite{Lewis2002, Lewis2013}\YLtodo{dragging? fast-slow? vs cov}, showcasing its ability to
 recover parameter constraints from CMB data, including `TTTEEE' +
 lensing likelihoods \cite{Planck2020c, Planck2020d} (see
-\autoref{fig:tg}).
+\Cref{fig:tg}).
 Finally, we demonstrate cosmological gains by computing $\tau_\reio$ as
-a derived parameter using our approach -- Eq.~(\ref{eq:premise}) --
+a derived parameter using our approach -- \cref{eq:premise} --
 compared to sampling over $\tau_\reio$ using the conventional $\tanh$
 model \cite{Lewis2008}.
-We summarize our strategy in \autoref{fig:big}.
+We summarize our strategy in \Cref{fig:big}.
 
 \begin{figure}
 \centering
 \includegraphics[width=\linewidth]{figs/big_fig.pdf}
 \caption{\textbf{Strategy to demote $\tau_\reio$ to derived parameter.}
-\emph{a)} Sobol sampling of 5 cosmological parameter and 1 astrophysical
-one (see \autoref{fig:sobol} in extended data).
-\emph{b)} Generated $x_\HI$ profiles as a function of scale factor and
-sampled parameters.
-\emph{c)} We determine the mapping, i.e.\ the rescale, between
-parameters and $x_\HI$ profiles using symbolic regression.
-\emph{d)} A universal shape is computed using the rescale and the
-Gompertz curve.
-The lower panel showcases the distribution of the residuals, we fit the
-residuals with a six-degree polynomial.
-\emph{e)}  CMB angular power spectra.
-The model prediction is obtained using classy while the observational
-data comes from the Planck likelihoods.
-\emph{f)} We use cobaya to make the inference using Monte Carlo Markov
-Chain sampler.}
+\emph{a)} Sobol sampling of $\vtheta$ comprising 5 cosmological and 1
+astrophysical parameters (see \Cref{fig:sobol} in Extended Data).
+\emph{b)} Simulated $x_\HI$ timelines as a function of $\vtheta$ and
+scale factor $a$.
+\emph{c)} With symbolic regression, we optimize the mapping from
+$\vtheta$ to the rescaling parameters that bring the universality.
+\emph{d)} We model the universal shape (upper panel) as a composition of
+the Gompertz function and a low-degree polynomial (lower panel).
+\emph{e)} Planck CMB data we re-analyze.
+\emph{f)} We infer the parameter constraints using Monte Carlo Markov
+Chain.}
+\YLtodo[inline]{replace Symb arrow label by ``to be rescaled by'',
+change c) to pivot $\ap(\vtheta)$ \& tilt $\tilt(\vtheta)$ by symbolic
+regression. e) should have lensing too? Resize and re-position the cube
+in a)}
 \label{fig:big}
 \end{figure}
 
-To achieve our goal outlined in Eq.~(\ref{eq:premise}), we construct a
+To achieve our goal outlined in \cref{eq:premise}, we construct a
 universal shape for $x_\HI$.
-All $x_\HI(z)$ profiles share this shape, with differences between
-scenarios being mere rescalings or translations.
-Reionization causes $x_\HI$ to transition from near 1 to effectively 0,
-making a sigmoid function suitable.
-The asymmetric nature of reionization history
-\cite{Trac2018, Doussot2019} suggests a Gompertz curve might be better
-suited than a symmetric $\tanh$ transition, providing an early start and
-rapid completion.
-The Gompertz curve, often used to model age-dependent human mortality
-\cite{Gompertz1825}, fulfills the requirements as a sigmoid function
-with the desired asymmetry.
+All $x_\HI(a)$ profiles share this shape, with differences between
+scenarios being mere translations and rescalings.
+Reionization causes $x_\HI$ to reduce from near 1 to effectively 0 via a
+sigmoid transition.
+The standard $\tanh$ function is symmetric in nature and not flexible
+enough to provide the early start and rapid completion perferred by the
+reionization history \cite{Trac2018, Doussot2019}.
+The Gompertz curve, an asymmetric sigmoid function often used to analyze
+age-dependent human mortality \cite{Gompertz1825}, proves a good model
+the survival of neutral hydrogen too.
+\YLtodo[inline]{add more astrophy explaining e.g.\ why not flipped Gomp}
 
-The foundational principle behind the universal shape for $x_\HI$ is
-treating it as a cumulative probability distribution.
-This insight allows us to handle its derivative with respect to $y$ as a
-probability density function (PDF), where $y = \ln\ar$ represents both
-time evolution and peak location.
-This PDF should apply to different reionization scenarios, although its
-pivot and tilt may depend on cosmology.
-Therefore, $\ar$ acts as a rescaled scale factor mapping cosmological
-parameters to reionization history.
-We demonstrate this rescale in \autoref{fig:shape} in the extended data.
-Essentially, cosmology impacts the \emph{mean} of the distribution, not
-its shape.
+One way to uncover the universality is to view each $x_\HI$ scenario as
+a cumulative probability distribution in $- \ln a$.
+With this insight, we can translate and rescale each timeline using the
+mean and variance of its corresponding probability density function
+(PDF), i.e.\ $- \mathrm{d}x_\HI / \mathrm{d}\ln a$, and discover the
+existence of a universal shape followed by all scenarios.
+Therefore, cosmology only impacts the translation and rescaling
+parameters of each timeline, not its shape.
 
-To enhance the flexibility of our Gompertz curve, we introduce a
-six-degree polynomial in $\ln\ar$ to reduce residuals and improve the
-separation of time evolution from cosmological dependence.
-This combined approach, using Gompertz and the PDF perspective,
-parametrizes the evolution of HI as follows
+However, with the PDF trick, some $x_\HI$'s can deviate artificially
+from universality, due to their incomplete reionization given our broad
+range of simulated scenarios.
+To address this, we adopt a better appoarch to jointly fit the global
+shape and the 2 individual parameters of each $x_\HI$.
+Our shape model constitutes the Gompertz function composed with a
+5th-degree polynomial, in the translated-and-rescaled time $\ln\ar
+\equiv \beta (\ln a - \ln\ap)$.
+And we are free to set the polynomial constant to 0 and its linear
+coefficient to 1 by utilizing their respective degeneracy with $\ln\ap$
+and $\tilt$.
+
+The complete model parametrizes the HI evolution as follows (also see
+\Cref{fig:shape} in the Extended Data):
 %
 \begin{align}
 \label{eq:uni}
@@ -220,107 +224,112 @@ P_5(\ar) &= {\textstyle\sum}_{m=0}^5 \, c_m \ln^m\!\ar, \\
 \end{align}
 %
 \YLtodo{number of sig figs}
-where $\vtheta$ corresponds to cosmological parameters, $\ap(\vtheta)$
-represents the pivot of the rescaling, and $\tilt = 8.290$ is the
-rescaling tilt, which, according to our 21cmFAST simulations, appears
-constant.
+where $\vtheta$ denotes to cosmological parameters\YLtodo{clarify notation w or wo $\zetaUV$}, $\ap(\vtheta)$
+is the power-law pivot (or logarithmic translation), and $\tilt = 8.290$
+is the rescaling tilt, which, according to our 21cmFAST simulations,
+appears constant.
 This lack of cosmological dependence may stem from 21cmFAST's treatment
 of reionization astrophysics.
-See \ref{ssec:helium} for specifics on implementing HeI and HeII
-reionization.\PMCtodo{What do you mean by sig here?}
+See \nameref{ssec:helium} for specifics on implementing HeI and HeII
+reionization.
 
 Before fully leveraging our formalism to extract the cosmological
-dependence in the rescale of Eq.~(\ref{eq:uni}) and potentially
-eliminating the need for $\tau_\reio$ in CMB analyses, we first
-implement the Gompertz shape in CLASS and confirm its agreement with the
-conventional $\tanh$ model.
+dependence in the rescale\YLtodo{?} of \cref{eq:uni} and eliminating the
+need for $\tau_\reio$ in CMB analyses, we first implement the Gompertz
+shape with independent $\tau_\reio$ in \texttt{CLASS} and confirm its
+agreement with the conventional $\tanh$ model.
 Using Planck 2018 likelihoods `TTTEEE' \cite{Planck2020c} and CMB
 lensing \cite{Planck2020d}, we sample typical cosmological parameters
-with cobaya \cite{Torrado2020}, including $\tau_\reio$.
-The sampler runs until the Gelman-Rubin statistic \cite{Lewis2013}
+with \texttt{Cobaya} \cite{Torrado2020}, including $\tau_\reio$.
+The sampler runs until the Gelman-Rubin statistic \cite{Lewis2013}\YLtodo{cite Gelman and Rubin instead}
 satisfies $R - 1 < 0.2$ for the between-chain variance of the confidence
 intervals.
 We repeat this for $\tanh$ reionization.
-Sampling over $\tau_\reio$ implies that CLASS finds the reionization
-history producing the desired optical depth using bisection.
+Sampling over $\tau_\reio$ implies that \texttt{CLASS} finds the
+reionization history producing the desired optical depth using
+bisection.\YLtodo{missing logic and over detailed}
 For $\tanh$ reionization, this varies the midpoint, while for Gompertz,
 it varies the pivot in the rescale, $\ln\ap$, to match the input
-$\tau_\reio$.
+$\tau_\reio$.\YLtodo{move this upward for logic}
 
-\autoref{fig:tg} and Table \ref{tab:tau_comp} in the extended data
-summarize the recovery experiment.
+\Cref{fig:tg} and \Cref{tab:tau_comp} in the Extended Data summarize the
+recovery\YLtodo{validating? and explain briefly in prev paragraph why obviously so} experiment.
 The only notable differences in inferred parameters are in the midpoint
 of reionization $z_\re$.
 The Gompertz scenario suggests a more delayed reionization by over
 $1\sigma$, with $z_\re = 6.81 \pm 0.68$ compared to $7.67 \pm 0.75$ for
-the $\tanh$ model.
-Our results align with recent high-$z$ quasar observations
+the $\tanh$ model, in alignment with recent high-$z$ quasar observations
 \cite{Keating2020}.
 All other cosmological parameters are in good agreement with Planck's
-results \cite{Planck2020a}, with errors of $\lessapprox 0.4 \%$.
+results \cite{Planck2020a}, with errors\YLtodo{biases?} $\lessapprox 0.4 \%$\YLtodo{of ?}.
 
-Having confirmed that the mortality-based reionization can reproduce
-standard CMB analyses, we aim to establish the connection between the
-universal shape for $x_\HI$ and the rescaling of  a given reionization
-scenario.
+Having confirmed that the Gompertz-polynomial-shaped reionization can
+reproduce standard CMB analyses, \YLtodo{strange logic and sentence} we aim to establish the connection
+between the universal shape for $x_\HI$ and the rescaling of a given
+reionization scenario.
 This rescaling is naturally a function of cosmology.
 For example, a larger density of matter $\Omegam$ results in deeper
 potential wells, accelerating structure formation and increasing the
 number of ultraviolet photons driving the reionization process.
-To confirm the universality of our Gompertz reionization and its
-cosmology dependence, we use 126 Sobol samples of 21cmFAST simulations
-(see \ref{ssec:sims} and \autoref{fig:sobol} in the extended data)
-and employ PySR, a SR package, to extract the cosmological dependence of
-the rescaling in Eq.~(\ref{eq:map}).
+To establish the universality of our Gompertz reionization and its
+cosmology dependence, we use 128 Sobol samples of 21cmFAST simulations\YLtodo{should probably appear earlier}
+(see \nameref{ssec:sims} and \Cref{fig:sobol} in the Extended Data)
+and employ \texttt{PySR}, an SR package, to extract the cosmological
+dependence of the rescaling in \cref{eq:map}.
 
-While PySR initially guided us towards the Gompertz mortality law, the
-final analysis only uses it to regress the pivot of the rescaling.
-We input Eq.~(\ref{eq:uni}) to the genetic algorithm and find the pivot
-that best (see \ref{ssec:pysr} in extended data for our definition of
-\emph{best}) matches the reionization histories in our 128 21cmFAST
-simulations to the Gompertz curve.
-Using PySR we derived the following rescaling as a function of cosmology
+While \texttt{PySR} initially guided us towards the Gompertz curve when
+directly regressing $x_\HI$, the final analysis only uses it to regress
+the pivot and tilt instead.
+We fit their values jointly with the polynomial coefficients as
+described above, and feed them as labels to the genetic algorithm to
+find the best analytic expression (see \nameref{ssec:pysr} in Extended
+Data for our definition of \emph{best}).
+Using \texttt{PySR} we derived the following pivot as a function of
+cosmology
 %
 \begin{equation}
 \label{eq:SR}
-\ln\ap(\vtheta) = (h^{\Omegam} + \sigma_8) (\Omegab - \ns - \Omegam).
+\ln\ap(\vtheta) = (h^{\Omegam} + \sigma_8) (\Omegab - \ns - \Omegam),
 \end{equation}
+\YL{which, interestingly, is independent of the astrophysical parameter.}
+\YLtodo{need to explain more about $\zetaUV$ in the main text?}
 
-Eqs.~(\ref{eq:map},\ref{eq:SR}) imply that higher values of $\ns$ hasten
+\cref{eq:map,eq:SR} imply that higher values of $\ns$ hasten
 reionization by boosting power on small scales, fostering a greater
 abundance of ionizing sources and earlier completion \cite{Montero2021}.
 Note that our 21cmFAST simulations assume that faint galaxies are the
 primary drivers of reionization.
 Similarly, larger $\Omegam$ and $\sigma_8$ primarily expedite
 reionization by enhancing structure formation.
-Surprisingly, Eq.~(\ref{eq:SR}) suggests that higher $\Omegab$ delays
+Surprisingly, \cref{eq:SR} suggests that higher $\Omegab$ delays
 reionization, likely due to the increased abundance of HI in the
 intergalactic medium requiring more ionizing photons.
 
 We note that within the prior range of our 21cmFAST simulations (see
-\ref{ssec:sims}) and their corresponding astrophysics of reionization,
-the mapping derived from SR is not unique.
+\nameref{ssec:sims}) and their corresponding astrophysics of
+reionization, the mapping derived from SR is not unique.
 Additional details and results using an alternative mapping are
-presented in \ref{ssec:0226} of the extended data.
+presented in \nameref{ssec:0226} of the Extended Data.
+\YL{Nonetheless, our results are robust and independent of the choice of
+mapping.}
 
-We implement Eq.~(\ref{eq:SR}) in our Gompertz CLASS.
-If the input excludes $\tau_\reio$, the algorithm determines the rescale
-and consequently the reionization history, $\tau_\reio$, and
-corresponding CMB angular power spectra using the cosmological
-parameter.
+We implement \cref{eq:SR} in our Gompertz \texttt{CLASS}, which given
+the cosmological parameters determines the pivot value and consequently
+the reionization history, $\tau_\reio$, and corresponding CMB angular
+power spectra.
 This eliminates the need to sample over $\tau_\reio$ (or $z_\re$),
 requiring only five cosmological parameters.
-We use cobaya to re-analyze the same Planck likelihoods, showcasing the
-full strength of our approach.
+We use \texttt{Cobaya} to re-analyze the same\YLtodo{as?} Planck likelihoods,
+showcasing the full strength of our approach.
 
 \begin{figure}
 \centering
-\includegraphics[width=\linewidth]{figs/gomp_tanh_triangle_kill.pdf}
+\includegraphics[width=0.6\linewidth]{figs/gomp_tanh_triangle_kill.pdf}
 \caption{\textbf{Analysis of CMB data with reionization as a function of
 cosmology.}
 \YLtodo[inline]{contour and PDFs look quite big}
 The green contours represent our results using the Gompertz reionization
-scenario with Eq.~(\ref{eq:SR}), eliminating the need to sample over any
+model with \cref{eq:SR}, eliminating the need to sample over any
 reionization parameter.
 The blue contours correspond to the results obtained using the
 conventional $\tanh$ model, while the relevant Planck constraints
@@ -328,21 +337,21 @@ conventional $\tanh$ model, while the relevant Planck constraints
 \label{fig:kill}
 \end{figure}
 
-\autoref{fig:kill} underscores the impact of our mortality-based
-reionization scenario.
-The Gompertz scenario does not sample over reionization parameters but
-maps cosmology parameters to $x_\HI$ profiles.
-This approach improves the constraint on the optical depth to $\approx
+\Cref{fig:kill} underscores the impact of our universally-shaped
+Gompertz reionization model.
+The Gompertz model does not sample over reionization parameters but
+maps cosmology parameters to $x_\HI$ profiles.\YL{too many repetitions?}
+This approach tightens the constraint on the optical depth to $\approx
 1\%$, a remarkable improvement compared to $> 10\%$ with the $\tanh$
 prescription.
-Furthermore, the constraint on $\As$ improves drastically since the TT
+Furthermore, the constraint on $\As$ improves dramatically since the TT
 data is no longer significantly hampered by the degeneracy between $\As$
 and $\tau_\reio$.
-The error on $\As$ decreases by an impressive 2.5 compared to Planck's
-results\cite{Planck2020a}.
+The error on $\As$ decreases by an impressive factor of 2.5 compared to
+Planck's results \cite{Planck2020a}.
 Overall, we recover tighter constraints across the board compared to
 Planck.
-See Table \ref{tab:para} in the extended data for details.
+See \Cref{tab:para} in the Extended Data for details.
 
 
 \section*{Outro}
@@ -350,16 +359,18 @@ See Table \ref{tab:para} in the extended data for details.
 \begin{figure}
 \centering
 \includegraphics[width=\linewidth]{figs/history.pdf}
-\caption{\textbf{Reionization history.}
-The $x_\HI$ profile based on the best-fit values from our Gompertz
-reionization scenario applied to Planck data (green dashed line).
-We also include an alternative mapping from cosmology to reionization
-timeline in the pink dashed line (see \ref{ssec:0226}).
-The $\tanh$-based Planck constraint is also shown (blue line).
+\caption{\textbf{Reionization history $x_\HI$.}
+Our best-fit Gompertz model (green dashed line) of Planck data is
+asymmetric ($z$ is shown in logarithmic scale of $a^{-1}$) and differs
+significantly from that of the symmetric $\tanh$ model (blue lines).
+We also include an alternative mapping from cosmology to Gompertz
+timeline in the pink dotted line (see \nameref{ssec:0226}).
 Additionally, we include observational constraints from high-redshift
 quasars \cite{Greig2017, Banados2018, Davies2018, Greig2019, Wang2020,
 Yang2020, Greig2022, Jin2023} and galaxies \cite{Ouchi2010,
 Sobacchi2015, Mason2018, Mason2019, Hoag2019, Mesinger2015}.}
+\YLtodo[inline]{explain blue thin dotted tanh}
+\YLtodo[inline]{Unify Gomp legend: gomp or Gomp or Gompertz}
 \label{fig:history}
 \end{figure}
 
@@ -374,7 +385,7 @@ The duration of reionization, though better suited to observational
 constraints compared to the $\tanh$ model, might still be considered
 somewhat rapid in the context of late reionization scenarios (see
 \cite{Cain2021}).
-\autoref{fig:history} illustrates the reionization timeline derived
+\Cref{fig:history} illustrates the reionization timeline derived
 from our best-fit values.
 
 Our findings for the timeline of reionization align with late
@@ -392,7 +403,7 @@ prescription employed by 21cmFAST to ionize the IGM, which, while
 efficient and swift, could bias our findings.
 Moreover, our exploration within the astrophysical framework of 21cmFAST
 has been limited to varying the ionization efficiency (see
-\ref{ssec:sims} in the extended data).
+\nameref{ssec:sims} in the Extended Data).
 Therefore, a more comprehensive exploration is warranted to ensure, for
 instance, that the tilt of the rescale remains a constant.
 Additionally, a valuable exercise to refine the inherent relationship
