@@ -80,18 +80,18 @@ def plot(lna, c, lna_pivot, tilt, x, xp):
                              gridspec_kw={'wspace': 0, 'hspace': 0}, figsize=(3, 4))
 
     axes[0].plot(a_rescaled.T, x.T, c='gray', lw=0.3, alpha=0.2)
-    axes[0].plot(ar, gomppoly(np.log(ar), c).T, c='C0', lw=0.5)
+    axes[0].plot(ar, gomppoly(np.log(ar), c).T, c='C0', lw=1)
     axes[0].set_ylabel(r'$x_\mathrm{HI}$')
     axes[0].set_ylim(-0.1, 1.1)
 
     axes[1].plot(a_rescaled.T, xp_rescaled.T, c='gray', lw=0.3, alpha=0.2)
-    axes[1].plot(ar, gomppoly_deriv(np.log(ar), c).T, c='C0', lw=0.5)
+    axes[1].plot(ar, gomppoly_deriv(np.log(ar), c).T, c='C0', lw=1)
     axes[1].set_ylabel(r'$- \mathrm{d}x_\mathrm{HI}/\mathrm{d}\ln\tilde{a}$')
     axes[1].set_yscale('log')
     axes[1].set_ylim(1e-3, 0.9)
 
     axes[2].plot(a_rescaled.T, np.log(-np.log(x.T)), c='gray', lw=0.3, alpha=0.2)
-    axes[2].plot(ar, poly(np.log(ar), c).T, c='C0', lw=0.5)
+    axes[2].plot(ar, poly(np.log(ar), c).T, c='C0', lw=1)
     axes[2].set_ylabel(r'$\ln(-\ln x_\mathrm{HI})$')
     axes[2].set_ylim(-9, 4)
     axes[2].set_xlabel(r'$\tilde{a}$')
