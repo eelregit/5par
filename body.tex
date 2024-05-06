@@ -137,11 +137,12 @@ reionization histories from \texttt{21cmFAST} \cite{Murray2020}.
 We integrate this shape into \texttt{CLASS} \cite{Blas2011}, a popular
 Boltzmann solver for CMB analyses.
 We then evaluate the modified \texttt{CLASS} alongside \texttt{Cobaya}
-\cite{Torrado2020}, a speed-aware sampler\cite{Lewis2002, Lewis2013}\footnote{With \paulo{adaptive covariance learning} and fast-dragging as
-in \cite{Neal2005}, \paulo{enabling larger steps in slow parameters via intermediate transitions of fast parameters.} } \YLtodo{dragging? fast-slow? vs cov}, showcasing its ability to
+\cite{Torrado2020}, a speed-aware sampler\cite{Lewis2002,
+Lewis2013}\footnote{With adaptive covariance learning and fast-dragging
+as in \cite{Neal2005}, enabling larger steps in slow parameters via
+intermediate transitions of fast parameters.}, showcasing its ability to
 recover parameter constraints from CMB data, including `TTTEEE' +
-lensing likelihoods \cite{Planck2020c, Planck2020d} (see
-\Cref{fig:tg}).
+lensing likelihoods \cite{Planck2020c, Planck2020d} (see \Cref{fig:tg}).
 Finally, we demonstrate cosmological gains by computing $\tau_\reio$ as
 a derived parameter using our approach -- \cref{eq:premise} --
 compared to sampling over $\tau_\reio$ using the conventional $\tanh$
