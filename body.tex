@@ -137,8 +137,8 @@ reionization histories from \texttt{21cmFAST} \cite{Murray2020}.
 We integrate this shape into \texttt{CLASS} \cite{Blas2011}, a popular
 Boltzmann solver for CMB analyses.
 We then evaluate the modified \texttt{CLASS} alongside \texttt{Cobaya}
-\cite{Torrado2020}, a speed-aware sampler\footnote{With fast-dragging as
-in \cite{Neal2005}.} \cite{Lewis2002, Lewis2013}\YLtodo{dragging? fast-slow? vs cov}, showcasing its ability to
+\cite{Torrado2020}, a speed-aware sampler\cite{Lewis2002, Lewis2013}\footnote{With \paulo{adaptive covariance learning} and fast-dragging as
+in \cite{Neal2005}, \paulo{enabling larger steps in slow parameters via intermediate transitions of fast parameters.} } \YLtodo{dragging? fast-slow? vs cov}, showcasing its ability to
 recover parameter constraints from CMB data, including `TTTEEE' +
 lensing likelihoods \cite{Planck2020c, Planck2020d} (see
 \Cref{fig:tg}).
@@ -224,7 +224,7 @@ P_5(\ar) &= {\textstyle\sum}_{m=0}^5 \, c_m \ln^m\!\ar, \\
 \end{align}
 %
 \YLtodo{number of sig figs}
-where $\vtheta$ denotes to cosmological parameters\YLtodo{clarify notation w or wo $\zetaUV$}, $\ap(\vtheta)$
+where $\vtheta$ denotes to \paulo{astrophysical and} cosmological parameters\YLtodo{clarify notation w or wo $\zetaUV$}, $\ap(\vtheta)$
 is the power-law pivot (or logarithmic translation), and $\tilt = 8.290$
 is the rescaling tilt, which, according to our \texttt{21cmFAST}
 simulations, appears constant.
@@ -241,7 +241,7 @@ agreement with the conventional $\tanh$ model.
 Using Planck 2018 likelihoods `TTTEEE' \cite{Planck2020c} and CMB
 lensing \cite{Planck2020d}, we sample typical cosmological parameters
 with \texttt{Cobaya} \cite{Torrado2020}, including $\tau_\reio$.
-The sampler runs until the Gelman-Rubin statistic \cite{Lewis2013}\YLtodo{cite Gelman and Rubin instead}
+The sampler runs until the Gelman-Rubin statistic \cite{Gelman1992}
 satisfies $R - 1 < 0.2$ for the between-chain variance of the confidence
 intervals.
 We repeat this for $\tanh$ reionization.
@@ -362,7 +362,7 @@ See \Cref{tab:para} in the Extended Data for details.
 \caption{\textbf{Reionization history $x_\HI$.}
 Our best-fit Gompertz model (green dashed line) of Planck data is
 asymmetric ($z$ is shown in logarithmic scale of $a^{-1}$) and differs
-significantly from that of the symmetric $\tanh$ model (blue lines).
+significantly from that of the symmetric $\tanh$ model (blue lines). \paulo{Note that the dotted region represent the 1$\sigma$ errors.}
 We also include an alternative mapping from cosmology to Gompertz
 timeline in the pink dotted line (see \nameref{ssec:0226}).
 Additionally, we include observational constraints from high-redshift
