@@ -164,10 +164,6 @@ the Gompertz function and a low-degree polynomial (lower panel).
 \emph{e)} Planck CMB data we re-analyze.
 \emph{f)} We infer the parameter constraints using Monte Carlo Markov
 Chain.}
-\YLtodo[inline]{replace Symb arrow label by ``to be rescaled by'',
-change c) to pivot $\ap(\vtheta)$ \& tilt $\tilt(\vtheta)$ by symbolic
-regression. e) should have lensing too? Resize and re-position the cube
-in a)}
 \label{fig:big}
 \end{figure}
 
@@ -186,7 +182,7 @@ the survival of neutral hydrogen too.
 \YLtodo[inline]{add more astrophy explaining e.g.\ why not flipped Gomp}
 
 One way to uncover the universality is to view each $x_\HI$ scenario as
-a cumulative probability distribution in $- \ln a$.
+a cumulative probability distribution (CDF) in $- \ln a$.
 With this insight, we can translate and rescale each timeline using the
 mean and variance of its corresponding probability density function
 (PDF), i.e.\ $- \mathrm{d}x_\HI / \mathrm{d}\ln a$, and discover the
@@ -197,7 +193,7 @@ parameters of each timeline, not its shape.
 However, with the PDF trick, some $x_\HI$'s can deviate artificially
 from universality, due to their incomplete reionization given our broad
 range of simulated scenarios.
-To address this, we adopt a better appoarch to jointly fit the global
+To address this, we adopt a better approach to jointly fit the global
 shape and the 2 individual parameters of each $x_\HI$.
 Our shape model constitutes the Gompertz function composed with a
 5th-degree polynomial, in the translated-and-rescaled time $\ln\ar
@@ -214,14 +210,13 @@ The complete model parametrizes the HI evolution as follows (also see
 x_\HI(\ar) &= \Gomp\bigl( P_5(\ar) \bigr)
   \equiv \exp\bigl[ - \exp\bigl( P_5(\ar) \bigr) \bigr], \\
 %
-\label{eq:map}
-\ar(a; \vtheta) &= \Bigl[ \frac{a}{\ap(\vtheta)} \Bigr]^\tilt ,\\
-%
 \label{eq:poly}
 P_5(\ar) &= {\textstyle\sum}_{m=0}^5 \, c_m \ln^m\!\ar, \\
 %
-\nonumber
-\bm{c} &= \{0, 1, 0.1503, 0.04850, 0.005261, 0.0002182\},
+\bm{c} &= \{0, 1, 0.1503, 0.04850, 0.005261, 0.0002182\}, \nonumber\\
+%
+\label{eq:map}
+\ar(a; \vtheta) &= \Bigl[ \frac{a}{\ap(\vtheta)} \Bigr]^\tilt,
 \end{align}
 %
 \YLtodo{number of sig figs}

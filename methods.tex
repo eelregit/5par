@@ -10,50 +10,60 @@
 \subsection*{Simulations}
 \label{ssec:sims}
 
-To verify the universality of our proposed Gompertz curve for the
+To establish the universality of our proposed Gompertz curve for the
 neutral hydrogen reionization and discover its relationship with
 cosmological parameter, we conducted 128 \texttt{21cmFASTv3}
-simulations to generate the corresponding $x_\HI(z, \vtheta)$ profiles.
+simulations to generate the corresponding $x_\HI(z; \vtheta)$ profiles.
 Our parameter space include $\vtheta = \{\sigma_8, \ns, h, \Omegab,
 \Omegam, \zetaUV\}$, comprising five cosmological and one astrophysical
-parameter.
+parameters.
 The selection of $\sigma_8$ instead of $\As$ is imposed by the input
 requirements of \texttt{21cmFAST}.
+We use a scrambled Sobol sequence \cite{Sobol1967, Owen1998} to sample
+quasi-uniformly in the $\vtheta$-space, with the following lower and
+upper bounds:
+%
+\begin{alignat}{3}
+\sigma_8 &\in (0.74, 0.90), &\quad
+\ns &\in (0.92, 1.00), &\quad
+h &\in (0.61, 0.73), \nonumber\\
+\Omegab &\in (0.04, 0.06), &\quad
+\Omegam &\in (0.24, 0.40), &\quad
+\zetaUV &\in (15, 30).
+\end{alignat}
+%
+The 1D and 2D projections of the distribution of our simulations is
+displayed in \Cref{fig:sobol}.
 
 The ionization efficiency $\zetaUV$ governs the ability of ultraviolet
-photons to escape their parents galaxies and ionize the IGM.
+photons to escape their parent galaxies and ionize the IGM.
 Due to significant uncertainties surrounding $\zetaUV$, we opted to use
-a constant value.
-Note that his choice was made for simplicity, but a more realistic
+a constant value \YL{in each simulation}.
+Note that this choice was made for simplicity, but a more realistic
 assumption might be that $\zetaUV$ is a function of halo mass
 \cite{Park2019} or redshift.
-However, our findings suggest that $\zetaUV$ plays a  minor role
-compared to the cosmological parameters.
-In fact, the best performing symbolic regression expressions do not
-include $\zetaUV$.
-
-We use Sobol sampling to select the $x_\HI$ profiles to be run in
-$\vtheta$-space, with the following lower and upper bounds:
-%
-\begin{align}
-\vtheta_\mathrm{min} &= \{ 0.74, 0.92, 0.61, 0.04, 0.24, 15\}, \\
-\vtheta_\mathrm{max} &= \{0.90, 1.00, 0.73, 0.06, 0.40, 30\}.
-\end{align}
-%
-The distribution of our simulations is displayed in \Cref{fig:sobol}.
+However, our findings suggest that $\zetaUV$ plays a minor role compared
+to the cosmological parameters.
+In fact, the best performing symbolic regression expressions do not use
+$\zetaUV$.
 
 \begin{figure}
 \centering
 \includegraphics[width=25em]{figs/sobol128.pdf}
-\caption{\textbf{Sobol sampling of our $x_\HI$ profiles}.
-Each point corresponds to a run of \texttt{21cmFAST} with the
-corresponding values of $\sigma_8, \ns, h, \Omegab, \Omegam, \zetaUV$.}
+\caption{\textbf{Sobol sampling of our $x_\HI$ profiles}, in 6D
+parameter space of $\sigma_8$, $\ns$, $h$, $\Omegab$, $\Omegam$, and
+$\zetaUV$,
+Each point in the lower triangular panels corresponds to the 2D
+projection of a \texttt{21cmFAST} run, while the diagonal panels show
+the 1D cumulative histograms for each parameter.
+These 1D and 2D projections demonstrate the uniformity of our sampling
+of the parameter space.}
 \label{fig:sobol}
 \end{figure}
 
-Our \texttt{21cmFAST} simulations have a 300 comoving Mpc box side and $768^3$
-($256^3$) cells for the matter (HI) field.
-We mantain most options in their default values.
+Our \texttt{21cmFAST} simulations have a 300 comoving Mpc\YLtodo{no $h$?} box size and
+$768^3$ ($256^3$) cells for the matter (HI) field.
+We maintain most options in their default values.
 
 \paulo{We should probably mention the porosity vs mass-weighted concern
 somewhere, also for methods perhaps?}
@@ -64,23 +74,25 @@ somewhere, also for methods perhaps?}
 
 The early intergalactic medium is primarily composed by neutral hydrogen
 and helium.
-Neutral helium loses is first electron at the same time as neutral
-hydrogen gets ionized \cite{Trac2007}.
+Neutral helium (HeI) loses is first electron at the same time as neutral
+hydrogen (HI) gets ionized \cite{Trac2007}.
 However, there is a second reionization that occurs around $z\sim3$
-where Helium loses its remaining electron.
+where Helium (HeII) loses its remaining electron.
 
 CMB photons will scatter off any free electrons, therefore both helium
 reionizations contribute to the Thomson optical depth to reionization
 $\tau_\reio$, although HeII ionization contribute relatively little in
 comparison to HI and HeI ionizations \cite{Liu2016}.
 
-To include the impact of helium reionization in our Gompertz
+To include the impact of the first helium reionization in our Gompertz
 \texttt{CLASS}, we follow the approach used for the $\tanh$ model, i.e.\
-the free electron fraction $x_\e$is given by
+the free electron fraction $x_\e$ is given by
+\YLtodo{should there be another $C$ to make the denominator number
+fraction too? Good ref on this?}
 %
 \begin{equation}
 \label{eq:xe_H_He}
-x_\e =  \left(1 + \frac{Y_\He}{C (1 - Y_\He)} - x^\rec_\e\right) x_\e^\Gomp + x^\rec_\e,
+x_\e = \Bigl(1 + \frac{Y_\He}{C (1 - Y_\He)} - x^\rec_\e\Bigr) x_\e^\Gomp + x^\rec_\e,
 \end{equation}
 %
 where $Y_\He$ is the helium mass fraction, $C\approx4$ is the helium to
@@ -88,7 +100,7 @@ hydrogen mass ratio, $x_\e^\Gomp$ corresponds to the contribution of
 free electrons due to \cref{eq:uni}, and $x^\rec_\e \approx
 10^{-4}$ is the leftover free electrons from after recombination.
 
-Given the relatively small impact on $\tau_\reio$, the current
+Given the relatively small impact on $\tau_\reio$, and the current
 uncertainties regarding the timeline and the difficulty involved with
 accurate modeling of HeII reionization \cite{Hotinli2023, Upton2020}, we
 opted to follow the conventional approach and include HeII reionization
@@ -96,36 +108,41 @@ using the $\tanh$ model
 %
 \begin{equation}
 \label{eq:xe_tot}
-x_\e^\mathrm{Tot} = x_\e + \frac{Y_\He}{2C(1 - Y_\He)} \left(\tanh{\left(\frac{z_\re^\HeII - z}{\Delta z^\HeII}\right)} + 1\right),
+x_\e^\mathrm{Tot} = x_\e + \frac{Y_\He}{2C(1 - Y_\He)}
+  \biggl(\tanh{\Bigl(\frac{z_\re^\HeII - z}{\Delta z^\HeII}\Bigr)} + 1\biggr),
 \end{equation}
 %
 where $z_\re^\HeII = 3.5$ and $\Delta z^\HeII = 0.5$ are the midpoint
 and duration of the second helium reionization, respectively.
-Note that the chosen values correspond to the default values used by
-\texttt{CLASS}.
+These choices are also the default values used by \texttt{CLASS}.
+
 
 \subsection*{Shape}
 \label{ssec:shape}
 
-\paulo{Do we need more info about the rescale? If so, Yin feel free to
-add text to this subsection or to modify existing text in the
-caption/body of the paper.}
-
 \begin{figure}
 \centering
 \includegraphics[width=0.6\linewidth]{figs/shape_6.pdf}
-\caption{\textbf{Universal shape for $x_\HI$.}
-\emph{(Top)} $x_\HI$ profiles as cumulative probability distribution as
-a function of scale factor and rescale $\ar = (a/\ap)^\tilt$.
-The blue curve correspond to the Gompertz curve with a six-degree
-polynomial fit presented in \cref{eq:uni}.
-\emph{(Middle)} Probability density function, that is the derivative of
-the cumulative probability distribution with respect to $\ln\ar$.
-\emph{(Bottom)} Inverse of Gompertz curve as a function of rescale.
-We fit a six-degree polynomial to the residuals to better match the
-spread of our $x_\HI$ data.}
+\caption{\textbf{Universal shape of $x_\HI$.}
+\emph{(Top)} 128 simulated $x_\HI$ timelines exhibit universality, after
+power-law transformations $\ar = (a/\ap)^\tilt$.
+The blue curves in all panels show our fitted analytic shape model, a
+composition of the Gompertz curve with a 5th-degree polynomial in
+\cref{eq:uni,eq:poly}.
+\emph{(Middle)} Time derivative of $x_\HI$, can be interpreted as a PDF
+if we view $x_\HI$ itself as the CDF.
+We first discovered the universality by translating and rescaling each
+$x_\HI$ using the mean and variance of its PDF, though now switch to the
+better approach that jointly fits the global shape and individual
+power-law parameters.
+We use the latter as target of symbolic regression.
+\emph{(Bottom)} Timelines transformed by the inverse of Gompertz
+function, modeled in blue curve with a 5th-degree polynomial in
+\cref{eq:poly}.}
 \label{fig:shape}
 \end{figure}
+
+We find the shape with PySR by accide
 
 
 \subsection*{\texttt{PySR} score}
