@@ -25,8 +25,12 @@ def pareto_plot(equation_file, savefig=True, lower_convex_hull=True):
     model = pysr.PySRRegressor.from_file(equation_file)
     hof = model.get_hof()
 
-    hof.plot(x='complexity', y='loss', loglog=True, xlim=(1, None), ylabel='loss',
-             drawstyle='steps-post')
+    plt.style.use('../5par.mplstyle')
+
+    hof = hof.rename(columns={'loss': 'Pareto front'})  # HACK to change legend label
+    hof.plot(x='complexity', y='Pareto front', figsize=(4.8, 3.6), loglog=True,
+             xlim=(1, None), ylabel='loss', drawstyle='steps-post')
+    hof = hof.rename(columns={'Pareto front': 'loss'})  # HACK change it back
 
     if lower_convex_hull:
         points = hof[['complexity', 'loss']].to_numpy()
