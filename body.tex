@@ -239,28 +239,24 @@ shape with independent $\tau_\reio$ in \texttt{CLASS} and confirm its
 agreement with the conventional $\tanh$ model.
 Using Planck 2018 likelihoods `TTTEEE' \cite{Planck2020c} and CMB
 lensing \cite{Planck2020d}, we sample typical cosmological parameters
-with \texttt{Cobaya} \cite{Torrado2020}, including $\tau_\reio$.
+with \texttt{Cobaya} \cite{Torrado2020}, including $\tau_\reio$. Given a proposal for
+$\tau_\reio$, we determine the corresponding reionization timeline using bisection by varying 
+$\ln\ap$ for Gompertz model, while for the conventional $\tanh$ model, 
+the reionization midpoint $z_\re$ is the tuning parameter. 
 The sampler runs until the Gelman-Rubin statistic \cite{Gelman1992}
 satisfies $R - 1 < 0.2$ for the between-chain variance of the confidence
 intervals.
-We repeat this for $\tanh$ reionization.
-Sampling over $\tau_\reio$ implies that \texttt{CLASS} finds the
-reionization history producing the desired optical depth using
-bisection.\YLtodo{missing logic and over detailed}
-For $\tanh$ reionization, this varies the midpoint, while for Gompertz,
-it varies the pivot in the rescale, $\ln\ap$, to match the input
-$\tau_\reio$.\YLtodo{move this upward for logic}
+We repeat this for $\tanh$ reionization and check the agreement between the two models.  
 
 \Cref{fig:tg} and \Cref{tab:tau_comp} in the Extended Data summarize the
-recovery\YLtodo{validating? and explain briefly in prev paragraph why obviously so} experiment.
-The only notable differences in inferred parameters are in the midpoint
-of reionization $z_\re$.
+validating experiment.
+The only notable differences in inferred parameters are in $z_\re$.
 The Gompertz scenario suggests a more delayed reionization by over
 $1\sigma$, with $z_\re = 6.81 \pm 0.68$ compared to $7.67 \pm 0.75$ for
 the $\tanh$ model, in alignment with recent high-$z$ quasar observations
 \cite{Keating2020}.
 All other cosmological parameters are in good agreement with Planck's
-results \cite{Planck2020a}, with errors\YLtodo{biases?} $\lessapprox 0.4 \%$\YLtodo{of ?}.
+results \cite{Planck2020a}, with biases of $\lessapprox 0.4 \%$.
 
 Having confirmed that the Gompertz-polynomial-shaped reionization can
 reproduce standard CMB analyses, \YLtodo{strange logic and sentence} we aim to establish the connection
