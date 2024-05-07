@@ -26,7 +26,7 @@ photons by free electrons, disrupting the CMB angular power spectra
 ($C_\ell$).
 This scattering suppresses the signal at scales smaller than the Hubble
 scale at reionization (approximately $\ell>10$) \cite{Planck2020b} due
-to the increased\YLtodo{nonzero?} optical depth $\tau_\reio$.
+to the increased\YLtodo{nonzero?} optical depth $\tau_\reio$ \PMCtodo{I hesitate to use nonzero, there is a tiny amount of free electrons that comes from decoupling, I think ``increased''  accurately reflects the physical picture}.
 Additionally, it introduces a new signal in the polarization of CMB
 photons at large angular scales \cite{Planck2020a}, that is $\propto
 \tau_\reio$ in $C^{TE}_\ell$, the cross-correlation of the $E$-mode
@@ -41,20 +41,18 @@ modes \cite{Natale2020}.
 
 While the high-$\ell$ signal holds most of the constraining power for
 cosmological parameters, the low-$\ell$ polarization is crucial for
-accurately determining $\tau_\reio$.
-Hence\YLtodo{connection not obvious to me}, breaking the degeneracy with $\As$ and diminishing\YLtodo{can diminish?} the influence
+accurately determining $\tau_\reio$\paulo{, particularly through its impact on $C^{EE}_\ell$}.
+Hence\YLtodo{connection not obvious to me}, \paulo{How about rephrase: the inclusion of low-$\ell$ -- polarization -- data leads to a lesser degeneracy between $\As$ and $\tau_\reio$ and can diminish the...?} be breaking the degeneracy with $\As$ and diminishing\YLtodo{can diminish?} the influence
 of $\tau_\reio$ on other anomalous parameters like $A_\mathrm{lens}$
 \cite{Giare2023}.
 $A_\mathrm{lens}$ contains information about the expected deflection of
 CMB photons due to the underlying matter distribution.
 However, interpreting signals at large angular scales (low $\ell$)
-without affecting high-$\ell$ measurements has proven challenging.
-\YLtodo[inline]{need to ask Paulo more about these 2 sentences}
-This challenge may ultimately require adopting a comprehensive Bayesian
+without affecting high-$\ell$ measurements has proven challenging. \YLtodo[inline]{need to ask Paulo more about these 2 sentences} This challenge may ultimately require adopting a comprehensive Bayesian
 framework to jointly consider cosmology, astrophysics, and instrument
 systematics \cite{Paradiso2023}.
 \Cref{fig:tau} illustrates current representative constraints on
-$\tau_\reio$.\YLtodo{feels a bit out of place here}
+$\tau_\reio$ \paulo{This paragraph, which should be connected to the ``While...'' but due to the inline comment looks like a separate paragraph, is addressing $\tau_\reio$ measurements/challenges, I feel it is okay.}.\YLtodo{feels a bit out of place here}
 
 \begin{figure}
 \centering
@@ -175,11 +173,11 @@ Reionization causes $x_\HI$ to reduce from near 1 to effectively 0 via a
 sigmoid transition.
 The standard $\tanh$ function is symmetric in nature and not flexible
 enough to provide the early start and rapid completion preferred by the
-reionization history\YLtodo{not accurate} \cite{Trac2018, Doussot2019}.
+reionization history\YLtodo{not accurate} \paulo{How about: ``suggested by reionization simulations''? Or more precise, the former suggested by reionization simulations while the latter preferred by observational data... The first one may be better since the word budget allocation is getting out of hand.} \cite{Trac2018, Doussot2019}.
 The Gompertz curve, an asymmetric sigmoid function often used to analyze
 age-dependent human mortality \cite{Gompertz1825}, proves a good model
-the survival of neutral hydrogen too.
-\YLtodo[inline]{add more astrophy explaining e.g.\ why not flipped Gomp}
+the survival of neutral hydrogen too. 
+\YLtodo[inline]{add more astrophy explaining e.g.\ why not flipped Gomp} \paulo{`` ... hydrogen too. Its expected accelerated increase in mortality with age resembles the expectation for the percolation of ionized HII bubbles during the end stages of reionization.}
 
 One way to uncover the universality is to view each $x_\HI$ scenario as
 a cumulative probability distribution (CDF) in $- \ln a$.
@@ -219,7 +217,7 @@ P_5(\ar) &= {\textstyle\sum}_{m=0}^5 \, c_m \ln^m\!\ar, \\
 \ar(a; \vtheta) &= \Bigl[ \frac{a}{\ap(\vtheta)} \Bigr]^\tilt,
 \end{align}
 %
-\YLtodo{number of sig figs}
+\YLtodo{number of sig figs} \PMCtodo{Did you check the sig figs? I thought you mention you were going to take a look at this.}
 where $\vtheta$ denotes 6 astrophysical and cosmological parameters,
 $\ap(\vtheta)$ is the power-law pivot (or logarithmic translation), and
 $\tilt = 8.290$ is the rescaling tilt, which, according to our

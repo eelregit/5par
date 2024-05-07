@@ -61,7 +61,7 @@ of the parameter space.}
 \label{fig:sobol}
 \end{figure}
 
-Our \texttt{21cmFAST} simulations have a 300 comoving Mpc\YLtodo{no $h$?} box size and
+Our \texttt{21cmFAST} simulations have a 300 comoving Mpc\YLtodo{no $h$?}\PMCtodo{Indeed no h.} box size and
 $768^3$ ($256^3$) cells for the matter (HI) field.
 We maintain most options in their default values.
 
@@ -88,7 +88,7 @@ To include the impact of the first helium reionization in our Gompertz
 \texttt{CLASS}, we follow the approach used for the $\tanh$ model, i.e.\
 the free electron fraction $x_\e$ is given by
 \YLtodo{should there be another $C$ to make the denominator number
-fraction too? Good ref on this?}
+fraction too? Good ref on this?} \PMCtodo{Sorry, I do not understand the question. C essentially appears because of $Y_\He$. The other C that you mention would be the same C (He to H) or you mean another ratio?}  \paulo{In case it helps: $n_{He} / n_H = \rho_{He}/ (m_{He}/m_H \rho_H) = Y_{He} \rho_b / (C (1 - Y_{He}) \rho_b) = Y_{He} / (C (1 - Y_{He}))$ and C is different than 4 because of binding energies.}
 %
 \begin{equation}
 \label{eq:xe_H_He}
