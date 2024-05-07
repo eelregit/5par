@@ -24,6 +24,7 @@ quasi-uniformly in the $\vtheta$-space, with the following lower and
 upper bounds:
 %
 \begin{alignat}{3}
+\label{eq:prior}
 \sigma_8 &\in (0.74, 0.90), &\quad
 \ns &\in (0.92, 1.00), &\quad
 h &\in (0.61, 0.73), \nonumber\\
@@ -47,7 +48,7 @@ to the cosmological parameters.
 In fact, the best performing symbolic regression expressions do not use
 $\zetaUV$.
 
-\begin{figure}
+\begin{figure}[tb]
 \centering
 \includegraphics[width=25em]{figs/sobol128.pdf}
 \caption{\textbf{Sobol sampling of our $x_\HI$ profiles}, in 6D
@@ -57,7 +58,7 @@ Each point in the lower triangular panels corresponds to the 2D
 projection of a \texttt{21cmFAST} run, while the diagonal panels show
 the 1D cumulative histograms for each parameter.
 These 1D and 2D projections demonstrate the uniformity of our sampling
-of the parameter space.}
+of the parameter space within the prior range of \cref{eq:prior}.}
 \label{fig:sobol}
 \end{figure}
 
@@ -126,7 +127,7 @@ These choices are also the default values used by \texttt{CLASS}.
 \subsection*{Shape}
 \label{ssec:shape}
 
-\begin{figure}
+\begin{figure}[tb]
 \centering
 \includegraphics[width=0.6\linewidth]{figs/shape_6.pdf}
 \caption{\textbf{Universal shape of $x_\HI$.}
@@ -166,7 +167,7 @@ before moving to the discuss the score.}
 complexity.}
 
 
-\begin{figure}
+\begin{figure}[tb]
 \centering
 \includegraphics[width=\linewidth]{figs/gomp_tanh_triangle_tau.pdf}
 \caption{\textbf{Analysis of CMB data with sampling over $\tau_\reio$
@@ -217,7 +218,7 @@ from cosmological dependence to reionization history in these results.}
 \end{table}
 
 
-\begin{figure}
+\begin{figure}[tb]
 \centering
 \includegraphics[width=\linewidth]{figs/gomp_tanh_triangle_kill_full.pdf}
 \caption{\textbf{Analysis of CMB data with $\tau_\reio$ as a derived parameter using \cref{eq:SR} and the conventional $\tanh$ model (sampling over $z_{\rm re}$ for reference). } Here we combine our Gompertz universal shape with the rescaled pivot and tilt obtained via symbolic regression. Note that for the Gompertz model we do not sample over $z_{\rm re}$ since \cref{eq:uni} does not depend on it. The green (blue) contours correspond to the constraints obtained with

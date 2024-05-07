@@ -26,7 +26,7 @@ photons by free electrons, disrupting the CMB angular power spectra
 ($C_\ell$).
 This scattering suppresses the signal at scales smaller than the Hubble
 scale at reionization (approximately $\ell>10$) \cite{Planck2020b} due
-to the increased\YLtodo{nonzero?} optical depth $\tau_\reio$ \PMCtodo{I hesitate to use nonzero, there is a tiny amount of free electrons that comes from decoupling, I think ``increased''  accurately reflects the physical picture}.
+to the optical depth $\tau_\reio$.
 Additionally, it introduces a new signal in the polarization of CMB
 photons at large angular scales \cite{Planck2020a}, that is $\propto
 \tau_\reio$ in $C^{TE}_\ell$, the cross-correlation of the $E$-mode
@@ -57,7 +57,7 @@ systematics \cite{Paradiso2023}.
 \Cref{fig:tau} illustrates current representative constraints on
 $\tau_\reio$ \paulo{This paragraph, which should be connected to the ``While...'' but due to the inline comment looks like a separate paragraph, is addressing $\tau_\reio$ measurements/challenges, I feel it is okay.}.\YLtodo{feels a bit out of place here}
 
-\begin{figure}
+\begin{figure}[tb]
 \centering
 \includegraphics{figs/tau_fig.pdf}
 \caption{\textbf{Current constraints on the optical depth to
@@ -150,7 +150,7 @@ compared to sampling over $\tau_\reio$ using the conventional $\tanh$
 model \cite{Lewis2008}.
 We summarize our strategy in \Cref{fig:big}.
 
-\begin{figure}
+\begin{figure}[tb]
 \centering
 \includegraphics[width=\linewidth]{figs/big_fig.pdf}
 \caption{\textbf{Strategy to demote $\tau_\reio$ to derived parameter.}
@@ -222,7 +222,7 @@ P_5(\ar) &= {\textstyle\sum}_{m=0}^5 \, c_m \ln^m\!\ar, \\
 \ar(a; \vtheta) &= \Bigl[ \frac{a}{\ap(\vtheta)} \Bigr]^\tilt,
 \end{align}
 %
-\YLtodo{number of sig figs} \PMCtodo{Did you check the sig figs? I thought you mention you were going to take a look at this.}
+\YLtodo{Yin will verify the number of sig figs}
 where $\vtheta$ denotes 6 astrophysical and cosmological parameters,
 $\ap(\vtheta)$ is the power-law pivot (or logarithmic translation), and
 $\tilt = 8.290$ is the rescaling tilt, which, according to our
@@ -321,7 +321,7 @@ requiring only five cosmological parameters.
 We use \texttt{Cobaya} to re-analyze the same\YLtodo{as?} Planck likelihoods,
 showcasing the full strength of our approach.
 
-\begin{figure}
+\begin{figure}[tb]
 \centering
 \includegraphics[width=0.6\linewidth]{figs/gomp_tanh_triangle_kill.pdf}
 \caption{\textbf{Analysis of CMB data with reionization as a function of
@@ -355,7 +355,7 @@ See \Cref{fig:unleashed_gomp} and \Cref{tab:para} in the Extended Data for detai
 
 \section*{Outro}
 
-\begin{figure}
+\begin{figure}[tb]
 \centering
 \includegraphics[width=\linewidth]{figs/history.pdf}
 \caption{\textbf{Reionization history $x_\HI$.}
