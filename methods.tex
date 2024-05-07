@@ -165,10 +165,9 @@ and fit it jointly with individual transformation parameters of each
 $x_\HI$ timeline.
 We compose the Gompertz function $\gomp$, defined in \cref{eq:uni}, with
 a low-degree polynomial $P_m$, where $m = 1, 3, 5, 7$ progressively.
-We fit the composed shape to minimize the mean squared error
-(chi-squared with unit covariance) in 128 $x_\HI$'s and at 92 time
-points in each, and find the objective value improve with $m$ but only
-marginally from $P_5$ to $P_7$.
+We fit the composed shape to minimize the mean squared error (MSE) in
+128 $x_\HI$'s and at 92 time points in each, and find the objective
+value improve with $m$ but only marginally from $P_5$ to $P_7$.
 Therefore, our final shape model is a composition of $\gomp$ and $P_5$,
 (see the lower panel of \Cref{fig:shape}), and has 6 parameters to fit.
 
@@ -188,15 +187,66 @@ independent parameters.
 \subsection*{Symbolic regression}
 \label{ssec:pysr}
 
+\begin{figure}[tb]
+\centering
+\includegraphics[width=0.8\linewidth]{figs/pareto.pdf}
+\caption{\textbf{Pareto front for symbolic regression} (blue solid
+steps) illustrates the trade-off between regression accuracy and
+expression complexity.
+We further add the lower convex hull to aid model selection: each
+segment of the orange dotted line represents a power-law trade-off in
+this log-log plot, and every model that touches the convex hull is more
+economic -- in the sense of accuracy gain at cost of complexity -- than
+the nearby models above the segment.
+As an example, here we show the results of $\ln\ap(\vtheta)$, where the
+complexity 11 point gives \cref{eq:SR}.}
+\label{fig:pareto}
+\end{figure}
+
 SR learns from data using analytic expressions, unlike traditional
 methods that adjust parameters in a fit.
 Moreover, it can be employed to interpret deep neural network outputs
 \cite{Cranmer2020b}.
-\YLtodo{Miles, it'd be great if you can refine/rewrite the SR and PySR
-intro}
+\YLtodo[inline]{Miles, it'd be great if you can refine/rewrite the SR
+and PySR intro}
 
-\paulo{Descibe here our choice for choosing between loss and
-complexity.}
+With \texttt{PySR}, we search for symbolic expressions that take the 6
+parameters in \Cref{fig:sobol} as inputs and output $\ln\ap$ or $\tilt$,
+to minimize the MSE loss.
+Here, the search space is the set of expressions composed of 5 binary
+operators ($+$, $-$, $\cdot$, $/$, and power function) and 2 unary
+operators ($\exp$ and $\ln$).
+Each expression naturally takes the form of a binary tree, and the
+total number of nodes is a measure of its complexity.
+
+More complex expressions tend to fit more accurately, a trade-off
+typically visualized by the Pareto front, as shown in \Cref{fig:pareto}.
+Better and more economic expressions can achieve a lower loss at
+moderate increase of complexity.
+To aid model selection, we use a heuristic that compares all expressions
+on the Pareto front globally, and only considers models that fare
+favorably in power-law trade-offs of the form
+%
+\begin{equation}
+\mathrm{loss}^{1 - \gamma} \cdot \mathrm{complexity}^\gamma
+= \mathrm{const}, \quad \forall \gamma \in (0, 1).
+\end{equation}
+All such expressions lie on the lower convex hull of the Pareto front,
+as illustrated in \Cref{fig:pareto}.
+
+We use 512 populations each has 33 expressions, and we optimize for
+10000 iterations and 10000 cycles in each.\YLtodo[inline]{Miles, could
+you translate this into some brief description in the language of
+evolve-simplify-optimize loop, mutation, crossover, and tournament?}
+
+For the pivot $\ln\ap$, we find complexity 11 is enough for the MSE loss
+to reach $10^{-4}$ (sub-percent level error on average), so there's no
+need to use expressions more complex that that.
+However, for the tilt $\tilt$, complexity 1, i.e.\ a constant, fit with
+a loss $\approx 0.1$ ($4\%$ error on average), while higher complexities
+can help but very slowly.
+Therefore, based on the economic heuristic, we choose expressions of
+complexity 11 and 1, for $\ln\ap$ and $\tilt$, respectively.
 
 
 \begin{figure}[tb]
@@ -271,33 +321,27 @@ our Gompertz universal shape ($\tanh$ model).}
 
 The mapping between neutral hydrogen profiles and cosmology is not
 unique.
-Through a run of \texttt{PySR}, we generate families of expressions
-capable of representing the simulated $x_\HI$ data with increasing
-complexity and slightly improved performance (lower loss).
-See \nameref{ssec:pysr} for details on selecting the best-performing
-analytic expression.
-Evidently, the resulting expressions for the tilt $\tilt(\vtheta)$ and
-pivot $\ap(\vtheta)$ in \cref{eq:map}, obtained using symbolic
-regression, depend on the available simulated data.
+This is because symbolic regression algorithms can be non-convergent.
+Moreover, the resulting symbolic expressions can depend on the data used
+for training, i.e.\ overfitting.
 
-To investigate the impact of the sampling of simulated data, which
-corresponds to the variance in the context of deep learning, we
-construct an alternative mapping of reionization with cosmology using
-only half of the \texttt{21cmFAST} $x_\HI$ profiles.
-Once again, we find a constant tilt $\tilt = 8.331$, remarkably close to
-the value obtained using the full simulated data (8.290).
-This preference for constant tilt could be a consequence of the
-astrophysical assumptions of reionization in \texttt{21cmFAST}.
-A more complex simulation, such as one involving radiative transfer or
-different X-ray preheating \cite{Montero2024}, might reveal a different
-tilt.
-Furthermore, the pivot is given by
+To investigate the impact of overfitting, we train an alternative
+mapping of reionization with cosmology using only half of the
+\texttt{21cmFAST} $x_\HI$ profiles.
+For the tilt, once again we find a constant $\tilt = 8.331$, remarkably
+close to the value obtained using the full simulated data (8.290).
+And for the pivot, we obtain
 %
 \begin{equation}
 \label{eq:SR0226}
-\ln\ap(\vtheta) = (1.0389123 + \sigma_8) (\Omegab - \Omegam h  - \ns).
+\ln\ap(\vtheta) = (1.0389123 + \sigma_8) (\Omegab - \Omegam h - \ns),
 \end{equation}
 %
+with a training loss of $1.2 \times 10^{-4}$.
+Now we can test this on the other half of our $x_\HI$ sample and get a
+validation loss of $1.4 \times 10^{-4}$, only slightly larger than the
+training loss implying we are safe from overfitting.
+
 Unsurprisingly, \cref{eq:SR0226} recovers the cosmological trends
 present in \cref{eq:SR}.
 Specifically, increasing $\ns$, $\Omegam$, and $\sigma_8$ leads to an
@@ -309,6 +353,12 @@ the matter density, albeit not in the same manner as in
 This is likely evidence that the role of $h$ is limited, and
 \texttt{PySR} considers its influence in conjunction with $\Omegam$
 without increasing the complexity of the analytic expression.
+
+This\YLtodo{Maybe move this to previous section} preference for constant tilt could be a consequence of the
+astrophysical assumptions of reionization in \texttt{21cmFAST}.
+A more complex simulation, such as one involving radiative transfer or
+different X-ray preheating \cite{Montero2024}, might reveal a different
+tilt.
 
 \begin{table}
 \centering
@@ -344,13 +394,12 @@ instead of $\tau_\reio$.}
 \label{tab:para}
 \end{table}
 
-Applying \cref{eq:SR0226} we reanalyze the CMB data following the
-same approach as with \cref{eq:SR}.
-The results are summarized in \Cref{tab:para}.
+Replacing \cref{eq:SR} with \cref{eq:SR0226}, we rerun the analysis
+following the same approach, and summarize the results in
+\Cref{tab:para}.
 Comparing these findings to our previous results, we observe strikingly
 similar values for all cosmological parameters, albeit with smaller
 deviations from the Planck results.
-The consistency between our results using the full $x_\HI$ data and
-those using only half the data indicates that our symbolic
-regression-based mapping performs well given the priors of our simulated
-data (see \nameref{ssec:sims}).
+The consistency between our results using the full $x_\HI$ sample and
+those using only half of it indicates that our symbolic expression
+mappings perform robustly and are not biasing the parameter inferences.
