@@ -10,18 +10,17 @@
 \subsection*{Simulations}
 \label{ssec:sims}
 
-To establish the universality of our proposed Gompertz curve for the
-neutral hydrogen reionization and discover its relationship with
-cosmological parameter, we conducted 128 \texttt{21cmFASTv3}
-simulations to generate the corresponding $x_\HI(z; \vtheta)$ profiles.
+To establish the universality of our proposed Gompertz model for the
+neutral hydrogen reionization and its relationship with the cosmological
+parameter, we conducted 128 \texttt{21cmFASTv3} simulations to generate
+the corresponding $x_\HI(z; \vtheta)$ profiles.
 Our parameter space include $\vtheta = \{\sigma_8, \ns, h, \Omegab,
 \Omegam, \zetaUV\}$, comprising five cosmological and one astrophysical
 parameters.
 The selection of $\sigma_8$ instead of $\As$ is imposed by the input
 requirements of \texttt{21cmFAST}.
 We use a scrambled Sobol sequence \cite{Sobol1967, Owen1998} to sample
-quasi-uniformly in the $\vtheta$-space, with the following lower and
-upper bounds:
+quasi-uniformly in the $\vtheta$-space, within the following ranges:
 %
 \begin{alignat}{3}
 \label{eq:prior}
@@ -33,20 +32,11 @@ h &\in (0.61, 0.73), \nonumber\\
 \zetaUV &\in (15, 30).
 \end{alignat}
 %
-The 1D and 2D projections of the distribution of our simulations is
-displayed in \Cref{fig:sobol}.
-
-The ionization efficiency $\zetaUV$ governs the ability of ultraviolet
-photons to escape their parent galaxies and ionize the IGM.
-Due to significant uncertainties surrounding $\zetaUV$, we opted to use
-a constant value \YL{in each simulation}.
-Note that this choice was made for simplicity, but a more realistic
-assumption might be that $\zetaUV$ is a function of halo mass
-\cite{Park2019} or redshift.
-However, our findings suggest that $\zetaUV$ plays a minor role compared
-to the cosmological parameters.
-In fact, the best performing symbolic regression expressions do not use
-$\zetaUV$.
+Their 1D and 2D projections in \Cref{fig:sobol} illustrate the sample
+uniformity in parameter space.
+Our \texttt{21cmFAST} simulations have a 300 comoving Mpc box size and
+$768^3$ ($256^3$) cells for the matter (HI) field.
+We maintain most options in their default values.
 
 \begin{figure}[tb]
 \centering
@@ -62,9 +52,17 @@ of the parameter space within the prior range of \cref{eq:prior}.}
 \label{fig:sobol}
 \end{figure}
 
-Our \texttt{21cmFAST} simulations have a 300 comoving Mpc box size and
-$768^3$ ($256^3$) cells for the matter (HI) field.
-We maintain most options in their default values.
+The ionization efficiency $\zetaUV$ governs the ability of ultraviolet
+photons to escape their parent galaxies and ionize the IGM.
+Due to significant uncertainties surrounding $\zetaUV$, we opted to use
+a constant value \YL{in each simulation}.
+Note that this choice was made for simplicity, and a more realistic
+assumption could be that $\zetaUV$ is a function of halo mass
+\cite{Park2019} or redshift.
+However, our findings suggest that $\zetaUV$ plays a minor role compared
+to the cosmological parameters.
+In fact, the best performing symbolic regression expressions do not use
+$\zetaUV$.
 
 \paulo{We should probably mention the porosity vs mass-weighted concern
 somewhere, also for methods perhaps?}
@@ -86,8 +84,8 @@ $\tau_\reio$, although HeII ionization contribute relatively little in
 comparison to HI and HeI ionizations \cite{Liu2016}.
 
 To include the impact of the first helium reionization in our Gompertz
-\texttt{CLASS}, we follow the approach used for the $\tanh$ model, i.e.\
-the free electron fraction $x_\e$ is given by
+\texttt{CLASS}, we assume it follows that of HI as done in the $\tanh$
+model, i.e.\ the free electron fraction $x_\e$ is given by
 %
 \begin{align}
 \label{eq:xe_H_He}
@@ -107,11 +105,11 @@ contribution of free electrons due to \cref{eq:uni}, and $x^\rec_\e
 \approx 10^{-4}$ is the leftover free electrons from after
 recombination.
 
-Given the relatively small impact on $\tau_\reio$, and the current
-uncertainties regarding the timeline and the difficulty involved with
-accurate modeling of HeII reionization \cite{Hotinli2023, Upton2020}, we
-opted to follow the conventional approach and include HeII reionization
-using the $\tanh$ model
+Given the relatively small impact of the HeII reionization on
+$\tau_\reio$, the current uncertainties regarding its timeline, and the
+difficulty involved with its accurate modeling \cite{Hotinli2023,
+Upton2020}, we opt to follow the conventional approach and include the
+second Helium reionization using the $\tanh$ model
 %
 \begin{equation}
 \label{eq:xe_tot}
@@ -276,7 +274,7 @@ without increasing the complexity of the analytic expression.
 \small
 \makebox[\textwidth][c]{\begin{tabular}{lllll}
 \toprule
-Parameter & Gompertz & Gompertz.5 & $\tanh$ & Planck \\
+Parameter & gomp & gomp.5 & $\tanh$ & Planck \\
 \midrule
 $10^{9} \As$ & 2.088 $\pm$ 0.012 & 2.089 $\pm$ 0.013 & 2.098 $\pm$ 0.030 & 2.100 $\pm$ 0.030 \\
 $\ns$ & 0.9634 $\pm$ 0.0040 & 0.9634 $\pm$ 0.0040 & 0.9641 $\pm$ 0.0041 & 0.9649 $\pm$ 0.0042 \\
