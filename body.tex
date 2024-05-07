@@ -166,6 +166,7 @@ the Gompertz function and a low-degree polynomial (lower panel).
 \emph{f)} We infer the parameter constraints using Monte Carlo Markov
 Chain.}
 \label{fig:big}
+\YLtodo[inline]{Now we need to change to inverse \textbf{g}omp. Sorry...}
 \end{figure}
 
 To achieve our goal outlined in \cref{eq:premise}, we construct a
@@ -200,7 +201,7 @@ To address this, we adopt a better approach to jointly fit the global
 shape and the 2 individual parameters of each $x_\HI$.
 Our shape model constitutes the Gompertz function composed with a
 5th-degree polynomial, in the translated-and-rescaled time $\ln\ar
-\equiv \beta (\ln a - \ln\ap)$.
+\equiv \tilt (\ln a - \ln\ap)$.
 And we are free to set the polynomial constant to 0 and its linear
 coefficient to 1 by utilizing their respective degeneracy with $\ln\ap$
 and $\tilt$.
@@ -240,13 +241,13 @@ agreement with the conventional $\tanh$ model.
 Using Planck 2018 likelihoods `TTTEEE' \cite{Planck2020c} and CMB
 lensing \cite{Planck2020d}, we sample typical cosmological parameters
 with \texttt{Cobaya} \cite{Torrado2020}, including $\tau_\reio$. Given a proposal for
-$\tau_\reio$, we determine the corresponding reionization timeline using bisection by varying 
-$\ln\ap$ for Gompertz model, while for the conventional $\tanh$ model, 
-the reionization midpoint $z_\re$ is the tuning parameter. 
+$\tau_\reio$, we determine the corresponding reionization timeline using bisection by varying
+$\ln\ap$ for Gompertz model, while for the conventional $\tanh$ model,
+the reionization midpoint $z_\re$ is the tuning parameter.
 The sampler runs until the Gelman-Rubin statistic \cite{Gelman1992}
 satisfies $R - 1 < 0.2$ for the between-chain variance of the confidence
 intervals.
-We repeat this for $\tanh$ reionization and check the agreement between the two models.  
+We repeat this for $\tanh$ reionization and check the agreement between the two models.
 
 \Cref{fig:tg} and \Cref{tab:tau_comp} in the Extended Data summarize the
 validating experiment.
@@ -322,8 +323,9 @@ showcasing the full strength of our approach.
 \includegraphics[width=0.6\linewidth]{figs/gomp_tanh_triangle_kill.pdf}
 \caption{\textbf{Analysis of CMB data with reionization as a function of
 cosmology.}
-\YLtodo[inline]{contour and PDFs look quite big} 
+\YLtodo[inline]{contour and PDFs look quite big}
 \paulo{How about now?}
+\YL{Can we ``average'' the font sizes of the legend and other texts?}
 The green contours represent our results using the Gompertz reionization
 model with \cref{eq:SR}, eliminating the need to sample over any
 reionization parameter.

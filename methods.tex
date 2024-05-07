@@ -68,7 +68,7 @@ $\zetaUV$.
 somewhere, also for methods perhaps?}
 
 
-\subsection*{Inclusion of Helium reionization}
+\subsection*{Helium reionization}
 \label{ssec:helium}
 
 The early intergalactic medium is primarily composed by neutral hydrogen
@@ -122,7 +122,7 @@ and duration of the second helium reionization, respectively.
 These choices are also the default values used by \texttt{CLASS}.
 
 
-\subsection*{Shape}
+\subsection*{Shape universality and modeling}
 \label{ssec:shape}
 
 \begin{figure}[tb]
@@ -148,18 +148,52 @@ function, modeled in blue curve with a 5th-degree polynomial in
 \label{fig:shape}
 \end{figure}
 
-We find the shape with PySR by accide
+We discovered the universality in the shape of $x_\HI$ timelines before
+attempting to build analytic model for it.
+Because $x_\HI$ varies monotonically between 1 and 0, we can view it as
+a CDF and derive its PDF, with which we can weigh the logarithmic scale
+factor $\ln a$ to compute its mean and standard deviations.
+It was immediatly obviously to us that the $x_\HI$'s had a common shape
+to percent level, after translation by their means and rescaling by
+their standard deviations.
+However, given our broad parameter range in \cref{eq:prior}, some
+$x_\HI$'s have not reached 0 by the end of simulations, resulting in
+imperfect transformations hurting the universality.
+
+To address this, we construct flexible models for the universal shape,
+and fit it jointly with individual transformation parameters of each
+$x_\HI$ timeline.
+We compose the Gompertz function $\gomp$, defined in \cref{eq:uni}, with
+a low-degree polynomial $P_m$, where $m = 1, 3, 5, 7$ progressively.
+We fit the composed shape to minimize the mean squared error
+(chi-squared with unit covariance) in 128 $x_\HI$'s and at 92 time
+points in each, and find the objective value improve with $m$ but only
+marginally from $P_5$ to $P_7$.
+Therefore, our final shape model is a composition of $\gomp$ and $P_5$,
+(see the lower panel of \Cref{fig:shape}), and has 6 parameters to fit.
+
+As for the transformation parameters, as in the PDF approach, we use an
+affine transformation $\ln\ar = \tilt (\ln a - \ln\ap)$, or equivalently
+a power law in \cref{eq:map}.
+Because each $x_\HI$ has its own parameters of $\ap$ and $\tilt$, we
+have in total $262 = 6 + 2 \times 128$ parameters to determine in the
+joint fit.
+\Cref{fig:shape} shows all 128 $x_\HI$ timelines and their universality
+after transformations.
+We can then use the fitted $\ap$ and $\tilt$ as the target for symbolic
+regression, to model their cosmological dependences on the other
+independent parameters.
 
 
-\subsection*{\texttt{PySR} score}
+\subsection*{Symbolic regression}
 \label{ssec:pysr}
 
 SR learns from data using analytic expressions, unlike traditional
 methods that adjust parameters in a fit.
 Moreover, it can be employed to interpret deep neural network outputs
 \cite{Cranmer2020b}.
-\paulo{Yin, I added a simple SR intro, feel free to refine it here
-before moving to the discuss the score.}
+\YLtodo{Miles, it'd be great if you can refine/rewrite the SR and PySR
+intro}
 
 \paulo{Descibe here our choice for choosing between loss and
 complexity.}
@@ -232,7 +266,7 @@ our Gompertz universal shape ($\tanh$ model).}
 \end{figure}
 
 
-\subsection*{\texttt{PySR} alternative mapping}
+\subsection*{Alternative mapping}
 \label{ssec:0226}
 
 The mapping between neutral hydrogen profiles and cosmology is not
@@ -250,8 +284,8 @@ To investigate the impact of the sampling of simulated data, which
 corresponds to the variance in the context of deep learning, we
 construct an alternative mapping of reionization with cosmology using
 only half of the \texttt{21cmFAST} $x_\HI$ profiles.
-Once again, we find a constant tilt $\tilt = 8.331045$, remarkably close
-to the value obtained using the full simulated data (8.289981).
+Once again, we find a constant tilt $\tilt = 8.331$, remarkably close to
+the value obtained using the full simulated data (8.290).
 This preference for constant tilt could be a consequence of the
 astrophysical assumptions of reionization in \texttt{21cmFAST}.
 A more complex simulation, such as one involving radiative transfer or
