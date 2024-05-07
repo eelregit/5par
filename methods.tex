@@ -269,7 +269,7 @@ our Gompertz universal shape ($\tanh$ model).}
 \small
 \begin{tabular}{llll}
 \toprule
-Parameter & Gompertz & $\tanh$ & Planck \\
+Parameter & gomp & $\tanh$ & Planck \\
 \midrule
 $10^{9} \As$ & 2.101 $\pm$ 0.031 & 2.099 $\pm$ 0.030 & 2.100 $\pm$ 0.030 \\
 $\ns$ & 0.9638 $\pm$ 0.0041 & 0.9641 $\pm$ 0.0042 & 0.9649 $\pm$ 0.0042 \\
@@ -391,6 +391,9 @@ parameter of the model nor a sampled parameter in the Gompertz models;
 instead, it is obtained directly with \cref{eq:uni}.
 Furthermore, the $\tanh$ model included here samples over $z_\re$
 instead of $\tau_\reio$.}
+\YLtodo[inline]{What's the point 5 after gomp? And I forgot why $\tanh$
+need different treatment? If just for sanity check then maybe we should
+avoid introducing both}
 \label{tab:para}
 \end{table}
 
