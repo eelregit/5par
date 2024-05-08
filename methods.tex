@@ -248,6 +248,11 @@ can help but very slowly.
 Therefore, based on the economic heuristic, we choose expressions of
 complexity 11 and 1, for $\ln\ap$ and $\tilt$, respectively.
 
+This preference for constant tilt could be a consequence of the
+astrophysical assumptions of reionization in \texttt{21cmFAST}.
+A more complex simulation, such as one involving radiative transfer or
+different X-ray preheating \cite{Montero2024}, might reveal a different
+tilt.
 
 \begin{figure}[tb]
 \centering
@@ -305,7 +310,10 @@ from cosmological dependence to reionization history in these results.}
 \caption{\textbf{Analysis of CMB data treating $\tau_\reio$ as a derived
 parameter using \cref{eq:uni,eq:poly,eq:map,eq:SR} vs.\ sampling it with
 the conventional $\tanh$ model (sampling over $z_\re$ for reference
-\YL{correct to say ``same af \Cref{fig:tg} for reference''?}).}
+\YL{correct to say ``same af \Cref{fig:tg} for reference''?})
+\paulo{Incorrect but it can be phrase as ``Same as \Cref{fig:tg} but treating 
+$\tau_\reio$ as a derived parameter with the Gompertz model vs. a $\tanh$ 
+model that samples over $z_\re$.'' or similar.}}
 Here we combine our Gompertz universal shape with the rescaling pivot
 and tilt obtained via symbolic regression.
 Note that for the Gompertz model we do not sample over $z_\re$ since
@@ -354,12 +362,6 @@ This is likely evidence that the role of $h$ is limited, and
 \texttt{PySR} considers its influence in conjunction with $\Omegam$
 without increasing the complexity of the analytic expression.
 
-This\YLtodo{Maybe move this to previous section} preference for constant tilt could be a consequence of the
-astrophysical assumptions of reionization in \texttt{21cmFAST}.
-A more complex simulation, such as one involving radiative transfer or
-different X-ray preheating \cite{Montero2024}, might reveal a different
-tilt.
-
 \begin{table}
 \centering
 \small
@@ -390,7 +392,10 @@ Note that the midpoint of reionization $z_\re$ is not a derived
 parameter of the model nor a sampled parameter in the Gompertz models;
 instead, it is obtained directly with \cref{eq:uni}.
 Furthermore, the $\tanh$ model included here samples over $z_\re$
-instead of $\tau_\reio$.}
+instead of $\tau_\reio$. \paulo{.5 since it train in half the data hehe.
+It is a sanity check but it also coverts our back, it shows 
+what happens to tanh when sampling over non-typical CMB
+parameters ($\sigma_8$ instead of $A_s$, $H_0$ instead of $\theta_{mc}$, and $z_{\rm re}$ instead of $\tau_\reio$). As such, I insist on keeping it.}}
 \YLtodo[inline]{What's the point 5 after gomp? And I forgot why $\tanh$
 need different treatment? If just for sanity check then maybe we should
 avoid introducing both}

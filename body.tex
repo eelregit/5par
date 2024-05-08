@@ -164,7 +164,7 @@ $\vtheta$ to the rescaling parameters that bring the universality.
 the Gompertz function and a low-degree polynomial (lower panel).
 \emph{e)} Planck CMB data we re-analyze.
 \emph{f)} We infer the parameter constraints using Monte Carlo Markov
-Chain.}
+Chain. \paulo{Is this okay?}}
 \label{fig:big}
 \YLtodo[inline]{Now we need to change to inverse \textbf{g}omp. Sorry...}
 \end{figure}
@@ -314,8 +314,9 @@ the cosmological parameters determines the pivot value and consequently
 the reionization history, $\tau_\reio$, and corresponding CMB angular
 power spectra.
 This eliminates the need to sample over $\tau_\reio$ (or $z_\re$),
-requiring only five cosmological parameters.
-We use \texttt{Cobaya} to re-analyze the same\YLtodo{as?} Planck likelihoods,
+requiring only five cosmological parameters, $\boldsymbol{\theta} = 
+\{ \sigma_8, \ns, h, \Omegab, \Omegam\}$.
+We use \texttt{Cobaya} to re-analyze the same CMB data,
 showcasing the full strength of our approach.
 
 \begin{figure}[tb]
@@ -324,7 +325,7 @@ showcasing the full strength of our approach.
 \caption{\textbf{Analysis of CMB data with reionization as a function of
 cosmology.}
 \paulo{How about now?}
-\YL{Can we ``average'' the font sizes of the legend and other texts?}
+\YL{Can we ``average'' the font sizes of the legend and other texts?} \paulo{Better now?}
 The green contours represent our results using the Gompertz reionization
 model with \cref{eq:SR}, eliminating the need to sample over any
 reionization parameter.
@@ -367,7 +368,9 @@ timeline in the pink dotted line (see \nameref{ssec:0226}).
 Additionally, we include observational constraints from high-redshift
 quasars \cite{Greig2017, Banados2018, Davies2018, Greig2019, Wang2020,
 Yang2020, Greig2022, Jin2023} and galaxies \cite{Ouchi2010,
-Sobacchi2015, Mason2018, Mason2019, Hoag2019, Mesinger2015}.}
+Sobacchi2015, Mason2018, Mason2019, Hoag2019, Mesinger2015}. 
+\paulo{I didn't do this initially since it will convolute the gomp vs gomp.5,
+but let me see how bad it gets.}}
 \YLtodo[inline]{Would it be useful to add a (much narrower) band around
 gomp curves too?}
 \label{fig:history}
