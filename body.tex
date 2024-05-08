@@ -170,7 +170,8 @@ Chain. \paulo{Is this okay?}}
 \end{figure}
 
 To achieve our goal outlined in \cref{eq:premise}, we construct a
-universal shape for $x_\HI$.
+universal shape for $x_\HI$ using 128 Sobol samples of \texttt{21cmFAST} simulations 
+(see \nameref{ssec:sims} and \Cref{fig:sobol} in the Extended Data).
 All $x_\HI(a)$ profiles share this shape, with differences between
 scenarios being mere translations and rescalings.
 Reionization causes $x_\HI$ to reduce from near 1 to effectively 0 via a
@@ -207,7 +208,7 @@ coefficient to 1 by utilizing their respective degeneracy with $\ln\ap$
 and $\tilt$.
 
 The complete model parametrizes the HI evolution as follows (also see
-\Cref{fig:shape} in the Extended Data):
+\Cref{fig:shape} and \nameref{ssec:shape} in the Extended Data):
 %
 \begin{align}
 \label{eq:uni}
@@ -234,7 +235,7 @@ See \nameref{ssec:helium} for specifics on implementing HeI and HeII
 reionization.
 
 Before fully leveraging our formalism to extract the cosmological
-dependence in the rescale\YLtodo{?} of \cref{eq:uni} and eliminating the
+dependence in the rescaling of \cref{eq:uni} and relaxing the
 need for $\tau_\reio$ in CMB analyses, we first implement the Gompertz
 shape with independent $\tau_\reio$ in \texttt{CLASS} and confirm its
 agreement with the conventional $\tanh$ model.
@@ -259,7 +260,7 @@ the $\tanh$ model, in alignment with recent high-$z$ quasar observations
 All other cosmological parameters are in good agreement with Planck's
 results \cite{Planck2020a}, with biases of $\lessapprox 0.4 \%$.
 
-Having confirmed that the Gompertz-polynomial-shaped reionization can
+\paulo{How about: ``Gompertz-polynomial-shaped reionization can reproduce standard CMB analyses. Now, we move to establish...''?} Having confirmed that the Gompertz-polynomial-shaped reionization can
 reproduce standard CMB analyses, \YLtodo{strange logic and sentence} we aim to establish the connection
 between the universal shape for $x_\HI$ and the rescaling of a given
 reionization scenario.
@@ -267,11 +268,9 @@ This rescaling is naturally a function of cosmology.
 For example, a larger density of matter $\Omegam$ results in deeper
 potential wells, accelerating structure formation and increasing the
 number of ultraviolet photons driving the reionization process.
-To establish the universality of our Gompertz reionization and its
-cosmology dependence, we use 128 Sobol samples of \texttt{21cmFAST} simulations\YLtodo{should probably appear earlier}
-(see \nameref{ssec:sims} and \Cref{fig:sobol} in the Extended Data)
-and employ \texttt{PySR}, an SR package, to extract the cosmological
-dependence of the rescaling in \cref{eq:map}.
+We employ \texttt{PySR}, an SR package,\PMCtodo{some of the material 
+now appears earlier} to establish the cosmological dependence of the 
+rescaling in \cref{eq:map}.
 
 While \texttt{PySR} initially guided us towards the Gompertz curve when
 directly regressing $x_\HI$, the final analysis only uses it to regress
@@ -287,8 +286,11 @@ cosmology
 \label{eq:SR}
 \ln\ap(\vtheta) = (h^{\Omegam} + \sigma_8) (\Omegab - \ns - \Omegam),
 \end{equation}
-\YL{which, interestingly, is independent of the astrophysical parameter.}
-\YLtodo{need to explain more about $\zetaUV$ in the main text?}
+which, interestingly, is independent of the astrophysical parameter $\zetaUV$. 
+This ionization efficiency modulates the timing of reionization in our simulations 
+by regulating the abundance of photons that escape into the IGM. Its absence in 
+\cref{eq:SR} suggests that it either plays a minor role or its contribution can be
+ mimicked by the cosmological parameters.
 
 \cref{eq:map,eq:SR} imply that higher values of $\ns$ hasten
 reionization by boosting power on small scales, fostering a greater
@@ -306,8 +308,8 @@ We note that within the prior range of our \texttt{21cmFAST} simulations
 reionization, the mapping derived from SR is not unique.
 Additional details and results using an alternative mapping are
 presented in \nameref{ssec:0226} of the Extended Data.
-\YL{Nonetheless, our results are robust and independent of the choice of
-mapping.}
+Nonetheless, our results are robust and independent of the choice of
+mapping.
 
 We implement \cref{eq:SR} in our Gompertz \texttt{CLASS}, which given
 the cosmological parameters determines the pivot value and consequently
@@ -336,10 +338,7 @@ conventional $\tanh$ model, while the relevant Planck constraints
 \end{figure}
 
 \Cref{fig:kill} underscores the impact of our universally-shaped
-Gompertz reionization model.
-The Gompertz model does not sample over reionization parameters but
-maps cosmology parameters to $x_\HI$ profiles.\YL{too many repetitions?}
-This approach tightens the constraint on the optical depth to $\approx
+Gompertz reionization model. This approach tightens the constraint on the optical depth to $\approx
 1\%$, a remarkable improvement compared to $> 10\%$ with the $\tanh$
 prescription.
 Furthermore, the constraint on $\As$ improves dramatically since the TT
