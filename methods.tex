@@ -286,7 +286,7 @@ $\Omegam h^2$ & 0.1430 $\pm$ 0.0011 & 0.1430 $\pm$ 0.0011 & 0.1430 $\pm$ 0.0011 
 $\OmegaL$ & 0.6842 $\pm$ 0.0076 & 0.6842 $\pm$ 0.0076 & 0.6847 $\pm$ 0.0073 \\
 Age [Gyr] & 13.800 $\pm$ 0.023 & 13.800 $\pm$ 0.023 & 13.797 $\pm$ 0.023 \\
 $H_0$ & 67.32 $\pm$ 0.55 & 67.32 $\pm$ 0.55 & 67.36 $\pm$ 0.54 \\
-$100 \theta_\mathrm{MC}$ & 1.04184 $\pm$ 0.00029 & 0.104815 $\pm$ 0.00029 & 1.04092 $\pm$ 0.00031 \\
+$100 \theta_\mathrm{MC}$ & 1.04184 $\pm$ 0.00029 & 1.04815 $\pm$ 0.00029 & 1.04092 $\pm$ 0.00031 \\
 $\sigma_8$ & 0.8109 $\pm$ 0.0059 & 0.8108 $\pm$ 0.0060 & 0.8111 $\pm$ 0.0060 \\
 $S_8 \equiv \sigma_8 \sqrt{\frac{\Omegam}{0.3}}$ & 0.832 $\pm$ 0.013 & 0.832 $\pm$ 0.013 & 0.832 $\pm$ 0.013\\
 $\tau_\reio$ & 0.0546 $\pm$ 0.0076 & 0.0543 $\pm$ 0.0075 & 0.0544 $\pm$ 0.0073 \\
@@ -314,7 +314,8 @@ the conventional $\tanh$ model (sampling over $z_\re$ for reference
 \YL{correct to say ``same af \Cref{fig:tg} for reference''?})
 \paulo{Incorrect but it can be phrase as ``Same as \Cref{fig:tg} but treating
 $\tau_\reio$ as a derived parameter with the Gompertz model vs. a $\tanh$
-model that samples over $z_\re$.'' or similar.}}
+model that samples over $z_\re$.'' or similar.}} \paulo{Come back to this after 
+defining the nomenclature for the tanhs ad gomps.}
 Here we combine our Gompertz universal shape with the rescaling pivot
 and tilt obtained via symbolic regression.
 Note that for the Gompertz model we do not sample over $z_\re$ since
@@ -396,7 +397,7 @@ Furthermore, the $\tanh$ model included here samples over $z_\re$
 instead of $\tau_\reio$. \paulo{.5 since it train in half the data hehe.
 It is a sanity check but it also coverts our back, it shows
 what happens to tanh when sampling over non-typical CMB
-parameters ($\sigma_8$ instead of $A_s$, $H_0$ instead of $\theta_{mc}$, and $z_{\rm re}$ instead of $\tau_\reio$). As such, I insist on keeping it.}\YL{What I meant is that we can still explain the sanity check but it should not interfere with the understanding of the key results, right? The reader can be confused by the last sentence here and in the figure caption and also gain no value from it. The suspicious ones can always read our text for this sanity check? Or maybe we should actually merge the two tables to have a landscape one? How about that?}}
+parameters ($\sigma_8$ instead of $A_s$, $H_0$ instead of $\theta_{mc}$, and $z_{\rm re}$ instead of $\tau_\reio$). As such, I insist on keeping it.}\YL{What I meant is that we can still explain the sanity check but it should not interfere with the understanding of the key results, right? The reader can be confused by the last sentence here and in the figure caption and also gain no value from it. The suspicious ones can always read our text for this sanity check? Or maybe we should actually merge the two tables to have a landscape one? How about that?} \paulo{We will merge the tables into a \emph{supreme} landscape table, split into gomps (bisection gomp, gomp, and gomp half or whatever nomeclature) and equal number of tanhs (bisection tanh, $z_\re$ tanh, and Planck/ref tanh). In the \emph{uber} table we will specify the sampled parameters using shading or similar.}}
 \YLtodo[inline]{What's the point 5 after gomp? And I forgot why $\tanh$
 need different treatment? If just for sanity check then maybe we should
 avoid introducing both}
@@ -412,3 +413,17 @@ deviations from the Planck results.
 The consistency between our results using the full $x_\HI$ sample and
 those using only half of it indicates that our symbolic expression
 mappings perform robustly and are not biasing the parameter inferences.
+
+
+\subsection*{Best fits}
+\label{ssec:fits}
+Table\PMCtodo{Any better name for this subsection one?} summarizes the
+results obtained by running cobaya for the models considered throughout 
+this work.
+
+There is an apparent discrepancy between the different models in $\theta_{\rm x}$, 
+a proxy for the angular scale of the acoustic oscillations ($\theta_*$). The difference is due to our 
+use of $100\theta_s$, which corresponds to the peak scale parameter defined exactly
+ as the ratio of the sound horizon divided by the angular diameter at decoupling, with 
+ decoupling time given by the maximum of the visibility function, i.e. the standard choice 
+ for CLASS. In contrast, the Planck collaboration reports $100\theta_{\rm MC}, which is given by Eq.~(6) in \cite{Planck2014}, which corresponds to the standard choice in \texttt{CosmoMC}\cite{Lewis2002}.
