@@ -36,7 +36,8 @@ Their 1D and 2D projections in \Cref{fig:sobol} illustrate the sample
 uniformity in parameter space.
 Our \texttt{21cmFAST} simulations have a 300 comoving Mpc box size and
 $768^3$ ($256^3$) cells for the matter (HI) field.
-We maintain most options in their default values.
+We maintain most options in their default values and extract the
+neutral hydrogen fraction using \texttt{lightcone.global_xH}.
 
 \begin{figure}[tb]
 \centering
@@ -62,8 +63,8 @@ assumption could be that $\zetaUV$ is a function of halo mass
 \cite{Park2019} or redshift.
 However, our findings suggest that $\zetaUV$ plays a minor role compared
 to the cosmological parameters.
-In fact, the best performing symbolic regression expressions do not use
-$\zetaUV$.
+In fact, the best performing symbolic regression expressions 
+(see \nameref{ssec:pysr} for the selection of best models) do not use $\zetaUV$.
 
 \paulo{We should probably mention the porosity vs mass-weighted concern
 somewhere, also for methods perhaps?}
