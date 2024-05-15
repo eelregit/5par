@@ -2,6 +2,17 @@ MCMC with Cobaya and CLASS
 ==========================
 
 
+* gomp_0 receives tau_reio as input and finds reionization timeline
+  using bisection (variyng alpha), gomp_0 is used for validation
+* gomp_1 finds tau_reio using alpha(cosmology)
+* gomp_2 finds tau_reio using alpha(cosmology) but the SR expression
+  was obtained using only half (64) of our data
+
+
+* tanh_0 receives tau_reio as input and finds reionization timeline
+  using bisection (varying z_re), tanh_o is used for validation
+* tanh_1 finds tau_reio by sampling over z_re
+
 * `tanh <tanh>`_ uses tanh TODO
 * `Gomp <gomp>`_
 
@@ -18,7 +29,7 @@ Chaining log:
 * modify thermodynamics_reionization_fuction to include gomp instead of
   tanh
 * adjust z_start in class:
-  + z_start = z_mid in inputs hopfully not confusing
+  + z_start = z_mid in inputs hopefully not confusing
 * achieve functional code
 * preliminary comparison of Gomp vs Tanh (look at Cl's)
   + matched optical depths (0.05660 vs 0.05657),
