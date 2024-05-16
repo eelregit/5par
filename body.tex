@@ -221,7 +221,7 @@ Before fully leveraging our formalism to extract the cosmological
 dependence in the rescaling of \cref{eq:uni} and relaxing the
 need for $\tau_\reio$ in CMB analyses, we first implement the Gompertz
 shape with independent $\tau_\reio$ in \texttt{CLASS} and confirm its
-agreement with the conventional $\tanh$ model.
+agreement with the conventional $\tanh$ model (gomp 0 and $\tanh$ 0 in \Cref{tab:uber-table}).
 Using Planck 2018 likelihoods `TTTEEE' \cite{Planck2020c} and CMB
 lensing \cite{Planck2020d}, we sample typical cosmological parameters
 with \texttt{Cobaya} \cite{Torrado2020}, including $\tau_\reio$. Given a proposal for
@@ -236,9 +236,9 @@ We repeat this for $\tanh$ reionization and check the agreement between the two 
 \Cref{fig:tg,tab:tau_comp} in the Extended Data summarize the validating
 experiment.
 The only notable differences in inferred parameters are in $z_\re$.
-The Gompertz scenario suggests a more delayed reionization by over
+The gomp 0 scenario suggests a more delayed reionization by over
 $1\sigma$, with $z_\re = 6.81 \pm 0.68$ compared to $7.67 \pm 0.75$ for
-the $\tanh$ model, in alignment with recent high-$z$ quasar observations
+$\tanh$ 0, in alignment with recent high-$z$ quasar observations
 \cite{Keating2020}.
 All other cosmological parameters are in good agreement with Planck's
 results \cite{Planck2020a}, with biases of $\lessapprox 0.4 \%$.
@@ -283,7 +283,7 @@ Similarly, larger $\Omegam$ and $\sigma_8$ primarily expedite
 reionization by enhancing structure formation.
 Surprisingly, \cref{eq:SR} suggests that higher $\Omegab$ delays
 reionization, likely due to the increased abundance of HI in the
-intergalactic medium requiring more ionizing photons.
+intergalactic medium requiring more ionizing photons. 
 
 We note that within the prior range of our \texttt{21cmFAST} simulations
 (see \nameref{ssec:sims}) and their corresponding astrophysics of
@@ -293,11 +293,11 @@ presented in \nameref{ssec:0226} of the Extended Data.
 Nonetheless, our results are robust and independent of the choice of
 mapping.
 
-We implement \cref{eq:SR} in our Gompertz \texttt{CLASS}, which given
+We implement \cref{eq:SR} in our Gompertz \texttt{CLASS} , which given
 the cosmological parameters determines the pivot value and consequently
 the reionization history, $\tau_\reio$, and corresponding CMB angular
 power spectra.
-This eliminates the need to sample over $\tau_\reio$ (or $z_\re$),
+This gomp 1 model eliminates the need to sample over $\tau_\reio$ (or $z_\re$),
 requiring only five cosmological parameters, $\vtheta = \{ \sigma_8,
 \ns, h, \Omegab, \Omegam\}$.
 We use \texttt{Cobaya} to re-analyze the same CMB data,
@@ -337,13 +337,13 @@ See \Cref{fig:unleashed_gomp,tab:para} in the Extended Data for details.
 \centering
 \includegraphics[width=\linewidth]{figs/history.pdf}
 \caption{\textbf{Reionization history $x_\HI$.}
-Our best-fit Gompertz model (green dashed line) of Planck data is
+Our best-fit gomp 1 model (green dashed line) of Planck data is
 asymmetric and differs significantly from that of the symmetric $\tanh$
 model (blue lines, with dotted region representing the 1$\sigma$
 errors).
 Note $z$ is shown in logarithmic scale of $a^{-1}$.
 We also include an alternative mapping from cosmology to Gompertz
-timeline in the pink dotted line (see \nameref{ssec:0226}).
+timeline -- gomp 2 -- in the pink dotted line (see \nameref{ssec:0226}).
 Additionally, we include observational constraints from high-redshift
 quasars \cite{Greig2017, Banados2018, Davies2018, Greig2019, Wang2020,
 Yang2020, Greig2022, Jin2023} and galaxies \cite{Ouchi2010,
@@ -361,9 +361,9 @@ Our best-fit cosmological parameters indicate a midpoint of $z_\re =
 7.40$ and a duration of $\Delta z \equiv z(x_\HI = 0.05) - z(x_\HI =
 0.95) \sim 500 $ Myr.
 While our results align with late reionization observations, the
-difference from the $\tanh$ model is within 1$\sigma$.
+difference from $\tanh$ 1 is within 1$\sigma$.
 The duration of reionization, though better suited to observational
-constraints compared to the $\tanh$ model, might still be considered
+constraints compared to  $\tanh$ 1, might still be considered
 somewhat rapid in the context of late reionization scenarios
 \cite{Cain2021}.
 \Cref{fig:history} illustrates the reionization timeline derived
