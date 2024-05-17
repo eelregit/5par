@@ -2,19 +2,16 @@ MCMC with Cobaya and CLASS
 ==========================
 
 
-* gomp_0 receives tau_reio as input and finds reionization timeline
-  using bisection (variyng alpha), gomp_0 is used for validation
-* gomp_1 finds tau_reio using alpha(cosmology)
-* gomp_2 finds tau_reio using alpha(cosmology) but the SR expression
-  was obtained using only half (64) of our data
+* `gomp_0 <gomp_0>`_ receives tau_reio as input and finds reionization
+  timeline using bisection (variyng alpha), gomp_0 is used for
+  validation
+* `gomp_1 <gomp_1>`_ finds tau_reio using alpha(cosmology)
+* `gomp_2 <gomp_2>`_ finds tau_reio using alpha(cosmology) but the SR
+  expression was obtained using only half (64) of our data
 
-
-* tanh_0 receives tau_reio as input and finds reionization timeline
-  using bisection (varying z_re), tanh_o is used for validation
-* tanh_1 finds tau_reio by sampling over z_re
-
-* `tanh <tanh>`_ uses tanh TODO
-* `Gomp <gomp>`_
+* `tanh_0 <tanh_0>`_ receives tau_reio as input and finds reionization
+  timeline using bisection (varying z_re), tanh_o is used for validation
+* `tanh_1 <tanh_1>`_ finds tau_reio by sampling over z_re
 
 
 Chaining log:
