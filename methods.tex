@@ -12,7 +12,7 @@
 
 To establish the universality of our proposed Gompertz model for the
 neutral hydrogen reionization and its relationship with the cosmological
-parameter, we conducted 128 \texttt{21cmFASTv3} simulations to generate
+parameters, we conducted 128 \texttt{21cmFASTv3} simulations to generate
 the corresponding $x_\HI(z; \vtheta)$ profiles.
 Our parameter space include $\vtheta = \{\sigma_8, \ns, h, \Omegab,
 \Omegam, \zetaUV\}$, comprising five cosmological and one astrophysical
@@ -65,9 +65,6 @@ However, our findings suggest that $\zetaUV$ plays a minor role compared
 to the cosmological parameters.
 In fact, the best performing symbolic regression expressions 
 (see \nameref{ssec:pysr} for the selection of best models) do not use $\zetaUV$.
-
-\paulo{We should probably mention the porosity vs mass-weighted concern
-somewhere, also for methods perhaps?}
 
 
 \subsection*{Helium reionization}
@@ -260,7 +257,15 @@ tilt.
 \begin{landscape}
 \begin{table}
 \centering
-\caption{Giga-table}
+\caption{\textbf{Parameter constraints from Planck CMB data.} Summary table
+of the constraints and corresponding errors for representative parameters of the
+universal shape (Gompertz) and $\tanh$ reionization models. The constraints use
+CMB `TTTEEE' + lensing information. The results from Planck analysis \cite{Planck2020a}
+are included for comparison. The validation models are gomp 0 and $\tanh$ 0, gomp 0
+does not include the cosmological information present in the timeline of reionization. In contrast,
+gomp 1, and the alternative mapping gomp 2, both include the additional cosmological information
+present in the timeline of reionization.
+The shaded cells highlight the parameters that are sampled over for the different models. }
 \begin{tabular}{l l l l l l l}
 \toprule
  & \multicolumn{3}{c}{Gompertz reionization} & \multicolumn{3}{c}{Tanh reionization} \\
@@ -329,18 +334,11 @@ from cosmological dependence to reionization history in these results.}
 \includegraphics[width=\linewidth]{figs/gomp_tanh_triangle_kill_full.pdf}
 \caption{\textbf{Analysis of CMB data treating $\tau_\reio$ as a derived
 parameter using \cref{eq:uni,eq:poly,eq:map,eq:SR} vs.\ sampling it with
-the conventional $\tanh$ model (sampling over $z_\re$ for reference
-\YL{correct to say ``same af \Cref{fig:tg} for reference''?})
-\paulo{Incorrect but it can be phrase as ``Same as \Cref{fig:tg} but treating
-$\tau_\reio$ as a derived parameter with the Gompertz model vs. a $\tanh$
-model that samples over $z_\re$.'' or similar.}} \paulo{Come back to this after 
-defining the nomenclature for the tanhs ad gomps.}
-Here we combine our Gompertz universal shape with the rescaling pivot
-and tilt obtained via symbolic regression.
-Note that for the Gompertz model we do not sample over $z_\re$ since
-\cref{eq:uni} does not depend on it.
+the conventional $\tanh$ model.} Here gomp 1 combines our Gompertz universal 
+shape with the rescaling pivot and tilt obtained via symbolic regression. Note that for 
+gomp 1 we do not sample over $z_\re$ since \cref{eq:uni} does not depend on it.
 The green (blue) contours correspond to the constraints obtained with
-our Gompertz universal shape ($\tanh$ model).}
+our Gompertz universal shape ($\tanh$ 1 model).}
 \label{fig:unleashed_gomp}
 \end{figure}
 
@@ -351,11 +349,10 @@ our Gompertz universal shape ($\tanh$ model).}
 \caption{\textbf{Validation of our universal shape for $x_\HI$ in \cref{eq:uni,eq:poly} vs.\ the
 conventional $\tanh$ model using CMB data with sampling over $\tau_\reio$.}
 Note that we have not \emph{eliminated} $\tau_\reio$ from the analysis
-yet.
-Here, we use the standard choice of sampling over optical depth and
-obtain the corresponding reionization history via bisection.
+yet. Here, we use the standard choice of sampling 
+over optical depth and obtain the corresponding reionization history via bisection.
 The green (blue) contours correspond to the constraints obtained with
-our Gompertz universal shape ($\tanh$ model).}
+our gomp 0 ($\tanh$ 0) model.}
 \label{fig:tg}
 \end{figure}
 
@@ -439,7 +436,7 @@ avoid introducing both}
 
 Replacing \cref{eq:SR} with \cref{eq:SR0226}, we rerun the analysis
 following the same approach, and summarize the results in
-\Cref{tab:para}.
+\Cref{tab:uber-table}.
 Comparing these findings to our previous results, we observe strikingly
 similar values for all cosmological parameters, albeit with smaller
 deviations from the Planck results.
@@ -450,17 +447,19 @@ mappings perform robustly and are not biasing the parameter inferences.
 
 \subsection*{MCMC runs}
 \label{ssec:fits}
-Table \Cref{tab:uber-table}\PMCtodo{Any better name for this subsection one?} summarizes the
+\Cref{tab:uber-table}\PMCtodo{Any better name for this subsection?} summarizes the
 results obtained by running cobaya for the models considered throughout this work. We also include 
-the results in \cite{Planck2020a} for reference. We run in total three Gompertz reionization and
+the Planck results \cite{Planck2020a} for reference. In total, we run three Gompertz reionization and
 two $\tanh$ reionization models, where $\tanh$ 0, Planck PR3, and gomp 0 sample over typical cosmological
-CMB cosmological parameters (see shaded parameters in Table \Cref{table:uber-table}). In contrast, 
-$\tanh$ 1, gomp 1, and gomp 2  sample over 
-$\boldsymbol{\theta} = \{\sigma_8, \ns, \Omegab h^2, \Omegac h^2, h, z_\re\}$.     
+CMB cosmological parameters (see shaded parameters in \Cref{tab:uber-table}). In contrast, 
+ gomp 1, and gomp 2  sample over 
+$\boldsymbol{\theta} = \{\sigma_8, \ns, \Omegab h^2, \Omegac h^2, h\}$. Similarly, $\tanh$ 1 samples over
+the same parameters as gomp 1 but with the inclusion of $z_\re$.   
 
 There is an apparent discrepancy between the different models in $\theta_{\rm x}$, 
 a proxy for the angular scale of the acoustic oscillations ($\theta_*$). The difference is due to our 
 use of $100\theta_s$, which corresponds to the peak scale parameter defined exactly
  as the ratio of the sound horizon divided by the angular diameter at decoupling, with 
  decoupling time given by the maximum of the visibility function, i.e. the standard choice 
- for CLASS. In contrast, the Planck collaboration reports $100\theta_{\rm MC}$, which is given by Eq.~(6) in \cite{Planck2014}, which corresponds to the standard choice in \texttt{CosmoMC}\cite{Lewis2002}.
+ for CLASS. In contrast, the Planck collaboration reports $100\theta_{\rm MC}$, which is given by Eq.~(6) in \cite{Planck2014}, 
+ and corresponds to the standard choice in \texttt{CosmoMC}\cite{Lewis2002}.

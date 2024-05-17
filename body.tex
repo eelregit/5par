@@ -58,8 +58,8 @@ data.}
 The error bars indicate the 1$\sigma$ uncertainties.
 Various analyses may employ distinct data sets or vary in the parameters
 considered.
-For instance, the inclusion of WMAP data in Refs.~ \cite{Natale2020,
-Paradiso2023} (circle and square) or ACT in combination with other
+For instance, the inclusion of astrophysical data \cite{Paoletti2024} (crosses), WMAP data in Refs.~ \cite{Natale2020,
+Paradiso2023} (circle and square), or ACT in combination with other
 external data sets \cite{Giare2023} (triangle), expanded sky coverage
 \cite{Paradiso2023} (square), incorporation of high-$\ell$ data
 \cite{Pagano2020, Planck2020a, Giare2023} (pentagon, star, and
@@ -111,7 +111,7 @@ by examining the dependence of $x_\HI(z)$ on cosmological parameters.
 This mapping can enhance parameter constraints and shed light on
 reionization astrophysics.
 It also aids ongoing efforts in parametrizing cosmic reionization models
-\cite{Trac2018, Trac2022} by including the cosmological dependence of
+\cite{Trac2018,Trac2022,Paoletti2024} by including the cosmological dependence of
 $x_\HI$.
 
 
@@ -226,14 +226,14 @@ Using Planck 2018 likelihoods `TTTEEE' \cite{Planck2020c} and CMB
 lensing \cite{Planck2020d}, we sample typical cosmological parameters
 with \texttt{Cobaya} \cite{Torrado2020}, including $\tau_\reio$. Given a proposal for
 $\tau_\reio$, we determine the corresponding reionization timeline using bisection by varying
-$\ln\ap$ for Gompertz model, while for the conventional $\tanh$ model,
+$\ln\ap$ for gomp 0, while for $\tanh$ 0,
 the reionization midpoint $z_\re$ is the tuning parameter.
 The sampler runs until the Gelman-Rubin statistic \cite{Gelman1992}
 satisfies $R - 1 < 0.2$ for the between-chain variance of the confidence
 intervals.
-We repeat this for $\tanh$ reionization and check the agreement between the two models.
+We repeat this for $\tanh$ 0 and verify the agreement between the two models.
 
-\Cref{fig:tg,tab:tau_comp} in the Extended Data summarize the validating
+\Cref{fig:tg,tab:uber-table} in the Extended Data summarize the validating
 experiment.
 The only notable differences in inferred parameters are in $z_\re$.
 The gomp 0 scenario suggests a more delayed reionization by over
@@ -246,7 +246,7 @@ results \cite{Planck2020a}, with biases of $\lessapprox 0.4 \%$.
 Gompertz-polynomial-shaped reionization can reproduce standard CMB analyses.
 Now, we move to establish the connection
 between the universal shape for $x_\HI$ and the rescaling of a given
-reionization scenario.
+reionization scenario. We refer to this model as gomp 1.
 This rescaling is naturally a function of cosmology.
 For example, a larger density of matter $\Omegam$ results in deeper
 potential wells, accelerating structure formation and increasing the
@@ -288,7 +288,7 @@ intergalactic medium requiring more ionizing photons.
 We note that within the prior range of our \texttt{21cmFAST} simulations
 (see \nameref{ssec:sims}) and their corresponding astrophysics of
 reionization, the mapping derived from SR is not unique.
-Additional details and results using an alternative mapping are
+Additional details and results using an alternative mapping -- gomp 2 -- are
 presented in \nameref{ssec:0226} of the Extended Data.
 Nonetheless, our results are robust and independent of the choice of
 mapping.
@@ -298,7 +298,7 @@ the cosmological parameters determines the pivot value and consequently
 the reionization history, $\tau_\reio$, and corresponding CMB angular
 power spectra.
 This gomp 1 model eliminates the need to sample over $\tau_\reio$ (or $z_\re$),
-requiring only five cosmological parameters, $\vtheta = \{ \sigma_8,
+requiring only five cosmological parameters, e.g. $\vtheta = \{ \sigma_8,
 \ns, h, \Omegab, \Omegam\}$.
 We use \texttt{Cobaya} to re-analyze the same CMB data,
 showcasing the full strength of our approach.
@@ -328,7 +328,7 @@ The error on $\As$ decreases by an impressive factor of 2.5 compared to
 Planck's results \cite{Planck2020a}.
 Overall, we recover tighter constraints across the board compared to
 Planck.
-See \Cref{fig:unleashed_gomp,tab:para} in the Extended Data for details.
+See \Cref{fig:unleashed_gomp,tab:uber-table} in the Extended Data for details.
 
 
 \section*{Outro}
