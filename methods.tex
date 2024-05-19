@@ -63,7 +63,7 @@ assumption could be that $\zetaUV$ is a function of halo mass
 \cite{Park2019} or redshift.
 However, our findings suggest that $\zetaUV$ plays a minor role compared
 to the cosmological parameters.
-In fact, the best performing symbolic regression expressions 
+In fact, the best performing symbolic regression expressions
 (see \nameref{ssec:pysr} for the selection of best models) do not use $\zetaUV$.
 
 
@@ -254,42 +254,47 @@ different X-ray preheating \cite{Montero2024}, might reveal a different
 tilt.
 
 
-\begin{landscape}
 \begin{table}
 \centering
-\caption{\textbf{Parameter constraints from Planck CMB data.} Summary table
-of the constraints and corresponding errors for representative parameters of the
-universal shape (Gompertz) and $\tanh$ reionization models. The constraints use
-CMB `TTTEEE' + lensing information. The results from Planck analysis \cite{Planck2020a}
-are included for comparison. The validation models are gomp 0 and $\tanh$ 0, gomp 0
-does not include the cosmological information present in the timeline of reionization. In contrast,
-gomp 1, and the alternative mapping gomp 2, both include the additional cosmological information
-present in the timeline of reionization.
-The shaded cells highlight the parameters that are sampled over for the different models. }
-\begin{tabular}{l l l l l l l}
+\caption{\textbf{Parameter constraints from Planck CMB data.}
+Summary table of the constraints and corresponding errors for
+representative parameters of the universal shape (Gompertz) and $\tanh$
+reionization models.
+The constraints use CMB `TTTEEE' + lensing information.
+The results from Planck analysis \cite{Planck2020a} are included for
+comparison.
+The validation models are gomp 0 and $\tanh$ 0, gomp 0 does not include
+the cosmological information present in the timeline of reionization.
+In contrast, gomp 1, and the alternative mapping gomp 2, both include
+the additional cosmological information present in the timeline of
+reionization.
+The shaded cells highlight the parameters that are sampled over for the
+different models.\YL{$\tau$ should have one more digit}}
+\makebox[\textwidth][c]{\footnotesize
+\begin{tabular}{l*{6}{r}}
 \toprule
  & \multicolumn{3}{c}{Gompertz reionization} & \multicolumn{3}{c}{Tanh reionization} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
 Parameter & gomp 0 & gomp 1 & gomp 2 & $\tanh$ 0 & $\tanh$ 1 & Planck PR3\cite{Planck2020a} \\
 \midrule
-$10^{9} \As$ & \cellcolor[gray]{0.9} 2.101 $\pm$ 0.031 & 2.088 $\pm$ 0.012 & 2.089 $\pm$ 0.013 & \cellcolor[gray]{0.9} 2.099 $\pm$ 0.030 & 2.098 $\pm$ 0.030 & \cellcolor[gray]{0.9} 2.100 $\pm$ 0.030 \\
-$\ns$ &\cellcolor[gray]{0.9} 0.9638 $\pm$ 0.0041 & \cellcolor[gray]{0.9} 0.9634 $\pm$ 0.0040 & \cellcolor[gray]{0.9} 0.9634 $\pm$ 0.0040 & \cellcolor[gray]{0.9} 0.9641 $\pm$ 0.0042 & \cellcolor[gray]{0.9} 0.9641 $\pm$ 0.0041 & \cellcolor[gray]{0.9} 0.9649 $\pm$ 0.0042 \\
-$\Omegac h^2$ &\cellcolor[gray]{0.9} 0.1201 $\pm$ 0.0012 & \cellcolor[gray]{0.9} 0.1203 $\pm$ 0.0011 & \cellcolor[gray]{0.9} 0.1202 $\pm$ 0.0011 & \cellcolor[gray]{0.9} 0.1201 $\pm$ 0.0012 & \cellcolor[gray]{0.9} 0.1201 $\pm$ 0.0012 & \cellcolor[gray]{0.9} 0.1200 $\pm$ 0.0012 \\
-$\Omegab h^2$ & \cellcolor[gray]{0.9} 0.02235 $\pm$  0.00015 & \cellcolor[gray]{0.9} 0.02233 $\pm$ 0.00014 & \cellcolor[gray]{0.9} 0.02233 $\pm$ 0.00014 &  \cellcolor[gray]{0.9} 0.02235 $\pm$ 0.00015 & \cellcolor[gray]{0.9} 0.02235 $\pm$ 0.00015 & \cellcolor[gray]{0.9} 0.02237 $\pm$ 0.00015 \\
-$\Omegam$ & 0.3157 $\pm$ 0.0076 & 0.3171 $\pm$ 0.0068 & 0.3168 $\pm$ 0.0068 & 0.3157 $\pm$ 0.0076 & 0.3159 $\pm$ 0.0075 & 0.3153 $\pm$ 0.0073 \\
-$\Omegam h^2$ & 0.1430 $\pm$ 0.0011 & 0.1433 $\pm$ 0.0010 & 0.1432 $\pm$ 0.0010 & 0.1430 $\pm$ 0.0011 & 0.1431 $\pm$ 0.0011 & 0.1430 $\pm$ 0.0011 \\
-$\OmegaL$ & 0.6842 $\pm$ 0.0076 & 0.6828 $\pm$ 0.0068 & 0.6831 $\pm$ 0.0068 & 0.6842 $\pm$ 0.0076 & 0.6840 $\pm$ 0.0075 & 0.6847 $\pm$ 0.0073 \\
-Age [Gyr] & 13.800 $\pm$ 0.023 & 13.803 $\pm$ 0.02 & 13.803 $\pm$ 0.022 & 13.800 $\pm$ 0.023 & 13.800 $\pm$ 0.023 & 13.797 $\pm$ 0.023 \\
-$H_0$ & 67.32 $\pm$ 0.55 & \cellcolor[gray]{0.9} 67.22 $\pm$ 0.49 & \cellcolor[gray]{0.9} 67.24 $\pm$ 0.50 & 67.32 $\pm$ 0.55 & \cellcolor[gray]{0.9} 67.31 $\pm$ 0.54 & 67.36 $\pm$ 0.54 \\
-$100 \theta_\mathrm{X}$ & \cellcolor[gray]{0.9} 1.04184 $\pm$ 0.00029 & 1.04183 $\pm$ 0.00029 & 1.04183 $\pm$ 0.00029 & \cellcolor[gray]{0.9} 1.04815 $\pm$ 0.00029 & 1.04184 $\pm$ 0.00029 & \cellcolor[gray]{0.9} 1.04092 $\pm$ 0.00031 \\
-$\sigma_8$ & 0.8109 $\pm$ 0.0059 & \cellcolor[gray]{0.9} 0.8092 $\pm$ 0.0045 & \cellcolor[gray]{0.9} 0.8092 $\pm$ 0.0046 & 0.8108 $\pm$ 0.0060 & \cellcolor[gray]{0.9} 0.8105 $\pm$ 0.0059 & 0.8111 $\pm$ 0.0060 \\  
-$S_8 \equiv \sigma_8 \sqrt{\frac{\Omegam}{0.3}}$ & 0.832 $\pm$ 0.013 & 0.832 $\pm$ 0.013 & 0.832 $\pm$ 0.013 & 0.832 $\pm$ 0.013 & 0.832 $\pm$ 0.013 & 0.832 $\pm$ 0.013 \\
-$\tau_\reio$ & \cellcolor[gray]{0.9} 0.0546 $\pm$ 0.0076 & 0.0511 $\pm$ 0.00061 & 0.0514 $\pm$ 0.00063 & \cellcolor[gray]{0.9} 0.0543 $\pm$ 0.0075 & 0.0538 $\pm$ 0.0074 & \cellcolor[gray]{0.9} 0.0544 $\pm$ 0.0073 \\
-$z_\re$ & 6.81 $\pm$ 0.68 & 7.40 & 7.41 & 7.67 $\pm$ 0.75 & \cellcolor[gray]{0.9} 7.62 $\pm$ 0.74 & 7.67 $\pm$ 0.73 \\
+$10^{9} \As$ & \sampled 2.101(31) & 2.088(12) & 2.089(13) & \sampled 2.099(30) & 2.098(30) & \sampled 2.100(30) \\
+$\ns$ &\sampled 0.9638(41) & \sampled 0.9634(40) & \sampled 0.9634(40) & \sampled 0.9641(42) & \sampled 0.9641(41) & \sampled 0.9649(42) \\
+$\Omegac h^2$ &\sampled 0.1201(12) & \sampled 0.1203(11) & \sampled 0.1202(11) & \sampled 0.1201(12) & \sampled 0.1201(12) & \sampled 0.1200(12) \\
+$\Omegab h^2$ & \sampled 0.02235(15) & \sampled 0.02233(14) & \sampled 0.02233(14) &  \sampled 0.02235(15) & \sampled 0.02235(15) & \sampled 0.02237(15) \\
+$\Omegam$ & 0.3157(76) & 0.3171(68) & 0.3168(68) & 0.3157(76) & 0.3159(75) & 0.3153(73) \\
+$\Omegam h^2$ & 0.1430(11) & 0.1433(10) & 0.1432(10) & 0.1430(11) & 0.1431(11) & 0.1430(11) \\
+$\OmegaL$ & 0.6842(76) & 0.6828(68) & 0.6831(68) & 0.6842(76) & 0.6840(75) & 0.6847(73) \\
+Age [Gyr] & 13.800(23) & 13.803(20) & 13.803(22) & 13.800(23) & 13.800(23) & 13.797(23) \\
+$H_0$ & 67.32(55) & \sampled 67.22(49) & \sampled 67.24(50) & 67.32(55) & \sampled 67.31(54) & 67.36(54) \\
+$100 \theta_\mathrm{X}$ & \sampled 1.04184(29) & 1.04183(29) & 1.04183(29) & \sampled 1.04815(29) & 1.04184(29) & \sampled 1.04092(31) \\
+$\sigma_8$ & 0.8109(59) & \sampled 0.8092(45) & \sampled 0.8092(46) & 0.8108(60) & \sampled 0.8105(59) & 0.8111(60) \\
+$S_8 \equiv \sigma_8 \sqrt{\frac{\Omegam}{0.3}}$ & 0.832(13) & 0.832(13) & 0.832(13) & 0.832(13) & 0.832(13) & 0.832(13) \\
+$\tau_\reio$ & \sampled 0.0546(76) & 0.0511X(61) & 0.0514X(63) & \sampled 0.0543(75) & 0.0538(74) & \sampled 0.0544(73) \\
+$z_\re$ & 6.81(68) & 7.40 & 7.41 & 7.67(75) & \sampled 7.62(74) & 7.67(73) \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \label{tab:uber-table}
 \end{table}
-\end{landscape}
 
 
 
@@ -334,8 +339,8 @@ from cosmological dependence to reionization history in these results.}
 \includegraphics[width=\linewidth]{figs/gomp_tanh_triangle_kill_full.pdf}
 \caption{\textbf{Analysis of CMB data treating $\tau_\reio$ as a derived
 parameter using \cref{eq:uni,eq:poly,eq:map,eq:SR} vs.\ sampling it with
-the conventional $\tanh$ model.} Here gomp 1 combines our Gompertz universal 
-shape with the rescaling pivot and tilt obtained via symbolic regression. Note that for 
+the conventional $\tanh$ model.} Here gomp 1 combines our Gompertz universal
+shape with the rescaling pivot and tilt obtained via symbolic regression. Note that for
 gomp 1 we do not sample over $z_\re$ since \cref{eq:uni} does not depend on it.
 The green (blue) contours correspond to the constraints obtained with
 our Gompertz universal shape ($\tanh$ 1 model).}
@@ -349,7 +354,7 @@ our Gompertz universal shape ($\tanh$ 1 model).}
 \caption{\textbf{Validation of our universal shape for $x_\HI$ in \cref{eq:uni,eq:poly} vs.\ the
 conventional $\tanh$ model using CMB data with sampling over $\tau_\reio$.}
 Note that we have not \emph{eliminated} $\tau_\reio$ from the analysis
-yet. Here, we use the standard choice of sampling 
+yet. Here, we use the standard choice of sampling
 over optical depth and obtain the corresponding reionization history via bisection.
 The green (blue) contours correspond to the constraints obtained with
 our gomp 0 ($\tanh$ 0) model.}
@@ -448,18 +453,18 @@ mappings perform robustly and are not biasing the parameter inferences.
 \subsection*{MCMC runs}
 \label{ssec:fits}
 \Cref{tab:uber-table}\PMCtodo{Any better name for this subsection?} summarizes the
-results obtained by running cobaya for the models considered throughout this work. We also include 
+results obtained by running cobaya for the models considered throughout this work. We also include
 the Planck results \cite{Planck2020a} for reference. In total, we run three Gompertz reionization and
 two $\tanh$ reionization models, where $\tanh$ 0, Planck PR3, and gomp 0 sample over typical cosmological
-CMB cosmological parameters (see shaded parameters in \Cref{tab:uber-table}). In contrast, 
- gomp 1, and gomp 2  sample over 
+CMB cosmological parameters (see shaded parameters in \Cref{tab:uber-table}). In contrast,
+ gomp 1, and gomp 2  sample over
 $\boldsymbol{\theta} = \{\sigma_8, \ns, \Omegab h^2, \Omegac h^2, h\}$. Similarly, $\tanh$ 1 samples over
-the same parameters as gomp 1 but with the inclusion of $z_\re$.   
+the same parameters as gomp 1 but with the inclusion of $z_\re$.
 
-There is an apparent discrepancy between the different models in $\theta_{\rm x}$, 
-a proxy for the angular scale of the acoustic oscillations ($\theta_*$). The difference is due to our 
+There is an apparent discrepancy between the different models in $\theta_{\rm x}$,
+a proxy for the angular scale of the acoustic oscillations ($\theta_*$). The difference is due to our
 use of $100\theta_s$, which corresponds to the peak scale parameter defined exactly
- as the ratio of the sound horizon divided by the angular diameter at decoupling, with 
- decoupling time given by the maximum of the visibility function, i.e. the standard choice 
- for CLASS. In contrast, the Planck collaboration reports $100\theta_{\rm MC}$, which is given by Eq.~(6) in \cite{Planck2014}, 
+ as the ratio of the sound horizon divided by the angular diameter at decoupling, with
+ decoupling time given by the maximum of the visibility function, i.e. the standard choice
+ for CLASS. In contrast, the Planck collaboration reports $100\theta_{\rm MC}$, which is given by Eq.~(6) in \cite{Planck2014},
  and corresponds to the standard choice in \texttt{CosmoMC}\cite{Lewis2002}.
