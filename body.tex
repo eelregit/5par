@@ -39,14 +39,14 @@ cosmological parameters, particularly $\As$, the amplitude of the
 primordial scalar power spectrum, and $r$, the ratio of tensor-to-scalar
 modes \cite{Natale2020}.
 
-Low-$\ell$ polarization data is crucial to determine $\tau_\reio$; however, 
-the measurement of such a weak signal ($ \sim 10^{-2} \mu$K$^2$) demands 
-superb systematic and foreground control\cite{Planck2020b}. Furthermore, 
+Low-$\ell$ polarization data is crucial to determine $\tau_\reio$; however,
+the measurement of such a weak signal ($ \sim 10^{-2} \mu$K$^2$) demands
+superb systematic and foreground control\cite{Planck2020b}. Furthermore,
 anomalous measurements in $C^{TE}_\ell$ at low multipoles\cite{Planck2020a}
-could indicate concerns to the cosmological interpretations at these angular scales. 
-Ultimately, this challenging measurement may require adopting a comprehensive 
+could indicate concerns to the cosmological interpretations at these angular scales.
+Ultimately, this challenging measurement may require adopting a comprehensive
 Bayesian framework to jointly consider cosmology, astrophysics, and
-instrument systematics\cite{Paradiso2023}. \Cref{fig:tau} illustrates current 
+instrument systematics\cite{Paradiso2023}. \Cref{fig:tau} illustrates current
 representative constraints on $\tau_\reio$.
 
 \begin{figure}[tb]
@@ -103,7 +103,7 @@ understanding and reduce inherent modeling uncertainties.
 Motivated by these developments, we use symbolic regression (SR)
 \cite{Cranmer2023} to construct a mapping between cosmology and
 reionization timeline, aiming to demote $\tau_\reio$ from an independent
-to a derived cosmological parameter, and simultaneously tightening 
+to a derived cosmological parameter, and simultaneously tightening
 constraints in cosmological parameters.
 
 \cref{eq:premise} introduces a novel avenue to constrain cosmology
@@ -149,7 +149,7 @@ $\vtheta$ to the rescaling parameters that bring the universality.
 the Gompertz function and a low-degree polynomial (lower panel).
 \emph{e)} Planck CMB data we re-analyze.
 \emph{f)} We infer the parameter constraints using Monte Carlo Markov
-Chain.}
+Chain (MCMC).}
 \label{fig:big}
 \end{figure}
 
@@ -251,7 +251,7 @@ This rescaling is naturally a function of cosmology.
 For example, a larger density of matter $\Omegam$ results in deeper
 potential wells, accelerating structure formation and increasing the
 number of ultraviolet photons driving the reionization process.
-We employ \texttt{PySR}, an SR package, to establish the cosmological dependence 
+We employ \texttt{PySR}, an SR package, to establish the cosmological dependence
 of the rescaling in \cref{eq:map}.
 
 While \texttt{PySR} initially guided us towards the Gompertz curve when
@@ -283,7 +283,7 @@ Similarly, larger $\Omegam$ and $\sigma_8$ primarily expedite
 reionization by enhancing structure formation.
 Surprisingly, \cref{eq:SR} suggests that higher $\Omegab$ delays
 reionization, likely due to the increased abundance of HI in the
-intergalactic medium requiring more ionizing photons. 
+intergalactic medium requiring more ionizing photons.
 
 We note that within the prior range of our \texttt{21cmFAST} simulations
 (see \nameref{ssec:sims}) and their corresponding astrophysics of

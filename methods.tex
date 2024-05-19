@@ -268,9 +268,15 @@ In contrast, gomp 1, and the alternative mapping gomp 2, both include
 the additional cosmological dependence in the reionization timeline.
 The shaded cells highlight the parameters that are sampled over by MCMC
 for the different models.
-\YL{The age of the Universe and $H_0$ are in unit of Gyr and km/s/Mpc,
+\YL{The numbers in paretheses give the marginalized 1$\sigma$ uncertainty
+in the last two significant digits.
+We highlight the best constraints in boldface, by factors of 12 and 2.5
+on $A_s$ and $\tau_\reio$, respectively.
+The age of the Universe and $H_0$ are in unit of Gyr and km/s/Mpc,
 respectively, and $S_8 \equiv \sigma_8 \sqrt{\Omegam/0.3}$ as usual.}}
-\YLtodo[inline]{Should be say something about absence of $z_\re$ uncertainty?}
+\YLtodo[inline]{Should be say something about absence of $z_\re$ uncertainty?
+Bold gomp 1 and gomp 2 look worse, better, or should I bold even more
+derived params that improve?}
 \makebox[\textwidth][c]{\footnotesize
 \renewcommand{\arraystretch}{1.3}
 \begin{tabular}{c *{3}{r} !{\hspace{.5em}} *{3}{r}}
@@ -279,7 +285,7 @@ respectively, and $S_8 \equiv \sigma_8 \sqrt{\Omegam/0.3}$ as usual.}}
 \cmidrule(lr){2-4} \cmidrule(lr){5-7}
 Parameter & gomp 0 & gomp 1 & gomp 2 & $\tanh$ 0 & $\tanh$ 1 & Planck PR3\cite{Planck2020a} \\
 \midrule
-$10^{9} \As$ & \sampled 2.101(31) & 2.088(12) & 2.089(13) & \sampled 2.099(30) & 2.098(30) & \sampled 2.100(30) \\
+$10^{9} \As$ & \sampled 2.101(31) & \textbf{2.088(12)} & \textbf{2.089(13)} & \sampled 2.099(30) & 2.098(30) & \sampled 2.100(30) \\
 $\ns$ &\sampled 0.9638(41) & \sampled 0.9634(40) & \sampled 0.9634(40) & \sampled 0.9641(42) & \sampled 0.9641(41) & \sampled 0.9649(42) \\
 $\Omegac h^2$ &\sampled 0.1201(12) & \sampled 0.1203(11) & \sampled 0.1202(11) & \sampled 0.1201(12) & \sampled 0.1201(12) & \sampled 0.1200(12) \\
 $\Omegab h^2$ & \sampled 0.02235(15) & \sampled 0.02233(14) & \sampled 0.02233(14) &  \sampled 0.02235(15) & \sampled 0.02235(15) & \sampled 0.02237(15) \\
@@ -291,7 +297,7 @@ $H_0$ & 67.32(55) & \sampled 67.22(49) & \sampled 67.24(50) & 67.32(55) & \sampl
 $100 \theta_\mathrm{X}$ & \sampled 1.04184(29) & 1.04183(29) & 1.04183(29) & \sampled 1.04815(29) & 1.04184(29) & \sampled 1.04092(31) \\
 $\sigma_8$ & 0.8109(59) & \sampled 0.8092(45) & \sampled 0.8092(46) & 0.8108(60) & \sampled 0.8105(59) & 0.8111(60) \\
 $S_8$ & 0.832(13) & 0.832(13) & 0.832(13) & 0.832(13) & 0.832(13) & 0.832(13) \\
-$\tau_\reio$ & \sampled 0.0546(76) & 0.05115(61) & 0.05140(63) & \sampled 0.0543(75) & 0.0538(74) & \sampled 0.0544(73) \\
+$\tau_\reio$ & \sampled 0.0546(76) & \textbf{0.05115(61)} & \textbf{0.05140(63)} & \sampled 0.0543(75) & 0.0538(74) & \sampled 0.0544(73) \\
 $z_\re$ & 6.81(68) & 7.40 & 7.41 & 7.67(75) & \sampled 7.62(74) & 7.67(73) \\
 \bottomrule
 \end{tabular}}
@@ -434,7 +440,7 @@ Furthermore, the $\tanh$ model included here samples over $z_\re$
 instead of $\tau_\reio$. \paulo{.5 since it train in half the data hehe.
 It is a sanity check but it also coverts our back, it shows
 what happens to tanh when sampling over non-typical CMB
-parameters ($\sigma_8$ instead of $A_s$, $H_0$ instead of $\theta_{mc}$, and $z_{\rm re}$ instead of $\tau_\reio$). As such, I insist on keeping it.}\YL{What I meant is that we can still explain the sanity check but it should not interfere with the understanding of the key results, right? The reader can be confused by the last sentence here and in the figure caption and also gain no value from it. The suspicious ones can always read our text for this sanity check? Or maybe we should actually merge the two tables to have a landscape one? How about that?} \paulo{We will merge the tables into a \emph{supreme} landscape table, split into gomps (bisection gomp, gomp, and gomp half or whatever nomeclature) and equal number of tanhs (bisection tanh, $z_\re$ tanh, and Planck/ref tanh). In the \emph{uber} table we will specify the sampled parameters using shading or similar.}}
+parameters ($\sigma_8$ instead of $A_s$, $H_0$ instead of $\theta_{mc}$, and $z_\re$ instead of $\tau_\reio$). As such, I insist on keeping it.}\YL{What I meant is that we can still explain the sanity check but it should not interfere with the understanding of the key results, right? The reader can be confused by the last sentence here and in the figure caption and also gain no value from it. The suspicious ones can always read our text for this sanity check? Or maybe we should actually merge the two tables to have a landscape one? How about that?} \paulo{We will merge the tables into a \emph{supreme} landscape table, split into gomps (bisection gomp, gomp, and gomp half or whatever nomeclature) and equal number of tanhs (bisection tanh, $z_\re$ tanh, and Planck/ref tanh). In the \emph{uber} table we will specify the sampled parameters using shading or similar.}}
 \YLtodo[inline]{What's the point 5 after gomp? And I forgot why $\tanh$
 need different treatment? If just for sanity check then maybe we should
 avoid introducing both}
@@ -452,21 +458,31 @@ those using only half of it indicates that our symbolic expression
 mappings perform robustly and are not biasing the parameter inferences.
 
 
-\subsection*{MCMC runs}
+\subsection*{MCMC inference}
 \label{ssec:fits}
-\Cref{tab:uber-table}\PMCtodo{Any better name for this subsection?} summarizes the
-results obtained by running cobaya for the models considered throughout this work. We also include
-the Planck results \cite{Planck2020a} for reference. In total, we run three Gompertz reionization and
-two $\tanh$ reionization models, where $\tanh$ 0, Planck PR3, and gomp 0 sample over typical cosmological
-CMB cosmological parameters (see shaded parameters in \Cref{tab:uber-table}). In contrast,
- gomp 1, and gomp 2  sample over
-$\boldsymbol{\theta} = \{\sigma_8, \ns, \Omegab h^2, \Omegac h^2, h\}$. Similarly, $\tanh$ 1 samples over
-the same parameters as gomp 1 but with the inclusion of $z_\re$.
 
-There is an apparent discrepancy between the different models in $\theta_{\rm x}$,
-a proxy for the angular scale of the acoustic oscillations ($\theta_*$). The difference is due to our
-use of $100\theta_s$, which corresponds to the peak scale parameter defined exactly
- as the ratio of the sound horizon divided by the angular diameter at decoupling, with
- decoupling time given by the maximum of the visibility function, i.e. the standard choice
- for CLASS. In contrast, the Planck collaboration reports $100\theta_{\rm MC}$, which is given by Eq.~(6) in \cite{Planck2014},
- and corresponds to the standard choice in \texttt{CosmoMC}\cite{Lewis2002}.
+\Cref{tab:uber-table}\PMCtodo{Any better name for this subsection?}\YLtodo{how about this?} summarizes the
+results obtained by performing MCMC Bayesian inference with
+\texttt{Cobaya} for the models considered throughout this work.
+We also include the Planck results \cite{Planck2020a} for reference.
+In total, we run three Gompertz reionization and two $\tanh$
+reionization models, where $\tanh$ 0, Planck PR3, and gomp 0 sample over
+the typical 6 cosmological parameters (see shaded parameters in
+\Cref{tab:uber-table}).
+In contrast, gomp 1, and gomp 2 sample over $\vtheta = \{\sigma_8, \ns,
+\Omegab h^2, \Omegac h^2, h\}$.
+Similarly, $\tanh$ 1 samples over the same parameters as gomp 1 but with
+the inclusion of $z_\re$, and agrees with $\tanh$ 0 as the expected
+result from this sanity check.
+
+There is an apparent discrepancy between the different models in
+$\theta_\mathrm{x}$, a proxy for the angular scale of the acoustic
+oscillations ($\theta_*$).
+The difference is due to our use of $100\theta_\mathrm{s}$, which
+corresponds to the peak scale parameter defined exactly as the
+ratio of the sound horizon divided by the angular diameter at
+decoupling, with decoupling time given by the maximum of the visibility
+function, i.e.\ the standard choice for CLASS.
+In contrast, the Planck collaboration reports $100\theta_\mathrm{MC}$,
+which is given by Eq.~(6) in \cite{Planck2014}, and corresponds to the
+standard choice in \texttt{CosmoMC}\cite{Lewis2002}.
