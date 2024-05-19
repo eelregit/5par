@@ -304,44 +304,6 @@ $z_\re$ & 6.81(68) & 7.40 & 7.41 & 7.67(75) & \sampled 7.62(74) & 7.67(73) \\
 \label{tab:uber-table}
 \end{table}
 
-
-
-
-\begin{table}
-\centering
-\small
-\begin{tabular}{llll}
-\toprule
-Parameter & gomp 0 & $\tanh$ 0  & Planck PR3 \\
-\midrule
-$10^{9} \As$ & 2.101 $\pm$ 0.031 & 2.099 $\pm$ 0.030 & 2.100 $\pm$ 0.030 \\
-$\ns$ & 0.9638 $\pm$ 0.0041 & 0.9641 $\pm$ 0.0042 & 0.9649 $\pm$ 0.0042 \\
-$\Omegac h^2$ & 0.1201 $\pm$ 0.0012 & 0.1201 $\pm$ 0.0012 & 0.1200 $\pm$ 0.0012 \\
-$\Omegab h^2 $ & 0.02235 $\pm$ 0.00015 & 0.02235 $\pm$ 0.00015 & 0.02237 $\pm$ 0.00015 \\
-$\Omegam$ & 0.3157 $\pm$ 0.0076 & 0.3157 $\pm$ 0.0076 & 0.3153 $\pm$ 0.0073 \\
-$\Omegam h^2$ & 0.1430 $\pm$ 0.0011 & 0.1430 $\pm$ 0.0011 & 0.1430 $\pm$ 0.0011 \\
-$\OmegaL$ & 0.6842 $\pm$ 0.0076 & 0.6842 $\pm$ 0.0076 & 0.6847 $\pm$ 0.0073 \\
-Age [Gyr] & 13.800 $\pm$ 0.023 & 13.800 $\pm$ 0.023 & 13.797 $\pm$ 0.023 \\
-$H_0$ & 67.32 $\pm$ 0.55 & 67.32 $\pm$ 0.55 & 67.36 $\pm$ 0.54 \\
-$100 \theta_\mathrm{MC}$ & 1.04184 $\pm$ 0.00029 & 1.04815 $\pm$ 0.00029 & 1.04092 $\pm$ 0.00031 \\
-$\sigma_8$ & 0.8109 $\pm$ 0.0059 & 0.8108 $\pm$ 0.0060 & 0.8111 $\pm$ 0.0060 \\
-$S_8 \equiv \sigma_8 \sqrt{\frac{\Omegam}{0.3}}$ & 0.832 $\pm$ 0.013 & 0.832 $\pm$ 0.013 & 0.832 $\pm$ 0.013\\
-$\tau_\reio$ & 0.0546 $\pm$ 0.0076 & 0.0543 $\pm$ 0.0075 & 0.0544 $\pm$ 0.0073 \\
-$z_\re$ & 6.81 $\pm$ 0.68 & 7.67 $\pm$ 0.75 & 7.67 $\pm$ 0.73 \\
-\bottomrule
-\end{tabular}
-\caption{\textbf{Parameter constraints from Planck CMB I.}
-Summary table of the constraints and corresponding errors for
-representative parameters of the universal shape (Gompertz) and $\tanh$
-models.
-The constraints use CMB `TTTEEE' + lensing information.
-The results from the Planck analysis \cite{Planck2020a} are included for
-comparison.
-Note that we sample over $\tau_\reio$ and have not included the mapping
-from cosmological dependence to reionization history in these results.}
-\label{tab:tau_comp}
-\end{table}
-
 \begin{figure}[tb]
 \centering
 \includegraphics[width=\linewidth]{figs/gomp_tanh_triangle_kill_full.pdf}
@@ -407,46 +369,6 @@ This is likely evidence that the role of $h$ is limited, and
 \texttt{PySR} considers its influence in conjunction with $\Omegam$
 without increasing the complexity of the analytic expression.
 
-\begin{table}
-\centering
-\small
-\makebox[\textwidth][c]{\begin{tabular}{lllll}
-\toprule
-Parameter & gomp 1 & gomp 2 & $\tanh$ 1 & Planck PR3 \\
-\midrule
-$10^{9} \As$ & 2.088 $\pm$ 0.012 & 2.089 $\pm$ 0.013 & 2.098 $\pm$ 0.030 & 2.100 $\pm$ 0.030 \\
-$\ns$ & 0.9634 $\pm$ 0.0040 & 0.9634 $\pm$ 0.0040 & 0.9641 $\pm$ 0.0041 & 0.9649 $\pm$ 0.0042 \\
-$\Omegac h^2$ & 0.1203 $\pm$ 0.0011 & 0.1202 $\pm$ 0.0011 & 0.1201 $\pm$ 0.0012 & 0.1200 $\pm$ 0.0012 \\
-$\Omegab h^2 $ & 0.02233 $\pm$ 0.00014 & 0.02233 $\pm$ 0.00014 & 0.02235 $\pm$ 0.00015 & 0.02237 $\pm$ 0.00015 \\
-$\Omegam$ & 0.3171 $\pm$ 0.0068 & 0.3168 $\pm$ 0.0068 & 0.3159 $\pm$ 0.0075 & 0.3153 $\pm$ 0.0073 \\
-$\Omegam h^2$ & 0.1433 $\pm$ 0.0010 & 0.1432 $\pm$ 0.0010 & 0.1431 $\pm$ 0.0011 & 0.1430 $\pm$ 0.0011 \\
-$\OmegaL$ & 0.6828 $\pm$ 0.0068 & 0.6831 $\pm$ 0.0068 & 0.6840 $\pm$ 0.0075 & 0.6847 $\pm$ 0.0073 \\
-Age [Gyr] & 13.803 $\pm$ 0.022 & 13.803 $\pm$ 0.022 & 13.800 $\pm$ 0.023 & 13.797 $\pm$ 0.023 \\
-$H_0$ & 67.22 $\pm$ 0.49 & 67.24 $\pm$ 0.50 & 67.31 $\pm$ 0.54 & 67.36 $\pm$ 0.54 \\
-$100 \theta_\mathrm{MC}$ & 1.04183 $\pm$ 0.00029 & 1.04183 $\pm$ 0.00029 & 1.04184 $\pm$ 0.00029 & 1.04092 $\pm$ 0.00031 \\
-$\sigma_8$ & 0.8092 $\pm$ 0.0045 & 0.8092 $\pm$ 0.0046 & 0.8105 $\pm$ 0.0059 & 0.8111 $\pm$ 0.0060 \\
-$S_8 \equiv \sigma_8 \sqrt{\frac{\Omegam}{0.3}}$ & 0.832 $\pm$ 0.013 & 0.832 $\pm$ 0.013 & 0.832 $\pm$ 0.013 & 0.832 $\pm$ 0.013\\
-$\tau_\reio$ & 0.0511 $\pm$ 0.00061 & 0.0514 $\pm$ 0.00063 & 0.0538 $\pm$ 0.0074 & 0.0544 $\pm$ 0.0073 \\
-$z_\re$ & 7.40 & 7.41 & 7.62 $\pm$ 0.74 & 7.67 $\pm$ 0.73 \\
-\bottomrule
-\end{tabular}}
-\caption{\textbf{Parameter constraints from Planck CMB II.}
-Similar to \Cref{tab:tau_comp} but including the cosmological mapping
-to reionization histories.
-Note that the midpoint of reionization $z_\re$ is not a derived
-parameter of the model nor a sampled parameter in the Gompertz models;
-instead, it is obtained directly with \cref{eq:uni}.
-Furthermore, the $\tanh$ model included here samples over $z_\re$
-instead of $\tau_\reio$. \paulo{.5 since it train in half the data hehe.
-It is a sanity check but it also coverts our back, it shows
-what happens to tanh when sampling over non-typical CMB
-parameters ($\sigma_8$ instead of $A_s$, $H_0$ instead of $\theta_{mc}$, and $z_\re$ instead of $\tau_\reio$). As such, I insist on keeping it.}\YL{What I meant is that we can still explain the sanity check but it should not interfere with the understanding of the key results, right? The reader can be confused by the last sentence here and in the figure caption and also gain no value from it. The suspicious ones can always read our text for this sanity check? Or maybe we should actually merge the two tables to have a landscape one? How about that?} \paulo{We will merge the tables into a \emph{supreme} landscape table, split into gomps (bisection gomp, gomp, and gomp half or whatever nomeclature) and equal number of tanhs (bisection tanh, $z_\re$ tanh, and Planck/ref tanh). In the \emph{uber} table we will specify the sampled parameters using shading or similar.}}
-\YLtodo[inline]{What's the point 5 after gomp? And I forgot why $\tanh$
-need different treatment? If just for sanity check then maybe we should
-avoid introducing both}
-\label{tab:para}
-\end{table}
-
 Replacing \cref{eq:SR} with \cref{eq:SR0226}, we rerun the analysis
 following the same approach, and summarize the results in
 \Cref{tab:uber-table}.
@@ -461,7 +383,7 @@ mappings perform robustly and are not biasing the parameter inferences.
 \subsection*{MCMC inference}
 \label{ssec:fits}
 
-\Cref{tab:uber-table}\PMCtodo{Any better name for this subsection?}\YLtodo{how about this?} summarizes the
+\Cref{tab:uber-table} summarizes the
 results obtained by performing MCMC Bayesian inference with
 \texttt{Cobaya} for the models considered throughout this work.
 We also include the Planck results \cite{Planck2020a} for reference.
