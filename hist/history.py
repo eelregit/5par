@@ -82,8 +82,8 @@ ax1.set_xlim(2,15)
 ax1.set_ylim(0.03, 0.065)
 ax1.legend(loc='lower right')
 ax1.plot(z_vals, tau_tanh0_z, '-', linewidth=3, color='darkblue', label='Planck PR3')
-ax1.plot(z_vals, tau_gomp1_z, '--', linewidth=3, color='green', label='gomp1')
-ax1.plot(z_vals, tau_gomp2_z, ':', linewidth=3, color='purple', label='gomp2')
+ax1.plot(z_vals, tau_gomp1_z, '--', linewidth=3, color='green', label='gomp 1')
+ax1.plot(z_vals, tau_gomp2_z, ':', linewidth=3, color='purple', label='gomp 2')
 
 
 
