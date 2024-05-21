@@ -65,28 +65,32 @@ val2 = 0.02233 / 0.6724**2
 
 # need two figures actually one full with everything including caption
 # and the second a chibi version with only the main point
-z = np.linspace(5.8, 16, 100, endpoint=True) - 1
+#z = np.linspace(5.8, 16, 100, endpoint=True) - 1
+z = np.linspace(5., 16, 100, endpoint=True) - 1
 b = 0.7
 plt.style.use('../5par.mplstyle')
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(9.4, 3.7))
 
 
+gs = gridspec.GridSpec(2, 1, height_ratios=[1, 1], hspace=0)
 
+fig = plt.figure(figsize=(5.5, 6.2))
+
+ax1 = fig.add_subplot(gs[0], sharex=ax2)
 ax1.fill_between(z_vals, planck_low, planck_high, facecolor='darkblue', edgecolor='darkblue', label=r'Planck PR3', alpha=0.1)
-ax1.fill_between(z_vals, low_0227, high_0227, facecolor='green', edgecolor='green', label=r'gomp1', alpha=0.2)
-ax1.fill_between(z_vals, low_0226, high_0226, facecolor='purple', edgecolor='pink', label=r'gomp2', alpha=0.2)
-ax1.set_xlabel(r'$z$', fontsize=14)
+ax1.fill_between(z_vals, low_0227, high_0227, facecolor='green', edgecolor='green', label=r'gomp 1', alpha=0.2)
+ax1.fill_between(z_vals, low_0226, high_0226, facecolor='purple', edgecolor='pink', label=r'gomp 2', alpha=0.2)
+#ax1.set_xlabel(r'$z$', fontsize=14)
 ax1.set_ylabel(r'$\tau$', fontsize=14)
-ax1.set_xlim(2,15)
-ax1.set_ylim(0.03, 0.065)
+#ax1.set_xlim(2,15)
+ax1.set_ylim(0.0301, 0.065)
+#ax1.set_ylim(0.0301, 0.065)
 ax1.legend(loc='lower right')
-ax1.plot(z_vals, tau_tanh0_z, '-', linewidth=3, color='darkblue', label='Planck PR3')
-ax1.plot(z_vals, tau_gomp1_z, '--', linewidth=3, color='green', label='gomp 1')
-ax1.plot(z_vals, tau_gomp2_z, ':', linewidth=3, color='purple', label='gomp 2')
+ax1.plot(1+z_vals, tau_tanh0_z, '-', linewidth=3, color='darkblue', label='Planck PR3')
+ax1.plot(1+z_vals, tau_gomp1_z, '--', linewidth=3, color='green', label='gomp 1')
+ax1.plot(1+z_vals, tau_gomp2_z, ':', linewidth=3, color='purple', label='gomp 2')
 
-
-
+ax2 = fig.add_subplot(gs[1])
 ax2.plot(1+z, xHI(z,sigma8=0.8092,ns=0.9634,h=0.6722,Ob=val,Om=0.3171,model='0227'),  '--', c='green', linewidth=3, label=r'gomp 1', zorder=7)
 ax2.plot(1+z, xHI(z,sigma8=0.8092,ns=0.9634,h=0.6724,Ob=val2,Om=0.3168,model='0226'),  ':', c='purple', linewidth=3, label=r'gomp 2', zorder=8, alpha=0.8)
 ax2.axvline(x=5.90, ls='dashed', c='purple')
@@ -116,20 +120,26 @@ ax2.errorbar(9.0,0.76,yerr=0.22,xerr=0.6,uplims=False,lolims=True,marker='d',mar
 
 ax2.set_ylabel(r'$x_\mathrm{HI}$', fontsize=14)
 #ax1.set_ylim(0, 1)
-ax2.set_xlim(6.8, 13)
+#ax2.set_xlim(6.8, 13)
+ax2.set_xlim(6., 13)
 ax2.set_xscale('log')
 ax2.set_xlabel(r'$z$',fontsize=14)
-ax2.set_xticks(range(7, 17), [str(z) for z in range(6, 16)])
+#ax2.set_xticks(range(7, 17), [str(z) for z in range(6, 16)])
+ax2.set_xticks(range(6, 17), [str(z) for z in range(5, 16)])
 handles, labels = ax2.get_legend_handles_labels()
 line_legend = ax2.legend(handles[:3], labels[:3], loc='center right', bbox_to_anchor=(1, 0.72))
 ax2.add_artist(line_legend)
 ax2.legend(handles[3:], labels[3:], loc='lower right', ncols=2,
            borderpad=0, handletextpad=0.2, columnspacing=0.5)
-
-
-
+#plt.margins(0,0)
+plt.setp(ax1.get_xticklabels(), visible=False)
+plt.subplots_adjust(hspace=0)
 plt.tight_layout()
 plt.savefig('history.pdf')
+
+
+
+
 
 
 # chibi version
