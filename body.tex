@@ -1,7 +1,3 @@
-\section*{Introduction}
-
-% the separation of sections here is artificial, the body does not have an intro, results nor outro
-
 The $\Lambda$CDM cosmological model has proven extremely effective in
 predicting the evolution of our Universe, relying on only six parameters
 \cite{Planck2020a}.
@@ -113,9 +109,6 @@ reionization astrophysics.
 It also aids ongoing efforts in parametrizing cosmic reionization models
 \cite{Trac2018,Trac2022,Paoletti2024} by including the cosmological dependence of
 $x_\HI$.
-
-
-\section*{Results}
 
 Here, we present a universality in the neutral hydrogen time evolution,
 and derive through SR its dependence on cosmology on simulated
@@ -268,14 +261,12 @@ cosmology
 \label{eq:SR}
 \ln\ap(\vtheta) = (h^{\Omegam} + \sigma_8) (\Omegab - \ns - \Omegam),
 \end{equation}
-which, interestingly, is independent of the astrophysical parameter $\zetaUV$.
+which, interestingly, is independent of the astrophysical parameter $\zetaUV$ 
+(see \nameref{ssec:simulations} in Extended data).
 This ionization efficiency modulates the timing of reionization in our simulations
 by regulating the abundance of photons that escape into the IGM.
 Its absence in \cref{eq:SR} suggests that it either plays a minor role
 or its contribution can be mimicked by the cosmological parameters.
-%\YL{[The latter is less likely given how the Sobol sampling and SR work,
-%right?]} \paulo{Indeed, but the reionization community will appreciate
-%the latter option, so I suggest we keep the language as is.}
 
 \cref{eq:map,eq:SR} imply that higher values of $\ns$ hasten
 reionization by boosting power on small scales, fostering a greater
@@ -296,7 +287,7 @@ presented in \nameref{ssec:0226} of the Extended Data.
 Nonetheless, our results are robust and independent of the choice of
 mapping.
 
-We implement \cref{eq:SR} in our Gompertz \texttt{CLASS} , which given
+We implement \cref{eq:SR} in our Gompertz \texttt{CLASS}, which given
 the cosmological parameters determines the pivot value and consequently
 the reionization history, $\tau_\reio$, and corresponding CMB angular
 power spectra.
@@ -332,9 +323,6 @@ Planck's results \cite{Planck2020a}.
 Overall, we recover tighter constraints across the board compared to
 Planck.
 See \Cref{fig:unleashed_gomp,tab:uber-table} in the Extended Data for details.
-
-
-\section*{Outro}
 
 \begin{figure}[tb]
 \centering
