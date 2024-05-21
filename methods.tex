@@ -1,12 +1,6 @@
 \section*{Methodology}
 \label{sec:methods}
 
-% If going for Nature Astronomy this will have descriptions on the code or so.
-\paulo{Keep detailed calculations here.}
-
-\paulo{We are allowed 10 extended figures, so we should use them if we can.}
-
-
 \subsection*{Simulations}
 \label{ssec:sims}
 
@@ -18,7 +12,8 @@ Our parameter space include $\vtheta = \{\sigma_8, \ns, h, \Omegab,
 \Omegam, \zetaUV\}$, comprising five cosmological and one astrophysical
 parameters.
 The selection of $\sigma_8$ instead of $\As$ is imposed by the input
-requirements of \texttt{21cmFAST}.
+requirements of \texttt{21cmFAST}\footnote{Alternatively, one could use 
+\texttt{21cmFirstCLASS}\cite{Flitter2024} to avoid $\sigma_8$.}.
 We use a scrambled Sobol sequence \cite{Sobol1967, Owen1998} to sample
 quasi-uniformly in the $\vtheta$-space, within the following ranges:
 %
@@ -408,7 +403,7 @@ standard choice in \texttt{CosmoMC}\cite{Lewis2002}.
 
 Although \Cref{tab:uber-table} does not display an error in the midpoint of
 reionization in the gomp 1 and gomp 2 models, it is important to note that an error
-does exist. Unfortunately, it cannot be automatically computed with cobaya because 
+does exist. Unfortunately, it cannot be automatically computed with \texttt{Cobaya} because 
 gomp 1 and gomp 2 do not sample over reionization parameters. Therefore, 
 $z_\re$ has no meaning in our Gompertz \texttt{CLASS}\footnote{This oversight 
 can be corrected; however, it would require re-running the chains.} for models
