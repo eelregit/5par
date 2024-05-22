@@ -10,7 +10,7 @@ tau = np.array([0.051, 0.054, 0.054, 0.058, 0.059, 0.066, 0.069, 0.080])
 tau_e = [0.001, 0.002, 0.007, 0.006, 0.006, 0.013, 0.011, 0.012]
 y = [1, 2, 3, 4, 5, 6, 7, 8]
 markers = ['|', 'x', 'd', '8', 'p', 's', 'o', '^']
-labels = ['This work', 'Paoletti', 'Planck et al. 2020', 'Tristram et al. 2023', 'Pagano et al. 2020', 'Paradiso et al. 2023', 'Natale et al. 2020', r'Giar\`e et al. 2023']
+labels = ['This work', 'Paoletti et al. 2024', 'Planck et al. 2020', 'Tristram et al. 2023', 'Pagano et al. 2020', 'Paradiso et al. 2023', 'Natale et al. 2020', r'Giar\`e et al. 2023']
 colors = ['green', 'gray', 'darkblue', 'orange', 'purple', 'brown', 'pink', 'magenta']
 
 plt.style.use('../5par.mplstyle')
