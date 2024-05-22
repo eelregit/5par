@@ -1,19 +1,10 @@
-\documentclass[12pt, a4paper, twoside]{article}
+\documentclass[12pt, a4paper]{article}
 
 
 \usepackage{microtype}
 \usepackage{newpxtext, newpxmath}
 \usepackage[T1]{fontenc}
 \usepackage[margin=3cm]{geometry}
-%\usepackage{geometry}
-%  \geometry{
-%    includemp,
-%    inner=2.5cm,
-%    outer=1.5cm,
-%    top=2.5cm,
-%    bottom=2.5cm,
-%    marginparwidth=3cm,
-%  }
 \usepackage{setspace}
   \setstretch{1.1}
 \usepackage{amsmath}
@@ -41,22 +32,9 @@
   \renewcommand{\bibfont}{\small}
 \usepackage{authblk}
   \renewcommand\Affilfont{\itshape\normalsize}
-%\usepackage[disable]{todonotes}
-\usepackage{todonotes}
-  \setuptodonotes{
-    backgroundcolor=lightgray!50,
-    linecolor=lightgray,
-    bordercolor=none,
-    tickmarkheight=0.2em,
-  }
-  \newcommand{\todoin}[2][]{\todo[inline, #1]{#2}}
-%\usepackage{marginnote}
-%  \let\marginpar\marginnote
+\usepackage[disable]{todonotes}
 \usepackage[left]{lineno}  % needed for Nature
-\linenumbers  % remove it for arXiv submission but keep it for now
-% since I already forgot about it
-% unless someone else takes responsibility for turning it on later hehe
-% it is required by the journal
+\linenumbers  % remove it for arXiv but keep it for journal submission
 
 
 % journals
@@ -92,7 +70,6 @@
 \newcommand{\He}{\mathrm{He}}
 \newcommand{\HeII}{\mathrm{HeII}}
 \newcommand{\e}{\mathrm{e}}
-%\newcommand{\Mpc}{\mathrm{Mpc}}
 \newcommand{\re}{\mathrm{re}}
 \newcommand{\reio}{\mathrm{reio}}
 \newcommand{\rec}{\mathrm{rec}}
@@ -107,7 +84,7 @@
 \newcommand{\YLtodo}[2][]{\todo[backgroundcolor=Bittersweet!20, linecolor=Bittersweet!50, #1]{#2}}
 
 
-% title is limited to 75 characters so think carefully
+% title is limited to 75 characters
 \title{Five parameters are all you need\\(in $\Lambda$CDM)\vspace{2em}}
 
 

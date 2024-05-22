@@ -209,8 +209,8 @@ genetic or deep learning-based algorithms.
 In this work, we use the \texttt{PySR} package \cite{Cranmer2020b,
 Cranmer2023} which performs SR optimizations using a multi-population
 genetic algorithm.
-%\YLtodo[inline]{Miles, it'd be great if you can refine/rewrite the SR
-%and PySR intro}
+\YLtodo[inline]{Miles, it'd be great if you can refine/rewrite the SR
+and PySR intro}
 
 With \texttt{PySR}, we search for symbolic expressions that take the 6
 parameters in \Cref{fig:sobol} as inputs and output $\ln\ap$ or $\tilt$,
@@ -222,9 +222,9 @@ Each expression naturally takes the form of a binary tree, and the
 total number of nodes is a measure of its complexity.
 We use 512 \texttt{PySR} populations each having 33 expressions, and
 optimize for 10000 iterations each with 10000 cycles.
-%\YLtodo[inline]{Miles, could you translate this into some brief
-%description in the language of evolve-simplify-optimize loop, mutation,
-%crossover, and tournament?}
+\YLtodo[inline]{Miles, could you translate this into some brief
+description in the language of evolve-simplify-optimize loop, mutation,
+crossover, and tournament?}
 
 More complex expressions tend to fit more accurately, a trade-off
 typically visualized by the Pareto front, as shown in \Cref{fig:pareto}.
