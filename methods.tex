@@ -1,6 +1,7 @@
 \section*{Methodology}
 \label{sec:methods}
 
+
 \subsection*{Simulations}
 \label{ssec:sims}
 
@@ -12,7 +13,7 @@ Our parameter space include $\vtheta = \{\sigma_8, \ns, h, \Omegab,
 \Omegam, \zetaUV\}$, comprising five cosmological and one astrophysical
 parameters.
 The selection of $\sigma_8$ instead of $\As$ is imposed by the input
-requirements of \texttt{21cmFAST}\footnote{Alternatively, one could use 
+requirements of \texttt{21cmFAST}\footnote{Alternatively, one could use
 \texttt{21cmFirstCLASS}\cite{Flitter2024} to avoid $\sigma_8$.}.
 We use a scrambled Sobol sequence \cite{Sobol1967, Owen1998} to sample
 quasi-uniformly in the $\vtheta$-space, within the following ranges:
@@ -198,12 +199,18 @@ complexity 11 point gives \cref{eq:SR}.}
 \label{fig:pareto}
 \end{figure}
 
-SR learns from data using analytic expressions, unlike traditional
-methods that adjust parameters in a fit.
-Moreover, it can be employed to interpret deep neural network outputs
-\cite{Cranmer2020b}.
-\YLtodo[inline]{Miles, it'd be great if you can refine/rewrite the SR
-and PySR intro}
+SR learns a model of data in the form of analytic expressions.
+Unlike traditional fittings that are restricted by their specific
+parameterization, SR searches in the vast function space of all
+expressions composed of specified operations, input variables, and free
+constants.
+It is NP-hard \cite{SongEtAl2024, VirgolinPissis2022} and typically need
+genetic or deep learning-based algorithms.
+In this work, we use the \texttt{PySR} package \cite{Cranmer2020b,
+Cranmer2023} which performs SR optimizations using a multi-population
+genetic algorithm.
+%\YLtodo[inline]{Miles, it'd be great if you can refine/rewrite the SR
+%and PySR intro}
 
 With \texttt{PySR}, we search for symbolic expressions that take the 6
 parameters in \Cref{fig:sobol} as inputs and output $\ln\ap$ or $\tilt$,
@@ -213,6 +220,11 @@ operators ($+$, $-$, $\cdot$, $/$, and power function) and 2 unary
 operators ($\exp$ and $\ln$).
 Each expression naturally takes the form of a binary tree, and the
 total number of nodes is a measure of its complexity.
+We use 512 \texttt{PySR} populations each having 33 expressions, and
+optimize for 10000 iterations each with 10000 cycles.
+%\YLtodo[inline]{Miles, could you translate this into some brief
+%description in the language of evolve-simplify-optimize loop, mutation,
+%crossover, and tournament?}
 
 More complex expressions tend to fit more accurately, a trade-off
 typically visualized by the Pareto front, as shown in \Cref{fig:pareto}.
@@ -228,11 +240,6 @@ favorably in power-law trade-offs of the form
 \end{equation}
 All such expressions lie on the lower convex hull of the Pareto front,
 as illustrated in \Cref{fig:pareto}.
-
-We use 512 populations each has 33 expressions, and we optimize for
-10000 iterations and 10000 cycles in each.\YLtodo[inline]{Miles, could
-you translate this into some brief description in the language of
-evolve-simplify-optimize loop, mutation, crossover, and tournament?}
 
 For the pivot $\ln\ap$, we find complexity 11 is enough for the MSE loss
 to reach $10^{-4}$ (sub-percent level error on average), so there's no
@@ -265,8 +272,8 @@ The shaded cells highlight the parameters that are sampled over by MCMC
 for the different models.
 The numbers in parentheses give the marginalized 1$\sigma$ uncertainty
 in the last two significant digits.
-We highlight the best constraints in boldface, by factors of 12 and 2.5
-on $\tau_\reio$ and $A_s$, respectively.
+We highlight the best constraints in boldface, with improvements by
+factors of 12 and 2.5 on $\tau_\reio$ and $A_s$, respectively.
 The age of the Universe and $H_0$ are in unit of Gyr and km/s/Mpc,
 respectively, and $S_8 \equiv \sigma_8 \sqrt{\Omegam/0.3}$ as usual.}
 \makebox[\textwidth][c]{\footnotesize
@@ -296,7 +303,7 @@ $z_\re$ & 6.81(68) & 7.40 & 7.41 & 7.67(75) & \sampled 7.62(74) & 7.67(73) \\
 \label{tab:uber-table}
 \end{table}
 
-\begin{figure}[tb]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{figs/gomp_tanh_triangle_kill_full.pdf}
 \caption{\textbf{Analysis of CMB data treating $\tau_\reio$ as a derived
@@ -309,8 +316,7 @@ our Gompertz universal shape ($\tanh$ 1 model).}
 \label{fig:unleashed_gomp}
 \end{figure}
 
-
-\begin{figure}[tb]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{figs/gomp_tanh_triangle_tau.pdf}
 \caption{\textbf{Validation of our universal shape for $x_\HI$ in \cref{eq:uni,eq:poly} vs.\ the
@@ -322,6 +328,7 @@ The green (blue) contours correspond to the constraints obtained with
 our gomp 0 ($\tanh$ 0) model.}
 \label{fig:tg}
 \end{figure}
+
 
 \subsection*{Alternative mapping}
 \label{ssec:0226}
@@ -403,16 +410,19 @@ standard choice in \texttt{CosmoMC}\cite{Lewis2002}.
 
 Although \Cref{tab:uber-table} does not display an error in the midpoint of
 reionization in the gomp 1 and gomp 2 models, it is important to note that an error
-does exist. Unfortunately, it cannot be automatically computed with \texttt{Cobaya} because 
-gomp 1 and gomp 2 do not sample over reionization parameters. Therefore, 
-$z_\re$ has no meaning in our Gompertz \texttt{CLASS}\footnote{This oversight 
+does exist. Unfortunately, it cannot be automatically computed with \texttt{Cobaya} because
+gomp 1 and gomp 2 do not sample over reionization parameters. Therefore,
+$z_\re$ has no meaning in our Gompertz \texttt{CLASS}\footnote{This oversight
 can be corrected; however, it would require re-running the chains.} for models
-that take advantage of \cref{eq:premise}. 
+that take advantage of \cref{eq:premise}.
 
 Remarkably, the inferred value of $S_8$ remains consistent across all reionization
 models, even when $\sigma_8$ and $\Omegam$ vary between models. This trend
 suggests that different reionization models neither alleviate nor exacerbate the $S_8$
-tension. While this observation holds for the Planck PR3 data, we anticipate that 
-incorporating low-redshift Baryon Acoustic Oscillation (BAO) data may affect this 
+tension. While this observation holds for the Planck PR3 data, we anticipate that
+incorporating low-redshift Baryon Acoustic Oscillation (BAO) data may affect this
 conclusion. Future work will explore the implications of Gompertz reionization
 for the joint analysis of CMB and low-redshift data.
+
+
+\FloatBarrier
