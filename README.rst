@@ -7,5 +7,5 @@ reionization timelines, and tighten constraints on τ and A\ :sub:`s`
 remarkably by reanalyzing Planck data.
 
 
-* arXiv URL: https://arxiv.org/abs/2405.XXXXX
+* arXiv URL: https://arxiv.org/abs/2405.13680
 * journal URL: DOI URL
