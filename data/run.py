@@ -36,7 +36,7 @@ def gen_history(i):
                 OMb=Omega_b,
                 POWER_INDEX=n_s),
             astro_params = {'R_BUBBLE_MAX':50, 'L_X':40.5, "HII_EFF_FACTOR":zeta_eff},
-            flag_options = {"INHOMO_RECO": True, "USE_TS_FLUCT":True, "USE_MASS_DEPENDENT_ZETA":True },
+            flag_options = {"INHOMO_RECO": True, "USE_TS_FLUCT":True, "USE_MASS_DEPENDENT_ZETA": False },
             random_seed=12345,
             direc = f'tmp{i:03d}', #here it is where I want the cached-boxes to be stored
             write = False,
