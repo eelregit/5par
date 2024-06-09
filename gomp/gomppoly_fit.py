@@ -7,7 +7,7 @@ from scipy.optimize import curve_fit
 a, x = np.loadtxt('../data/xHI.txt', unpack=True)[:2]
 
 num_sim = 128
-num_a = 92  # 122 -> 102 -> 92,  padded zeros removed
+num_a = 127
 a = a.reshape(num_sim, num_a)
 x = x.reshape(num_sim, num_a)
 lna = np.log(a)
@@ -102,17 +102,18 @@ def plot(lna, c, lna_pivot, tilt, x, xp):
     plt.close(fig)
 
 
-for degree in range(2, 9, 2):
-    print('#'*32, 'degree =', degree, '#'*32)
+if __name__ == '__main__':
+    for degree in range(2, 9, 2):
+        print('#'*32, 'degree =', degree, '#'*32)
 
-    c, lna_pivot, tilt = fit(degree, lna, x)
-    print('c =', c)
-    print('lna_pivot =', lna_pivot, sep='\n')
-    print('tilt =', tilt, sep='\n')
+        c, lna_pivot, tilt = fit(degree, lna, x)
+        print('c =', c)
+        print('lna_pivot =', lna_pivot, sep='\n')
+        print('tilt =', tilt, sep='\n')
 
-    chi2 = np.square(gomppoly(lna, c, lna_pivot, tilt) - x).sum()
-    print('chi-squared =', chi2)
+        chi2 = np.square(gomppoly(lna, c, lna_pivot, tilt) - x).sum()
+        print('chi-squared =', chi2)
 
-    np.savetxt(f'pivottilt_{degree}.txt', np.stack([lna_pivot, tilt], axis=1))
+        np.savetxt(f'pivottilt_{degree}.txt', np.stack([lna_pivot, tilt], axis=1))
 
-    plot(lna, c, lna_pivot, tilt, x, xp)
+        plot(lna, c, lna_pivot, tilt, x, xp)

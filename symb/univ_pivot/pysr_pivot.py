@@ -49,7 +49,7 @@ kwargs = dict(
     #    'exp':{'exp':0, 'log':1},
     #    'log':{'exp':1, 'log':0},
     #},
-    maxsize=32,
+    maxsize=40,
     #maxdepth=8,
     #warmup_maxsize_by=1e-2,
     parsimony=1e-5,

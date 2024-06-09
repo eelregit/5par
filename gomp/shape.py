@@ -5,7 +5,7 @@ from scipy.interpolate import CubicSpline
 a, x = np.loadtxt('../data/xHI.txt', unpack=True)[:2]
 
 num_sim = 128
-num_a = 92  # 122 -> 102 -> 92,  padded zeros removed
+num_a = 127
 a = a[:num_a]
 x = x.reshape(num_sim, num_a)
 

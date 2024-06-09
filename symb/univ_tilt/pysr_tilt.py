@@ -23,10 +23,8 @@ print(f'{num_cores} cores on each of {num_nodes} nodes', flush=True)
 num_cores *= num_nodes
 
 
-#var_names = ['s8', 'ns', 'h', 'Ob', 'Om', 'zt']
-#var_cols = [2, 3, 4, 5, 6, 7]
-var_names = ['s8', 'ns', 'h', 'Ob', 'Om']
-var_cols = [2, 3, 4, 5, 6]
+var_names = ['s8', 'ns', 'h', 'Ob', 'Om', 'zt']
+var_cols = [2, 3, 4, 5, 6, 7]
 var = np.loadtxt('../xHI.txt', dtype='f4', usecols=var_cols)
 num_sim = 128
 var = var.reshape(num_sim, -1, len(var_cols))
@@ -34,10 +32,10 @@ var = var[:, 0, :]  # ignore the time dimension
 
 tilt = np.loadtxt('../pivottilt_6.txt', dtype='f4', usecols=1)
 
-var_train = var[:64]
-tilt_train = tilt[:64]
-#var_train = var
-#tilt_train = tilt
+#var_train = var[:64]
+#tilt_train = tilt[:64]
+var_train = var
+tilt_train = tilt
 
 
 kwargs = dict(
