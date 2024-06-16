@@ -122,14 +122,14 @@ plt.style.use('../..//5par.mplstyle')
 fig, axes = plt.subplots(nrows=3, ncols=3, sharex=True,
                              gridspec_kw={'wspace': 0.25, 'hspace': 0.}, figsize=(9, 4))
 
-#pivot_gomp1, tilt_gomp1 = SR_gomp1_comp19_comp15(s8, ns, h, Ob, Om, zt)
-pivot_gomp1, tilt_gomp1 = SR_gomp1_comp30_comp28(s8, ns, h, Ob, Om, zt)
+pivot_gomp1, tilt_gomp1 = SR_gomp1_comp19_comp15(s8, ns, h, Ob, Om, zt)
+#pivot_gomp1, tilt_gomp1 = SR_gomp1_comp30_comp28(s8, ns, h, Ob, Om, zt)
 lna_rescaled_SR = (lna - pivot_gomp1) * tilt_gomp1
 a_rescaled_SR = np.exp(lna_rescaled_SR)
 xp_rescaled_SR = xp / tilt_gomp1
 
-#pivot_gomp2, tilt_gomp2 = SR_gomp2_comp22_comp10(s8, ns, h, Ob, Om, zt)
-pivot_gomp2, tilt_gomp2 = SR_gomp2_comp36_comp27(s8, ns, h, Ob, Om, zt)
+pivot_gomp2, tilt_gomp2 = SR_gomp2_comp22_comp10(s8, ns, h, Ob, Om, zt)
+#pivot_gomp2, tilt_gomp2 = SR_gomp2_comp36_comp27(s8, ns, h, Ob, Om, zt)
 lna_rescaled_SR2 = (lna - pivot_gomp2) * tilt_gomp2
 a_rescaled_SR2 = np.exp(lna_rescaled_SR2)
 xp_rescaled_SR2 = xp / tilt_gomp2
