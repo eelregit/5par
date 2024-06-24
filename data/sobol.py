@@ -5,14 +5,8 @@ from scipy.stats.qmc import Sobol, discrepancy, scale
 import matplotlib.pyplot as plt
 
 
-params = (r'$\sigma_8$', r'$n_\mathrm{s}$', '$h$',
-          r'$\Omega_\mathrm{b}$', r'$\Omega_\mathrm{m}$', r'$\zeta_\mathrm{UV}$')
-l_bounds = (.74, .92, .61, .04, .24, 15)
-u_bounds = (.90, 1.00, .73, .06, .40, 30)
-
-
-def gen_sobol(filename=None, d=6, m=7, extra=7, seed=0, seed_max=65536,
-              params=params, l_bounds=l_bounds, u_bounds=u_bounds):
+def gen_sobol(params, l_bounds, u_bounds, filename=None, d=6, m=7, extra=7, seed=0,
+              seed_max=65536):
 
     nicer_seed = seed
     if seed is None:
@@ -92,10 +86,20 @@ def plt_proj(filename, max_rows=None, max_cols=None,
 
 
 if __name__ == '__main__':
-    filename = 'sobol.txt'
+    params = (r'$\sigma_8$', r'$n_\mathrm{s}$', '$h$',
+              r'$\Omega_\mathrm{b}$', r'$\Omega_\mathrm{m}$', r'$\zeta_\mathrm{UV}$')
 
+    l_bounds = (.74, .92, .61, .04, .24, 15)
+    u_bounds = (.90, 1.00, .73, .06, .40, 30)
+    filename = 'sobol.txt'
     if not os.path.exists(filename):
-        gen_sobol(filename)
+        gen_sobol(params, l_bounds, u_bounds, filename=filename)
+
+    l_bounds = (.7811, .9436, .6466, .04508, .2788, 20)
+    u_bounds = (.8411, .9856, .7066, .05358, .3518, 35)
+    filename = 'sobol_core.txt'
+    if not os.path.exists(filename):
+        gen_sobol(params, l_bounds, u_bounds, filename=filename)
 
     plt.style.use('../5par.mplstyle')
 
