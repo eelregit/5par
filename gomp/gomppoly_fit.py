@@ -4,9 +4,12 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
 
-a, x = np.loadtxt('../data/xHI.txt', unpack=True)[:2]
+a_edge, x_edge = np.loadtxt('../data/xHI.txt', unpack=True)[:2]
+a_core, x_core = np.loadtxt('../data/xHI_core.txt', unpack=True)[:2]
+a = np.concatenate((a_edge, a_core))
+x = np.concatenate((x_edge, x_core))
 
-num_sim = 128
+num_sim = 128 + 128
 num_a = 127
 a = a.reshape(num_sim, num_a)
 x = x.reshape(num_sim, num_a)

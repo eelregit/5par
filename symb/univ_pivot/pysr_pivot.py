@@ -25,15 +25,18 @@ num_cores *= num_nodes
 
 var_names = ['s8', 'ns', 'h', 'Ob', 'Om', 'zt']
 var_cols = [2, 3, 4, 5, 6, 7]
-var = np.loadtxt('../xHI.txt', dtype='f4', usecols=var_cols)
-num_sim = 128
-var = var.reshape(num_sim, -1, len(var_cols))
+var_edge = np.loadtxt('../xHI.txt', dtype='f4', usecols=var_cols)
+var_core = np.loadtxt('../xHI_core.txt', dtype='f4', usecols=var_cols)
+var = np.concatenate((var_edge, var_core), axis=0)
+num_sim = 128 + 128
+num_a = 127
+var = var.reshape(num_sim, num_a, len(var_cols))
 var = var[:, 0, :]  # ignore the time dimension
 
 pivot = np.loadtxt('../pivottilt_6.txt', dtype='f4', usecols=0)
 
-#var_train = var[:64]
-#pivot_train = pivot[:64]
+#var_train = var.reshape(2, num_sim//2, len(var_cols))[:, :64].reshape(128, -1)
+#pivot_train = pivot.reshape(2, num_sim//2)[:, :64].ravel()
 var_train = var
 pivot_train = pivot
 
@@ -52,11 +55,11 @@ kwargs = dict(
     maxsize=40,
     #maxdepth=8,
     #warmup_maxsize_by=1e-2,
-    parsimony=1e-5,
+    parsimony=5e-6,
     adaptive_parsimony_scaling=1000,
 
     # Search Size
-    niterations=10000,
+    niterations=20000,
     early_stop_condition=('stop_if(loss, complexity) = loss < 1e-5 && complexity < 21'),
     populations=num_cores*4,
     ncyclesperiteration=10000,
