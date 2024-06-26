@@ -4,9 +4,31 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 from scipy.interpolate import interp1d
 from scipy.integrate import quad
+import sys
+
+# core or edge?
+if len(sys.argv) != 2:
+        print("Usage: python gomp_fit_vs_SR.py <input_string>")
+        print("Inputs: core or edge")
+        sys.exit(1)
+
+input = sys.argv[1]
+
+if input == 'core':
+    print('Doing core')
+    a, x, s8, ns, h, Ob, Om, zt = np.loadtxt('../../data/xHI_core.txt', unpack=True, usecols=[0,1,2,3,4,5,6,7])
+    d = [0.0, 1.0, 1.15994003e-01, 2.69992540e-02, 6.53080653e-04, -7.13122781e-05] # core
+    pivot_a, tilt_a = np.loadtxt('pivottilt_6_core.txt', unpack=True)
+else:
+    print('Doing edge')
+    a, x, s8, ns, h, Ob, Om, zt = np.loadtxt('../../data/xHI.txt', unpack=True, usecols=[0,1,2,3,4,5,6,7])
+    d = [0.0, 1.0, 0.109881282, 0.0245923405, 0.000280982197, -7.76864358e-05] # large zeta
+    pivot_a, tilt_a = np.loadtxt('../pivottilt_6.txt', unpack=True)
 
 
-a, x, s8, ns, h, Ob, Om, zt = np.loadtxt('../../data/xHI.txt', unpack=True, usecols=[0,1,2,3,4,5,6,7])
+    
+
+
 
 num_sim = 128
 num_a = 127
@@ -21,12 +43,11 @@ zt = zt.reshape(num_sim, num_a)
 lna = np.log(a)
 xp = - np.gradient(x, lna[0], axis=1)  # - dx/dlna
 
-d = [0.0, 1.0, 0.109881282, 0.0245923405, 0.000280982197, -7.76864358e-05]
+
 P6 = Polynomial(d)
 P6_deriv = Polynomial(d).deriv()
 
 # grab the fit
-pivot_a, tilt_a = np.loadtxt('../pivottilt_6.txt', unpack=True)
 pivot_fit = np.ones((num_sim,num_a))
 tilt_fit = np.ones((num_sim,num_a))
 
@@ -123,13 +144,13 @@ fig, axes = plt.subplots(nrows=3, ncols=3, sharex=True,
                              gridspec_kw={'wspace': 0.25, 'hspace': 0.}, figsize=(9, 4))
 
 pivot_gomp1, tilt_gomp1 = SR_gomp1_comp19_comp15(s8, ns, h, Ob, Om, zt)
-#pivot_gomp1, tilt_gomp1 = SR_gomp1_comp30_comp28(s8, ns, h, Ob, Om, zt)
+#pivot_gomp1, tilt_gomp1 = SR_gomp1_comp9_comp1(s8, ns, h, Ob, Om, zt)
 lna_rescaled_SR = (lna - pivot_gomp1) * tilt_gomp1
 a_rescaled_SR = np.exp(lna_rescaled_SR)
 xp_rescaled_SR = xp / tilt_gomp1
 
 pivot_gomp2, tilt_gomp2 = SR_gomp2_comp22_comp10(s8, ns, h, Ob, Om, zt)
-#pivot_gomp2, tilt_gomp2 = SR_gomp2_comp36_comp27(s8, ns, h, Ob, Om, zt)
+#pivot_gomp2, tilt_gomp2 = SR_gomp2_comp9_comp1(s8, ns, h, Ob, Om, zt)
 lna_rescaled_SR2 = (lna - pivot_gomp2) * tilt_gomp2
 a_rescaled_SR2 = np.exp(lna_rescaled_SR2)
 xp_rescaled_SR2 = xp / tilt_gomp2
@@ -185,8 +206,11 @@ axes[2,1].set_xlabel(r'$\tilde{a}$')
 axes[2,1].set_xscale('log')
 axes[2,1].set_xlim(2e-3, 8)
 
+if input == 'core':
+    fig.savefig(f'residuals_core.pdf')
+else:
+    fig.savefig(f'residuals.pdf') # large
 
-fig.savefig(f'residuals.pdf')
 plt.close(fig)
 
 
@@ -203,7 +227,7 @@ MU = 1. + 0.7428 * 0.2454
 def dtau_SR1(z, s8, ns, h, Ob, Om, zt):
     aa = z_to_a(z)
     pivot_SR, tilt_SR = SR_gomp1_comp19_comp15(s8, ns, h, Ob, Om, zt)
-#    pivot_SR, tilt_SR = SR_gomp1_comp30_comp28(s8, ns, h, Ob, Om, zt)
+#    pivot_SR, tilt_SR = SR_gomp1_comp9_comp1(s8, ns, h, Ob, Om, zt)
     xHI = SR_xHI(np.log(aa), pivot_SR, tilt_SR)
     if xHI >= 0.990:
         xHI = 1.
@@ -218,7 +242,7 @@ def tau_SR1(s8, ns, h, Ob, Om, zt):
 def dtau_SR2(z, s8, ns, h, Ob, Om, zt):
     aa = z_to_a(z)
     pivot_SR, tilt_SR = SR_gomp2_comp22_comp10(s8, ns, h, Ob, Om, zt)
-#    pivot_SR, tilt_SR = SR_gomp2_comp36_comp27(s8, ns, h, Ob, Om, zt)
+#    pivot_SR, tilt_SR = SR_gomp2_comp9_comp1(s8, ns, h, Ob, Om, zt)
     xHI = SR_xHI(np.log(aa), pivot_SR, tilt_SR)
     if xHI >= 0.990:
         xHI = 1.
@@ -296,7 +320,7 @@ print('MAE rel. error for gomp2 is ', MAE_gomp2 / (1. * num_sim) )
 #print('MAE rel. error for gomp1 is ', MAE_gomp1 / (1. * num_sim-9) )
 #print('MAE rel. error for gomp2 is ', MAE_gomp2 / (1. * num_sim-15) )
 
-print('##### outliers? #####')
+#print('##### outliers? #####')
 #i_max_gomp1 = np.where(c_gomp1 >= 0.50 * c_gomp1.max())[0]
 #i_min_gomp1 = np.where(c_gomp1 <= 10 * c_gomp1.min())[0]
 #print('Who has the maximum difference? Gomp 1: ', c_gomp1[i_max_gomp1], i_max_gomp1)
@@ -308,27 +332,27 @@ print('##### outliers? #####')
 #print('Corresponding parameters are: ', s8[i_max_gomp2][0], ns[i_max_gomp2][0], h[i_max_gomp2][0], Ob[i_max_gomp2][0], Om[i_max_gomp2][0], zt[i_max_gomp2][0])
 #print('Who has the minimum difference? Gomp 2: ', c_gomp2[i_min_gomp2], i_min_gomp2)
 
-print('############### Gomp1 ###############')
-print('############### s8 ###############')
-s8_out = np.array([s8[26][0], s8[44][0], s8[85][0], s8[87][0], s8[100][0], s8[104][0], s8[108][0], s8[118][0], s8[127][0]])
-print('Values: ', s8_out)
-#print('Values: ', s8_out.sort())
-print('############### ns ###############')
-ns_out = np.array([ns[26][0], ns[44][0], ns[85][0], ns[87][0], ns[100][0], ns[104][0], ns[108][0], ns[118][0], ns[127][0]])
-print('Values: ', ns_out)
-
-print('############### h ###############')
-h_out = np.array([h[26][0], h[44][0], h[85][0], h[87][0], h[100][0], h[104][0], h[108][0], h[118][0], h[127][0]])
-print('Values: ', h_out)
-
-print('############### Ob ###############')
-Ob_out = np.array([Ob[26][0], Ob[44][0], Ob[85][0], Ob[87][0], Ob[100][0], Ob[104][0], Ob[108][0], Ob[118][0], Ob[127][0]])
-print('Values: ', Ob_out)
-
-print('############### Om ###############')
-Om_out = np.array([Om[26][0], Om[44][0], Om[85][0], Om[87][0], Om[100][0], Om[104][0], Om[108][0], Om[118][0], Om[127][0]])
-print('Values: ', Om_out)
-
-print('############### zt ###############')
-zt_out = np.array([zt[26][0], zt[44][0], zt[85][0], zt[87][0], zt[100][0], zt[104][0], zt[108][0], zt[118][0], zt[127][0]])
-print('Values: ', zt_out)
+#print('############### Gomp1 ###############')
+#print('############### s8 ###############')
+#s8_out = np.array([s8[26][0], s8[44][0], s8[85][0], s8[87][0], s8[100][0], s8[104][0], s8[108][0], s8[118][0], s8[127][0]])
+#print('Values: ', s8_out)
+##print('Values: ', s8_out.sort())
+#print('############### ns ###############')
+#ns_out = np.array([ns[26][0], ns[44][0], ns[85][0], ns[87][0], ns[100][0], ns[104][0], ns[108][0], ns[118][0], ns[127][0]])
+#print('Values: ', ns_out)
+#
+#print('############### h ###############')
+#h_out = np.array([h[26][0], h[44][0], h[85][0], h[87][0], h[100][0], h[104][0], h[108][0], h[118][0], h[127][0]])
+#print('Values: ', h_out)
+#
+#print('############### Ob ###############')
+#Ob_out = np.array([Ob[26][0], Ob[44][0], Ob[85][0], Ob[87][0], Ob[100][0], Ob[104][0], Ob[108][0], Ob[118][0], Ob[127][0]])
+#print('Values: ', Ob_out)
+#
+#print('############### Om ###############')
+#Om_out = np.array([Om[26][0], Om[44][0], Om[85][0], Om[87][0], Om[100][0], Om[104][0], Om[108][0], Om[118][0], Om[127][0]])
+#print('Values: ', Om_out)
+#
+#print('############### zt ###############')
+#zt_out = np.array([zt[26][0], zt[44][0], zt[85][0], zt[87][0], zt[100][0], zt[104][0], zt[108][0], zt[118][0], zt[127][0]])
+#print('Values: ', zt_out)
