@@ -33,8 +33,7 @@ def gen_sobol(params, l_bounds, u_bounds, filename=None, d=6, m=7, extra=7, seed
     return sample
 
 
-def plt_proj(filename, max_rows=None, max_cols=None,
-             params=params, l_bounds=l_bounds, u_bounds=u_bounds):
+def plt_proj(params, l_bounds, u_bounds, filename, max_rows=None, max_cols=None):
     usecols = range(max_cols) if isinstance(max_cols, int) else max_cols
     sample = np.loadtxt(filename, usecols=usecols, max_rows=max_rows)
 
@@ -104,4 +103,4 @@ if __name__ == '__main__':
     plt.style.use('../5par.mplstyle')
 
     #plt_proj(filename, max_rows=64)
-    plt_proj(filename, max_rows=128)
+    plt_proj(params, l_bounds, u_bounds, filename, max_rows=128)
