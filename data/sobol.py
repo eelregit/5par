@@ -89,8 +89,8 @@ if __name__ == '__main__':
     params = (r'$\sigma_8$', r'$n_\mathrm{s}$', '$h$',
               r'$\Omega_\mathrm{b}$', r'$\Omega_\mathrm{m}$', r'$\zeta_\mathrm{UV}$')
 
-    l_bounds = (.74, .92, .61, .04, .24, 15)
-    u_bounds = (.90, 1.00, .73, .06, .40, 30)
+    l_bounds = (.74, .92, .61, .04, .24, 20)
+    u_bounds = (.90, 1.00, .73, .06, .40, 35)
     filename = 'sobol.txt'
     if not os.path.exists(filename):
         gen_sobol(params, l_bounds, u_bounds, filename=filename)
