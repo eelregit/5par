@@ -93,7 +93,7 @@ params:
   z_reio:
     latex: z_\mathrm{re}
   zt:
-    value: 24.,
+    value: 24.
     latex: \zeta_\mathrm{UV}
   sigma8:
     latex: \sigma_8
