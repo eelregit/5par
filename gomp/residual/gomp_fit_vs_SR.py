@@ -19,18 +19,32 @@ if input == 'core':
     a, x, s8, ns, h, Ob, Om, zt = np.loadtxt('../../data/xHI_core.txt', unpack=True, usecols=[0,1,2,3,4,5,6,7])
     d = [0.0, 1.0, 1.15994003e-01, 2.69992540e-02, 6.53080653e-04, -7.13122781e-05] # core
     pivot_a, tilt_a = np.loadtxt('pivottilt_6_core.txt', unpack=True)
+    num_sim = 128
+elif input == 'total':
+    print('Doing core + edge')
+    a_core, x_core, s8_core, ns_core, h_core, Ob_core, Om_core, zt_core = np.loadtxt('../../data/xHI_core.txt', unpack=True, usecols=[0,1,2,3,4,5,6,7])
+    a_edge, x_edge, s8_edge, ns_edge, h_edge, Ob_edge, Om_edge, zt_edge = np.loadtxt('../../data/xHI.txt', unpack=True, usecols=[0,1,2,3,4,5,6,7])
+    d = [0.0, 1.0, 1.12988593e-01, 2.59887121e-02, 5.49059964e-04, -6.51788022e-05]
+    pivot_a, tilt_a = np.loadtxt('../pivottilt_6.txt', unpack=True)
+    a = np.concatenate((a_edge, a_core))
+    x = np.concatenate((x_edge, x_core))
+    s8 = np.concatenate((s8_edge, s8_core))
+    ns = np.concatenate((ns_edge, ns_core))
+    h = np.concatenate((h_edge, h_core))
+    Ob = np.concatenate((Ob_edge, Ob_core))
+    Om = np.concatenate((Om_edge, Om_core))
+    zt = np.concatenate((zt_edge, zt_core))
+    num_sim = 128 + 128
 else:
     print('Doing edge')
     a, x, s8, ns, h, Ob, Om, zt = np.loadtxt('../../data/xHI.txt', unpack=True, usecols=[0,1,2,3,4,5,6,7])
     d = [0.0, 1.0, 0.109881282, 0.0245923405, 0.000280982197, -7.76864358e-05] # large zeta
     pivot_a, tilt_a = np.loadtxt('../pivottilt_6.txt', unpack=True)
+    num_sim = 128
 
 
     
 
-
-
-num_sim = 128
 num_a = 127
 a = a.reshape(num_sim, num_a)
 x = x.reshape(num_sim, num_a)
@@ -66,6 +80,12 @@ def fit_grad(lna, pivot_fit, tilt_fit):
     gompertz = np.exp(- exponentials)
     return gompertz * exponentials * P6_deriv(lnar)
 
+
+def SR_edge_core_gomp1_comp22_comp25(s8, ns, h, Ob, Om, zt):
+    #pareto-hull contact #1
+    pivot_SR = ((((ns - (np.log(0.11230898 * zt) * -0.35580978)) * (0.048352774 - s8)) - (Om + ns)) + ((Ob / Om)**h))
+    tilt_SR = ((np.log(Ob) * (((0.005659511**Om) / 0.601493) - (np.log(zt - ((Om + (ns * h))**15.051933)) - h))) + (h / s8))
+    return pivot_SR, tilt_SR
 
 
 def SR_gomp1_comp9_comp1(s8, ns, h, Ob, Om, zt):
@@ -143,8 +163,8 @@ plt.style.use('../..//5par.mplstyle')
 fig, axes = plt.subplots(nrows=3, ncols=3, sharex=True,
                              gridspec_kw={'wspace': 0.25, 'hspace': 0.}, figsize=(9, 4))
 
-pivot_gomp1, tilt_gomp1 = SR_gomp1_comp19_comp15(s8, ns, h, Ob, Om, zt)
-#pivot_gomp1, tilt_gomp1 = SR_gomp1_comp9_comp1(s8, ns, h, Ob, Om, zt)
+#pivot_gomp1, tilt_gomp1 = SR_gomp1_comp19_comp15(s8, ns, h, Ob, Om, zt)
+pivot_gomp1, tilt_gomp1 = SR_edge_core_gomp1_comp22_comp25(s8, ns, h, Ob, Om, zt)
 lna_rescaled_SR = (lna - pivot_gomp1) * tilt_gomp1
 a_rescaled_SR = np.exp(lna_rescaled_SR)
 xp_rescaled_SR = xp / tilt_gomp1
@@ -208,6 +228,8 @@ axes[2,1].set_xlim(2e-3, 8)
 
 if input == 'core':
     fig.savefig(f'residuals_core.pdf')
+elif input == 'total':
+    fig.savefig(f'residuals_total.pdf')
 else:
     fig.savefig(f'residuals.pdf') # large
 
@@ -226,8 +248,8 @@ MU = 1. + 0.7428 * 0.2454
 
 def dtau_SR1(z, s8, ns, h, Ob, Om, zt):
     aa = z_to_a(z)
-    pivot_SR, tilt_SR = SR_gomp1_comp19_comp15(s8, ns, h, Ob, Om, zt)
-#    pivot_SR, tilt_SR = SR_gomp1_comp9_comp1(s8, ns, h, Ob, Om, zt)
+#    pivot_SR, tilt_SR = SR_gomp1_comp19_comp15(s8, ns, h, Ob, Om, zt)
+    pivot_SR, tilt_SR = SR_edge_core_gomp1_comp22_comp25(s8, ns, h, Ob, Om, zt)
     xHI = SR_xHI(np.log(aa), pivot_SR, tilt_SR)
     if xHI >= 0.990:
         xHI = 1.
