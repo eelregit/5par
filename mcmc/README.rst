@@ -2,16 +2,38 @@ MCMC with Cobaya and CLASS
 ==========================
 
 
+Using Planck PR3 TTTEEE ϕϕ and low-ell data:
+
 * `gomp_0 <gomp_0>`_ receives tau_reio as input and finds reionization
-  timeline using bisection (variyng alpha), gomp_0 is used for
-  validation
-* `gomp_1 <gomp_1>`_ finds tau_reio using alpha(cosmology)
-* `gomp_2 <gomp_2>`_ finds tau_reio using alpha(cosmology) but the SR
-  expression was obtained using only half (64) of our data
+  timeline using bisection varying alpha while fixing beta.
+  gomp_0 is used for validation
+* `gomp_1 <gomp_1>`_ finds tau_reio using alpha(cosmo) and beta(cosmo)
+* `gomp_2 <gomp_2>`_ finds tau_reio using alpha(cosmo) and beta(cosmo)
+  but the SR expression was obtained using only half of the data
 
 * `tanh_0 <tanh_0>`_ receives tau_reio as input and finds reionization
   timeline using bisection (varying z_re), tanh_o is used for validation
 * `tanh_1 <tanh_1>`_ finds tau_reio by sampling over z_re
+
+
+Using various combinations of datasets:
+
+* CMB primary and lensing
+  + Planck PR4 TTTEEE + PR3 low ell's, alternatives are
+    - cmbP: Planck PR4 TTTEEE
+    - cmbA: ACT DR4
+    - cmbS: SPT 3G
+  + SOTA (Planck PR4 ϕϕ + ACT DR6), alternatives are
+    - lensP: Planck PR4 ϕϕ
+    - lensA: ACT DR6
+    - lensS: SPT 3G
+* BAO and/or SNe
+  + baoD: DESI (alternative is baoS: SDSS eBOSS DR16)
+    - baoDx: without the 1st LRG bin
+    - baoDg: without Lya forest bin
+  + snD: DES Y5
+  + snP: Pantheon+
+  + snU: Union3
 
 
 Chaining log:
