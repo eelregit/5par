@@ -87,6 +87,11 @@ def SR_edge_core_gomp1_comp22_comp25(s8, ns, h, Ob, Om, zt):
     tilt_SR = ((np.log(Ob) * (((0.005659511**Om) / 0.601493) - (np.log(zt - ((Om + (ns * h))**15.051933)) - h))) + (h / s8))
     return pivot_SR, tilt_SR
 
+def SR_edge_core_gomp2_comp22_comp11(s8, ns, h, Ob, Om, zt):
+    #pareto-hull contact #1
+    pivot_SR = ((((Ob / Om)**Om) - (np.log(((zt + (Ob**-0.49822742))**s8) * h)**0.5721157)) - (ns**1.8340757))
+    tilt_SR = (((zt - (Om**-1.583228)) / (Ob * h))**0.31627414)
+    return pivot_SR, tilt_SR
 
 def SR_gomp1_comp9_comp1(s8, ns, h, Ob, Om, zt):
     pivot_SR = (Ob**Om - s8 - ns) / 0.68492776
@@ -169,8 +174,8 @@ lna_rescaled_SR = (lna - pivot_gomp1) * tilt_gomp1
 a_rescaled_SR = np.exp(lna_rescaled_SR)
 xp_rescaled_SR = xp / tilt_gomp1
 
-pivot_gomp2, tilt_gomp2 = SR_gomp2_comp22_comp10(s8, ns, h, Ob, Om, zt)
-#pivot_gomp2, tilt_gomp2 = SR_gomp2_comp9_comp1(s8, ns, h, Ob, Om, zt)
+#pivot_gomp2, tilt_gomp2 = SR_gomp2_comp22_comp10(s8, ns, h, Ob, Om, zt)
+pivot_gomp2, tilt_gomp2 = SR_edge_core_gomp2_comp22_comp11(s8, ns, h, Ob, Om, zt)
 lna_rescaled_SR2 = (lna - pivot_gomp2) * tilt_gomp2
 a_rescaled_SR2 = np.exp(lna_rescaled_SR2)
 xp_rescaled_SR2 = xp / tilt_gomp2
@@ -263,8 +268,8 @@ def tau_SR1(s8, ns, h, Ob, Om, zt):
 
 def dtau_SR2(z, s8, ns, h, Ob, Om, zt):
     aa = z_to_a(z)
-    pivot_SR, tilt_SR = SR_gomp2_comp22_comp10(s8, ns, h, Ob, Om, zt)
-#    pivot_SR, tilt_SR = SR_gomp2_comp9_comp1(s8, ns, h, Ob, Om, zt)
+#    pivot_SR, tilt_SR = SR_gomp2_comp22_comp10(s8, ns, h, Ob, Om, zt)
+    pivot_SR, tilt_SR = SR_edge_core_gomp2_comp22_comp11(s8, ns, h, Ob, Om, zt)
     xHI = SR_xHI(np.log(aa), pivot_SR, tilt_SR)
     if xHI >= 0.990:
         xHI = 1.
