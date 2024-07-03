@@ -13,7 +13,7 @@ def reparam(h, omega_b, omega_cdm):
 
 def poly6(lna, lna_pivot=None, tilt=None, params=None):
     # the const and linear coeffs can be absorbed by the pivot and tilt of each curve
-    c = np.array([0, 1, 0.1503, 0.04850, 0.005261, 0.0002182])
+    c = np.array([0, 1, 1.130e-1, 2.600e-2, 5.491e-4, -6.518e-5])
     poly = Polynomial(c)
 
     if params is not None:
@@ -30,28 +30,26 @@ def gomppoly6(lna, lna_pivot=None, tilt=None, params=None):
     return exp(- exp(poly6(lna, lna_pivot=lna_pivot, tilt=tilt, params=params)))
 
 
-def pivot_sr(h, omega_b, omega_cdm, sigma8, n_s, fit):
+def pivot_sr(h, omega_b, omega_cdm, sigma8, n_s, zt, fit):
     Ob, Om = reparam(h, omega_b, omega_cdm)
     s8, ns = sigma8, n_s
 
-    if fit == '0226_simple':  # complexity 11
-        return ((-1.039 - s8) * (((Om * h) - Ob) + ns))
+    if fit == 'gomp1':  # complexity 22
+        return (ns + 0.3558 * log(0.1123 * zt)) * (0.04835 - s8) - Om - ns + (Ob / Om) ** h
 
-    if fit == '0227_simple':  # complexity 11
-        return (((h ** Om) + s8) * (Ob - (ns + Om)))
+    #if fit == 'gomp2':  # complexity ??
 
     raise ValueError(f'fit = {fit} not recognized')
 
 
-def tilt_sr(h, omega_b, omega_cdm, sigma8, n_s, fit):
+def tilt_sr(h, omega_b, omega_cdm, sigma8, n_s, zt, fit):
     Ob, Om = reparam(h, omega_b, omega_cdm)
     s8, ns = sigma8, n_s
 
-    if fit.startswith('0226'):
-        return 8.331
+    if fit == 'gomp1':  # complexity 25
+        return log(Ob) * (0.005660 ** Om / 0.6015 - log(zt - (Om + ns * h) ** 15.05) + h) + h / s8
 
-    if fit.startswith('0227'):
-        return 8.290
+    #if fit == 'gomp2':  # complexity ??
 
     raise ValueError(f'fit = {fit} not recognized')
 
@@ -63,8 +61,9 @@ if __name__ == '__main__':
         omega_cdm=0.1201075,
         sigma8=0.8159,
         n_s=0.9660499,
+        zt=24,
     )
-    fits = ['0226_simple', '0227_simple']
+    fits = ['gomp1']
 
     z = np.linspace(5, 16, num=10000)
     for fit in fits:
