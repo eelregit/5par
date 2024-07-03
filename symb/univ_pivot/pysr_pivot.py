@@ -59,6 +59,7 @@ kwargs = dict(
     adaptive_parsimony_scaling=1000,
 
     # Search Size
+    #niterations=40000,
     niterations=20000,
     early_stop_condition=('stop_if(loss, complexity) = loss < 1e-5 && complexity < 21'),
     populations=num_cores*4,
