@@ -30,7 +30,8 @@ def gomppoly6(lna, lna_pivot=None, tilt=None, params=None):
     return exp(- exp(poly6(lna, lna_pivot=lna_pivot, tilt=tilt, params=params)))
 
 
-def pivot_sr(h, omega_b, omega_cdm, sigma8, n_s, zt, fit):
+def pivot_sr(h, omega_b, omega_cdm, sigma8, n_s, zt, fit,
+             **kwargs):  # kwargs absorbs other params of Cobaya
     Ob, Om = reparam(h, omega_b, omega_cdm)
     s8, ns = sigma8, n_s
 
@@ -42,7 +43,8 @@ def pivot_sr(h, omega_b, omega_cdm, sigma8, n_s, zt, fit):
     raise ValueError(f'fit = {fit} not recognized')
 
 
-def tilt_sr(h, omega_b, omega_cdm, sigma8, n_s, zt, fit):
+def tilt_sr(h, omega_b, omega_cdm, sigma8, n_s, zt, fit,
+            **kwargs):  # kwargs absorbs other params of Cobaya
     Ob, Om = reparam(h, omega_b, omega_cdm)
     s8, ns = sigma8, n_s
 
