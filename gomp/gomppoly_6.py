@@ -79,10 +79,10 @@ class PlanA(Likelihood):
         self.get_my_data(data)
 
     def get_my_data(self, data):
-        z, mean, lo, hi = data.T
+        z, m, l, h = data.T
         self.lna = - np.log(1 + z)
-        self.mean = mean + (lo + hi) / 2  # symmetrized
-        self.var = ((hi - lo) / 2) ** 2  # symmetrized
+        self.mean = m + (l + h) / 2  # symmetrized
+        self.var = ((h - l) / 2) ** 2  # symmetrized
 
     def get_requirements(self):
         return dict(H0=None)
