@@ -75,8 +75,15 @@ class CombinedQuasar(Likelihood):
         return dict(H0=None)
 
     def logp(self, **param_values):
-        param_values['h'] = self.provider.get_param('H0') / 100
-        param_values['sr_label'] = 'gomp1'
+        param_values.update(dict(
+            h = self.provider.get_param('H0') / 100,
+            omega_b = self.provider.get_param('omega_b'),
+            omega_cdm = self.provider.get_param('omega_cdm'),
+            sigma8 = self.provider.get_param('sigma8'),
+            n_s = self.provider.get_param('n_s'),
+            zt = self.provider.get_param('zt'),
+            sr_label = 'gomp1',
+        ))
         xHI = gomppoly6(self.lna, params=param_values)
         return -0.5 * (np.log(2 * np.pi * self.var) + (xHI - self.mean) ** 2 / self.var)
 
