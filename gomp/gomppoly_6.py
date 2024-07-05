@@ -64,12 +64,25 @@ def tilt_sr(h, omega_b, omega_cdm, sigma8, n_s, zt, sr_label,
     raise ValueError(f'sr_label = {sr_label} not recognized')
 
 
-class CombinedQuasar(Likelihood):
+class PlanA(Likelihood):
 
     def initialize(self):
-        self.lna = - np.log(1 + 7.29)
-        self.mean = 0.49
-        self.var = 0.11 ** 2  # symmetric
+        data = np.array([
+            [7.29, 0.49, -0.11, 0.11],  # combined quasars
+            [6.15, 0.20, -0.12, 0.14],  # 2404.12585 damping wing
+            [6.35, 0.29, -0.13, 0.14],
+            [5.60, 0.19, -0.16, 0.11],  # 2405.12273 damping wing
+            [6.10, 0.21, -0.07, 0.17],  # 2401.10328 damping wing
+            [6.46, 0.21, -0.07, 0.33],
+            [6.87, 0.37, -0.17, 0.17],
+        ])
+        self.get_my_data(data)
+
+    def get_my_data(self, data):
+        z, mean, lo, hi = data.T
+        self.lna = - np.log(1 + z)
+        self.mean = mean + (lo + hi) / 2  # symmetrized
+        self.var = ((hi - lo) / 2) ** 2  # symmetrized
 
     def get_requirements(self):
         return dict(H0=None)
@@ -85,7 +98,26 @@ class CombinedQuasar(Likelihood):
             sr_label = 'gomp1',
         ))
         xHI = gomppoly6(self.lna, params=param_values)
-        return -0.5 * (np.log(2 * np.pi * self.var) + (xHI - self.mean) ** 2 / self.var)
+        return -0.5 * np.sum(np.log(2 * np.pi * self.var)
+                             + (xHI - self.mean) ** 2 / self.var)
+
+
+class PlanB(PlanA):
+
+    def initialize(self):
+        data = np.array([
+            [7.29, 0.49, -0.11, 0.11],  # combined quasars
+            [6.15, 0.20, -0.12, 0.14],  # 2404.12585 damping wing
+            [6.35, 0.29, -0.13, 0.14],
+            [5.60, 0.19, -0.16, 0.11],  # 2405.12273 damping wing
+            [6.10, 0.21, -0.07, 0.17],  # 2401.10328 damping wing
+            [6.46, 0.21, -0.07, 0.33],
+            [6.87, 0.37, -0.17, 0.17],
+            [6.60, 0.08, -0.05, 0.08],  # 2101.01205 luminosity function
+            [7.00, 0.28, -0.05, 0.05],
+            #[7.30, 0.83, -0.07, 0.06],  # concerning interpolation of UV luminosity
+        ])
+        self.get_my_data(data)
 
 
 if __name__ == '__main__':
