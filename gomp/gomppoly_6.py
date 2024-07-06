@@ -1,3 +1,5 @@
+from functools import partial
+
 import numpy as np
 from numpy import exp, log
 from numpy.polynomial import Polynomial
@@ -32,92 +34,79 @@ def gomppoly6(lna, lna_pivot=None, tilt=None, params=None):
     return exp(- exp(poly6(lna, lna_pivot=lna_pivot, tilt=tilt, params=params)))
 
 
-def pivot_sr(h, omega_b, omega_cdm, sigma8, n_s, zt, sr_label,
-             **kwargs):  # kwargs absorbs other params of Cobaya
+def pivot_sr(h, omega_b, omega_cdm, sigma8, n_s, zt, fit):
     Ob, Om = reparam(h, omega_b, omega_cdm)
     s8, ns = sigma8, n_s
 
-    if sr_label == 'gomp1':  # complexity 22
+    if fit == 'gomp1':  # complexity 22
         return (ns + 0.35580978 * log(0.11230898 * zt)) * (0.048352774 - s8) - Om - ns + (Ob / Om) ** h
-    if sr_label == 'gomp1_raw':
+    if fit == 'gomp1_raw':
         return ((((ns - (log(0.11230898 * zt) * -0.35580978)) * (0.048352774 - s8)) - (Om + ns)) + ((Ob / Om) ** h))
 
-    #if sr_label == 'gomp2':  # complexity ??
-    #if sr_label == 'gomp2_raw':
+    #if fit == 'gomp2':  # complexity ??
+    #if fit == 'gomp2_raw':
 
-    raise ValueError(f'sr_label = {sr_label} not recognized')
+    raise ValueError(f'fit = {fit} not recognized')
 
 
-def tilt_sr(h, omega_b, omega_cdm, sigma8, n_s, zt, sr_label,
-            **kwargs):  # kwargs absorbs other params of Cobaya
+def tilt_sr(h, omega_b, omega_cdm, sigma8, n_s, zt, fit):
     Ob, Om = reparam(h, omega_b, omega_cdm)
     s8, ns = sigma8, n_s
 
-    if sr_label == 'gomp1':  # complexity 25
+    if fit == 'gomp1':  # complexity 25
         return log(Ob) * (0.005659511 ** Om / 0.601493 - log(zt - (Om + ns * h) ** 15.051933) + h) + h / s8
-    if sr_label == 'gomp1_raw':
+    if fit == 'gomp1_raw':
         return ((log(Ob) * (((0.005659511 ** Om) / 0.601493) - (log(zt - ((Om + (ns * h)) ** 15.051933)) - h))) + (h / s8))
 
-    #if sr_label == 'gomp2':  # complexity ??
-    #if sr_label == 'gomp2_raw':
+    #if fit == 'gomp2':  # complexity ??
+    #if fit == 'gomp2_raw':
 
-    raise ValueError(f'sr_label = {sr_label} not recognized')
-
-
-class PlanA(Likelihood):
-
-    def initialize(self):
-        data = np.array([
-            [7.29, 0.49, -0.11, 0.11],  # combined quasars
-            [6.15, 0.20, -0.12, 0.14],  # 2404.12585 damping wing
-            [6.35, 0.29, -0.13, 0.14],
-            [5.60, 0.19, -0.16, 0.11],  # 2405.12273 damping wing
-            [6.10, 0.21, -0.07, 0.17],  # 2401.10328 damping wing
-            [6.46, 0.21, -0.07, 0.33],
-            [6.87, 0.37, -0.17, 0.17],
-        ])
-        self.get_my_data(data)
-
-    def get_my_data(self, data):
-        z, m, l, h = data.T
-        self.lna = - np.log(1 + z)
-        self.mean = m + (l + h) / 2  # symmetrized
-        self.var = ((h - l) / 2) ** 2  # symmetrized
-
-    def get_requirements(self):
-        return dict(H0=None)
-
-    def logp(self, **param_values):
-        param_values.update(dict(
-            h = self.provider.get_param('H0') / 100,
-            omega_b = self.provider.get_param('omega_b'),
-            omega_cdm = self.provider.get_param('omega_cdm'),
-            sigma8 = self.provider.get_param('sigma8'),
-            n_s = self.provider.get_param('n_s'),
-            zt = self.provider.get_param('zt'),
-            sr_label = 'gomp1',
-        ))
-        xHI = gomppoly6(self.lna, params=param_values)
-        return -0.5 * np.sum(np.log(2 * np.pi * self.var)
-                             + (xHI - self.mean) ** 2 / self.var)
+    raise ValueError(f'fit = {fit} not recognized')
 
 
-class PlanB(PlanA):
+def xHI_like(_self=None, plan='b', fit='gomp1'):
+    data = np.array([
+        [7.29, 0.49, -0.11, 0.11],  # combined quasars
+        [6.15, 0.20, -0.12, 0.14],  # 2404.12585 damping wing
+        [6.35, 0.29, -0.13, 0.14],
+        [5.60, 0.19, -0.16, 0.11],  # 2405.12273 damping wing
+        [6.10, 0.21, -0.07, 0.17],  # 2401.10328 damping wing
+        [6.46, 0.21, -0.07, 0.33],
+        [6.87, 0.37, -0.17, 0.17],
+        [6.60, 0.08, -0.05, 0.08],  # 2101.01205 luminosity function
+        [7.00, 0.28, -0.05, 0.05],
+        #[7.30, 0.83, -0.07, 0.06],  # concerning interpolation of UV luminosity
+    ])
+    if plan == 'a':
+        data = data[:-2]  # Plan A does not use luminosity function data points
+    elif plan == 'q':
+        data = data[:1]  # Plan Q only uses combined quasar data point
 
-    def initialize(self):
-        data = np.array([
-            [7.29, 0.49, -0.11, 0.11],  # combined quasars
-            [6.15, 0.20, -0.12, 0.14],  # 2404.12585 damping wing
-            [6.35, 0.29, -0.13, 0.14],
-            [5.60, 0.19, -0.16, 0.11],  # 2405.12273 damping wing
-            [6.10, 0.21, -0.07, 0.17],  # 2401.10328 damping wing
-            [6.46, 0.21, -0.07, 0.33],
-            [6.87, 0.37, -0.17, 0.17],
-            [6.60, 0.08, -0.05, 0.08],  # 2101.01205 luminosity function
-            [7.00, 0.28, -0.05, 0.05],
-            #[7.30, 0.83, -0.07, 0.06],  # concerning interpolation of UV luminosity
-        ])
-        self.get_my_data(data)
+    z, m, l, h = data.T
+    lna = - np.log(1 + z)
+    mean = m + (l + h) / 2  # symmetrized
+    var = ((h - l) / 2) ** 2  # symmetrized
+
+    params = dict(
+        h=_self.provider.get_param('H0') / 100,
+        omega_b=_self.provider.get_param('omega_b'),
+        omega_cdm=_self.provider.get_param('omega_cdm'),
+        sigma8=_self.provider.get_param('sigma8'),
+        n_s=_self.provider.get_param('n_s'),
+        zt=_self.provider.get_param('zt'),
+        fit=fit,
+    )
+    xHI = gomppoly6(lna, params=params)
+    half_neg_chi2 = -0.5 * np.sum((xHI - mean) ** 2 / var)
+    #print(f'{params=}, {xHI=}, {half_neg_chi2=}', flush=True)
+    return half_neg_chi2
+
+planb_gomp1 = partial(xHI_like, plan='b', fit='gomp1')
+plana_gomp1 = partial(xHI_like, plan='a', fit='gomp1')
+planq_gomp1 = partial(xHI_like, plan='q', fit='gomp1')
+planb_gomp2 = partial(xHI_like, plan='b', fit='gomp2')
+plana_gomp2 = partial(xHI_like, plan='a', fit='gomp2')
+planq_gomp2 = partial(xHI_like, plan='q', fit='gomp2')
 
 
 if __name__ == '__main__':
@@ -129,14 +118,14 @@ if __name__ == '__main__':
         n_s=0.9660499,
         zt=24,
     )
-    #sr_labels = ['gomp1', 'gomp1_raw']
-    sr_labels = ['gomp1']
+    #fits = ['gomp1', 'gomp1_raw']
+    fits = ['gomp1']
 
     import matplotlib.pyplot as plt
     z = np.linspace(5, 16, num=111, endpoint=True)
-    for sr_label in sr_labels:
-        params['sr_label'] = sr_label
-        plt.plot(z, gomppoly6(log(1/(1+z)), params=params), label=sr_label, lw=1, alpha=.5)
+    for fit in fits:
+        params['fit'] = fit
+        plt.plot(z, gomppoly6(log(1/(1+z)), params=params), label=fit, lw=1, alpha=.5)
     plt.legend()
     plt.xlabel('$z$')
     plt.ylabel('$x_\mathrm{HI}$')

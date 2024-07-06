@@ -30,30 +30,28 @@ def gomppoly6(lna, lna_pivot=None, tilt=None, params=None):
     return exp(- exp(poly6(lna, lna_pivot=lna_pivot, tilt=tilt, params=params)))
 
 
-def pivot_sr(h, omega_b, omega_cdm, sigma8, n_s, zt, sr_label,
-             **kwargs):  # kwargs absorbs other params of Cobaya
+def pivot_sr(h, omega_b, omega_cdm, sigma8, n_s, zt, fit):
     Ob, Om = reparam(h, omega_b, omega_cdm)
     s8, ns = sigma8, n_s
 
-    if sr_label == 'gomp1':  # complexity 22
+    if fit == 'gomp1':  # complexity 22
         return (ns + 0.3558 * log(0.1123 * zt)) * (0.04835 - s8) - Om - ns + (Ob / Om) ** h
 
-    #if sr_label == 'gomp2':  # complexity ??
+    #if fit == 'gomp2':  # complexity ??
 
-    raise ValueError(f'sr_label = {sr_label} not recognized')
+    raise ValueError(f'fit = {fit} not recognized')
 
 
-def tilt_sr(h, omega_b, omega_cdm, sigma8, n_s, zt, sr_label,
-            **kwargs):  # kwargs absorbs other params of Cobaya
+def tilt_sr(h, omega_b, omega_cdm, sigma8, n_s, zt, fit):
     Ob, Om = reparam(h, omega_b, omega_cdm)
     s8, ns = sigma8, n_s
 
-    if sr_label == 'gomp1':  # complexity 25
+    if fit == 'gomp1':  # complexity 25
         return log(Ob) * (0.005660 ** Om / 0.6015 - log(zt - (Om + ns * h) ** 15.05) + h) + h / s8
 
-    #if sr_label == 'gomp2':  # complexity ??
+    #if fit == 'gomp2':  # complexity ??
 
-    raise ValueError(f'sr_label = {sr_label} not recognized')
+    raise ValueError(f'fit = {fit} not recognized')
 
 
 if __name__ == '__main__':
@@ -65,14 +63,14 @@ if __name__ == '__main__':
         n_s=0.9660499,
         zt=24,
     )
-    sr_labels = ['gomp1']
+    fits = ['gomp1']
 
     z = np.linspace(5, 16, num=10000)
-    for sr_label in sr_labels:
-        params['sr_label'] = sr_label
+    for fit in fits:
+        params['fit'] = fit
         x_many = manyfig.gomppoly6(log(1/(1+z)), params=params)
         x_4 = gomppoly6(log(1/(1+z)), params=params)
-        print(sr_label)
+        print(fit)
         print(f'  min  = {(x_4 - x_many).min()}')
         print(f'  max  = {(x_4 - x_many).max()}')
         print(f'  mean = {(x_4 - x_many).mean()}')
