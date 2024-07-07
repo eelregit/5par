@@ -3,10 +3,6 @@ from functools import partial
 import numpy as np
 from numpy import exp, log
 from numpy.polynomial import Polynomial
-try:
-    from cobaya.likelihood import Likelihood
-except:
-    pass
 
 
 def reparam(h, omega_b, omega_cdm):
