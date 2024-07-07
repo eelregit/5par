@@ -75,6 +75,7 @@ plt.style.use('../5par.mplstyle')
 gs = gridspec.GridSpec(2, 1, height_ratios=[1, 1], hspace=0)
 
 fig = plt.figure(figsize=(5.5, 6.2))
+ax2 = fig.add_subplot(gs[1])
 
 ax1 = fig.add_subplot(gs[0], sharex=ax2)
 ax1.fill_between(z_vals, planck_low, planck_high, facecolor='darkblue', edgecolor='darkblue', label=r'Planck PR3', alpha=0.1)
@@ -90,7 +91,6 @@ ax1.plot(1+z_vals, tau_tanh0_z, '-', linewidth=3, color='darkblue', label='Planc
 ax1.plot(1+z_vals, tau_gomp1_z, '--', linewidth=3, color='green', label='gomp 1')
 ax1.plot(1+z_vals, tau_gomp2_z, ':', linewidth=3, color='purple', label='gomp 2')
 
-ax2 = fig.add_subplot(gs[1])
 ax2.plot(1+z, xHI(z,sigma8=0.8092,ns=0.9634,h=0.6722,Ob=val,Om=0.3171,model='0227'),  '--', c='green', linewidth=3, label=r'gomp 1', zorder=7)
 ax2.plot(1+z, xHI(z,sigma8=0.8092,ns=0.9634,h=0.6724,Ob=val2,Om=0.3168,model='0226'),  ':', c='purple', linewidth=3, label=r'gomp 2', zorder=8, alpha=0.8)
 ax2.axvline(x=5.90, ls='dashed', c='purple')
@@ -113,10 +113,19 @@ ax2.errorbar(8.5,0.56,yerr=np.array([[0.18,0.21]]).T,uplims=False,marker='p',mar
 # lets also move this one back to 7.5
 ax2.errorbar(8.5,0.60,yerr=np.array([[0.23,0.20]]).T,uplims=False,marker='p',markersize=7,capthick=2,capsize=4, c='rosybrown', ls='none', label=r'J1342+0928c',zorder=6, alpha=b)
 ax2.errorbar(8.1,0.48,yerr=np.array([[0.26,0.26]]).T,uplims=False,marker='p',markersize=7,capthick=2,capsize=4, c='rosybrown', ls='none', label=r'J1120+0641',zorder=6, alpha=b)
-ax2.errorbar(8.29,0.49,yerr=np.array([[0.11,0.11]]).T,uplims=False,marker='p',markersize=7,capthick=2,capsize=4, ls='none', label=r'Combined quasars',zorder=6, alpha=b)
+ax2.errorbar(8.29,0.49, yerr=np.array([[0.11,0.11]]).T, uplims=False,marker='p',markersize=7,capthick=2,capsize=4, ls='none', label=r'Combined quasars',zorder=6, alpha=b)
 ax2.errorbar(8.0,0.59,yerr=np.array([[0.15,0.11]]).T,xerr=0.5,uplims=False,marker='d',markersize=7,capthick=2,capsize=4, ls='none', label=r'Ly$\alpha$ EWa',zorder=6, alpha=b)
 ax2.errorbar(8.6,0.88,yerr=np.array([[0.10,0.05]]).T,xerr=0.6,uplims=False,marker='d',markersize=7,capthick=2,capsize=4, ls='none', label=r'Ly$\alpha$ EWb',zorder=6, alpha=b)
 ax2.errorbar(9.0,0.76,yerr=0.22,xerr=0.6,uplims=False,lolims=True,marker='d',markersize=7,capthick=2,capsize=4, ls='none', label=r'Ly$\alpha$ EWc',zorder=6, alpha=b)
+ax2.errorbar(7.6,0.08,yerr=np.array([[0.05, 0.08]]).T, uplims=False, marker='d',markersize=7,capthick=2,capsize=4, ls='none', label=r'LF',zorder=6, alpha=b)
+ax2.errorbar(8.,0.28,yerr=np.array([[0.05, 0.05]]).T, uplims=False, marker='d',markersize=7,capthick=2,capsize=4, ls='none', label=r'LF',zorder=6, alpha=b)
+ax2.errorbar(8.3,0.83,yerr=np.array([[0.07, 0.06]]).T, uplims=False, marker='d',markersize=7,capthick=2,capsize=4, ls='none', label=r'LF',zorder=6, alpha=b)
+ax2.errorbar(7.1,0.21,yerr=np.array([[0.07, 0.17]]).T, uplims=False, marker='s',markersize=7,capthick=2,capsize=4, ls='none', label=r'DW',zorder=6, alpha=b)
+ax2.errorbar(7.46,0.21,yerr=np.array([[0.07, 0.33]]).T, uplims=False, marker='s',markersize=7,capthick=2,capsize=4, ls='none', label=r'DW',zorder=6, alpha=b)
+ax2.errorbar(7.87,0.37,yerr=np.array([[0.17, 0.17]]).T, uplims=False, marker='s',markersize=7,capthick=2,capsize=4, ls='none', label=r'DW',zorder=6, alpha=b)
+ax2.errorbar(6.6,0.19,yerr=np.array([[0.16, 0.11]]).T, uplims=False, marker='s',markersize=7,capthick=2,capsize=4, ls='none', label=r'DW',zorder=6, alpha=b)
+ax2.errorbar(7.15,0.20,yerr=np.array([[0.12, 0.14]]).T, uplims=False, marker='s',markersize=7,capthick=2,capsize=4, ls='none', label=r'DW',zorder=6, alpha=b)
+ax2.errorbar(7.35,0.29,yerr=np.array([[0.13, 0.14]]).T, uplims=False, marker='s',markersize=7,capthick=2,capsize=4, ls='none', label=r'DW',zorder=6, alpha=b)
 
 ax2.set_ylabel(r'$x_\mathrm{HI}$', fontsize=14)
 #ax1.set_ylim(0, 1)
@@ -200,9 +209,12 @@ print('Redshift 2: ', inter2(0.95))
 
 
 # the chibi one is going to be a xHI(a)
-a, x = np.loadtxt('../data/xHI.txt', unpack=True)[:2]
-num_sim = 128
-num_a = 92
+a_edge, x_edge = np.loadtxt('../data/xHI.txt', unpack=True)[:2]
+a_core, x_core = np.loadtxt('../data/xHI_core.txt', unpack=True)[:2]
+a = np.concatenate((a_edge, a_core))
+x = np.concatenate((x_edge, x_core))
+num_sim = 128 + 128
+num_a = 127
 a = a[:num_a]
 x = x.reshape(num_sim, num_a)
 
