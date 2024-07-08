@@ -35,18 +35,26 @@ Using Planck PR3 TTTEEE ϕϕ, low-ell data, and optionally quasar data:
 Using various combinations of datasets:
 
 * CMB primary and lensing
+
   + Planck PR4 TTTEEE + PR3 low ell's, alternatives are
+
     - cmbP: Planck PR4 TTTEEE
     - cmbA: ACT DR4
     - cmbS: SPT 3G
+
   + SOTA (Planck PR4 ϕϕ + ACT DR6), alternatives are
+
     - lensP: Planck PR4 ϕϕ
     - lensA: ACT DR6
     - lensS: SPT 3G
+
 * BAO and/or SNe
+
   + baoD: DESI (alternative is baoS: SDSS eBOSS DR16)
+
     - baoDx: without the 1st LRG bin
     - baoDg: without Lya forest bin
+
   + snD: DES Y5
   + snP: Pantheon+
   + snU: Union3
