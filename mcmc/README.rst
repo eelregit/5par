@@ -2,18 +2,34 @@ MCMC with Cobaya and CLASS
 ==========================
 
 
-Using Planck PR3 TTTEEE ϕϕ and low-ell data:
+Using Planck PR3 TTTEEE ϕϕ, low-ell data, and optionally quasar data:
 
 * `gomp_0 <gomp_0>`_ receives tau_reio as input and finds reionization
   timeline using bisection varying alpha while fixing beta.
   gomp_0 is used for validation
 * `gomp_1 <gomp_1>`_ finds tau_reio using alpha(cosmo) and beta(cosmo)
+* `gomp_1dw <gomp_1dw>`_ finds tau_reio using alpha(cosmo) and
+  beta(cosmo), using additionally quasar damping wing data
+* `gomp_1dwlf <gomp_1dwlf>`_ finds tau_reio using alpha(cosmo) and
+  beta(cosmo), using additionally quasar damping wing and luminosity
+  function data
 * `gomp_2 <gomp_2>`_ finds tau_reio using alpha(cosmo) and beta(cosmo)
   but the SR expression was obtained using only half of the data
+* `gomp_2dw <gomp_2dw>`_ finds tau_reio using alpha(cosmo) and
+  beta(cosmo) but the SR expression was obtained using only half of the
+  data, using additionally quasar damping wing data
+* `gomp_2dwlf <gomp_2dwlf>`_ finds tau_reio using alpha(cosmo) and
+  beta(cosmo) but the SR expression was obtained using only half of the
+  data, using additionally quasar damping wing and luminosity function
+  data
 
 * `tanh_0 <tanh_0>`_ receives tau_reio as input and finds reionization
   timeline using bisection (varying z_re), tanh_o is used for validation
 * `tanh_1 <tanh_1>`_ finds tau_reio by sampling over z_re
+* `tanh_1dw <tanh_1dw>`_ finds tau_reio by sampling over z_re, using
+  additionally quasar damping wing data
+* `tanh_1dwlf <tanh_1dwlf>`_ finds tau_reio by sampling over z_re, using
+  additionally quasar damping wing and luminosity function data
 
 
 Using various combinations of datasets:

@@ -1,0 +1,6 @@
+*.txt
+*.checkpoint
+*.covmat
+*.progress
+#*.input.yaml
+*.updated.yaml
