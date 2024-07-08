@@ -60,6 +60,15 @@ def tilt_sr(h, omega_b, omega_cdm, sigma8, n_s, zt, fit):
     raise ValueError(f'fit = {fit} not recognized')
 
 
+def tanh(z, z_reio):
+    """Planck 2018 VI footnote 15"""
+    y, y_reio = (1 + z) ** 1.5, (1 + z_reio) ** 1.5
+    delta_z = 0.5
+    delta_y = 1.5 * np.sqrt(1 + z_reio) * delta_z
+    x_HI = 0.5 * (1 + np.tanh((y - y_reio) / delta_y))
+    return x_HI
+
+
 def xHI_like(_self=None, type='dw', fit='gomp1'):
     data = np.array([
         [7.29, 0.49, -0.11, 0.11],  # combined quasars daming wing
@@ -78,33 +87,37 @@ def xHI_like(_self=None, type='dw', fit='gomp1'):
     elif type == 'dw':  # only damping wing
         data = data[:-2]
     else:
-        raise ValueError(f'{type=} not supported')
+        raise ValueError(f'{type=} not recognized')
 
     z, m, l, h = data.T
-    lna = - np.log(1 + z)
+    lna = - log(1 + z)
     mean = m + (l + h) / 2  # symmetrized
     var = ((h - l) / 2) ** 2  # symmetrized
 
-    params = dict(
-        h=_self.provider.get_param('H0') / 100,
-        omega_b=_self.provider.get_param('omega_b'),
-        omega_cdm=_self.provider.get_param('omega_cdm'),
-        sigma8=_self.provider.get_param('sigma8'),
-        n_s=_self.provider.get_param('n_s'),
-        zt=_self.provider.get_param('zt'),
-        fit=fit,
-    )
-    xHI = gomppoly6(lna, params=params)
-    half_neg_chi2 = -0.5 * np.sum((xHI - mean) ** 2 / var)
-    #print(f'{params=}, {xHI=}, {half_neg_chi2=}', flush=True)
+    if fit == 'tanh':
+        z_reio=_self.provider.get_param('z_reio'),
+        xHI = tanh(z, z_reio)
+    else:
+        params = dict(
+            h=_self.provider.get_param('H0') / 100,
+            omega_b=_self.provider.get_param('omega_b'),
+            omega_cdm=_self.provider.get_param('omega_cdm'),
+            sigma8=_self.provider.get_param('sigma8'),
+            n_s=_self.provider.get_param('n_s'),
+            zt=_self.provider.get_param('zt'),
+            fit=fit,
+        )
+        xHI = gomppoly6(lna, params=params)
+
+    half_neg_chi2 = -0.5 * ((xHI - mean) ** 2 / var).sum()
     return half_neg_chi2
 
-planb_gomp1 = partial(xHI_like, plan='b', fit='gomp1')
-plana_gomp1 = partial(xHI_like, plan='a', fit='gomp1')
-planq_gomp1 = partial(xHI_like, plan='q', fit='gomp1')
-planb_gomp2 = partial(xHI_like, plan='b', fit='gomp2')
-plana_gomp2 = partial(xHI_like, plan='a', fit='gomp2')
-planq_gomp2 = partial(xHI_like, plan='q', fit='gomp2')
+tanh_dw = partial(xHI_like, type='dw', fit='tanh')
+tanh_dwlf = partial(xHI_like, type='dwlf', fit='tanh')
+gomp_1dw = partial(xHI_like, type='dw', fit='gomp1')
+gomp_1dwlf = partial(xHI_like, type='dwlf', fit='gomp1')
+gomp_2dw = partial(xHI_like, type='dw', fit='gomp2')
+gomp_2dwlf = partial(xHI_like, type='dwlf', fit='gomp2')
 
 
 if __name__ == '__main__':
@@ -121,9 +134,11 @@ if __name__ == '__main__':
 
     import matplotlib.pyplot as plt
     z = np.linspace(5, 16, num=111, endpoint=True)
+    lna = - log(1 + z)
     for fit in fits:
         params['fit'] = fit
-        plt.plot(z, gomppoly6(log(1/(1+z)), params=params), label=fit, lw=1, alpha=.5)
+        plt.plot(z, gomppoly6(lna, params=params), label=fit, lw=1, alpha=.5)
+    plt.plot(z, tanh(z, z_reio=7.67), label='tanh', lw=1, alpha=.5)
     plt.legend()
     plt.xlabel('$z$')
     plt.ylabel('$x_\mathrm{HI}$')
