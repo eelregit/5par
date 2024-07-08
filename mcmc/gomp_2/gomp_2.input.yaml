@@ -1,7 +1,7 @@
 theory:
   classy:
     extra_args:
-      reio_parametrization: reio_gomp
+      reio_parametrization: reio_gomp2
       non linear: hmcode
       nonlinear_min_k_max: 20
       N_ncdm: 1
@@ -17,7 +17,7 @@ params:
   n_s:
     prior:
       min: 0.92
-      max: 1.00
+      max: 1.0
     ref:
       dist: norm
       loc: 0.965
@@ -28,8 +28,8 @@ params:
     latex: 100\theta_\mathrm{s}
   H0:
     prior:
-      min: 61.
-      max: 73.
+      min: 61.0
+      max: 73.0
     ref:
       dist: norm
       loc: 67.4
@@ -58,7 +58,7 @@ params:
     latex: \Omega_\mathrm{c} h^2
   Omega_m:
     min: 0.24
-    max: 0.40
+    max: 0.4
     latex: \Omega_\mathrm{m}
   Omega_b:
     derived: 'lambda omega_b, H0: omega_b/(H0/100)**2'
@@ -83,13 +83,23 @@ params:
   sigma8:
     prior:
       min: 0.74
-      max: 0.90
+      max: 0.9
     ref:
       dist: norm
       loc: 0.8111
       scale: 0.006
     proposal: 0.006
     latex: \sigma_8
+  zt:
+    prior:
+      min: 20.
+      max: 35.
+    ref:
+      dist: norm
+      loc: 24.
+      scale: 1.
+    proposal: 0.5
+    latex: \zeta_\mathrm{UV}
   s8h5:
     derived: 'lambda sigma8, H0: sigma8*(H0*1e-2)**(-0.5)'
     latex: \sigma_8/h^{0.5}
@@ -117,3 +127,4 @@ sampler:
     covmat: auto
     Rminus1_stop: 0.01
     Rminus1_cl_stop: 0.2
+output: gomp2
