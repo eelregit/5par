@@ -37,7 +37,8 @@ def pivot_sr(h, omega_b, omega_cdm, sigma8, n_s, zt, fit):
     if fit == 'gomp1':  # complexity 22
         return (ns + 0.3558 * log(0.1123 * zt)) * (0.04835 - s8) - Om - ns + (Ob / Om) ** h
 
-    #if fit == 'gomp2':  # complexity ??
+    if fit == 'gomp2':  # complexity 22
+        return (Ob / Om) ** Om - log((zt + Ob ** -0.4982) ** s8 * h) ** 0.5721 - ns ** 1.834
 
     raise ValueError(f'fit = {fit} not recognized')
 
@@ -49,7 +50,8 @@ def tilt_sr(h, omega_b, omega_cdm, sigma8, n_s, zt, fit):
     if fit == 'gomp1':  # complexity 25
         return log(Ob) * (0.005660 ** Om / 0.6015 - log(zt - (Om + ns * h) ** 15.05) + h) + h / s8
 
-    #if fit == 'gomp2':  # complexity ??
+    if fit == 'gomp2':  # complexity 11
+        return ((zt - Om ** -1.583) / (Ob * h)) ** 0.3163
 
     raise ValueError(f'fit = {fit} not recognized')
 
@@ -63,7 +65,7 @@ if __name__ == '__main__':
         n_s=0.9660499,
         zt=24,
     )
-    fits = ['gomp1']
+    fits = ['gomp1', 'gomp2']
 
     z = np.linspace(5, 16, num=10000)
     for fit in fits:

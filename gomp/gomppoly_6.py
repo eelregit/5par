@@ -39,8 +39,10 @@ def pivot_sr(h, omega_b, omega_cdm, sigma8, n_s, zt, fit):
     if fit == 'gomp1_raw':
         return ((((ns - (log(0.11230898 * zt) * -0.35580978)) * (0.048352774 - s8)) - (Om + ns)) + ((Ob / Om) ** h))
 
-    #if fit == 'gomp2':  # complexity ??
-    #if fit == 'gomp2_raw':
+    if fit == 'gomp2':  # complexity 22
+        return (Ob / Om) ** Om - log((zt + Ob ** -0.49822742) ** s8 * h) ** 0.5721157 - ns ** 1.8340757
+    if fit == 'gomp2_raw':
+        return ((((Ob / Om) ** Om) - (log(((zt + (Ob ** -0.49822742)) ** s8) * h) ** 0.5721157)) - (ns ** 1.8340757))
 
     raise ValueError(f'fit = {fit} not recognized')
 
@@ -54,8 +56,10 @@ def tilt_sr(h, omega_b, omega_cdm, sigma8, n_s, zt, fit):
     if fit == 'gomp1_raw':
         return ((log(Ob) * (((0.005659511 ** Om) / 0.601493) - (log(zt - ((Om + (ns * h)) ** 15.051933)) - h))) + (h / s8))
 
-    #if fit == 'gomp2':  # complexity ??
-    #if fit == 'gomp2_raw':
+    if fit == 'gomp2':  # complexity 11, 1e-5 difference in constants from those in csv
+        return ((zt - Om ** -1.583228) / (Ob * h)) ** 0.31627414
+    if fit == 'gomp2_raw':
+        return (((zt - (Om ** -1.583228)) / (Ob * h)) ** 0.31627414)
 
     raise ValueError(f'fit = {fit} not recognized')
 
@@ -129,8 +133,8 @@ if __name__ == '__main__':
         n_s=0.9660499,
         zt=24,
     )
-    #fits = ['gomp1', 'gomp1_raw']
-    fits = ['gomp1']
+    #fits = ['gomp1', 'gomp1_raw', 'gomp2', 'gomp2_raw']
+    fits = ['gomp1', 'gomp2']
 
     import matplotlib.pyplot as plt
     z = np.linspace(5, 16, num=111, endpoint=True)
