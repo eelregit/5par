@@ -60,9 +60,9 @@ def tilt_sr(h, omega_b, omega_cdm, sigma8, n_s, zt, fit):
     raise ValueError(f'fit = {fit} not recognized')
 
 
-def xHI_like(_self=None, plan='b', fit='gomp1'):
+def xHI_like(_self=None, type='dw', fit='gomp1'):
     data = np.array([
-        [7.29, 0.49, -0.11, 0.11],  # combined quasars
+        [7.29, 0.49, -0.11, 0.11],  # combined quasars daming wing
         [6.15, 0.20, -0.12, 0.14],  # 2404.12585 damping wing
         [6.35, 0.29, -0.13, 0.14],
         [5.60, 0.19, -0.16, 0.11],  # 2405.12273 damping wing
@@ -73,10 +73,12 @@ def xHI_like(_self=None, plan='b', fit='gomp1'):
         [7.00, 0.28, -0.05, 0.05],
         #[7.30, 0.83, -0.07, 0.06],  # concerning interpolation of UV luminosity
     ])
-    if plan == 'a':
-        data = data[:-2]  # Plan A does not use luminosity function data points
-    elif plan == 'q':
-        data = data[:1]  # Plan Q only uses combined quasar data point
+    if type == 'dwlf':  # both damping wing and luminosity function
+        pass
+    elif type == 'dw':  # only damping wing
+        data = data[:-2]
+    else:
+        raise ValueError(f'{type=} not supported')
 
     z, m, l, h = data.T
     lna = - np.log(1 + z)
