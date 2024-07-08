@@ -382,12 +382,22 @@ those using only half of it indicates that our symbolic expression
 mappings perform robustly and are not biasing the parameter inferences.
 
 
+\subsection*{Astrophysical data}
+\label{ssec:xHI}
+The increasing number of directtconstraints on the reionization timeline
+now provides significant additional constraining power to CMB analyses.
+In this work, we use quasar damping wings (DW) and luminosity function (LF)
+constraints on $x_\HI (z)$ (see \Cref{fig:history}).
+
+For inference, DW data includes DW constrains, while DW + LF combines
+these with LF values. We exclude the highest redshift LF constraint due to
+its sensitivity to sampling and interpolation effects, thus its likely to change
+with more high-$z$ data. 
+
+
 \subsection*{MCMC inference}
 \label{ssec:fits}
-
-\subsubsection*{Astrophysical data}
-\label{sssec:xHI}
-\paulo{Describe plan A \& B here.}
+Our inference combines CMB with astrophysical data.
 
 \Cref{tab:uber-table} summarizes the results obtained by performing MCMC
 Bayesian inference with \texttt{Cobaya} for the models considered
