@@ -95,7 +95,7 @@ def xHI_like(_self=None, type='dw', fit='gomp1'):
     var = ((h - l) / 2) ** 2  # symmetrized
 
     if fit == 'tanh':
-        z_reio=_self.provider.get_param('z_reio'),
+        z_reio = _self.provider.get_param('z_reio')
         xHI = tanh(z, z_reio)
     else:
         params = dict(
