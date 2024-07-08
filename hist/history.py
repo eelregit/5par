@@ -46,19 +46,20 @@ def tanH_model(z_re,z):
     return x_e
 
 
-z_vals, tau_gomp1_z = np.loadtxt('gomp1_tau_z.txt', unpack=True)
-z_vals, tau_gomp2_z = np.loadtxt('gomp2_tau_z.txt', unpack=True)
+z_vals, tau_SRFullDW_z = np.loadtxt('gomp1_DW_tau_z.txt', unpack=True)
+z_vals, tau_SRFullDWLF_z = np.loadtxt('gomp1_DWLF_tau_z.txt', unpack=True)
+#z_vals, tau_gomp2_z = np.loadtxt('gomp2_tau_z.txt', unpack=True)
 z_vals, tau_tanh0_z = np.loadtxt('tanh0_tau_z.txt', unpack=True)
 
 # planck constraints
 planck_low = 0.047 * np.ones(len(z_vals))
 planck_high = 0.061 * np.ones(len(z_vals))
 
-low_0227 = (0.05115 - 0.00061) * np.ones(len(z_vals))
-high_0227 = (0.05115 + 0.00061) * np.ones(len(z_vals))
+low_SRFullDW = (0.0526 - 0.0015) * np.ones(len(z_vals))
+high_SRFullDW = (0.0526 + 0.0015) * np.ones(len(z_vals))
 
-low_0226 = (0.05140 - 0.00063) * np.ones(len(z_vals))
-high_0226 = (0.05140 + 0.00063) * np.ones(len(z_vals))
+low_SRFullDWLF = (0.05720 - 0.00077) * np.ones(len(z_vals))
+high_SRFullDWLF = (0.05720 + 0.00088) * np.ones(len(z_vals))
 
 # need two figures actually one full with everything including caption
 # and the second a chibi version with only the main point
@@ -76,8 +77,9 @@ ax2 = fig.add_subplot(gs[1])
 
 ax1 = fig.add_subplot(gs[0], sharex=ax2)
 ax1.fill_between(z_vals, planck_low, planck_high, facecolor='darkblue', edgecolor='darkblue', label=r'Planck PR3', alpha=0.1)
-ax1.fill_between(z_vals, low_0227, high_0227, facecolor='green', edgecolor='green', label=r'gomp 1', alpha=0.2)
-ax1.fill_between(z_vals, low_0226, high_0226, facecolor='purple', edgecolor='pink', label=r'gomp 2', alpha=0.2)
+ax1.fill_between(z_vals, low_SRFullDW, high_SRFullDW, facecolor='green', edgecolor='green', label=r'G + SRFull + DW', alpha=0.2)
+ax1.fill_between(z_vals, low_SRFullDWLF, high_SRFullDWLF, facecolor='lightgreen', edgecolor='green', label=r'G + SRFull + DW + LF', alpha=0.2)
+#ax1.fill_between(z_vals, low_0226, high_0226, facecolor='purple', edgecolor='pink', label=r'gomp 2', alpha=0.2)
 #ax1.set_xlabel(r'$z$', fontsize=14)
 ax1.set_ylabel(r'$\tau$', fontsize=14)
 #ax1.set_xlim(2,15)
@@ -85,8 +87,9 @@ ax1.set_ylim(0.0301, 0.065)
 #ax1.set_ylim(0.0301, 0.065)
 ax1.legend(loc='lower right')
 ax1.plot(1+z_vals, tau_tanh0_z, '-', linewidth=3, color='darkblue', label='Planck PR3')
-ax1.plot(1+z_vals, tau_gomp1_z, '--', linewidth=3, color='green', label='gomp 1')
-ax1.plot(1+z_vals, tau_gomp2_z, ':', linewidth=3, color='purple', label='gomp 2')
+ax1.plot(1+z_vals, tau_SRFullDW_z, '--', linewidth=3, color='green', label='G + SRFull + DW')
+ax1.plot(1+z_vals, tau_SRFullDWLF_z, '--', linewidth=3, color='lightgreen', label='G + SRFull + DW + LF')
+#ax1.plot(1+z_vals, tau_gomp2_z, ':', linewidth=3, color='purple', label='gomp 2')
 
 
 
