@@ -8,7 +8,7 @@
 To establish the universality of our proposed Gompertz model for the
 neutral hydrogen reionization and its relationship with the cosmological
 parameters, we conducted 128 \texttt{21cmFASTv3} simulations to generate
-the corresponding $x_\HI(z; \vtheta)$ profiles.
+the corresponding $x_\HI(z; \vtheta)$ profiles. 
 Our parameter space include $\vtheta = \{\sigma_8, \ns, h, \Omegab,
 \Omegam, \zetaUV\}$, comprising five cosmological and one astrophysical
 parameters.
@@ -25,9 +25,12 @@ quasi-uniformly in the $\vtheta$-space, within the following ranges:
 h &\in (0.61, 0.73), \nonumber\\
 \Omegab &\in (0.04, 0.06), &\quad
 \Omegam &\in (0.24, 0.40), &\quad
-\zetaUV &\in (15, 30).
+\zetaUV &\in (20, 35).
 \end{alignat}
 %
+Most of the volume in a 6D sphere lies on its surface, thus we add 128
+simulations in the \emph{core} to reduce the theoretical error from the symbolic 
+regression. The core is defined within the 5$\sigma$ range of Ref.\cite{Planck2020a}. 
 Their 1D and 2D projections in \Cref{fig:sobol} illustrate the sample
 uniformity in parameter space.
 Our \texttt{21cmFAST} simulations have a 300 comoving Mpc box size and
@@ -125,7 +128,7 @@ These choices are also the default values used by \texttt{CLASS}.
 \centering
 \includegraphics[width=0.6\linewidth]{figs/shape_6.pdf}
 \caption{\textbf{Universal shape of $x_\HI$.}
-\emph{(Top)} 128 simulated $x_\HI$ timelines (thin light gray lines)
+\emph{(Top)} 256 simulated $x_\HI$ timelines (thin light gray lines)
 exhibit universality, after power-law transformations $\ar =
 (a/\ap)^\tilt$.
 The blue curves in all panels show our fitted analytic shape model, a
@@ -195,7 +198,7 @@ this log-log plot, and every model that touches the convex hull is more
 economic -- in the sense of accuracy gain at cost of complexity -- than
 the nearby models above the segments.
 As an example, here we show the results of $\ln\ap(\vtheta)$, where the
-complexity 11 point gives \cref{eq:SR}.}
+complexity 22 point gives \cref{eq:SR}.}
 \label{fig:pareto}
 \end{figure}
 
