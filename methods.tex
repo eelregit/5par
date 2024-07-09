@@ -28,20 +28,22 @@ h &\in (0.61, 0.73), \nonumber\\
 \zetaUV &\in (20, 35).
 \end{alignat}
 %
+Their 1D and 2D projections in \Cref{fig:sobol} illustrate the sample
+uniformity in parameter space.
+
 Most of the volume in a 6D sphere lies on its surface, thus we add 128
 simulations in the \emph{core} to reduce the theoretical error from the symbolic 
 regression. The core is defined within the 5$\sigma$ range of Ref.\cite{Planck2020a}. 
-Their 1D and 2D projections in \Cref{fig:sobol} illustrate the sample
-uniformity in parameter space.
+
 Our \texttt{21cmFAST} simulations have a 300 comoving Mpc box size and
 $768^3$ ($256^3$) cells for the matter (HI) field.
 We maintain most options in their default values and extract the
 neutral hydrogen fraction using \texttt{lightcone.global\_xH}.
 
-\begin{figure}[tb]
+\begin{figure}[tb] 
 \centering
 \includegraphics[width=25em]{figs/sobol128.pdf}
-\caption{\textbf{Sobol sampling of our $x_\HI$ profiles}, in 6D
+\caption{\textbf{Sobol sampling of our $x_\HI$ edge profiles}, in 6D
 parameter space of $\sigma_8$, $\ns$, $h$, $\Omegab$, $\Omegam$, and
 $\zetaUV$,
 Each point in the lower triangular panels corresponds to the 2D
@@ -60,11 +62,7 @@ a constant value in each simulation.
 Note that this choice was made for simplicity, and a more realistic
 assumption could be that $\zetaUV$ is a function of halo mass
 \cite{Park2019} or redshift.
-However, our findings suggest that $\zetaUV$ plays a minor role compared
-to the cosmological parameters.
-In fact, the best performing symbolic regression expressions (see
-\nameref{ssec:pysr} for the selection of best models) do not use
-$\zetaUV$.
+
 
 
 \subsection*{Helium reionization}
@@ -165,7 +163,7 @@ $x_\HI$ timeline.
 We compose the Gompertz function $\gomp$, defined in \cref{eq:uni}, with
 a low-degree polynomial $P_m$, where $m = 1, 3, 5, 7$ progressively.
 We fit the composed shape to minimize the mean squared error (MSE) in
-128 $x_\HI$'s and at 92 time points in each, and find the objective
+256 $x_\HI$'s and at 127 time points in each, and find the objective
 value improve with $m$ but only marginally from $P_5$ to $P_7$.
 Therefore, our final shape model is a composition of $\gomp$ and $P_5$,
 (see the lower panel of \Cref{fig:shape}), and has 6 parameters to fit.
@@ -174,9 +172,9 @@ As for the transformation parameters, as in the PDF approach, we use an
 affine transformation $\ln\ar = \tilt (\ln a - \ln\ap)$, or equivalently
 a power law in \cref{eq:map}.
 Because each $x_\HI$ has its own parameters of $\ap$ and $\tilt$, we
-have in total $262 = 6 + 2 \times 128$ parameters to determine in the
+have in total $518 = 6 + 2 \times 256$ parameters to determine in the
 joint fit.
-\Cref{fig:shape} shows all 128 $x_\HI$ timelines and their universality
+\Cref{fig:shape} shows all 256 $x_\HI$ timelines and their universality
 after transformations.
 We can then use the fitted $\ap$ and $\tilt$ as the target for symbolic
 regression, to model their cosmological dependences on the other
@@ -198,7 +196,7 @@ this log-log plot, and every model that touches the convex hull is more
 economic -- in the sense of accuracy gain at cost of complexity -- than
 the nearby models above the segments.
 As an example, here we show the results of $\ln\ap(\vtheta)$, where the
-complexity 22 point gives \cref{eq:SR}.}
+complexity 22 point gives \cref{eq:SR_a}.}
 \label{fig:pareto}
 \end{figure}
 
@@ -244,20 +242,20 @@ favorably in power-law trade-offs of the form
 All such expressions lie on the lower convex hull of the Pareto front,
 as illustrated in \Cref{fig:pareto}.
 
-For the pivot $\ln\ap$, we find complexity 11 is enough for the MSE loss
-to reach $10^{-4}$ (sub-percent level error on average), so there's no
-need to use expressions more complex that that.
-However, for the tilt $\tilt$, complexity 1, i.e.\ a constant, fit with
-a loss $\approx 0.1$ ($4\%$ error on average), while higher complexities
+For the pivot $\ln\ap$, we find complexity 22 is enough for the MSE loss
+to reach $1.6 \times 10^{-5}$ (lower than sub-percent level error on average), 
+so there is no need to use expressions more complex that that.
+For the tilt $\tilt$, complexity 25, corresponds to a loss $\approx 1.2\times10^{-3}$
+($\sim 0.03\%$ error on average) \paulo{Update numbers}, while higher complexities
 can help but very slowly.
 Therefore, based on the economic heuristic, we choose expressions of
-complexity 11 and 1, for $\ln\ap$ and $\tilt$, respectively.
+complexity 22 and 25, for $\ln\ap$ and $\tilt$, respectively.
 
-This preference for constant tilt could be a consequence of the
+Our current selection for tilt and pivot could be a consequence of the
 astrophysical assumptions of reionization in \texttt{21cmFAST}.
 A more complex simulation, such as one involving radiative transfer or
-different X-ray preheating \cite{Montero2024}, might reveal a different
-tilt.
+different X-ray preheating \cite{Montero2024}, might reveal a different 
+mapping between $x_\HI$ profiles and cosmology.
 
 \begin{landscape}
 \begin{table}[t]
@@ -364,17 +362,18 @@ Now we can test this on the other half of our $x_\HI$ sample and get a
 validation loss of $1.4 \times 10^{-4}$\paulo{update}, only slightly larger than the
 training loss implying we are safe from overfitting.
 
-Unsurprisingly, \cref{eq:SRHalf_a} recovers the cosmological trends
-present in \cref{eq:SR_a}.
-Specifically, increasing $\ns$, $\Omegam$, and $\sigma_8$ leads to an
-earlier reionization scenario, while a higher value of $\Omegab$
-slightly delays reionization.
-Furthermore, the impact of the Hubble constant is once again linked to
-the matter density, albeit not in the same manner as in
-\cref{eq:SR_a}.
-This is likely evidence that the role of $h$ is limited, and
-\texttt{PySR} considers its influence in conjunction with $\Omegam$
-without increasing the complexity of the analytic expression.
+Unsurprisingly, \cref{eq:SRHalf_a,eq:SRHalf_b} recover the cosmological trends
+discovered with SRFull. Specifically, increasing $\zetaUV$, $\ns$, $\Omegam$, 
+and $\sigma_8$ primarily leads to an earlier reionization scenario, 
+while a higher value of $\Omegab$ delays reionization. Besides, the ratio of
+matter densities appears in the pivot expression once again. Among the
+discrepancies, we note that the role of $h$ generally shows the opposite
+trend in $\alpha$. Furthermore, \cref{eq:SRHalf_b} does not include $\ns$
+nor $\sigma_8$ because of our choice of complexity for SRHalf, which 
+although less convoluted also hosts a larger loss than SRFull. Nevertheless,
+the two models have close enough mean squared errors to reproduce the 
+simulated data.
+
 
 Replacing \cref{eq:SR_a,eq:SR_b} with \cref{eq:SRHalf_a,eq:SRHalf_b}, we rerun
 the analysis following the same approach, and summarize the results using 
