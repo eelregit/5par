@@ -147,9 +147,13 @@ Chain (MCMC).}
 \label{fig:big}
 \end{figure}
 
+
 To achieve our goal outlined in \cref{eq:premise}, we construct a
-universal shape for $x_\HI$ using 128 Sobol samples of \texttt{21cmFAST} simulations
-(see \nameref{ssec:sims} and \Cref{fig:sobol} in the Extended Data).
+universal shape for $x_\HI$ using 256 Sobol samples of \texttt{21cmFAST} simulations. 
+The simulations account for variations in the ionization efficiency ($\zetaUV$), 
+which modulates the timing of reionization by regulating the abundance
+of photons that escape into the IGM 
+(see \nameref{ssec:sims} and \Cref{fig:sobol} in the Extended Data). 
 All $x_\HI(a)$ profiles share this shape, with differences between
 scenarios being mere translations and rescalings.
 Reionization causes $x_\HI$ to reduce from near 1 to effectively 0 via a
@@ -240,7 +244,7 @@ results \cite{Planck2020a}, with biases of $\lessapprox 0.4 \%$.
 Gompertz-polynomial-shaped reionization can reproduce standard CMB analyses.
 Now, we move to establish the connection
 between the universal shape for $x_\HI$ and the rescaling of a given
-reionization scenario. We refer to this model as gomp 1.
+reionization scenario. We refer to this model as SRFull.
 This rescaling is naturally a function of cosmology.
 For example, a larger density of matter $\Omegam$ results in deeper
 potential wells, accelerating structure formation and increasing the
@@ -260,37 +264,35 @@ cosmology
 %
 \begin{align}
 \label{eq:SR_a}
-\ln\ap(\vtheta) &= (0.04835 - \sigma_8) (\ns + 0.3558 \ln[0.1123 \zetaUV])  - \Omegam - \ns + \left(\frac{\Omegab}{\Omegam}\right)^h, \\
+\ln\ap(\vtheta) &= \left(\frac{\Omegab}{\Omegam}\right)^h + (0.04835 - \sigma_8) (\ns + 0.3558 \ln[0.1123 \zetaUV])  - \Omegam - \ns, \\
 \label{eq:SR_b}
-\beta(\vtheta) &=  \left( \frac{0.005660^{\Omegam}}{0.6015} - \ln[\zetaUV - (\Omegam + \ns h)^{15.05} ]+ h \right) \ln{\Omegab} + \frac{h}{\sigma_8} ,
-\end{align}
-which, interestingly, is independent of the astrophysical parameter $\zetaUV$
-(see \nameref{ssec:sims} in Extended data). \paulo{Need rewording.}
-This ionization efficiency modulates the timing of reionization in our simulations
-by regulating the abundance of photons that escape into the IGM.
-Its absence in \cref{eq:SR} suggests that it either plays a minor role
-or its contribution can be mimicked by the cosmological parameters.
+\beta(\vtheta) &=  \left( \frac{0.005660^{\Omegam}}{0.6015} - \ln[\zetaUV - (\Omegam + \ns h)^{15.05} ]+ h \right) \ln{\Omegab} + \frac{h}{\sigma_8},
+\end{align} 
 
-\cref{eq:map,eq:SR} imply that higher values of $\ns$ hasten
-reionization by boosting power on small scales, fostering a greater
-abundance of ionizing sources and earlier completion \cite{Montero2021}.
-Note that our \texttt{21cmFAST} simulations assume that faint galaxies
-are the primary drivers of reionization.
-Similarly, larger $\Omegam$ and $\sigma_8$ primarily expedite
-reionization by enhancing structure formation.
-Surprisingly, \cref{eq:SR} suggests that higher $\Omegab$ delays
+\cref{eq:map,eq:SR_a,eq:SR_b} imply that higher values of $\Omegam$, $\sigma_8$, 
+and $\zetaUV$ hasten reionization by enhancing structure
+formation or by increasing the abundance of ionizing photons. 
+Similarly, larger $\ns$ primarily expedite reionization by boosting
+power on small scales, fostering a greater abundance of ionizing 
+sources and earlier completion \cite{Montero2021}. Note that our 
+\texttt{21cmFAST} simulations assume that faint galaxies
+are the primary drivers of reionization. Note that the role of $\sigma_8$ 
+and $\ns$ in $\beta$ reduces the impact of these trends. 
+Surprisingly, \cref{eq:SR_a,eq:SR_b} suggests that higher $\Omegab$ delays
 reionization, likely due to the increased abundance of HI in the
-intergalactic medium requiring more ionizing photons.
+intergalactic medium requiring more ionizing photons. 
+The ratio $\Omegab/\Omegam$ in $\alpha$ is consistent
+with this trend. Also, increasing $h$ slightly delays reionization.
 
 We note that within the prior range of our \texttt{21cmFAST} simulations
 (see \nameref{ssec:sims}) and their corresponding astrophysics of
 reionization, the mapping derived from SR is not unique.
-Additional details and results using an alternative mapping -- gomp 2 -- are
+Additional details and results using an alternative mapping -- SRHalf -- are
 presented in \nameref{ssec:SRHalf} of the Extended Data.
 Nonetheless, our results are robust and independent of the choice of
 mapping.
 
-We implement \cref{eq:SR} in our Gompertz \texttt{CLASS}, which given
+We implement \cref{eq:SR_a,eq:SR_b} in our Gompertz \texttt{CLASS}, which given
 the cosmological parameters determines the pivot value and consequently
 the reionization history, $\tau_\reio$, and corresponding CMB angular
 power spectra.

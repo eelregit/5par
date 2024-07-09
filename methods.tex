@@ -357,26 +357,28 @@ For the pivot and tilt, we obtain
 \beta(\vtheta) &= \left( \frac{\zetaUV - \Omegam^{-1.583}}{\Omegab h }\right)^{0.3163}, \label{eq:SRHalf_b}
 \end{align}
 %
-with a training loss of $1.1 \times 10^{-5}$ and $3.7 \times 10^{-3}$, respectively.
+with a training loss of $1.1 \times 10^{-5}$ and $3.7 \times 10^{-3}$, respectively. 
+Overall, we obtain a square-rooted relative mean squared error of 0.9\% when 
+reproducing the simulated data (edge + core) with SRHalf. 
 Now we can test this on the other half of our $x_\HI$ sample and get a
 validation loss of $1.4 \times 10^{-4}$\paulo{update}, only slightly larger than the
 training loss implying we are safe from overfitting.
 
 Unsurprisingly, \cref{eq:SRHalf_a} recovers the cosmological trends
-present in \cref{eq:SR}.
+present in \cref{eq:SR_a}.
 Specifically, increasing $\ns$, $\Omegam$, and $\sigma_8$ leads to an
 earlier reionization scenario, while a higher value of $\Omegab$
 slightly delays reionization.
 Furthermore, the impact of the Hubble constant is once again linked to
 the matter density, albeit not in the same manner as in
-\cref{eq:SR}.
+\cref{eq:SR_a}.
 This is likely evidence that the role of $h$ is limited, and
 \texttt{PySR} considers its influence in conjunction with $\Omegam$
 without increasing the complexity of the analytic expression.
 
-Replacing \cref{eq:SR} with \cref{eq:SRHalf_a,eq:SRHalf_b}, we rerun the analysis
-following the same approach, and summarize the results using CMB + DW in
-\Cref{tab:uber-table}.
+Replacing \cref{eq:SR_a,eq:SR_b} with \cref{eq:SRHalf_a,eq:SRHalf_b}, we rerun
+the analysis following the same approach, and summarize the results using 
+CMB + DW in \Cref{tab:uber-table}.
 Comparing these findings to our previous results, we observe strikingly
 similar values for all cosmological parameters, albeit with smaller
 deviations from the Planck results.
@@ -390,7 +392,7 @@ mappings perform robustly and are not biasing the parameter inferences.
 The increasing number of direct constraints on the reionization timeline
 provides significant additional constraining power to CMB analyses. Figure
 \Cref{fig:history} includes upper limits from dark pixel constraints\cite{Jin2023} 
-(high-$z$ quasars),a lower bound from the Ly$\alpha$ emission 
+(high-$z$ quasars), a lower bound from the Ly$\alpha$ emission 
 fraction\cite{Mesinger2015} (high-$z$ galaxies), and an upper limit from the
 clustering of Ly$\alpha$ emitters\cite{Sobacchi2015} (high-$z$ galaxies).
 Moreover, it presents constraints by Ly$\alpha$ equivalent width of Ly$\alpha$ 
@@ -402,10 +404,10 @@ through the evolution of the galaxy Ly$\alpha$ luminosity function\cite{Morales2
 In this work, we supplement Planck CMB data with quasar damping wings (DW) 
 and luminosity function (LF) constraints on $x_\HI (z)$ (see \Cref{fig:history}).
 
-For inference, DW data includes DW constrains, while DW + LF combines
-these with LF values. We exclude the highest redshift LF constraint due to
-its sensitivity to sampling and interpolation effects, thus its likely to change
-with more high-$z$ data. 
+For  inference purpose (\nameref{ssec:fits}), DW data includes DW constrains, 
+while DW + LF combinesthese with LF values. We exclude the highest redshift
+LF constraint due to its sensitivity to sampling and interpolation effects, thus its 
+likely to change with more high-$z$ data. 
 
 
 \subsection*{MCMC inference}
