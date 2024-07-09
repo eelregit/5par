@@ -258,12 +258,14 @@ Data for our definition of \emph{best}).
 Using \texttt{PySR} we derived the following pivot as a function of
 cosmology
 %
-\begin{equation}
-\label{eq:SR}
-\ln\ap(\vtheta) = (h^{\Omegam} + \sigma_8) (\Omegab - \ns - \Omegam),
-\end{equation}
+\begin{align}
+\label{eq:SR_a}
+\ln\ap(\vtheta) &= (0.04835 - \sigma_8) (\ns + 0.3558 \ln[0.1123 \zetaUV])  - \Omegam - \ns + \left(\frac{\Omegab}{\Omegam}\right)^h, \\
+\label{eq:SR_b}
+\beta(\vtheta) &=  \left( \frac{0.005660^{\Omegam}}{0.6015} - \ln[\zetaUV - (\Omegam + \ns h)^{15.05} ]+ h \right) \ln{\Omegab} + \frac{h}{\sigma_8} ,
+\end{align}
 which, interestingly, is independent of the astrophysical parameter $\zetaUV$
-(see \nameref{ssec:sims} in Extended data).
+(see \nameref{ssec:sims} in Extended data). \paulo{Need rewording.}
 This ionization efficiency modulates the timing of reionization in our simulations
 by regulating the abundance of photons that escape into the IGM.
 Its absence in \cref{eq:SR} suggests that it either plays a minor role

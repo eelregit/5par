@@ -339,7 +339,7 @@ our gomp 0 ($\tanh$ 0) model.}
 
 
 \subsection*{Alternative mapping}
-\label{ssec:0226}
+\label{ssec:SRHalf}
 
 The mapping between neutral hydrogen profiles and cosmology is not
 unique.
@@ -349,22 +349,20 @@ for training, i.e.\ overfitting.
 
 To investigate the impact of overfitting, we train an alternative
 mapping of reionization with cosmology using only half of the
-\texttt{21cmFAST} $x_\HI$ profiles, which we refer as gomp 2.
-For the tilt, once again we find a constant $\tilt = 8.331$, remarkably
-close to the value obtained using the full simulated data (8.290).
-And for the pivot, we obtain
+\texttt{21cmFAST} $x_\HI$ profiles, which we refer as SRHalf.
+For the pivot and tilt, we obtain
 %
-\begin{equation}
-\label{eq:SR0226}
-\ln\ap(\vtheta) = (1.039 + \sigma_8) (\Omegab - \Omegam h - \ns),
-\end{equation}
+\begin{align}
+\ln\ap(\vtheta) &= \left(\frac{\Omegab}{\Omegam}\right)^{\Omegam} - \ln^{0.5271}{\left(h(\zetaUV + \Omegab^{-0.4982})^{\sigma_8} \right) - \ns^{1.834}}, \label{eq:SRHalf_a} \\
+\beta(\vtheta) &= \left( \frac{\zetaUV - \Omegam^{-1.583}}{\Omegab h }\right)^{0.3163}, \label{eq:SRHalf_b}
+\end{align}
 %
-with a training loss of $1.2 \times 10^{-4}$.
+with a training loss of $1.1 \times 10^{-5}$ and $3.7 \times 10^{-3}$, respectively.
 Now we can test this on the other half of our $x_\HI$ sample and get a
-validation loss of $1.4 \times 10^{-4}$, only slightly larger than the
+validation loss of $1.4 \times 10^{-4}$\paulo{update}, only slightly larger than the
 training loss implying we are safe from overfitting.
 
-Unsurprisingly, \cref{eq:SR0226} recovers the cosmological trends
+Unsurprisingly, \cref{eq:SRHalf_a} recovers the cosmological trends
 present in \cref{eq:SR}.
 Specifically, increasing $\ns$, $\Omegam$, and $\sigma_8$ leads to an
 earlier reionization scenario, while a higher value of $\Omegab$
@@ -376,8 +374,8 @@ This is likely evidence that the role of $h$ is limited, and
 \texttt{PySR} considers its influence in conjunction with $\Omegam$
 without increasing the complexity of the analytic expression.
 
-Replacing \cref{eq:SR} with \cref{eq:SR0226}, we rerun the analysis
-following the same approach, and summarize the results in
+Replacing \cref{eq:SR} with \cref{eq:SRHalf_a,eq:SRHalf_b}, we rerun the analysis
+following the same approach, and summarize the results using CMB + DW in
 \Cref{tab:uber-table}.
 Comparing these findings to our previous results, we observe strikingly
 similar values for all cosmological parameters, albeit with smaller
