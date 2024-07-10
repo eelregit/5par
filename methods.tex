@@ -261,22 +261,23 @@ mapping between $x_\HI$ profiles and cosmology.
 \begin{table}[t]
 %\begin{sidewaystable}
 \centering
-\caption{\textbf{Parameter constraints from Planck CMB data.}
+\caption{\textbf{Parameter constraints from Planck CMB and DW data.}
 Summary table of the constraints for representative parameters of the
 universal shape (Gompertz) and $\tanh$ reionization models.
 The constraints use CMB `TTTEEE' + lensing information.
 The results from Planck analysis \cite{Planck2020a} are included for
 comparison.
-The validation models are gomp 0 and $\tanh$ 0, gomp 0 does not include
+The validation models are gomp and $\tanh$, gomp does not include
 the cosmological information present in the timeline of reionization.
-In contrast, gomp 1, and the alternative mapping gomp 2, both include
+In contrast, gomp + SRFull, and the alternative mapping gomp + SRHalf, both include
 the additional cosmological dependence in the reionization timeline.
 The shaded cells highlight the parameters that are sampled over by MCMC
 for the different models.
 The numbers in parentheses give the marginalized 1$\sigma$ uncertainty
 in the last two significant digits.
 We highlight the best constraints in boldface, with improvements by
-factors of 12 and 2.5 on $\tau_\reio$ and $A_s$, respectively.
+factors of 5 and 2.3 on $\tau_\reio$ and $A_s$, respectively. We also 
+highlight our extremely competitive $\zetaUV$ constraint. 
 The age of the Universe and $H_0$ are in unit of Gyr and km/s/Mpc,
 respectively, and $S_8 \equiv \sigma_8 \sqrt{\Omegam/0.3}$ as usual.}
 \makebox[\textwidth][c]{\footnotesize
@@ -313,12 +314,12 @@ $\zetaUV$ & & & &  \sampled $\boldsymbol{26.9^{(2.1)}_{(2.5)}}$ & \sampled $\bol
 \centering
 \includegraphics[width=\linewidth]{figs/gomp1dw_tanh_triangle_kill_full.pdf}
 \caption{\textbf{Analysis of CMB data treating $\tau_\reio$ as a derived
-parameter using \cref{eq:uni,eq:poly,eq:map,eq:SR} vs.\ sampling it with
-the conventional $\tanh$ model.} Here gomp 1 combines our Gompertz universal
+parameter using \cref{eq:uni,eq:poly,eq:map,eq:SR_a,eq:SR_b} vs.\ sampling it with
+the conventional $\tanh$ model.} Here gomp + SRFull combines our Gompertz universal
 shape with the rescaling pivot and tilt obtained via symbolic regression. Note that for
-gomp 1 we do not sample over $z_\re$ since \cref{eq:uni} does not depend on it.
+gomp + SRFull we do not sample over $z_\re$ since \cref{eq:uni} does not depend on it.
 The green (blue) contours correspond to the constraints obtained with
-our Gompertz universal shape ($\tanh$ 1 model).}
+our Gompertz universal shape ($\tanh$ model).}
 \label{fig:unleashed_gomp}
 \end{figure}
 
@@ -327,11 +328,11 @@ our Gompertz universal shape ($\tanh$ 1 model).}
 \includegraphics[width=\linewidth]{figs/gomp_tanh_triangle_tau.pdf}
 \caption{\textbf{Validation of our universal shape for $x_\HI$ in \cref{eq:uni,eq:poly} vs.\ the
 conventional $\tanh$ model using CMB data with sampling over $\tau_\reio$.}
-Note that we have not \emph{eliminated} $\tau_\reio$ from the analysis
-yet. Here, we use the standard choice of sampling
+Note that we have not use our mapping from cosmology to $\tau_\reio$. 
+Here, we use the standard choice of sampling
 over optical depth and obtain the corresponding reionization history via bisection.
 The green (blue) contours correspond to the constraints obtained with
-our gomp 0 ($\tanh$ 0) model.}
+our gomp ($\tanh$) model.}
 \label{fig:tg}
 \end{figure}
 
@@ -398,14 +399,11 @@ quasar damping wings\cite{Greig2022, Greig2024, Spina2024, Durovcikova2024}
 (high-$z$ quasars). Furthermore, it includes the indirect constraint on $x_\HI$ 
 through the evolution of the galaxy Ly$\alpha$ luminosity function\cite{Morales2021}.
 
-In this work, we supplement Planck CMB data with quasar damping wings (DW) 
-and luminosity function (LF) constraints on $x_\HI (z)$ (see green pentagons
-and violet hexagons in \Cref{fig:history}).
-
-For  inference purpose (\nameref{ssec:fits}), the DW label includes DW constrains, 
-while DW + LF combines these with LF values. We exclude the highest redshift
-LF constraint due to its sensitivity to sampling and interpolation effects, thus its 
-likely to change with more high-$z$ data. \paulo{revisit later for LF rephrase.}
+In this work, we supplement Planck CMB data with constraints on $x_\HI$ 
+by quasar damping wings (DW) (see green pentagons in \Cref{fig:history}). 
+Note that this decision reflects our expectation regarding the robustness of 
+the constraints. An interesting future exercise would be to include luminosity 
+function constraints when jointly with DW as more data becomes available. 
 
 
 \subsection*{MCMC inference}
@@ -415,8 +413,10 @@ summarizes the results obtained by performing MCMC
 Bayesian inference with \texttt{Cobaya} for the models considered
 throughout this work.
 We also include the Planck results \cite{Planck2020a} for reference.
-In total, we run three Gompertz reionization and two $\tanh$
-reionization models. When considering only CMB data, we sample
+In total, we run one Gompertz and one $\tanh$ reionization models with
+CMB data and two extra Gompertz models using SR and astrophysical data
+jointly with CMB to map reionization to cosmological parameters. 
+When considering only CMB data, we sample
 the typical 6 cosmological parameters (see shaded parameters in 
 \Cref{tab:uber-table}), sampling $\tau_\reio$ and using bisection to obtain
 the reionization timeline. For $\tanh$, the bisection varies $z_\re$, 
@@ -431,9 +431,9 @@ is calculated in \texttt{Cobaya} based on the used astrophysical dataset.
 For Gompertz, we do not sample any reionization parameter. Instead, we 
 use SRFull or SRHalf to map cosmology to reionization timeline and 
 include the additional likelihood component. Perhaps unsurprisingly, 
-$\tanh$ reionization does a poor job of fitting the data, with a 
-$\chi^2$ larger than Gompertz's by an order of magnitude,
-hence we do not show the $\tanh$ results in
+$\tanh$ reionization does a poor job of fitting the astrophysical data, 
+with a $\chi^2$ larger than Gompertz's by an order of magnitude,
+hence we do not show the $\tanh$ + CMB + DW results in
  \Cref{tab:uber-table}.
 
 There is an apparent discrepancy between the different models in
@@ -446,22 +446,24 @@ decoupling, with decoupling time given by the maximum of the visibility
 function, i.e.\ the standard choice for CLASS.
 In contrast, the Planck collaboration reports $100\theta_\mathrm{MC}$,
 which is given by Eq.~(6) in \cite{Planck2014}, and corresponds to the
-standard choice in \texttt{CosmoMC}\cite{Lewis2002}.
+standard choice in \texttt{CosmoMC}\cite{Lewis2002}. Unsurprisingly,
+different reionization scenarios give similar values of $100\theta_\mathrm{s}$.
+
 
 Although \Cref{tab:uber-table} does not display an error in the midpoint of
-reionization in gomp + SRFull + CMB + DW, gomp + SRHalf + CMB + DW, 
-nor in gomp + SRFull + CMB + DW + LF runs, it is important to note that 
-an error does exist. Unfortunately, it cannot be automatically computed with 
-\texttt{Cobaya} because SRFull and SRHalf models do not sample over
-reionization parameters. Therefore, $z_\re$ has no meaning in our Gompertz
-\texttt{CLASS}\footnote{This oversight can be corrected; however, it would 
-require re-running the chains.} for models that take advantage 
-of \cref{eq:premise}.
+reionization in gomp + SRFull + CMB + DW nor gomp + SRHalf + CMB + DW runs, 
+it is important to note that an error does exist. Unfortunately, it cannot be 
+automatically computed with \texttt{Cobaya} because SRFull and SRHalf
+models do not sample over reionization parameters. Therefore, $z_\re$ 
+has no meaning in our Gompertz \texttt{CLASS}\footnote{This oversight
+can be corrected; however, it would require re-running the chains.}
+for models that take advantage of \cref{eq:premise}.
 
-\paulo{revisit when table is completed} Remarkably, the inferred value of $S_8$ remains consistent across all reionization
-models, even when $\sigma_8$ and $\Omegam$ vary between models. This trend
-suggests that different reionization models neither alleviate nor exacerbate the $S_8$
-tension. While this observation holds for the Planck PR3 data, we anticipate that
+Remarkably, the inferred value of $S_8$ remains consistent across all reionization
+models, even when $\sigma_8$ and $\Omegam$ show small variations between
+models. This trend suggests that different reionization models neither alleviate 
+nor exacerbate the $S_8$ tension. While this observation holds for the Planck
+PR3 data and for CMB + DW, we anticipate that
 incorporating low-redshift Baryon Acoustic Oscillation (BAO) data may affect this
 conclusion. Future work will explore the implications of Gompertz reionization
 for the joint analysis of CMB and low-redshift data.
