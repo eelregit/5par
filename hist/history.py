@@ -48,6 +48,8 @@ def tanH_model(z_re,z):
 
 z_vals, tau_SRFullDW_z = np.loadtxt('gomp1_DW_tau_z.txt', unpack=True)
 z_vals, tau_SRFullDWLF_z = np.loadtxt('gomp1_DWLF_tau_z.txt', unpack=True)
+
+z_vals, tau_SRHalfDW_z = np.loadtxt('gomp2_DW_tau_z.txt', unpack=True)
 #z_vals, tau_gomp2_z = np.loadtxt('gomp2_tau_z.txt', unpack=True)
 z_vals, tau_tanh0_z = np.loadtxt('tanh0_tau_z.txt', unpack=True)
 
@@ -57,6 +59,9 @@ planck_high = 0.061 * np.ones(len(z_vals))
 
 low_SRFullDW = (0.0526 - 0.0015) * np.ones(len(z_vals))
 high_SRFullDW = (0.0526 + 0.0015) * np.ones(len(z_vals))
+
+low_SRHalfDW = (0.0527 - 0.0016) * np.ones(len(z_vals))
+high_SRHalfDW = (0.0527 + 0.0014) * np.ones(len(z_vals))
 
 low_SRFullDWLF = (0.05720 - 0.00077) * np.ones(len(z_vals))
 high_SRFullDWLF = (0.05720 + 0.00088) * np.ones(len(z_vals))
@@ -79,6 +84,8 @@ ax1 = fig.add_subplot(gs[0], sharex=ax2)
 ax1.fill_between(z_vals, planck_low, planck_high, facecolor='darkblue', edgecolor='darkblue', label=r'Planck PR3', alpha=0.1)
 ax1.fill_between(z_vals, low_SRFullDW, high_SRFullDW, facecolor='green', edgecolor='green', label=r'G + SRFull + DW', alpha=0.2)
 ax1.fill_between(z_vals, low_SRFullDWLF, high_SRFullDWLF, facecolor='lightgreen', edgecolor='green', label=r'G + SRFull + DW + LF', alpha=0.2)
+ax1.fill_between(z_vals, low_SRHalfDW, high_SRHalfDW, facecolor='purple', edgecolor='purple', label=r'G + SRHalf + DW', alpha=0.2)
+
 #ax1.fill_between(z_vals, low_0226, high_0226, facecolor='purple', edgecolor='pink', label=r'gomp 2', alpha=0.2)
 #ax1.set_xlabel(r'$z$', fontsize=14)
 ax1.set_ylabel(r'$\tau$', fontsize=14)
@@ -88,14 +95,25 @@ ax1.set_ylim(0.0301, 0.065)
 ax1.legend(loc='lower right')
 ax1.plot(1+z_vals, tau_tanh0_z, '-', linewidth=3, color='darkblue', label='Planck PR3')
 ax1.plot(1+z_vals, tau_SRFullDW_z, '--', linewidth=3, color='green', label='G + SRFull + DW')
-ax1.plot(1+z_vals, tau_SRFullDWLF_z, '--', linewidth=3, color='lightgreen', label='G + SRFull + DW + LF')
+ax1.plot(1+z_vals, tau_SRHalfDW_z, ':', linewidth=3, color='purple', label='G + SRHalf + DW')
+ax1.plot(1+z_vals, tau_SRFullDWLF_z, '-.', linewidth=3, color='lightgreen', label='G + SRFull + DW + LF')
 #ax1.plot(1+z_vals, tau_gomp2_z, ':', linewidth=3, color='purple', label='gomp 2')
 
 
 
 # curves for xHI
 ax2.plot(1+z, xHI(z,sigma8=0.8100,ns=0.9636,h=0.6726,Ob=0.02234/0.6726**2,Om=0.3166, zt=26.9, model='SRFull'),  '--', c='green', linewidth=3, label=r'G + SRFull + DW', zorder=7)
-ax2.plot(1+z, xHI(z,sigma8=0.8138,ns=0.9646,h=0.6729,Ob=0.02234/0.6729**2,Om=0.3162, zt=32.8, model='SRFull'),  '--', c='lightgreen', linewidth=3, label=r'G + SRFull + DW + LF', zorder=7)
+ax2.plot(1+z, xHI(z,sigma8=0.8138,ns=0.9646,h=0.6729,Ob=0.02234/0.6729**2,Om=0.3162, zt=32.8, model='SRFull'),  '-.', c='lightgreen', linewidth=3, label=r'G + SRFull + DW + LF', zorder=7)
+ax2.plot(1+z, xHI(z,sigma8=0.8099,ns=0.9637,h=0.6728,Ob=0.02234/0.6728**2,Om=0.3163, zt=27., model='SRHalf'),  ':', c='purple', linewidth=3, label=r'G + SRHalf + DW', zorder=7)
+
+# Let's add some extra tanhs because of current results
+ax2.plot(1+z,(1.0 - tanH_model(7.19, z)),linewidth=3,c='brown',label=r'T + DW',zorder=5)
+ax2.plot(1+z,(1.0 - tanH_model(7.235, z)),linewidth=3,c='red',label=r'T + DW + LF',zorder=5)
+
+# Let's take a look at the ranges
+ax2.fill_between(1+z, (1.0 - tanH_model(7.07, z)), (1.0 - tanH_model(7.34, z)), facecolor='brown', edgecolor='brown', alpha=0.1)
+ax2.fill_between(1+z, (1.0 - tanH_model(7.185, z)), (1.0 - tanH_model(7.293, z)), facecolor='red', edgecolor='red', alpha=0.1)
+
 #ax2.plot(1+z, xHI(z,sigma8=0.8138,ns=0.9646,h=0.6729,Ob=0.02234/0.6729**2,Om=0.3162, zt=35, model='SRFull'),  '--', c='olive', linewidth=3, label=r'G + SRFull + DW + LF', zorder=7)
 
 #ax2.plot(1+z, xHI(z,sigma8=0.8092,ns=0.9634,h=0.6724,Ob=val2,Om=0.3168,model='0226'),  ':', c='purple', linewidth=3, label=r'gomp 2', zorder=8, alpha=0.8)
@@ -214,6 +232,8 @@ plt.savefig('history.pdf')
 # let's use this to also figure out the midpoint
 inter_GSRFullDW = interp1d(xHI(z,sigma8=0.8100,ns=0.9639,h=0.6726,Ob=0.02234/0.6726**2,Om=0.3166, zt=26.9, model='SRFull'),z, kind='linear')
 
+inter_GSRHalfDW = interp1d(xHI(z,sigma8=0.8099,ns=0.9637,h=0.6728,Ob=0.02234/0.6728**2,Om=0.3163, zt=27., model='SRHalf'),z, kind='linear')
+
 inter_GSRFullDWLF = interp1d(xHI(z,sigma8=0.8138,ns=0.9646,h=0.6729,Ob=0.02234/0.6729**2,Om=0.3162, zt=32.8, model='SRFull'),z, kind='linear')
 
 print('#'*5+' G + SRFull + DW '+'#'*5)
@@ -221,6 +241,13 @@ print('Midpoint is ', inter_GSRFullDW(0.5))
 print('Duration -- 0.1 to 0.99 completion -- is ', inter_GSRFullDW(0.1) - inter_GSRFullDW(0.97))
 print('Redshift 1: ', inter_GSRFullDW(0.05))
 print('Redshift 2: ', inter_GSRFullDW(0.95))
+
+print('#'*5+' G + SRHalf + DW '+'#'*5)
+print('Midpoint is ', inter_GSRHalfDW(0.5))
+print('Duration -- 0.1 to 0.99 completion -- is ', inter_GSRHalfDW(0.1) - inter_GSRHalfDW(0.97))
+print('Redshift 1: ', inter_GSRHalfDW(0.05))
+print('Redshift 2: ', inter_GSRHalfDW(0.95))
+
 
 print('#'*5+' G + SRFull + DW + LF'+'#'*5)
 print('Midpoint is ', inter_GSRFullDWLF(0.5))
