@@ -82,9 +82,9 @@ ax2 = fig.add_subplot(gs[1])
 
 ax1 = fig.add_subplot(gs[0], sharex=ax2)
 ax1.fill_between(z_vals, planck_low, planck_high, facecolor='darkblue', edgecolor='darkblue', label=r'Planck PR3', alpha=0.1)
-ax1.fill_between(z_vals, low_SRFullDW, high_SRFullDW, facecolor='green', edgecolor='green', label=r'G + SRFull + DW', alpha=0.2)
-ax1.fill_between(z_vals, low_SRFullDWLF, high_SRFullDWLF, facecolor='lightgreen', edgecolor='green', label=r'G + SRFull + DW + LF', alpha=0.2)
-ax1.fill_between(z_vals, low_SRHalfDW, high_SRHalfDW, facecolor='purple', edgecolor='purple', label=r'G + SRHalf + DW', alpha=0.2)
+ax1.fill_between(z_vals, low_SRFullDW, high_SRFullDW, facecolor='green', edgecolor='green', label=r'gomp + SRFull + DW', alpha=0.2)
+ax1.fill_between(z_vals, low_SRFullDWLF, high_SRFullDWLF, facecolor='lightgreen', edgecolor='green', label=r'gomp + SRFull + DW + LF', alpha=0.2)
+ax1.fill_between(z_vals, low_SRHalfDW, high_SRHalfDW, facecolor='purple', edgecolor='purple', label=r'gomp + SRHalf + DW', alpha=0.2)
 
 #ax1.fill_between(z_vals, low_0226, high_0226, facecolor='purple', edgecolor='pink', label=r'gomp 2', alpha=0.2)
 #ax1.set_xlabel(r'$z$', fontsize=14)
@@ -94,25 +94,26 @@ ax1.set_ylim(0.0301, 0.065)
 #ax1.set_ylim(0.0301, 0.065)
 ax1.legend(loc='lower right')
 ax1.plot(1+z_vals, tau_tanh0_z, '-', linewidth=3, color='darkblue', label='Planck PR3')
-ax1.plot(1+z_vals, tau_SRFullDW_z, '--', linewidth=3, color='green', label='G + SRFull + DW')
-ax1.plot(1+z_vals, tau_SRHalfDW_z, ':', linewidth=3, color='purple', label='G + SRHalf + DW')
-ax1.plot(1+z_vals, tau_SRFullDWLF_z, '-.', linewidth=3, color='lightgreen', label='G + SRFull + DW + LF')
+ax1.plot(1+z_vals, tau_SRFullDW_z, '--', linewidth=3, color='green', label='gomp + SRFull + DW')
+ax1.plot(1+z_vals, tau_SRHalfDW_z, ':', linewidth=3, color='purple', label='gomp + SRHalf + DW')
+ax1.plot(1+z_vals, tau_SRFullDWLF_z, '-.', linewidth=3, color='lightgreen', label='gomp + SRFull + DW + LF')
 #ax1.plot(1+z_vals, tau_gomp2_z, ':', linewidth=3, color='purple', label='gomp 2')
 
 
 
 # curves for xHI
-ax2.plot(1+z, xHI(z,sigma8=0.8100,ns=0.9636,h=0.6726,Ob=0.02234/0.6726**2,Om=0.3166, zt=26.9, model='SRFull'),  '--', c='green', linewidth=3, label=r'G + SRFull + DW', zorder=7)
-ax2.plot(1+z, xHI(z,sigma8=0.8138,ns=0.9646,h=0.6729,Ob=0.02234/0.6729**2,Om=0.3162, zt=32.8, model='SRFull'),  '-.', c='lightgreen', linewidth=3, label=r'G + SRFull + DW + LF', zorder=7)
-ax2.plot(1+z, xHI(z,sigma8=0.8099,ns=0.9637,h=0.6728,Ob=0.02234/0.6728**2,Om=0.3163, zt=27., model='SRHalf'),  ':', c='purple', linewidth=3, label=r'G + SRHalf + DW', zorder=7)
+ax2.plot(1+z, xHI(z,sigma8=0.8100,ns=0.9636,h=0.6726,Ob=0.02234/0.6726**2,Om=0.3166, zt=26.9, model='SRFull'),  '--', c='green', linewidth=3, label=r'gomp + SRFull + DW', zorder=7)
+ax2.plot(1+z, xHI(z,sigma8=0.8138,ns=0.9646,h=0.6729,Ob=0.02234/0.6729**2,Om=0.3162, zt=32.8, model='SRFull'),  '-.', c='lightgreen', linewidth=3, label=r'gomp + SRFull + DW + LF', zorder=7)
+ax2.plot(1+z, xHI(z,sigma8=0.8099,ns=0.9637,h=0.6728,Ob=0.02234/0.6728**2,Om=0.3163, zt=27., model='SRHalf'),  ':', c='purple', linewidth=3, label=r'gomp + SRHalf + DW', zorder=7)
 
 # Let's add some extra tanhs because of current results
-ax2.plot(1+z,(1.0 - tanH_model(7.19, z)),linewidth=3,c='brown',label=r'T + DW',zorder=5)
-ax2.plot(1+z,(1.0 - tanH_model(7.235, z)),linewidth=3,c='red',label=r'T + DW + LF',zorder=5)
+#ax2.plot(1+z,(1.0 - tanH_model(7.19, z)),linewidth=3,c='brown',label=r'tanh + DW',zorder=5)
+#ax2.plot(1+z,(1.0 - tanH_model(7.235, z)),linewidth=3,c='red',label=r'tanh + DW + LF',zorder=5)
+# tanh + astro does a poor job of fit data
 
-# Let's take a look at the ranges
-ax2.fill_between(1+z, (1.0 - tanH_model(7.07, z)), (1.0 - tanH_model(7.34, z)), facecolor='brown', edgecolor='brown', alpha=0.1)
-ax2.fill_between(1+z, (1.0 - tanH_model(7.185, z)), (1.0 - tanH_model(7.293, z)), facecolor='red', edgecolor='red', alpha=0.1)
+# Let's take a look at the ranges, definitely not a great fit to data
+#ax2.fill_between(1+z, (1.0 - tanH_model(7.07, z)), (1.0 - tanH_model(7.34, z)), facecolor='brown', edgecolor='brown', alpha=0.1)
+#ax2.fill_between(1+z, (1.0 - tanH_model(7.185, z)), (1.0 - tanH_model(7.293, z)), facecolor='red', edgecolor='red', alpha=0.1)
 
 #ax2.plot(1+z, xHI(z,sigma8=0.8138,ns=0.9646,h=0.6729,Ob=0.02234/0.6729**2,Om=0.3162, zt=35, model='SRFull'),  '--', c='olive', linewidth=3, label=r'G + SRFull + DW + LF', zorder=7)
 
