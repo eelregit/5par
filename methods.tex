@@ -287,7 +287,7 @@ respectively, and $S_8 \equiv \sigma_8 \sqrt{\Omegam/0.3}$ as usual.}
 \cmidrule(lr){2-4} \cmidrule(lr){5-6} 
 Parameter & Planck PR3\cite{Planck2020a} & $\tanh$ & gomp  & gomp + SRFull & gomp + SRHalf  & gomp + SRFull  \\
 \midrule
-$10^{9} \As$ &  \sampled 2.100(30) & \sampled 2.099(30) & \sampled 2.101(31) & 2.094(13) & 2.094(13)  & 2.112(12) \\
+$10^{9} \As$ &  \sampled 2.100(30) & \sampled 2.099(30) & \sampled 2.101(31) & \textbf{2.094(13)} & \textbf{2.094(13)}  & 2.112(12) \\
 $\ns$ & \sampled 0.9649(42) & \sampled 0.9641(42) & \sampled 0.9640(42)  & \sampled 0.9636(39) & \sampled 0.9637(39)  & \sampled 0.9646(38) \\
 $\Omegac h^2$ & \sampled 0.1200(12) & \sampled 0.1201(12) & \sampled 0.1200(12)  & \sampled 0.1202(11) & \sampled 0.1202(11)  & \sampled 0.1202(10) \\
 $\Omegab h^2$ & \sampled 0.02237(15) &  \sampled 0.02235(15) & \sampled 0.02235(15)  & \sampled 0.02234(14) & \sampled 0.02234(14)  & \sampled 0.02234(14) \\
@@ -296,12 +296,12 @@ $\Omegam h^2$ & 0.1430(11) & 0.1430(11) & 0.1430(11)  & 0.1432(10) & 0.1431(10) 
 $\OmegaL$ & 0.6847(73) & 0.6842(76) & 0.6845(75)  & 0.6833(69) & 0.6836(69) & 0.6837(63) \\
 Age & 13.797(23) & 13.800(23) & 13.799(23)  & 13.802(22) & 13.801(22)  & 13.801(21) \\
 $H_0$ & 67.36(54) & 67.32(55) & 67.34(55)  & \sampled 67.26(50) & \sampled 67.28(50)  & \sampled 67.29(46) \\
-$100 \theta_\mathrm{X}$ & \sampled 1.04092(31) & \sampled 1.04815(29) & \sampled 1.04185(29)  & 1.04184(29) & 1.04184(29)  & 1.04185(29) \\
+$100 \theta_\mathrm{X}$ & \sampled 1.04092(31) & \sampled 1.04185(29) & \sampled 1.04185(29)  & 1.04184(29) & 1.04184(29)  & 1.04185(29) \\
 $\sigma_8$ & 0.8111(60) & 0.8108(60) & 0.8109(60)  & \sampled 0.8100(44) & \sampled 0.8099(44)  & \sampled 0.8138(40) \\
 $S_8$ & 0.832(13) & 0.832(13) & 0.832(13) & 0.832(13) & 0.832(13)   &0.836(12) \\
-$\tau_\reio$ & \sampled 0.0544(73) & \sampled 0.0543(75) & \sampled 0.0547(76)  & 0.0526(15) & $0.0527^{(14)}_{(16)}$  & $0.05720_{(77)}^{(88)}$ \\
+$\tau_\reio$ & \sampled 0.0544(73) & \sampled 0.0543(75) & \sampled 0.0547(76)  & \textbf{0.0526(15)} & $\boldsymbol{0.0527^{(14)}_{(16)}}$  & $0.05720_{(77)}^{(88)}$ \\
 $z_\re$ & 7.67(73) & 7.67(75) & 6.76(67)  & 6.98 & 6.99  & 7.45\\
-$\zetaUV$ & & & &  \sampled $26.9^{(2.1)}_{(2.5)}$ & \sampled $27.0^{(2.1)}_{(2.5)}$  & \sampled $>32.8$ \\
+$\zetaUV$ & & & &  \sampled $\boldsymbol{26.9^{(2.1)}_{(2.5)}}$ & \sampled $\boldsymbol{27.0^{(2.1)}_{(2.5)}}$  & \sampled $>32.8$ \\
 \bottomrule
 \end{tabular}}
 \label{tab:uber-table}
@@ -405,7 +405,7 @@ and violet hexagons in \Cref{fig:history}).
 For  inference purpose (\nameref{ssec:fits}), the DW label includes DW constrains, 
 while DW + LF combines these with LF values. We exclude the highest redshift
 LF constraint due to its sensitivity to sampling and interpolation effects, thus its 
-likely to change with more high-$z$ data. 
+likely to change with more high-$z$ data. \paulo{revisit later for LF rephrase.}
 
 
 \subsection*{MCMC inference}
@@ -426,12 +426,15 @@ Therefore, we do not use the mapping from reionization to cosmology --
 \cref{eq:SR_a,eq:SR_b} or alternatively \cref{eq:SRHalf_a,eq:SRHalf_b}. 
 
 In contrast, when astrophysical data is included, $\tanh$ samples over
-$z_\re$ instead of $\tau_\reio$ \paulo{I guess we sampled over $\tau_\reio$ 
-at the end so adjust when confirmed.} and an additional likelihood component
-is calculated in \texttt{Cobaya} based on the used astrophysical dataset. For 
-Gompertz, we do not sample any reionization parameter. Instead, we 
+$z_\re$ instead of $\tau_\reio$ and an additional likelihood component
+is calculated in \texttt{Cobaya} based on the used astrophysical dataset.  
+For Gompertz, we do not sample any reionization parameter. Instead, we 
 use SRFull or SRHalf to map cosmology to reionization timeline and 
-include the additional likelihood component.   
+include the additional likelihood component. Perhaps unsurprisingly, 
+$\tanh$ reionization does a poor job of fitting the data, with a 
+$\chi^2$ larger than Gompertz's by an order of magnitude,
+hence we do not show the $\tanh$ results in
+ \Cref{tab:uber-table}.
 
 There is an apparent discrepancy between the different models in
 $\theta_\mathrm{x}$, a proxy for the angular scale of the acoustic
