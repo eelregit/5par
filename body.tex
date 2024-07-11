@@ -75,7 +75,7 @@ role.
 In theory, cosmic reionization is uniquely determined given a specific
 cosmology, i.e.\ by the other five cosmological parameters.
 Specifically, the evolution of the global fraction of neutral hydrogen
-can be written as
+can be written as \paulo{... think if we want to keep this with +astro or remove it}
 %
 \begin{equation}
 \label{eq:premise}
@@ -151,7 +151,7 @@ Chain (MCMC).}
 
 
 To achieve our goal outlined in \cref{eq:premise}, we construct a
-universal shape for $x_\HI$ using 256 Sobol samples of \texttt{21cmFAST} simulations. 
+universal shape for $x_\HI$ using 512 Sobol samples of \texttt{21cmFAST} simulations. 
 The simulations account for variations in the ionization efficiency ($\zetaUV$), 
 which modulates the timing of reionization by regulating the abundance
 of photons that escape into the IGM 
@@ -202,17 +202,16 @@ x_\HI(\ar) &= \gomp\bigl( P_5(\ar) \bigr)
 \label{eq:poly}
 P_5(\ar) &= {\textstyle\sum}_{m=0}^5 \, c_m \ln^m\!\ar, \\
 %
-\bm{c} &= \{0, 1, 0.1503, 0.04850, 0.005261, 0.0002182\}, \nonumber\\
+\bm{c} &= \{0, 1, 0.1130, 0.02600, 0.0005491, -0.00006518\}, \nonumber\\
 %
 \label{eq:map}
-\ar(a; \vtheta) &= \Bigl[ \frac{a}{\ap(\vtheta)} \Bigr]^\tilt,
+\ar(a; \vtheta) &= \Bigl[ \frac{a}{\ap(\vtheta)} \Bigr]^{\tilt(\vtheta)},
 \end{align}
 %
 where $\vtheta$ denotes 6 astrophysical and cosmological parameters,
 $\ap(\vtheta)$ is the power-law pivot (or logarithmic translation), and
-$\tilt = 8.290$ is the rescaling tilt, which, according to our
-\texttt{21cmFAST} simulations, appears constant.
-This lack of cosmological dependence may stem from \texttt{21cmFAST}'s
+$\tilt(\vtheta)$ is the rescaling tilt.
+Their cosmological dependence may stem from \texttt{21cmFAST}'s
 treatment of reionization astrophysics.
 See \nameref{ssec:helium} for specifics on implementing HeI and HeII
 reionization.
@@ -294,13 +293,13 @@ Nonetheless, our results are robust and independent of the choice of
 mapping.
 
 We implement \cref{eq:SR_a,eq:SR_b} in our Gompertz \texttt{CLASS}, which given
-the cosmological parameters determines the pivot value and consequently
-the reionization history, $\tau_\reio$, and corresponding CMB angular
+the cosmological parameters, determines the pivot and tilt values, and consequently
+the reionization history, $\tau_\reio$, and CMB angular
 power spectra.
 This SRFull model eliminates the need to sample over $\tau_\reio$ (or $z_\re$),
 requiring only five cosmological parameters and $\zetaUV$. 
-We use \texttt{Cobaya} to re-analyze the same CMB data and 
-we include astrophysical data (see \nameref{ssec:xHI}) to effectively
+We use \texttt{Cobaya} to re-analyze the same CMB data and
+include astrophysical data (see \nameref{ssec:xHI}) to effectively
 marginalize over $\zetaUV$.
 
 \begin{figure}[tb]
@@ -318,8 +317,7 @@ conventional $\tanh$ model, while the relevant Planck constraints
 \end{figure}
 
 \Cref{fig:kill} underscores the impact of our universally-shaped
-Gompertz reionization model. This approach tightens the constraint 
-on the optical depth to $\lessapprox 3\%$, a remarkable improvement 
+Gompertz reionization model, tightening the optical depth to  $\lessapprox 3\%$
 compared to $> 10\%$ with the $\tanh$ prescription.
 Furthermore, the constraint on $\As$ improves dramatically since the TT
 data is no longer significantly hampered by the degeneracy between $\As$
@@ -327,9 +325,9 @@ and $\tau_\reio$.
 The error on $\As$ decreases by an impressive factor of 2.3 compared to
 Planck's results \cite{Planck2020a}.
 Overall, we recover tighter constraints across the board compared to
-Planck. Notably, the combination of SR with CMB and astrophysical data
+Planck. Notably, combining SR with CMB and astrophysical data
 yields a highly competitive constraint on $\zetaUV = 26.9^{+2.1}_{-2.5}$, a 
-commanding improvement compared to previous constraints
+commanding improvement over previous constraints
 (e.g. $\zetaUV = 28^{+52}_{-18}$)\cite{Greig2017}. See
 \Cref{fig:unleashed_gomp,tab:uber-table} in the Extended Data for details.
 
@@ -360,7 +358,7 @@ Our best-fit cosmological parameters indicate a midpoint of $z_\re =
 While our results align with late reionization observations, the
 difference from $\tanh$ is within 1$\sigma$.
 The duration of reionization, though better suited to observational
-constraints compared to  $\tanh$, might still be considered
+constraints compared to $\tanh$, might still be considered
 somewhat rapid in the context of late reionization scenarios
 \cite{Cain2021}.
 \Cref{fig:history} illustrates the reionization timeline derived
@@ -392,7 +390,7 @@ using more realistic, albeit slower, reionization models.
 One such option is to use the THESAN simulations \cite{Kannan2022},
 which are hydrodynamical simulations incorporating radiative transfer.
 
-We only considered DW data but the inclusion of current luminosity function 
-constraints is already capable of lowering $\tau_\reio$ by a factor of two. 
-We expect reionization constraints to grow in number and significance, leading 
-to potential cosmological gains within out framework.   
+We considered only DW data, but including current luminosity function 
+constraints can already halve the error on $\tau_\reio$. As reionization 
+constraints increase, we anticipate significant cosmological gains within
+our framework.

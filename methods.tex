@@ -264,7 +264,8 @@ mapping between $x_\HI$ profiles and cosmology.
 \caption{\textbf{Parameter constraints from Planck CMB and DW data.}
 Summary table of the constraints for representative parameters of the
 universal shape (Gompertz) and $\tanh$ reionization models.
-The constraints use CMB `TTTEEE' + lensing information.
+The constraints use CMB `TTTEEE' + lensing information alone or jointly
+with DW $x_\HI$ constraints.
 The results from Planck analysis \cite{Planck2020a} are included for
 comparison.
 The validation models are gomp and $\tanh$, gomp does not include
@@ -388,22 +389,21 @@ mappings perform robustly and are not biasing the parameter inferences.
 \subsection*{Astrophysical data}
 \label{ssec:xHI}
 The increasing number of direct constraints on the reionization timeline
-provides significant enhances CMB analyses.
-\Cref{fig:history} includes upper limits from dark pixel constraints\cite{Jin2023} 
-(high-$z$ quasars), a lower bound from the Ly$\alpha$ emission 
-fraction\cite{Mesinger2015} (high-$z$ galaxies), and an upper limit from the
-clustering of Ly$\alpha$ emitters\cite{Sobacchi2015} (high-$z$ galaxies). 
-It also presents constraints by Ly$\alpha$ equivalent width of Ly$\alpha$ 
+enhances CMB analyses. \Cref{fig:history} includes upper limits from dark 
+pixel constraints\cite{Jin2023} (high-$z$ quasars), a lower bound from
+the Ly$\alpha$ emission fraction\cite{Mesinger2015} (high-$z$ galaxies), 
+and an upper limit from the clustering of Ly$\alpha$ emitters\cite{Sobacchi2015} 
+(high-$z$ galaxies). It also presents constraints by Ly$\alpha$ equivalent width of Ly$\alpha$ 
 emitters\cite{Mason2018, Mason2018,  Hoag2019} (high-$z$ galaxies) and 
 quasar damping wings\cite{Greig2022, Greig2024, Spina2024, Durovcikova2024} 
-(high-$z$ quasars). Furthermore, it includes the indirect constraint on $x_\HI$ 
+(high-$z$ quasars). Furthermore, it includes the indirect constraints on $x_\HI$ 
 through the evolution of the galaxy Ly$\alpha$ luminosity function\cite{Morales2021}.
 
-In this work, we supplement Planck CMB data with constraints on $x_\HI$ 
-by quasar damping wings (DW) (see green pentagons in \Cref{fig:history}). 
-Note that this decision reflects our expectation regarding the robustness of 
-the constraints. An interesting future exercise would be to include luminosity 
-function constraints when jointly with DW as more data becomes available. 
+In this work, we supplement Planck CMB data with quasar damping wing (DW) 
+constraints on $x_\HI$ (green pentagons in \Cref{fig:history}), reflecting
+our confidence in their robustness. Future studies could include luminosity
+function constraints with DW as more data becomes available, particularly 
+since it inclusion already can halve the error on $\tau_\reio$.
 
 
 \subsection*{MCMC inference}
@@ -427,7 +427,7 @@ Therefore, we do not use the mapping from reionization to cosmology --
 
 In contrast, when astrophysical data is included, $\tanh$ samples over
 $z_\re$ instead of $\tau_\reio$ and an additional likelihood component
-is calculated in \texttt{Cobaya} based on the used astrophysical dataset.  
+is calculated in \texttt{Cobaya}.  
 For Gompertz, we do not sample any reionization parameter. Instead, we 
 use SRFull or SRHalf to map cosmology to reionization timeline and 
 include the additional likelihood component. Perhaps unsurprisingly, 
@@ -448,7 +448,6 @@ In contrast, the Planck collaboration reports $100\theta_\mathrm{MC}$,
 which is given by Eq.~(6) in \cite{Planck2014}, and corresponds to the
 standard choice in \texttt{CosmoMC}\cite{Lewis2002}. Unsurprisingly,
 different reionization scenarios give similar values of $100\theta_\mathrm{s}$.
-
 
 Although \Cref{tab:uber-table} does not display an error in the midpoint of
 reionization in gomp + SRFull + CMB + DW nor gomp + SRHalf + CMB + DW runs, 
