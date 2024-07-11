@@ -12,7 +12,7 @@ The advent of the James Webb Space Telescope (JWST) \cite{Gardner2006}
 represents a pivotal moment, substantially bolstering our ability to
 directly constrain the evolution of the neutral hydrogen fraction
 $x_\HI$.
-This progress is being driven by the JWST's enhanced detection
+This progress is being driven by JWST's enhanced detection
 capabilities, enabling the observation of high-redshift quasars
 \cite{Eilers2023} and high-redshift galaxies
 \cite{Adams2023, Bradley2023, Donnan2023,Ning2024}.
@@ -72,45 +72,27 @@ Given the challenges posed by $\tau_\reio$ in CMB analyses and the
 anticipated advancements in constraining the reionization timeline
 \cite{Montero2021, Hera2022}, now is an opportune moment to reassess its
 role.
-In theory, cosmic reionization is uniquely determined given a specific
-cosmology, i.e.\ by the other five cosmological parameters.
-Specifically, the evolution of the global fraction of neutral hydrogen
-can be written as \paulo{... think if we want to keep this with +astro or remove it}
-%
-\begin{equation}
-\label{eq:premise}
-x_\HI(a) = f(a; \sigma_8, \ns, h, \Omegab, \Omegam)
-\quad \Rightarrow \quad
-\tau_\reio = g(\sigma_8, \ns, h, \Omegab, \Omegam),
-\end{equation}
-%
-where $\ns$, $h$, $\Omegab$, and $\Omegam$ are the tilt of the
-primordial power spectrum, dimensionless Hubble constant, and present
-baryon and matter density fractions, respectively.
-$\sigma_8$ is the present linear rms relative density fluctuation in a
-sphere of radius $8 \, h^{-1}$Mpc.
-This parametrization chosen for convenience fully determines $x_\HI$,
-but the incomplete understanding of cosmic reionization obscures this
-mapping, necessitating the introduction of $\tau_\reio$ in CMB analyses.
-However, our understanding of the astrophysical processes governing
-reionization has significantly improved \cite{Gnedin2022, Kannan2022,
-Murray2020, Fan2023} since the inclusion of $\tau_\reio$ became a
-standard practice.
-Ongoing and forthcoming observations promise to further our
-understanding and reduce inherent modeling uncertainties.
+Theoretically, cosmic reionization is uniquely determined by
+cosmology, i.e.\  $x_\HI(z)$ is fully determined by the other five cosmological
+parameters. However, incomplete understanding of
+reionization obscures this mapping, necessitating the introduction
+of $\tau_\reio$ in CMB analyses. Since the inclusion of 
+$\tau_\reio$ became a standard practice, 
+our understanding of the astrophysical 
+processes governing reionization has significantly 
+improved\cite{Gnedin2022, Kannan2022,Murray2020, Fan2023}  
+and ongoing and forthcoming observations promise to reduce inherent
+modeling uncertainties.
+
 Motivated by these developments, we use symbolic regression (SR)
 \cite{Cranmer2023} to construct a mapping between cosmology and
 reionization timeline, aiming to demote $\tau_\reio$ from an independent
-to a derived cosmological parameter, and simultaneously tightening
-constraints in cosmological parameters.
-
-\cref{eq:premise} introduces a novel avenue to constrain cosmology
-by examining the dependence of $x_\HI(z)$ on cosmological parameters.
-This mapping can enhance parameter constraints and shed light on
-reionization astrophysics.
-It also aids ongoing efforts in parametrizing cosmic reionization models
-\cite{Trac2018,Trac2022,Paoletti2024} by including the cosmological dependence of
-$x_\HI$.
+to a derived cosmological parameter, tightening constraints 
+in cosmological parameters. This mapping can also
+shed light on reionization astrophysics and aid ongoing efforts in 
+parametrizing reionization models 
+\cite{Trac2018,Trac2022,Paoletti2024} by including the cosmological
+dependence of $x_\HI$.
 
 Here, we present a universality in the neutral hydrogen time evolution,
 and derive through SR its dependence on cosmology on simulated
@@ -126,7 +108,7 @@ intermediate transitions of fast parameters.}, showcasing its ability to
 recover parameter constraints from CMB data, including `TTTEEE' +
 lensing likelihoods \cite{Planck2020c, Planck2020d} (see \Cref{fig:tg}).
 Finally, we demonstrate cosmological gains by computing $\tau_\reio$ as
-a derived parameter using our approach -- \cref{eq:premise} --
+a derived parameter using our approach
 compared to sampling over $\tau_\reio$ using the conventional $\tanh$
 model \cite{Lewis2008}.
 We summarize our strategy in \Cref{fig:big}.
@@ -150,8 +132,8 @@ Chain (MCMC).}
 \end{figure}
 
 
-To achieve our goal outlined in \cref{eq:premise}, we construct a
-universal shape for $x_\HI$ using 512 Sobol samples of \texttt{21cmFAST} simulations. 
+We construct a universal shape for $x_\HI$ using 512 Sobol 
+samples of \texttt{21cmFAST} simulations. 
 The simulations account for variations in the ionization efficiency ($\zetaUV$), 
 which modulates the timing of reionization by regulating the abundance
 of photons that escape into the IGM 
@@ -269,6 +251,11 @@ cosmology
 \label{eq:SR_b}
 \beta(\vtheta) &=  \left( \frac{0.005660^{\Omegam}}{0.6015} - \ln[\zetaUV - (\Omegam + \ns h)^{15.05} ]+ h \right) \ln{\Omegab} + \frac{h}{\sigma_8},
 \end{align} 
+where $\ns$, $h$, $\Omegab$, and $\Omegam$ are the tilt of the
+primordial power spectrum, dimensionless Hubble constant, and present
+baryon and matter density fractions, respectively.
+$\sigma_8$ is the present linear rms relative density fluctuation in a
+sphere of radius $8 \, h^{-1}$Mpc.
 
 \cref{eq:map,eq:SR_a,eq:SR_b} imply that higher values of $\Omegam$, $\sigma_8$, 
 and $\zetaUV$ hasten reionization by enhancing structure
