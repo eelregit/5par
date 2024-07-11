@@ -221,32 +221,32 @@ Before fully leveraging our formalism to extract the cosmological
 dependence in the rescaling of \cref{eq:uni} and relaxing the
 need for $\tau_\reio$ in CMB analyses, we first implement the Gompertz
 shape with independent $\tau_\reio$ in \texttt{CLASS} and confirm its
-agreement with the conventional $\tanh$ model (gomp 0 and $\tanh$ 0 in \Cref{tab:uber-table}).
+agreement with the conventional $\tanh$ model (gomp and $\tanh$  in \Cref{tab:uber-table}).
 Using Planck PR3 likelihoods `TTTEEE' \cite{Planck2020c} and CMB
 lensing \cite{Planck2020d}, we sample typical cosmological parameters
 with \texttt{Cobaya} \cite{Torrado2020}, including $\tau_\reio$. Given a proposal for
 $\tau_\reio$, we determine the corresponding reionization timeline using bisection by varying
-$\ln\ap$ for gomp 0, while for $\tanh$ 0,
+$\ln\ap$ for gomp, while for $\tanh$,
 the reionization midpoint $z_\re$ is the tuning parameter.
 The sampler runs until the Gelman-Rubin statistic \cite{Gelman1992}
 satisfies $R - 1 < 0.2$ for the between-chain variance of the confidence
 intervals.
-We repeat this for $\tanh$ 0 and verify the agreement between the two models.
+We repeat this for $\tanh$ and verify the agreement between the two models.
 
 \Cref{fig:tg,tab:uber-table} in the Extended Data summarize the validating
 experiment.
 The only notable differences in inferred parameters are in $z_\re$.
-The gomp 0 scenario suggests a more delayed reionization by over
-$1\sigma$, with $z_\re = 6.81 \pm 0.68$ compared to $7.67 \pm 0.75$ for
-$\tanh$ 0, in alignment with recent high-$z$ quasar observations
+The gomp scenario suggests a more delayed reionization by over
+$1\sigma$, with $z_\re = 6.76 \pm 0.67$ compared to $7.67 \pm 0.75$ for
+$\tanh$, in alignment with recent high-$z$ quasar observations
 \cite{Keating2020}.
 All other cosmological parameters are in good agreement with Planck's
-results \cite{Planck2020a}, with biases of $\lessapprox 0.4 \%$.
+results \cite{Planck2020a}, with biases of $\lessapprox 0.5 \%$.
 
 Gompertz-polynomial-shaped reionization can reproduce standard CMB analyses.
 Now, we move to establish the connection
 between the universal shape for $x_\HI$ and the rescaling of a given
-reionization scenario. We refer to this model as SRFull.
+reionization scenario. We refer to this model as gomp + SRFull.
 This rescaling is naturally a function of cosmology.
 For example, a larger density of matter $\Omegam$ results in deeper
 potential wells, accelerating structure formation and increasing the
@@ -297,11 +297,11 @@ We implement \cref{eq:SR_a,eq:SR_b} in our Gompertz \texttt{CLASS}, which given
 the cosmological parameters determines the pivot value and consequently
 the reionization history, $\tau_\reio$, and corresponding CMB angular
 power spectra.
-This gomp 1 model eliminates the need to sample over $\tau_\reio$ (or $z_\re$),
-requiring only five cosmological parameters, e.g. $\vtheta = \{ \sigma_8,
-\ns, h, \Omegab, \Omegam\}$.
-We use \texttt{Cobaya} to re-analyze the same CMB data,
-showcasing the full strength of our approach.
+This SRFull model eliminates the need to sample over $\tau_\reio$ (or $z_\re$),
+requiring only five cosmological parameters and $\zetaUV$. 
+We use \texttt{Cobaya} to re-analyze the same CMB data and 
+we include astrophysical data (see \nameref{ssec:xHI}) to effectively
+marginalize over $\zetaUV$.
 
 \begin{figure}[tb]
 \centering
@@ -318,24 +318,27 @@ conventional $\tanh$ model, while the relevant Planck constraints
 \end{figure}
 
 \Cref{fig:kill} underscores the impact of our universally-shaped
-Gompertz reionization model. This approach tightens the constraint on the optical depth to $\approx
-1\%$, a remarkable improvement compared to $> 10\%$ with the $\tanh$
-prescription.
+Gompertz reionization model. This approach tightens the constraint 
+on the optical depth to $\lessapprox 3\%$, a remarkable improvement 
+compared to $> 10\%$ with the $\tanh$ prescription.
 Furthermore, the constraint on $\As$ improves dramatically since the TT
 data is no longer significantly hampered by the degeneracy between $\As$
 and $\tau_\reio$.
-The error on $\As$ decreases by an impressive factor of 2.5 compared to
+The error on $\As$ decreases by an impressive factor of 2.3 compared to
 Planck's results \cite{Planck2020a}.
 Overall, we recover tighter constraints across the board compared to
-Planck.
-See \Cref{fig:unleashed_gomp,tab:uber-table} in the Extended Data for details.
+Planck. Notably, the combination of SR with CMB and astrophysical data
+yields a highly competitive constraint on $\zetaUV = 26.9^{+2.1}_{-2.5}$, a 
+commanding improvement compared to previous constraints
+(e.g. $\zetaUV = 28^{+52}_{-18}$)\cite{Greig2017}. See
+\Cref{fig:unleashed_gomp,tab:uber-table} in the Extended Data for details.
 
 \begin{figure}[tb]
 \centering
 \includegraphics[width=0.66\linewidth]{figs/history.pdf}
 \caption{\textbf{Optical depth evolution $\tau(z)$ and reionization
 history $x_\HI(z)$.}
-Our best-fit gomp + SRFull model (green dashed line) of Planck + DW data is
+Our best-fit gomp + SRFull model (green dashed line) of Planck + damping wing (DW) data is
 asymmetric and differs significantly from that of the symmetric $\tanh$
 model (blue lines, with dotted region representing the 1$\sigma$
 errors). Note $z$ is shown in logarithmic scale of $a^{-1}$.
@@ -350,18 +353,19 @@ high-redshift quasars and galaxies (see \nameref{ssec:xHI}).
 \end{figure}
 
 Our results suggest that Planck data favors a delayed reionization
-compared to other CMB-based constraints.
+compared to other CMB-based constraints (in a $\chi^2$-sense).
 Our best-fit cosmological parameters indicate a midpoint of $z_\re =
-7.40$ and a duration of $\Delta z \equiv z(x_\HI = 0.05) - z(x_\HI =
-0.95) \sim 500 $ Myr.
+6.98$ and a duration of $\Delta z \equiv z(x_\HI = 0.05) - z(x_\HI =
+0.95) \approx 560 $ Myr.
 While our results align with late reionization observations, the
-difference from $\tanh$ 1 is within 1$\sigma$.
+difference from $\tanh$ is within 1$\sigma$.
 The duration of reionization, though better suited to observational
-constraints compared to  $\tanh$ 1, might still be considered
+constraints compared to  $\tanh$, might still be considered
 somewhat rapid in the context of late reionization scenarios
 \cite{Cain2021}.
 \Cref{fig:history} illustrates the reionization timeline derived
-from our best-fit values.
+from our best-fit values and the inability of symmetric $\tanh$
+to fit the astrophysical constraints. 
 
 Our findings for the timeline of reionization align with late
 reionization scenarios, which are supported by high-$z$ Lyman-$\alpha$
@@ -381,9 +385,14 @@ Moreover, our exploration within the astrophysical framework of
 \texttt{21cmFAST} has been limited to varying the ionization efficiency
 (see \nameref{ssec:sims} in the Extended Data).
 Therefore, a more comprehensive exploration is warranted to ensure, for
-instance, that the rescaling tilt $\tilt$ remains a constant.
-Additionally, a valuable exercise to refine the inherent relationship
+instance, that the choice of rescaling does not bias cosmological 
+analyses. Additionally, a valuable exercise to refine the inherent relationship
 between cosmological parameters and reionization history would involve
 using more realistic, albeit slower, reionization models.
 One such option is to use the THESAN simulations \cite{Kannan2022},
 which are hydrodynamical simulations incorporating radiative transfer.
+
+We only considered DW data but the inclusion of current luminosity function 
+constraints is already capable of lowering $\tau_\reio$ by a factor of two. 
+We expect reionization constraints to grow in number and significance, leading 
+to potential cosmological gains within out framework.   

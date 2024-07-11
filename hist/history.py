@@ -239,20 +239,20 @@ inter_GSRFullDWLF = interp1d(xHI(z,sigma8=0.8138,ns=0.9646,h=0.6729,Ob=0.02234/0
 
 print('#'*5+' G + SRFull + DW '+'#'*5)
 print('Midpoint is ', inter_GSRFullDW(0.5))
-print('Duration -- 0.1 to 0.99 completion -- is ', inter_GSRFullDW(0.1) - inter_GSRFullDW(0.97))
+print('Duration -- 0.05 to 0.95 completion -- is ', inter_GSRFullDW(0.05) - inter_GSRFullDW(0.95))
 print('Redshift 1: ', inter_GSRFullDW(0.05))
 print('Redshift 2: ', inter_GSRFullDW(0.95))
 
 print('#'*5+' G + SRHalf + DW '+'#'*5)
 print('Midpoint is ', inter_GSRHalfDW(0.5))
-print('Duration -- 0.1 to 0.99 completion -- is ', inter_GSRHalfDW(0.1) - inter_GSRHalfDW(0.97))
+print('Duration -- 0.05 to 0.95 completion -- is ', inter_GSRHalfDW(0.05) - inter_GSRHalfDW(0.95))
 print('Redshift 1: ', inter_GSRHalfDW(0.05))
 print('Redshift 2: ', inter_GSRHalfDW(0.95))
 
 
 print('#'*5+' G + SRFull + DW + LF'+'#'*5)
 print('Midpoint is ', inter_GSRFullDWLF(0.5))
-print('Duration -- 0.1 to 0.99 completion -- is ', inter_GSRFullDWLF(0.1) - inter_GSRFullDWLF(0.97))
+print('Duration -- 0.05 to 0.95 completion -- is ', inter_GSRFullDWLF(0.05) - inter_GSRFullDWLF(0.95))
 print('Redshift 1: ', inter_GSRFullDWLF(0.05))
 print('Redshift 2: ', inter_GSRFullDWLF(0.95))
 
