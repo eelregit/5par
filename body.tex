@@ -69,9 +69,9 @@ over astrophysics and instrumental systematics \cite{Paradiso2023} (square).}
 \end{figure}
 
 Given the challenges posed by $\tau_\reio$ in CMB analyses and the
-anticipated advancements in constraining the reionization timeline
-\cite{Montero2021, Hera2022}, now is an opportune moment to reassess its
-role.
+anticipated advancements in constraining the reionization 
+timeline\cite{Montero2021, Hera2022}, now is an opportune
+moment to reassess its role.
 Theoretically, cosmic reionization is uniquely determined by
 cosmology, i.e.\  $x_\HI(z)$ is fully determined by the other five cosmological
 parameters. However, incomplete understanding of
@@ -84,19 +84,18 @@ improved\cite{Gnedin2022, Kannan2022,Murray2020, Fan2023}
 and ongoing and forthcoming observations promise to reduce inherent
 modeling uncertainties.
 
-Motivated by these developments, we use symbolic regression (SR)
-\cite{Cranmer2023} to construct a mapping between cosmology and
+Motivated by these developments, we use symbolic regression 
+(SR)\cite{Cranmer2023} to construct a mapping between cosmology and
 reionization timeline, aiming to demote $\tau_\reio$ from an independent
 to a derived cosmological parameter, tightening constraints 
 in cosmological parameters. This mapping can also
 shed light on reionization astrophysics and aid ongoing efforts in 
-parametrizing reionization models 
-\cite{Trac2018,Trac2022,Paoletti2024} by including the cosmological
-dependence of $x_\HI$.
+parametrizing reionization models\cite{Trac2018,Trac2022,Paoletti2024}
+by including the cosmological dependence of $x_\HI$.
 
 Here, we present a universality in the neutral hydrogen time evolution,
 and derive through SR its cosmological dependence from simulated
-\texttt{21cmFAST} \cite{MesingerEtAl2011,Murray2020} reionization histories.
+\texttt{21cmFAST}\cite{MesingerEtAl2011,Murray2020} reionization histories.
 We integrate this shape into \texttt{CLASS} \cite{Blas2011}, a popular
 Boltzmann solver for CMB analyses.
 We then evaluate the modified \texttt{CLASS} alongside \texttt{Cobaya}
@@ -105,12 +104,12 @@ Lewis2013}\footnote{With adaptive covariance learning and fast-dragging
 as in \cite{Neal2005}, enabling larger steps in slow parameters via
 intermediate transitions of fast parameters.}, showcasing its ability to
 recover parameter constraints from CMB data, including `TTTEEE' +
-lensing likelihoods \cite{Planck2020c, Planck2020d} (see \Cref{fig:tg}).
+lensing likelihoods\cite{Planck2020c, Planck2020d} (see \Cref{fig:tg}).
 Finally, we combine CMB and astrophysical data, marginalize over 
 astrophysics, and compute $\tau_\reio$ as
 a derived parameter using SR, quantifying the gains
 compared to sampling over $\tau_\reio$ using the conventional $\tanh$
-model \cite{Lewis2008}.
+model\cite{Lewis2008}.
 We summarize our strategy in \Cref{fig:big}.
 
 \begin{figure}[tb]
