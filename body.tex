@@ -95,9 +95,8 @@ parametrizing reionization models
 dependence of $x_\HI$.
 
 Here, we present a universality in the neutral hydrogen time evolution,
-and derive through SR its dependence on cosmology on simulated
-reionization histories from \texttt{21cmFAST} \cite{MesingerEtAl2011,
-Murray2020}.
+and derive through SR its cosmological dependence from simulated
+\texttt{21cmFAST} \cite{MesingerEtAl2011,Murray2020} reionization histories.
 We integrate this shape into \texttt{CLASS} \cite{Blas2011}, a popular
 Boltzmann solver for CMB analyses.
 We then evaluate the modified \texttt{CLASS} alongside \texttt{Cobaya}
@@ -107,8 +106,9 @@ as in \cite{Neal2005}, enabling larger steps in slow parameters via
 intermediate transitions of fast parameters.}, showcasing its ability to
 recover parameter constraints from CMB data, including `TTTEEE' +
 lensing likelihoods \cite{Planck2020c, Planck2020d} (see \Cref{fig:tg}).
-Finally, we demonstrate cosmological gains by computing $\tau_\reio$ as
-a derived parameter using our approach
+Finally, we combine CMB and astrophysical data, marginalize over 
+astrophysics, and compute $\tau_\reio$ as
+a derived parameter using SR, quantifying the gains
 compared to sampling over $\tau_\reio$ using the conventional $\tanh$
 model \cite{Lewis2008}.
 We summarize our strategy in \Cref{fig:big}.
@@ -158,8 +158,8 @@ With this insight, we can translate and rescale each timeline using the
 mean and variance of its corresponding probability density function
 (PDF), i.e.\ $- \mathrm{d}x_\HI / \mathrm{d}\ln a$, and discover the
 existence of a universal shape followed by all scenarios.
-Therefore, cosmology only impacts the translation and rescaling
-parameters of each timeline, not its shape.
+Therefore, cosmology -- and $\zetaUV$ -- only impacts 
+the translation and rescaling parameters of each timeline, not its shape.
 
 However, with the PDF trick, some $x_\HI$'s can deviate artificially
 from universality, due to their incomplete reionization given our broad
@@ -228,12 +228,12 @@ Gompertz-polynomial-shaped reionization can reproduce standard CMB analyses.
 Now, we move to establish the connection
 between the universal shape for $x_\HI$ and the rescaling of a given
 reionization scenario. We refer to this model as gomp + SRFull.
-This rescaling is naturally a function of cosmology.
+This rescaling naturally depends on cosmology.
 For example, a larger density of matter $\Omegam$ results in deeper
 potential wells, accelerating structure formation and increasing the
 number of ultraviolet photons driving the reionization process.
-We employ \texttt{PySR}, an SR package, to establish the cosmological dependence
-of the rescaling in \cref{eq:map}.
+We employ \texttt{PySR}, an SR package, to establish derive 
+the rescaling in \cref{eq:map}.
 
 While \texttt{PySR} initially guided us towards the Gompertz curve when
 directly regressing $x_\HI$, the final analysis only uses it to regress
@@ -242,8 +242,7 @@ We fit their values jointly with the polynomial coefficients as
 described above, and feed them as labels to the genetic algorithm to
 find the best analytic expression (see \nameref{ssec:pysr} in Extended
 Data for our definition of \emph{best}).
-Using \texttt{PySR} we derived the following pivot as a function of
-cosmology
+Using \texttt{PySR} we derived the following mapping 
 %
 \begin{align}
 \label{eq:SR_a}
@@ -280,9 +279,9 @@ Nonetheless, our results are robust and independent of the choice of
 mapping.
 
 We implement \cref{eq:SR_a,eq:SR_b} in our Gompertz \texttt{CLASS}, which given
-the cosmological parameters, determines the pivot and tilt values, and consequently
-the reionization history, $\tau_\reio$, and CMB angular
-power spectra.
+the cosmological and astrophysical parameters, determines the pivot and tilt values, 
+and consequently the reionization history, $\tau_\reio$, 
+and CMB angular power spectra.
 This SRFull model eliminates the need to sample over $\tau_\reio$ (or $z_\re$),
 requiring only five cosmological parameters and $\zetaUV$. 
 We use \texttt{Cobaya} to re-analyze the same CMB data and
@@ -316,7 +315,7 @@ Planck. Notably, combining SR with CMB and astrophysical data
 yields a highly competitive constraint on $\zetaUV = 26.9^{+2.1}_{-2.5}$, a 
 commanding improvement over previous constraints
 (e.g. $\zetaUV = 28^{+52}_{-18}$)\cite{Greig2017}. See
-\Cref{fig:unleashed_gomp,tab:uber-table} in the Extended Data for details.
+\nameref{ssec:fits}, \Cref{fig:unleashed_gomp,tab:uber-table} in the Extended Data for details.
 
 \begin{figure}[tb]
 \centering
@@ -379,5 +378,5 @@ which are hydrodynamical simulations incorporating radiative transfer.
 
 We considered only DW data, but including current luminosity function 
 constraints can already halve the error on $\tau_\reio$. As reionization 
-constraints increase, we anticipate significant cosmological gains within
+constraints increase, we anticipate substantial cosmological gains with
 our framework.
