@@ -85,9 +85,10 @@ and ongoing and forthcoming observations promise to reduce inherent
 modeling uncertainties.
 
 Motivated by these developments, we use symbolic regression 
-(SR)\cite{Cranmer2023} to construct a mapping between cosmology and
-reionization timeline, aiming to demote $\tau_\reio$ from an independent
-to a derived cosmological parameter, tightening constraints 
+(SR)\cite{Cranmer2023} to construct a mapping between cosmology, 
+astrophysics, and reionization timeline, aiming to demote $\tau_\reio$ 
+from an independent to a derived cosmological parameter 
+and simultaneously tightening constraints 
 in cosmological parameters. This mapping can also
 shed light on reionization astrophysics and aid ongoing efforts in 
 parametrizing reionization models\cite{Trac2018,Trac2022,Paoletti2024}
@@ -192,7 +193,7 @@ P_5(\ar) &= {\textstyle\sum}_{m=0}^5 \, c_m \ln^m\!\ar, \\
 where $\vtheta$ denotes 6 astrophysical and cosmological parameters,
 $\ap(\vtheta)$ is the power-law pivot (or logarithmic translation), and
 $\tilt(\vtheta)$ is the rescaling tilt.
-Their cosmological dependence may stem from \texttt{21cmFAST}'s
+Their cosmological -- and astrophysical-- dependence may stem from \texttt{21cmFAST}'s
 treatment of reionization astrophysics.
 See \nameref{ssec:helium} for specifics on implementing HeI and HeII
 reionization.
@@ -260,14 +261,16 @@ and $\zetaUV$ hasten reionization by enhancing structure
 formation and increasing the abundance of ionizing photons. 
 Similarly, larger $\ns$ primarily expedites reionization by boosting
 power on small scales, leading to more ionizing 
-sources and earlier completion\cite{Montero2021}. Our 
+sources and earlier completion\cite{Montero2021}. Keep in mind that our 
 \texttt{21cmFAST} simulations assume that faint galaxies
 are the primary drivers of reionization. Note that the role of $\sigma_8$ 
 and $\ns$ in $\beta$ slightly reduces the impact of these trends. 
 Surprisingly, \cref{eq:SR_a,eq:SR_b} suggests that higher $\Omegab$ delays
 reionization, likely due to more HI in the intergalactic medium requiring 
 additional ionizing photons. The ratio $\Omegab/\Omegam$ in $\alpha$ 
-supports this trend. Moreover, increasing $h$ slightly delays reionization.
+supports this trend. Moreover, increasing $h$ slightly delays reionization,
+consistent with the expectation that galaxies and ionizing photons will be 
+more spread out. 
 
 We note that within the prior range of our \texttt{21cmFAST} simulations
 (see \nameref{ssec:sims}) and their corresponding astrophysics of
@@ -281,28 +284,35 @@ We implement \cref{eq:SR_a,eq:SR_b} in our Gompertz \texttt{CLASS}, which given
 the cosmological and astrophysical parameters, determines the pivot and tilt values, 
 and consequently the reionization history, $\tau_\reio$, 
 and CMB angular power spectra.
-This SRFull model eliminates the need to sample over $\tau_\reio$ (or $z_\re$),
-requiring only five cosmological parameters and $\zetaUV$. 
-We use \texttt{Cobaya} to re-analyze the same CMB data and
-include astrophysical data (see \nameref{ssec:xHI}) to effectively
-marginalize over $\zetaUV$.
+This gomp + SRFull model eliminates the need to sample over $\tau_\reio$ (or $z_\re$),
+requiring only five cosmological parameters and $\zetaUV$. The 
+advantage of sampling over $\zetaUV$ instead of $\tau_\reio$ is that
+powerful astrophysical constraints on $x_\HI$ can be used to marginalize
+over $\zetaUV$. Moreover, thanks to SR, the model can constrain 
+$\zetaUV$ using CMB data directly, a link that was not utilized 
+in previous efforts\cite{Greig2017}. We use \texttt{Cobaya} 
+to re-analyze the same CMB data and include astrophysical data 
+(see \nameref{ssec:xHI} of the Extended Data) to effectively marginalize over $\zetaUV$.
 
 \begin{figure}[tb]
 \centering
 \includegraphics[width=0.7\linewidth]{figs/gomp1dw_tanh_triangle_kill.pdf}
-\caption{\textbf{Analysis of CMB data with reionization as a function of
-cosmology.}
+\caption{\textbf{Analysis of CMB and astrophysical data with reionization
+as a function of cosmology and astrophysics.}
 The green contours represent our results using the Gompertz reionization
-model with \cref{eq:SR_a,eq:SR_b}, eliminating the need to sample over any
-reionization parameter.
+model with \cref{eq:SR_a,eq:SR_b}, which eliminates the need to sample 
+over any conventional reionization parameter and uses quasar damping wing
+constraints on $x_\HI$ to marginalize over reionization astrophysics.
 The blue contours correspond to the results obtained using the
 conventional $\tanh$ model, while the relevant Planck constraints
-\cite{Planck2020a} are depicted with gray lines for reference.}
+\cite{Planck2020a} are depicted with gray lines for reference. 
+The $\tanh$ model performs poorly in fitting astrophysical data; thus, 
+combining $\tanh$ with astrophysical data is ill-advised.}
 \label{fig:kill}
 \end{figure}
 
 \Cref{fig:kill} underscores the impact of our universally-shaped
-Gompertz reionization model, tightening the optical depth to  $\lessapprox 3\%$
+Gompertz reionization model, tightening the optical depth to  $<3\%$
 compared to $> 10\%$ with the $\tanh$ prescription.
 Furthermore, the constraint on $\As$ improves dramatically since the TT
 data is no longer significantly hampered by the degeneracy between $\As$
@@ -310,7 +320,8 @@ and $\tau_\reio$.
 The error on $\As$ decreases by an impressive factor of 2.3 compared to
 Planck's results \cite{Planck2020a}.
 Overall, we recover tighter constraints across the board compared to
-Planck. Notably, combining SR with CMB and astrophysical data
+Planck. Notably, combining SR with CMB and astrophysical data, specifically
+quasar damping wing (DW) data, 
 yields a highly competitive constraint on $\zetaUV = 26.9^{+2.1}_{-2.5}$, a 
 commanding improvement over previous constraints
 (e.g. $\zetaUV = 28^{+52}_{-18}$)\cite{Greig2017}. See
@@ -375,7 +386,7 @@ using more realistic, albeit slower, reionization models.
 One such option is to use the THESAN simulations \cite{Kannan2022},
 which are hydrodynamical simulations incorporating radiative transfer.
 
-We considered only DW data, but including current luminosity function 
-constraints can already halve the error on $\tau_\reio$. As reionization 
-constraints increase, we anticipate substantial cosmological gains with
+Throughout this work we considered only DW data, but including current luminosity function 
+constraints can already halve the error on $\tau_\reio$. Hence, as reionization 
+constraints improve, we anticipate substantial cosmological gains with
 our framework.
