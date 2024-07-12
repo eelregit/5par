@@ -106,10 +106,10 @@ as in \cite{Neal2005}, enabling larger steps in slow parameters via
 intermediate transitions of fast parameters.}, showcasing its ability to
 recover parameter constraints from CMB data, including `TTTEEE' +
 lensing likelihoods\cite{Planck2020c, Planck2020d} (see \Cref{fig:tg}).
-Finally, we combine CMB and astrophysical data, marginalize over 
-astrophysics, and compute $\tau_\reio$ as
+Finally, combining CMB and astrophysical data, we marginalize over 
+reionization astrophysics to compute $\tau_\reio$ as
 a derived parameter using SR, quantifying the gains
-compared to sampling over $\tau_\reio$ using the conventional $\tanh$
+compared to sampling over $\tau_\reio$ utilizing the conventional $\tanh$
 model\cite{Lewis2008}.
 We summarize our strategy in \Cref{fig:big}.
 
@@ -149,7 +149,7 @@ The Gompertz curve, an asymmetric sigmoid function often used to analyze
 age-dependent human mortality \cite{Gompertz1825}, proves a good model
 for the survival of neutral hydrogen too.
 Its expected accelerated increase in mortality with age resembles the
-expectation for the percolation of ionized HII bubbles during the end
+expectation for the percolation of ionized hydrogen bubbles during the end
 stages of reionization.
 
 One way to uncover the universality is to view each $x_\HI$ scenario as
@@ -232,7 +232,7 @@ This rescaling naturally depends on cosmology.
 For example, a larger density of matter $\Omegam$ results in deeper
 potential wells, accelerating structure formation and increasing the
 number of ultraviolet photons driving the reionization process.
-We employ \texttt{PySR}, an SR package, to establish derive 
+We employ \texttt{PySR}, an SR package, to derive 
 the rescaling in \cref{eq:map}.
 
 While \texttt{PySR} initially guided us towards the Gompertz curve when
@@ -268,7 +268,7 @@ and $\ns$ in $\beta$ slightly reduces the impact of these trends.
 Surprisingly, \cref{eq:SR_a,eq:SR_b} suggests that higher $\Omegab$ delays
 reionization, likely due to more HI in the intergalactic medium requiring 
 additional ionizing photons. The ratio $\Omegab/\Omegam$ in $\alpha$ 
-supports this trend. Moreover, increasing $h$ slightly delays reionization,
+supports this view. Moreover, increasing $h$ slightly delays reionization,
 consistent with the expectation that galaxies and ionizing photons will be 
 more spread out. 
 
@@ -332,7 +332,7 @@ commanding improvement over previous constraints
 \includegraphics[width=0.66\linewidth]{figs/history.pdf}
 \caption{\textbf{Optical depth evolution $\tau(z)$ and reionization
 history $x_\HI(z)$.}
-Our best-fit gomp + SRFull model (green dashed line) of Planck + damping wing (DW) data is
+Our best-fit gomp + SRFull model (green dashed line) of Planck CMB data + quasar damping wing (DW) data is
 asymmetric and differs significantly from that of the symmetric $\tanh$
 model (blue lines, with dotted region representing the 1$\sigma$
 errors). Note $z$ is shown in logarithmic scale of $a^{-1}$.
