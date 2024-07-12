@@ -8,7 +8,7 @@
 To establish the universality of our proposed Gompertz model for the
 neutral hydrogen reionization and its relationship with the cosmological
 parameters, we conducted 128 \texttt{21cmFASTv3} simulations to generate
-the corresponding $x_\HI(z; \vtheta)$ profiles. 
+the corresponding $x_\HI(z; \vtheta)$ profiles.
 Our parameter space include $\vtheta = \{\sigma_8, \ns, h, \Omegab,
 \Omegam, \zetaUV\}$, comprising five cosmological and one astrophysical
 parameters.
@@ -32,15 +32,15 @@ Their 1D and 2D projections in \Cref{fig:sobol} illustrate the sample
 uniformity in parameter space.
 
 Most of the volume in a 6D sphere lies on its surface, thus we add 128
-simulations in the \emph{core} to reduce the theoretical error from the symbolic 
-regression. The core is defined within the 5$\sigma$ range of Ref.\cite{Planck2020a}. 
+simulations in the \emph{core} to reduce the theoretical error from the symbolic
+regression. The core is defined within the 5$\sigma$ range of Ref.\cite{Planck2020a}.
 
 Our \texttt{21cmFAST} simulations have a 300 comoving Mpc box size and
 $768^3$ ($256^3$) cells for the matter (HI) field.
 We maintain most options in their default values and extract the
 neutral hydrogen fraction using \texttt{lightcone.global\_xH}.
 
-\begin{figure}[tb] 
+\begin{figure}[tb]
 \centering
 \includegraphics[width=25em]{figs/sobol128.pdf}
 \caption{\textbf{Sobol sampling of our $x_\HI$ edge profiles}, in 6D
@@ -243,7 +243,7 @@ All such expressions lie on the lower convex hull of the Pareto front,
 as illustrated in \Cref{fig:pareto}.
 
 For the pivot $\ln\ap$, we find complexity 22 is enough for the MSE loss
-to reach $1.6 \times 10^{-5}$ (lower than sub-percent level error on average), 
+to reach $1.6 \times 10^{-5}$ (lower than sub-percent level error on average),
 so there is no need to use expressions more complex that that.
 For the tilt $\tilt$, complexity 25, corresponds to a loss $\approx 1.2\times10^{-3}$
 ($\sim 0.03\%$ error on average) \paulo{Update numbers}, while higher complexities
@@ -254,7 +254,7 @@ complexity 22 and 25, for $\ln\ap$ and $\tilt$, respectively.
 Our current selection for tilt and pivot could be a consequence of the
 astrophysical assumptions of reionization in \texttt{21cmFAST}.
 A more complex simulation, such as one involving radiative transfer or
-different X-ray preheating \cite{Montero2024}, might reveal a different 
+different X-ray preheating \cite{Montero2024}, might reveal a different
 mapping between $x_\HI$ profiles and cosmology.
 
 \begin{landscape}
@@ -277,16 +277,16 @@ for the different models.
 The numbers in parentheses give the marginalized 1$\sigma$ uncertainty
 in the last two significant digits.
 We highlight the best constraints in boldface, with improvements by
-factors of 5 and 2.3 on $\tau_\reio$ and $A_s$, respectively. We also 
-highlight our extremely competitive $\zetaUV$ constraint. 
+factors of 5 and 2.3 on $\tau_\reio$ and $A_s$, respectively. We also
+highlight our extremely competitive $\zetaUV$ constraint.
 The age of the Universe and $H_0$ are in unit of Gyr and km/s/Mpc,
 respectively, and $S_8 \equiv \sigma_8 \sqrt{\Omegam/0.3}$ as usual.}
 \makebox[\textwidth][c]{\footnotesize
 \renewcommand{\arraystretch}{1.3}
 \begin{tabular}{c *{3}{r} !{\hspace{.5em}} *{2}{r} !{\hspace{.5em}}  *{1}{r}}
 \toprule
- & \multicolumn{3}{c}{CMB} & \multicolumn{2}{c}{CMB + DW} & CMB + DW + LF \\ 
-\cmidrule(lr){2-4} \cmidrule(lr){5-6} 
+ & \multicolumn{3}{c}{CMB} & \multicolumn{2}{c}{CMB + DW} & CMB + DW + LF \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-6}
 Parameter & Planck PR3\cite{Planck2020a} & $\tanh$ & gomp  & gomp + SRFull & gomp + SRHalf  & gomp + SRFull  \\
 \midrule
 $10^{9} \As$ &  \sampled 2.100(30) & \sampled 2.099(30) & \sampled 2.101(31) & \textbf{2.094(13)} & \textbf{2.094(13)}  & 2.112(12) \\
@@ -330,7 +330,7 @@ our Gompertz universal shape ($\tanh$ model).}
 \includegraphics[width=\linewidth]{figs/gomp_tanh_triangle_tau.pdf}
 \caption{\textbf{Validation of our universal shape for $x_\HI$ in \cref{eq:uni,eq:poly} vs.\ the
 conventional $\tanh$ model using CMB data with sampling over $\tau_\reio$.}
-Note that we have not use our mapping from cosmology to $\tau_\reio$. 
+Note that we have not use our mapping from cosmology to $\tau_\reio$.
 Here, we use the standard choice of sampling
 over optical depth and obtain the corresponding reionization history via bisection.
 The green (blue) contours correspond to the constraints obtained with
@@ -358,26 +358,29 @@ For the pivot and tilt, we obtain
 \beta(\vtheta) &= \left( \frac{\zetaUV - \Omegam^{-1.583}}{\Omegab h }\right)^{0.3163}, \label{eq:SRHalf_b}
 \end{align}
 %
-with a training loss (complexity) of $1.1 \times 10^{-5}$ (22) and $3.7 \times 10^{-3}$ (11), respectively. 
-Overall, we obtain a square-rooted relative mean squared error of 0.9\% when 
-reproducing the simulated data (edge + core) with SRHalf. 
+with a training loss (complexity) of $1.1 \times 10^{-5}$ (22) and $3.7
+\times 10^{-3}$ (11), respectively.
+Overall, we obtain a square-rooted relative mean squared error of 0.9\% when
+reproducing the simulated data (edge + core) with SRHalf.
 Now we can test this on the other half of our $x_\HI$ sample and get a
-validation loss of $1.4 \times 10^{-4}$\paulo{update}, only slightly larger than the
-training loss implying we are safe from overfitting.
+validation loss of $2.2 \times 10^{-5}$ and $6.5 \times 10^{-3}$
+respectively, only slightly larger than the training loss on absolute
+scales implying we are safe from overfitting and supported by
+consistency of their MCMC results.
 
 Unsurprisingly, \cref{eq:SRHalf_a,eq:SRHalf_b} recover the cosmological trends
-discovered with SRFull. Specifically, increasing $\zetaUV$, $\ns$, $\Omegam$, 
-and $\sigma_8$ primarily leads to earlier reionization, 
+discovered with SRFull. Specifically, increasing $\zetaUV$, $\ns$, $\Omegam$,
+and $\sigma_8$ primarily leads to earlier reionization,
 while larger $\Omegab$ delays it. The ratio of
 matter densities appears in the pivot expression again. Notably, the
-role of $h$ generally shows the opposite trend in $\alpha$. 
+role of $h$ generally shows the opposite trend in $\alpha$.
 Furthermore, \cref{eq:SRHalf_b} excludes $\ns$
-and $\sigma_8$ because of our choice of complexity for SRHalf, 
+and $\sigma_8$ because of our choice of complexity for SRHalf,
 which, despite having a larger loss, still achieves mean squared errors
 comparable to SRFull when reproducing the simulated data.
 
 Replacing \cref{eq:SR_a,eq:SR_b} with \cref{eq:SRHalf_a,eq:SRHalf_b}, we rerun
-the analysis following the same approach, and summarize the results using 
+the analysis following the same approach, and summarize the results using
 CMB jointly with astrophysical data in \Cref{tab:uber-table}.
 Comparing these findings to our previous results, we observe strikingly
 similar values for all cosmological parameters, albeit with marginally smaller
@@ -390,51 +393,51 @@ mappings perform robustly and are not biasing the parameter inferences.
 \subsection*{Astrophysical data}
 \label{ssec:xHI}
 The increasing number of direct constraints on the reionization timeline
-enhances CMB analyses. \Cref{fig:history} includes upper limits from dark 
+enhances CMB analyses. \Cref{fig:history} includes upper limits from dark
 pixel constraints\cite{Jin2023} (high-$z$ quasars), a lower bound from
-the Ly$\alpha$ emission fraction\cite{Mesinger2015} (high-$z$ galaxies), 
-and an upper limit from the clustering of Ly$\alpha$ emitters\cite{Sobacchi2015} 
-(high-$z$ galaxies). It also presents constraints by Ly$\alpha$ equivalent width of Ly$\alpha$ 
-emitters\cite{Mason2018, Mason2019,  Hoag2019} (high-$z$ galaxies) and 
-quasar damping wings\cite{Greig2022, Greig2024, Spina2024, Durovcikova2024} 
-(high-$z$ quasars). Furthermore, it includes the indirect constraints on $x_\HI$ 
+the Ly$\alpha$ emission fraction\cite{Mesinger2015} (high-$z$ galaxies),
+and an upper limit from the clustering of Ly$\alpha$ emitters\cite{Sobacchi2015}
+(high-$z$ galaxies). It also presents constraints by Ly$\alpha$ equivalent width of Ly$\alpha$
+emitters\cite{Mason2018, Mason2019,  Hoag2019} (high-$z$ galaxies) and
+quasar damping wings\cite{Greig2022, Greig2024, Spina2024, Durovcikova2024}
+(high-$z$ quasars). Furthermore, it includes the indirect constraints on $x_\HI$
 through the evolution of the galaxy Ly$\alpha$ luminosity function\cite{Morales2021}.
 
-In this work, we supplement Planck CMB data with quasar damping wing (DW) 
+In this work, we supplement Planck CMB data with quasar damping wing (DW)
 constraints on $x_\HI$ (green pentagons in \Cref{fig:history}), reflecting
 our confidence in their robustness. Future studies could include luminosity
-function constraints with DW as more data becomes available, particularly 
+function constraints with DW as more data becomes available, particularly
 since its inclusion already can halve the error on $\tau_\reio$ and because more
 data will enhance our ability to marginalize over reionization astrophysics.
 
 
 \subsection*{MCMC inference}
 \label{ssec:fits}
-Our inference combines CMB with astrophysical data. \Cref{tab:uber-table} 
+Our inference combines CMB with astrophysical data. \Cref{tab:uber-table}
 summarizes the results obtained by performing MCMC
 Bayesian inference with \texttt{Cobaya} for the models considered
 throughout this work.
 We also include the Planck results \cite{Planck2020a} for reference.
 In total, we run one Gompertz and one $\tanh$ reionization models with
 CMB data and two extra Gompertz models using SR and astrophysical data
-jointly with CMB to map reionization to cosmological parameters by 
-marginalizing over $\zetaUV$. 
+jointly with CMB to map reionization to cosmological parameters by
+marginalizing over $\zetaUV$.
 When considering only CMB data, we sample
-the typical 6 cosmological parameters (see shaded parameters in 
+the typical 6 cosmological parameters (see shaded parameters in
 \Cref{tab:uber-table}), sampling $\tau_\reio$ and using bisection to obtain
-the reionization timeline. For $\tanh$, the bisection varies $z_\re$, 
-while for Gompertz we fix $\beta$ to the mean value (complexity 1 
-in \texttt{PySR} terms) and vary $\alpha$.  
+the reionization timeline. For $\tanh$, the bisection varies $z_\re$,
+while for Gompertz we fix $\beta$ to the mean value (complexity 1
+in \texttt{PySR} terms) and vary $\alpha$.
 Therefore, we do not use the mapping from reionization to cosmology --
-\cref{eq:SR_a,eq:SR_b} or alternatively \cref{eq:SRHalf_a,eq:SRHalf_b}. 
+\cref{eq:SR_a,eq:SR_b} or alternatively \cref{eq:SRHalf_a,eq:SRHalf_b}.
 
 In contrast, when astrophysical data is included, $\tanh$ samples over
 $z_\re$ instead of $\tau_\reio$ and an additional likelihood component
-is calculated in \texttt{Cobaya}.  
-For Gompertz, we do not sample any reionization parameter. Instead, we 
-use SRFull or SRHalf to map cosmology to reionization timeline and 
-include the additional likelihood component. Perhaps unsurprisingly, 
-$\tanh$ reionization does a poor job of fitting the astrophysical data, 
+is calculated in \texttt{Cobaya}.
+For Gompertz, we do not sample any reionization parameter. Instead, we
+use SRFull or SRHalf to map cosmology to reionization timeline and
+include the additional likelihood component. Perhaps unsurprisingly,
+$\tanh$ reionization does a poor job of fitting the astrophysical data,
 with a $\chi^2$ larger than Gompertz's by an order of magnitude,
 hence we do not show the $\tanh$ + CMB + DW results in
  \Cref{tab:uber-table}.
@@ -453,10 +456,10 @@ standard choice in \texttt{CosmoMC}\cite{Lewis2002}. Unsurprisingly,
 different reionization scenarios give similar values of $100\theta_\mathrm{s}$.
 
 Although \Cref{tab:uber-table} does not display an error in the midpoint of
-reionization for gomp + SRFull + CMB + DW nor gomp + SRHalf + CMB + DW models, 
-it is important to note that an error does exist. Unfortunately, it cannot be 
+reionization for gomp + SRFull + CMB + DW nor gomp + SRHalf + CMB + DW models,
+it is important to note that an error does exist. Unfortunately, it cannot be
 automatically computed with \texttt{Cobaya} because SRFull and SRHalf
-models do not sample over reionization parameters. Therefore, $z_\re$ 
+models do not sample over reionization parameters. Therefore, $z_\re$
 has no meaning in our Gompertz \texttt{CLASS}\footnote{This oversight
 can be corrected; however, it would require re-running the chains.}
 for models that take advantage of the mapping between cosmology
@@ -464,7 +467,7 @@ and reionization timeline.
 
 Remarkably, the inferred value of $S_8$ remains consistent across all reionization
 models, even when $\sigma_8$ and $\Omegam$ show small variations between
-models. This trend suggests that different reionization models neither alleviate 
+models. This trend suggests that different reionization models neither alleviate
 nor exacerbate the $S_8$ tension. While this observation holds for the Planck
 PR3 data and for CMB + DW, we anticipate that
 incorporating low-redshift Baryon Acoustic Oscillation (BAO) data may affect this
