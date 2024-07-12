@@ -2,5 +2,6 @@
 *.checkpoint
 *.covmat
 *.progress
-#*.input.yaml
+*.input.yaml
+*.input.yaml.locked
 *.updated.yaml
