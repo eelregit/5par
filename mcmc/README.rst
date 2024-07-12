@@ -48,6 +48,8 @@ Using various combinations of datasets:
     - lensA: ACT DR6
     - lensS: SPT 3G
 
+  + quasar damping wing data needed to pin down zeta_UV/tau_reio
+
 * BAO and/or SNe
 
   + baoD: DESI (alternative is baoS: SDSS eBOSS DR16)
