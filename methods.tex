@@ -261,11 +261,11 @@ mapping between $x_\HI$ profiles and cosmology.
 \begin{table}[t]
 %\begin{sidewaystable}
 \centering
-\caption{\textbf{Parameter constraints from Planck CMB and DW data.}
+\caption{\textbf{Parameter constraints from Planck CMB and astrophysical (DW) data.}
 Summary table of the constraints for representative parameters of the
 universal shape (Gompertz) and $\tanh$ reionization models.
 The constraints use CMB `TTTEEE' + lensing information alone or jointly
-with DW $x_\HI$ constraints.
+with quasar damping wing $x_\HI$ constraints.
 The results from Planck analysis \cite{Planck2020a} are included for
 comparison.
 The validation models are gomp and $\tanh$, gomp does not include
@@ -314,11 +314,12 @@ $\zetaUV$ & & & &  \sampled $\boldsymbol{26.9^{(2.1)}_{(2.5)}}$ & \sampled $\bol
 \begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{figs/gomp1dw_tanh_triangle_kill_full.pdf}
-\caption{\textbf{Analysis of CMB data treating $\tau_\reio$ as a derived
+\caption{\textbf{Analysis of CMB data and astrophysical data treating $\tau_\reio$ as a derived
 parameter using \cref{eq:uni,eq:poly,eq:map,eq:SR_a,eq:SR_b} vs.\ sampling it with
 the conventional $\tanh$ model.} Here gomp + SRFull combines our Gompertz universal
 shape with the rescaling pivot and tilt obtained via symbolic regression. Note that for
-gomp + SRFull we do not sample over $z_\re$ since \cref{eq:uni} does not depend on it.
+gomp + SRFull we do not sample over $z_\re$ since \cref{eq:uni} does not depend on it
+but we use the astrophysical data to marginalize over reionization astrophysics.
 The green (blue) contours correspond to the constraints obtained with
 our Gompertz universal shape ($\tanh$ model).}
 \label{fig:unleashed_gomp}
@@ -377,9 +378,9 @@ comparable to SRFull when reproducing the simulated data.
 
 Replacing \cref{eq:SR_a,eq:SR_b} with \cref{eq:SRHalf_a,eq:SRHalf_b}, we rerun
 the analysis following the same approach, and summarize the results using 
-CMB + DW in \Cref{tab:uber-table}.
+CMB jointly with astrophysical data in \Cref{tab:uber-table}.
 Comparing these findings to our previous results, we observe strikingly
-similar values for all cosmological parameters, albeit with smaller
+similar values for all cosmological parameters, albeit with marginally smaller
 deviations from the Planck results.
 The consistency between our results using the full $x_\HI$ sample and
 those using only half of it indicates that our symbolic expression
@@ -394,7 +395,7 @@ pixel constraints\cite{Jin2023} (high-$z$ quasars), a lower bound from
 the Ly$\alpha$ emission fraction\cite{Mesinger2015} (high-$z$ galaxies), 
 and an upper limit from the clustering of Ly$\alpha$ emitters\cite{Sobacchi2015} 
 (high-$z$ galaxies). It also presents constraints by Ly$\alpha$ equivalent width of Ly$\alpha$ 
-emitters\cite{Mason2018, Mason2018,  Hoag2019} (high-$z$ galaxies) and 
+emitters\cite{Mason2018, Mason2019,  Hoag2019} (high-$z$ galaxies) and 
 quasar damping wings\cite{Greig2022, Greig2024, Spina2024, Durovcikova2024} 
 (high-$z$ quasars). Furthermore, it includes the indirect constraints on $x_\HI$ 
 through the evolution of the galaxy Ly$\alpha$ luminosity function\cite{Morales2021}.
@@ -403,7 +404,8 @@ In this work, we supplement Planck CMB data with quasar damping wing (DW)
 constraints on $x_\HI$ (green pentagons in \Cref{fig:history}), reflecting
 our confidence in their robustness. Future studies could include luminosity
 function constraints with DW as more data becomes available, particularly 
-since its inclusion already can halve the error on $\tau_\reio$.
+since its inclusion already can halve the error on $\tau_\reio$ and because more
+data will enhance our ability to marginalize over reionization astrophysics.
 
 
 \subsection*{MCMC inference}
@@ -415,7 +417,8 @@ throughout this work.
 We also include the Planck results \cite{Planck2020a} for reference.
 In total, we run one Gompertz and one $\tanh$ reionization models with
 CMB data and two extra Gompertz models using SR and astrophysical data
-jointly with CMB to map reionization to cosmological parameters. 
+jointly with CMB to map reionization to cosmological parameters by 
+marginalizing over $\zetaUV$. 
 When considering only CMB data, we sample
 the typical 6 cosmological parameters (see shaded parameters in 
 \Cref{tab:uber-table}), sampling $\tau_\reio$ and using bisection to obtain
@@ -450,7 +453,7 @@ standard choice in \texttt{CosmoMC}\cite{Lewis2002}. Unsurprisingly,
 different reionization scenarios give similar values of $100\theta_\mathrm{s}$.
 
 Although \Cref{tab:uber-table} does not display an error in the midpoint of
-reionization for gomp + SRFull + CMB + DW nor gomp + SRHalf + CMB + DW runs, 
+reionization for gomp + SRFull + CMB + DW nor gomp + SRHalf + CMB + DW models, 
 it is important to note that an error does exist. Unfortunately, it cannot be 
 automatically computed with \texttt{Cobaya} because SRFull and SRHalf
 models do not sample over reionization parameters. Therefore, $z_\re$ 
