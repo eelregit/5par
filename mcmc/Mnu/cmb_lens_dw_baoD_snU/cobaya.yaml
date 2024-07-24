@@ -140,7 +140,7 @@ sampler:
     drag: true
     oversample_power: 0.4
     proposal_scale: 1.9
-    covmat: auto
+    covmat: base.covmat
     Rminus1_stop: 0.01
     Rminus1_cl_stop: 0.2
 output: mcmc
