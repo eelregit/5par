@@ -8,10 +8,16 @@ from matplotlib.colors import Normalize
 #var_names = ['s8', 'ns', 'h', 'Ob', 'Om', 'zt']
 #var_cols = [2, 3, 4, 5, 6, 7]
 a, x, *params = np.loadtxt('../xHI.txt', unpack=True)[:8]
-params = np.stack(params, axis=0)
+a_edge, x_edge, *params_edge = np.loadtxt('../xHI.txt', unpack=True)[:8]
+params_edge = np.stack(params_edge, axis=0)
+a_core, x_core, *params_core = np.loadtxt('../xHI_core.txt', unpack=True)[:8]
+params_core = np.stack(params_core, axis=0)
+a = np.concatenate((a_edge, a_core))
+x = np.concatenate((x_edge, x_core))
+params = np.concatenate((params_edge, params_core), axis=1)
 
-num_sim = 128
-num_a = 92  # 122 -> 102 -> 92,  padded zeros removed
+num_sim = 128 + 128
+num_a = 127
 a = a.reshape(num_sim, num_a)
 x = x.reshape(num_sim, num_a)
 params = params.reshape(6, num_sim, num_a)[..., 0]
@@ -32,12 +38,13 @@ def plot(lna, lna_pivot, tilt, x, xp, param):
     xp_rescaled = xp / tilt[:, None]
 
     s8, ns, h, Ob, Om, zt = params
-    param = Ob / Om
-    #param_label = '$\sigma_8$'
+    param = s8
+    param_label = '$\sigma_8$'
     #param_label = '$n_s$'
     #param_label = '$h$'
     #param_label = '$\Omega_\mathrm{b}$'
-    param_label = '$\Omega_\mathrm{b} / \Omega_\mathrm{m}$'
+    #param_label = '$\Omega_\mathrm{m}$'
+    #param_label = '$\Omega_\mathrm{b} / \Omega_\mathrm{m}$'
     #param_label = '$\zeta_\mathrm{eff}$'
 
     #norm = Normalize(0.74, 0.9)   # s8
@@ -48,7 +55,7 @@ def plot(lna, lna_pivot, tilt, x, xp, param):
     #norm = Normalize(15, 30)      # zt
     norm = Normalize(param.min(), param.max())
 
-    plt.style.use('../5par.mplstyle')
+    plt.style.use('../../5par.mplstyle')
     fig, axes = plt.subplots(nrows=3, sharex=True,
                              gridspec_kw={'wspace': 0, 'hspace': 0}, figsize=(3.5, 4))
 
@@ -77,7 +84,7 @@ def plot(lna, lna_pivot, tilt, x, xp, param):
     cbar = fig.colorbar(lines, ax=axes)
     cbar.ax.set_xlabel(param_label)
 
-    fig.savefig(f'shape_Lambda.pdf')
+    fig.savefig(f'shape_x.pdf')
     plt.close(fig)
 
 
