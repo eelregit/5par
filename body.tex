@@ -364,16 +364,13 @@ Extended Data for details.
 \includegraphics[width=0.66\linewidth]{figs/history.pdf}
 \caption{\textbf{Optical depth evolution $\tau(z)$ and reionization
 history $x_\HI(z)$.}
-\YL{(Use green dotted for SRFull, on top of, purple dashed SRHalf.
-I tried to do this myself but history.py confusingly require some
-tau files not in the repo, nor can I find the code to generate them)}
-Our best-fit gomp + SRFull model (green dashed line) of Planck CMB data
+Our best-fit gomp + SRFull model (green dotted line) of Planck CMB data
 + quasar damping wing (DW) data is asymmetric and differs significantly
 from that of the symmetric $\tanh$ model (blue lines, with dotted region
-representing the 1$\sigma$ errors).
+representing the 1$\sigma$ errors \YL{(dotted region?)}).
 Note $z$ is shown in logarithmic scale of $a^{-1}$.
 We also include an alternative mapping from cosmology to Gompertz
-timeline -- gomp + SRHalf -- in the purple dotted line (see
+timeline -- gomp + SRHalf -- in the purple dashed line (see
 \nameref{ssec:SRHalf}).
 The shaded regions in the upper panel correspond to the inferred range
 in $\tau_\reio$ from analyzing Planck PR3 data.
@@ -407,9 +404,10 @@ brighter galaxies to drive reionization, a role that in our
 \texttt{21cmFAST} simulations was attributed to a population of faint
 galaxies.
 
-We note that our results assume a flat Universe. Relaxing this assumption
-requires adding an extra parameter to the functional form of 
-$\tau$\cite{Anselmi2023}. Furthermore, our results are influenced by the semi-numerical
+We note that our results assume a flat Universe.
+Relaxing this assumption requires adding an extra parameter to the
+functional form of $\tau$ \cite{Anselmi2023}.
+Furthermore, our results are influenced by the semi-numerical
 prescription employed by \texttt{21cmFAST} to ionize the IGM, which,
 while efficient and swift, could bias our findings.
 Moreover, our exploration within the astrophysical framework of
