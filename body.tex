@@ -79,7 +79,7 @@ Theoretically, cosmic reionization is uniquely determined by cosmology,
 i.e.\ $x_\HI(z)$ is fully determined by the other five cosmological
 parameters.
 However, incomplete understanding of reionization obscures this mapping,
-necessitating the \YL{additional empirical parameter} $\tau_\reio$ in CMB
+necessitating the additional empirical parameter $\tau_\reio$ in CMB
 analyses.
 Since the inclusion of $\tau_\reio$ became a standard practice, our
 understanding of the astrophysical processes governing reionization has
@@ -91,7 +91,7 @@ Motivated by these developments, we use symbolic regression (SR)
 \cite{Cranmer2023} to construct a mapping between cosmology,
 astrophysics, and reionization timeline, aiming to demote $\tau_\reio$
 from an independent to a derived cosmological parameter and
-simultaneously tightening constraints in cosmological \YL{and astrophysical}
+simultaneously tightening constraints in cosmological and astrophysical
 parameters.
 This mapping can also shed light on reionization astrophysics and aid
 ongoing efforts in parametrizing reionization models \cite{Trac2018,
@@ -99,19 +99,16 @@ Trac2022, Paoletti2024} by including the cosmological dependence of
 $x_\HI$.
 
 Here, we present a universality in the neutral hydrogen time evolution
-\YL{related via a power-law transform}, and derive through SR \YL{the
-dependence of power-law parameters on cosmology and astrophysics} from
+related via a power-law transform, and derive through SR the
+dependence of power-law parameters on cosmology and astrophysics from
 simulated \texttt{21cmFAST} \cite{MesingerEtAl2011, Murray2020}
 reionization histories.
-We integrate this \YL{universally shaped reionization timeline} into
+We integrate this universally shaped reionization timeline into
 \texttt{CLASS} \cite{Blas2011}, a popular Boltzmann solver for CMB
 analyses.
 We then evaluate the modified \texttt{CLASS} alongside \texttt{Cobaya}
 \cite{Torrado2020}, a speed-aware sampler \cite{Lewis2002,
-Lewis2013}\footnote{With adaptive covariance learning and fast-dragging
-as in \cite{Neal2005}, enabling larger steps in slow parameters via
-intermediate transitions of fast parameters. \YL{Can we remove this
-cobaya advertisement which also collides with the citation superscripts?}}, showcasing its ability to
+Lewis2013}, showcasing its ability to
 recover parameter constraints from CMB data, including `TTTEEE' +
 lensing likelihoods \cite{Planck2020c, Planck2020d} (see \Cref{fig:tg}).
 Finally, combining CMB and astrophysical data, we marginalize over
@@ -138,22 +135,22 @@ Chain (MCMC).}
 \label{fig:big}
 \end{figure}
 
-We construct \YL{the} universal $x_\HI$ shape using \YL{256} Sobol samples
-of \texttt{21cmFAST} simulations\YL{, varying 5 cosmological parameters
+We construct the universal $x_\HI$ shape using 256 Sobol samples
+of \texttt{21cmFAST} simulations, varying 5 cosmological parameters
 and the astrophysical ionizing efficiency $\zetaUV$.
-The latter} modulates the timing of reionization by regulating the
+The latter modulates the timing of reionization by regulating the
 abundance of photons that escape into the IGM (see \nameref{ssec:sims}
 and \Cref{fig:sobol} in the Extended Data).
-All $x_\HI(a)$ profiles share \YL{the same} shape, with differences between
-scenarios being mere translations and rescalings \YL{in logarithmic scale
-factor $\ln a$}.
+All $x_\HI(a)$ profiles share the same shape, with differences between
+scenarios being mere translations and rescalings in logarithmic scale
+factor $\ln a$.
 Reionization causes $x_\HI$ to reduce from near 1 to effectively 0 via a
 sigmoid transition.
 The standard $\tanh$ function is symmetric in nature and not flexible
 enough to provide the early start and rapid completion suggested by
-reionization simulations \cite{Trac2018, Doussot2019} \YL{and favored by
-astrophysical data (see \Cref{fig:history}).}
-\YL{In contrast, the SR-inspired} Gompertz curve, an asymmetric sigmoid
+reionization simulations \cite{Trac2018, Doussot2019} and favored by
+astrophysical data (see \Cref{fig:history}).
+In contrast, the SR-inspired Gompertz curve, an asymmetric sigmoid
 function often used to analyze age-dependent human mortality
 \cite{Gompertz1825}, proves a good model for the survival of neutral
 hydrogen too.
@@ -207,7 +204,7 @@ reionization astrophysics.
 Also see \nameref{ssec:helium} for specifics on implementing HeI and
 HeII reionization.
 
-Before fully leveraging our \YL{methodology} to extract the \YL{parameter}
+Before fully leveraging our methodology to extract the parameter
 dependence in the rescaling of \cref{eq:uni} and relaxing the need for
 $\tau_\reio$ in CMB analyses, we first implement the Gompertz shape with
 independent $\tau_\reio$ in \texttt{CLASS} and confirm its agreement
@@ -218,13 +215,12 @@ Using Planck PR3 likelihoods `TTTEEE' \cite{Planck2020c} and CMB lensing
 \texttt{Cobaya} \cite{Torrado2020}, including $\tau_\reio$.
 Given a proposal for $\tau_\reio$, we determine the corresponding
 reionization timeline using bisection by varying $\ln\ap$ for gomp
-\YL{(while fixing ...?)},
-while for $\tanh$, the reionization midpoint $z_\re$ is the tuning
+while fixing $\beta$ to its mean value,
+meanwhile for $\tanh$, the reionization midpoint $z_\re$ is the tuning
 parameter.
 The sampler runs until the Gelman-Rubin statistic \cite{Gelman1992}
-satisfies $R - 1 < 0.2$ for the between-chain variance of the confidence
-intervals.
-\YL{(0.01? Also I am not sure about the interpretation or GR here)}
+satisfies $R - 1 < 0.01$ for the variance in parameter means from different chains.
+\paulo{Changed to R-1< 0.01, which has a different meaning than the R-1<0.2 final check.}
 We repeat this for $\tanh$ and verify the agreement between the two
 models.
 
@@ -236,14 +232,14 @@ $1\sigma$, with $z_\re = 6.76 \pm 0.67$ compared to $7.67 \pm 0.75$ for
 $\tanh$, in alignment with recent high-$z$ quasar observations
 \cite{Keating2020}.
 All other cosmological parameters are in good agreement with Planck's
-results \cite{Planck2020a}, with \YL{differences} $\lessapprox 0.5 \%$.
+results \cite{Planck2020a}, with differences $\lessapprox 0.5 \%$.
 
-\YL{Having demonstrated that the universally shaped reionization can
-reproduce standard CMB analyses,} we move to establish the connection
+Having demonstrated that the universally shaped reionization can
+reproduce standard CMB analyses, we move to establish the connection
 between the universal shape for $x_\HI$ and the rescaling of a given
 reionization scenario.
 We refer to this model as gomp + SRFull.
-This rescaling naturally depends on cosmology \YL{and astrophysics}.
+This rescaling naturally depends on cosmology and astrophysics.
 For example, a larger matter density $\Omegam$ results in deeper
 potential wells, accelerating structure formation and increasing the
 number of ultraviolet photons driving the reionization process.
@@ -276,9 +272,9 @@ baryon and matter density fractions, respectively.
 $\sigma_8$ is the present linear rms relative density fluctuation in a
 sphere of radius $8 \, h^{-1}$Mpc.
 
-\cref{eq:map,eq:SR_a,eq:SR_b} \YL{are analytic expressions and thus
+\cref{eq:map,eq:SR_a,eq:SR_b} are analytic expressions and thus
 interpretable.
-For example,} higher values of $\Omegam$, $\sigma_8$, and $\zetaUV$
+For example, higher values of $\Omegam$, $\sigma_8$, and $\zetaUV$
 hasten reionization by enhancing structure formation and increasing the
 abundance of ionizing photons.
 Similarly, larger $\ns$ primarily expedites reionization by boosting
@@ -286,17 +282,14 @@ power on small scales, leading to more ionizing sources and earlier
 completion \cite{Montero2021}.
 Keep in mind that our \texttt{21cmFAST} simulations assume that faint
 galaxies are the primary drivers of reionization.
-Note that the role of $\sigma_8$ and $\ns$ in $\beta$ slightly reduces
-the impact of these trends.
-\YL{(what trends? last 2 sentence for what purpose?)}
 Surprisingly, \cref{eq:SR_a,eq:SR_b} suggests that higher $\Omegab$
 delays reionization, likely due to more HI in the intergalactic medium
 requiring additional ionizing photons.
 The ratio $\Omegab/\Omegam$ in $\alpha$ supports this view.
 Moreover, increasing $h$ slightly delays reionization, consistent with
+an increase in physical baryon density and
 the expectation that galaxies and ionizing photons will be more spread
 out.
-\YL{(increasing $h$ also increases physical baryon density)}
 
 We note that within the prior range of our \texttt{21cmFAST} simulations
 (see \nameref{ssec:sims}) and their corresponding astrophysics of
@@ -312,17 +305,15 @@ the pivot and tilt values, and consequently the reionization history,
 $\tau_\reio$, and CMB angular power spectra.
 This gomp + SRFull model eliminates the need to sample over $\tau_\reio$
 (or $z_\re$), requiring only five cosmological parameters and $\zetaUV$.
-The advantage of sampling over $\zetaUV$ instead of $\tau_\reio$ is that
-powerful astrophysical constraints on $x_\HI$ can be used to marginalize
-over $\zetaUV$.
-\YL{(sounds strange to mention marginalization before constraining)}
 Moreover, thanks to SR, the model can constrain $\zetaUV$ using CMB data
 directly, a link that was not utilized in previous efforts
 \cite{Greig2017}.
-\YL{(need be careful because direct constraining power from DW)}
+The advantage of sampling over $\zetaUV$ instead of $\tau_\reio$ is that
+powerful astrophysical constraints on $x_\HI$ can be used to marginalize 
+over $\zetaUV$.
 We use \texttt{Cobaya} to re-analyze the same CMB data and include
 astrophysical data (see \nameref{ssec:xHI} of the Extended Data) to
-effectively \YL{constrain and} marginalize over $\zetaUV$.
+effectively constrain and marginalize over $\zetaUV$.
 
 \begin{figure}[tb]
 \centering
@@ -332,7 +323,7 @@ reionization as a function of cosmology and astrophysics.}
 The green contours represent our results using the Gompertz reionization
 model with \cref{eq:SR_a,eq:SR_b}, which eliminates the need to sample
 over any conventional reionization parameter and uses quasar damping
-wing data on $x_\HI$ to \YL{constrain and} marginalize over reionization
+wing data on $x_\HI$ to constrain and marginalize over reionization
 astrophysics.
 The blue contours correspond to the results obtained using the
 conventional $\tanh$ model, while the relevant Planck constraints
@@ -368,7 +359,7 @@ Our best-fit gomp + SRFull model (green dotted line) of Planck CMB data
 + quasar damping wing (DW) data is asymmetric and differs significantly
 from that of the symmetric $\tanh$ model (blue solid line).
 Note $z$ is shown in logarithmic scale of $a^{-1}$.
-We also include an alternative mapping from \YL{physical parameters} to
+We also include an alternative mapping from physical parameters to
 Gompertz timeline -- gomp + SRHalf -- in the purple dashed line (see
 \nameref{ssec:SRHalf}).
 The shaded regions in the upper panel correspond to the inferred range
@@ -381,16 +372,16 @@ Our results suggest that Planck data favors a delayed reionization
 compared to other CMB-based constraints (in a $\chi^2$-sense).
 Our best-fit cosmological parameters indicate a midpoint of $z_\re =
 6.98$ and a duration of $\Delta z \equiv z(x_\HI = 0.05) - z(x_\HI =
-0.95) \approx 560 $ Myr, \YL{consistent with our previous constraint
-without SR.}
+0.95) \approx 560 $ Myr, consistent with our previous constraint
+without SR.
 While our results align with late reionization observations, the
 difference from $\tanh$ is within 1$\sigma$.
 The duration of reionization, though better suited to observational
 constraints compared to $\tanh$, might still be considered somewhat
 rapid in the context of late reionization scenarios \cite{Cain2021}.
 \Cref{fig:history} illustrates the reionization timeline derived from
-our best-fit values\YL{, in contrast with the poor fit of symmetric $\tanh$
-to the astrophysical data}.
+our best-fit values, in contrast with the poor fit of symmetric $\tanh$
+to the astrophysical data.
 
 Our findings for the timeline of reionization align with late
 reionization scenarios, which are supported by high-$z$ Lyman-$\alpha$
@@ -413,15 +404,16 @@ Moreover, our exploration within the astrophysical framework of
 \texttt{21cmFAST} has been limited to varying the ionization efficiency
 (see \nameref{ssec:sims} in the Extended Data).
 Therefore, a more comprehensive exploration is warranted to ensure, for
-instance, that the choice of rescaling does not bias cosmological
-analyses. \YL{(what choice? maybe mention the bigger param space we are working on?)}
+instance, that our findings for $\alpha$ and $\beta$ will not bias cosmological
+analyses when incorporating additional astrophysical parameters, like
+the minimum halo mass that host ionizing sources. 
 Additionally, a valuable exercise to refine the inherent relationship
 between cosmological parameters and reionization history would involve
 using more realistic, albeit slower, reionization models.
 One such option is to use the THESAN simulations \cite{Kannan2022},
 which are hydrodynamical simulations incorporating radiative transfer.
 
-Throughout this work we considered only DW \YL{for astrophysical} data,
+Throughout this work we considered only DW for astrophysical data,
 but including current luminosity function constraints can already halve
 the error on $\tau_\reio$.
 Hence, as reionization constraints improve, we anticipate substantial
