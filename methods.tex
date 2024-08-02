@@ -50,9 +50,9 @@ neutral hydrogen fraction using \texttt{lightcone.global\_xH}.
 \caption{\textbf{Sobol design for our $x_\HI$ edge and core samples},
 in 6D parameter space of $\sigma_8$, $\ns$, $h$, $\Omegab$, $\Omegam$,
 and $\zetaUV$.
-Each point in the lower triangular panels corresponds to the 2D
-projection of a \texttt{21cmFAST} run, while the diagonal panels show
-the 1D cumulative histograms for each parameter.
+Each of the 128 points in the lower triangular panels corresponds to the
+2D projection of one core and one edge \texttt{21cmFAST} runs, while the
+diagonal panels show the 1D cumulative histograms for each parameter.
 These 1D and 2D projections demonstrate the uniformity of our sampling
 of the parameter space within the edge prior range of \cref{eq:prior},
 as well as in the core area surrounding the Planck PR3 constraint.}
@@ -251,7 +251,7 @@ For the pivot $\ln\ap$, we find complexity 22 is enough for the MSE loss
 to reach $1.6 \times 10^{-5}$ (lower than sub-percent level error on
 average), so there is no need to use expressions more complex that that.
 For the tilt $\tilt$, complexity 25, corresponds to a loss $\approx
-1.2\times10^{-3}$ ($\sim 0.05\%$ error on average), while higher
+1.2\times10^{-3}$ ($\lesssim 0.05\%$ error on average), while higher
 complexities can help but very slowly.
 Therefore, based on the economic heuristic, we choose expressions of
 complexity 22 and 25, for $\ln\ap$ and $\tilt$, respectively.
@@ -261,95 +261,6 @@ astrophysical assumptions of reionization in \texttt{21cmFAST}.
 A more complex simulation, such as one involving radiative transfer or
 different X-ray preheating \cite{Montero2024}, might reveal a different
 mapping between physical parameters and $x_\HI$ profiles.
-
-%\begin{landscape}
-%\begin{sidewaystable}  % instead of table
-\begin{table}[t]
-\centering
-\caption{\textbf{Parameter constraints from Planck CMB and astrophysical
-(DW) data.}
-Summary table of the constraints for representative parameters of the
-universal shape (Gompertz) and $\tanh$ reionization models.
-The constraints use CMB `TTTEEE' + lensing information alone or jointly
-with quasar damping wing $x_\HI$ constraints.
-The results from Planck analysis \cite{Planck2020a} are included for
-comparison.
-The validation models are gomp and $\tanh$, gomp does not include the
-cosmological and astrophysical dependences present in the timeline
-of reionization.
-In contrast, gomp + SRFull, and the alternative mapping gomp + SRHalf,
-both include the additional parameter dependences in the reionization
-timeline.
-The shaded cells highlight the parameters that are sampled over by MCMC
-for the different models.
-The numbers in parentheses give the marginalized 1$\sigma$ uncertainty
-in the last two significant digits.
-We highlight the best constraints in boldface, with improvements by
-factors of 5 and 2.3 on $\tau_\reio$ and $A_s$, respectively.
-We also highlight our extremely competitive $\zetaUV$ constraint.
-The age of the Universe and $H_0$ are in unit of Gyr and km/s/Mpc,
-respectively, and $S_8 \equiv \sigma_8 \sqrt{\Omegam/0.3}$ as usual.}
-\makebox[\textwidth][c]{\small
-\renewcommand{\arraystretch}{1.3}
-\begin{tabular}{c *{3}{r} !{\hspace{.5em}} *{2}{r} }% !{\hspace{.5em}} *{1}{r}}
-\toprule
- & \multicolumn{3}{c}{CMB} & \multicolumn{2}{c}{CMB + DW} \\% & CMB + DW + LF \\
-\cmidrule(lr){2-4} \cmidrule(lr){5-6} % \cmidrule(lr){7-7}
-Parameter & Planck PR3\cite{Planck2020a} & $\tanh$ & gomp & gomp + SRFull & gomp + SRHalf \\% & gomp + SRFull \\
-\midrule
-$10^{9} \As$ & \sampled 2.100(30) & \sampled 2.099(30) & \sampled 2.101(31) & \textbf{2.094(13)} & \textbf{2.094(13)} \\% & 2.112(12) \\
-$\ns$ & \sampled 0.9649(42) & \sampled 0.9641(42) & \sampled 0.9640(42) & \sampled 0.9636(39) & \sampled 0.9637(39) \\% & \sampled 0.9646(38) \\
-$\Omegac h^2$ & \sampled 0.1200(12) & \sampled 0.1201(12) & \sampled 0.1200(12) & \sampled 0.1202(11) & \sampled 0.1202(11) \\% & \sampled 0.1202(10) \\
-$\Omegab h^2$ & \sampled 0.02237(15) & \sampled 0.02235(15) & \sampled 0.02235(15) & \sampled 0.02234(14) & \sampled 0.02234(14) \\% & \sampled 0.02234(14) \\
-$\Omegam$ & 0.3153(73) & 0.3157(76) & 0.3155(75) & 0.3166(69) & 0.3163(69) \\% & 0.3162(63) \\
-$\Omegam h^2$ & 0.1430(11) & 0.1430(11) & 0.1430(11) & 0.1432(10) & 0.1431(10) ) \\% & 0.14314(96) \\
-$\OmegaL$ & 0.6847(73) & 0.6842(76) & 0.6845(75) & 0.6833(69) & 0.6836(69) \\% & 0.6837(63) \\
-Age & 13.797(23) & 13.800(23) & 13.799(23) & 13.802(22) & 13.801(22) \\% & 13.801(21) \\
-$H_0$ & 67.36(54) & 67.32(55) & 67.34(55) & \sampled 67.26(50) & \sampled 67.28(50) \\% & \sampled 67.29(46) \\
-$100 \theta_\mathrm{X}$ & \sampled 1.04092(31) & \sampled 1.04185(29) & \sampled 1.04185(29) & 1.04184(29) & 1.04184(29) \\% & 1.04185(29) \\
-$\sigma_8$ & 0.8111(60) & 0.8108(60) & 0.8109(60) & \sampled 0.8100(44) & \sampled 0.8099(44) \\% & \sampled 0.8138(40) \\
-$S_8$ & 0.832(13) & 0.832(13) & 0.832(13) & 0.832(13) & 0.832(13) \\% & 0.836(12) \\
-$\tau_\reio$ & \sampled 0.0544(73) & \sampled 0.0543(75) & \sampled 0.0547(76) & \textbf{0.0526(15)} & $\mathbf{0.0527^{+(14)}_{-(16)}}$ \\% & $0.05720_{(77)}^{(88)}$ \\
-$z_\re$ & 7.67(73) & 7.67(75) & 6.76(67) & 6.98 & 6.99 \\% & 7.45 \\
-$\zetaUV$ & & & & \sampled $\mathbf{26.9^{+2.1}_{-2.5}}$ & \sampled $\mathbf{27.0^{+2.1}_{-2.5}}$ \\% & \sampled $>32.8$ \\
-\bottomrule
-\end{tabular}}
-\label{tab:uber-table}
-\end{table}
-%\end{sidewaystable}  % instead of table
-%\end{landscape}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\linewidth]{figs/gomp1dw_tanh_triangle_kill_full.pdf}
-\caption{\textbf{Analysis of CMB data and astrophysical data treating
-$\tau_\reio$ as a derived parameter using
-\cref{eq:uni,eq:poly,eq:map,eq:SR_a,eq:SR_b} vs.\ sampling it with the
-conventional $\tanh$ model.}
-Here gomp + SRFull combines our Gompertz universal shape with the
-rescaling pivot and tilt obtained via symbolic regression.
-Note that for gomp + SRFull we do not sample over $z_\re$, since
-\cref{eq:uni} does not depend on it but we use the astrophysical data to
-constrain and marginalize over reionization astrophysics.
-The green (blue) contours correspond to the constraints obtained with
-our Gompertz universal shape ($\tanh$ model).}
-\label{fig:unleashed_gomp}
-\end{figure}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\linewidth]{figs/gomp_tanh_triangle_tau.pdf}
-\caption{\textbf{Validation of our universal shape for $x_\HI$ in
-\cref{eq:uni,eq:poly} vs.\ the conventional $\tanh$ model using CMB data
-with sampling over $\tau_\reio$.}
-Note that we have not use our mapping from physical parameters to
-$\tau_\reio$.
-Here, we use the standard choice of sampling over optical depth and
-obtain the corresponding reionization history via bisection.
-The green (blue) contours correspond to the constraints obtained with
-our gomp ($\tanh$) model.}
-\label{fig:tg}
-\end{figure}
 
 
 \subsection*{Alternative mapping}
@@ -381,8 +292,8 @@ For the pivot and tilt, we obtain
 with a training loss (complexity) of $1.1 \times 10^{-5}$ (22) and $3.7
 \times 10^{-3}$ (11), respectively.
 Overall, we obtain a relative root mean squared error of 0.9\% when
-reproducing the simulated optical depths from the $x_\HI$ 
-(edge + core) with SRHalf.
+reproducing the simulated optical depths from the $x_\HI$ (edge + core)
+with SRHalf.
 Now we can test this on the other half of our $x_\HI$ sample and get a
 validation loss of $2.2 \times 10^{-5}$ and $6.5 \times 10^{-3}$
 respectively, only slightly larger than the training loss on absolute
@@ -441,6 +352,64 @@ astrophysics.
 We opt not to include the LF constraints on $x_\HI$ in this work as they
 are in slight tension with the DW data at the current stage
 (\Cref{fig:history}).
+
+
+%\begin{landscape}
+%\begin{sidewaystable}  % instead of table
+\begin{table}[!t]
+\centering
+\caption{\textbf{Parameter constraints from Planck CMB and astrophysical
+(DW) data.}
+Summary table of the constraints for representative parameters of the
+universal shape (Gompertz) and $\tanh$ reionization models.
+The constraints use CMB `TTTEEE' + lensing information alone or jointly
+with quasar damping wing $x_\HI$ constraints.
+The results from Planck analysis \cite{Planck2020a} are included for
+comparison.
+The validation models are gomp and $\tanh$, gomp does not include the
+cosmological and astrophysical dependences present in the timeline
+of reionization.
+In contrast, gomp + SRFull, and the alternative mapping gomp + SRHalf,
+both include the additional parameter dependences in the reionization
+timeline.
+The shaded cells highlight the parameters that are sampled over by MCMC
+for the different models.
+The numbers in parentheses give the marginalized 1$\sigma$ uncertainty
+in the last two significant digits.
+We highlight the best constraints in boldface, with improvements by
+factors of 5 and 2.3 on $\tau_\reio$ and $A_s$, respectively.
+We also highlight our extremely competitive $\zetaUV$ constraint.
+The age of the Universe and $H_0$ are in unit of Gyr and km/s/Mpc,
+respectively, and $S_8 \equiv \sigma_8 \sqrt{\Omegam/0.3}$ as usual.}
+\makebox[\textwidth][c]{\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{c *{3}{r} !{\hspace{.5em}} *{2}{r} }% !{\hspace{.5em}} *{1}{r}}
+\toprule
+ & \multicolumn{3}{c}{CMB} & \multicolumn{2}{c}{CMB + DW} \\% & CMB + DW + LF \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-6} % \cmidrule(lr){7-7}
+Parameter & Planck PR3\cite{Planck2020a} & $\tanh$ & gomp & gomp + SRFull & gomp + SRHalf \\% & gomp + SRFull \\
+\midrule
+$10^{9} \As$ & \sampled 2.100(30) & \sampled 2.099(30) & \sampled 2.101(31) & \textbf{2.094(13)} & \textbf{2.094(13)} \\% & 2.112(12) \\
+$\ns$ & \sampled 0.9649(42) & \sampled 0.9641(42) & \sampled 0.9640(42) & \sampled 0.9636(39) & \sampled 0.9637(39) \\% & \sampled 0.9646(38) \\
+$\Omegac h^2$ & \sampled 0.1200(12) & \sampled 0.1201(12) & \sampled 0.1200(12) & \sampled 0.1202(11) & \sampled 0.1202(11) \\% & \sampled 0.1202(10) \\
+$\Omegab h^2$ & \sampled 0.02237(15) & \sampled 0.02235(15) & \sampled 0.02235(15) & \sampled 0.02234(14) & \sampled 0.02234(14) \\% & \sampled 0.02234(14) \\
+$\Omegam$ & 0.3153(73) & 0.3157(76) & 0.3155(75) & 0.3166(69) & 0.3163(69) \\% & 0.3162(63) \\
+$\Omegam h^2$ & 0.1430(11) & 0.1430(11) & 0.1430(11) & 0.1432(10) & 0.1431(10) ) \\% & 0.14314(96) \\
+$\OmegaL$ & 0.6847(73) & 0.6842(76) & 0.6845(75) & 0.6833(69) & 0.6836(69) \\% & 0.6837(63) \\
+Age & 13.797(23) & 13.800(23) & 13.799(23) & 13.802(22) & 13.801(22) \\% & 13.801(21) \\
+$H_0$ & 67.36(54) & 67.32(55) & 67.34(55) & \sampled 67.26(50) & \sampled 67.28(50) \\% & \sampled 67.29(46) \\
+$100 \theta_\mathrm{X}$ & \sampled 1.04092(31) & \sampled 1.04185(29) & \sampled 1.04185(29) & 1.04184(29) & 1.04184(29) \\% & 1.04185(29) \\
+$\sigma_8$ & 0.8111(60) & 0.8108(60) & 0.8109(60) & \sampled 0.8100(44) & \sampled 0.8099(44) \\% & \sampled 0.8138(40) \\
+$S_8$ & 0.832(13) & 0.832(13) & 0.832(13) & 0.832(13) & 0.832(13) \\% & 0.836(12) \\
+$\tau_\reio$ & \sampled 0.0544(73) & \sampled 0.0543(75) & \sampled 0.0547(76) & \textbf{0.0526(15)} & $\mathbf{0.0527^{+(14)}_{-(16)}}$ \\% & $0.05720_{(77)}^{(88)}$ \\
+$z_\re$ & 7.67(73) & 7.67(75) & 6.76(67) & 6.98 & 6.99 \\% & 7.45 \\
+$\zetaUV$ & & & & \sampled $\mathbf{26.9^{+2.1}_{-2.5}}$ & \sampled $\mathbf{27.0^{+2.1}_{-2.5}}$ \\% & \sampled $>32.8$ \\
+\bottomrule
+\end{tabular}}
+\label{tab:uber-table}
+\end{table}
+%\end{sidewaystable}  % instead of table
+%\end{landscape}
 
 
 \subsection*{MCMC inference}
@@ -515,5 +484,36 @@ Future work will explore the implications of Gompertz reionization for
 the joint analysis of CMB and low-redshift data.
 
 
-\YL{FIXME: rearrange floats and barriers at the end}
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figs/gomp1dw_tanh_triangle_kill_full.pdf}
+\caption{\textbf{Analysis of CMB data and astrophysical data treating
+$\tau_\reio$ as a derived parameter using
+\cref{eq:uni,eq:poly,eq:map,eq:SR_a,eq:SR_b} vs.\ sampling it with the
+conventional $\tanh$ model.}
+Here gomp + SRFull combines our Gompertz universal shape with the
+rescaling pivot and tilt obtained via symbolic regression.
+Note that for gomp + SRFull we do not sample over $z_\re$, since
+\cref{eq:uni} does not depend on it but we use the astrophysical data to
+constrain and marginalize over reionization astrophysics.
+The green (blue) contours correspond to the constraints obtained with
+our Gompertz universal shape ($\tanh$ model).}
+\label{fig:unleashed_gomp}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figs/gomp_tanh_triangle_tau.pdf}
+\caption{\textbf{Validation of our universal shape for $x_\HI$ in
+\cref{eq:uni,eq:poly} vs.\ the conventional $\tanh$ model using CMB data
+with sampling over $\tau_\reio$.}
+Note that we have not use our mapping from physical parameters to
+$\tau_\reio$.
+Here, we use the standard choice of sampling over optical depth and
+obtain the corresponding reionization history via bisection.
+The green (blue) contours correspond to the constraints obtained with
+our gomp ($\tanh$) model.}
+\label{fig:tg}
+\end{figure}
+
 \FloatBarrier
