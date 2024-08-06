@@ -212,12 +212,22 @@ expressions composed of specified operations, input variables, and free
 constants.
 It is NP-hard \cite{SongEtAl2024, VirgolinPissis2022} and typically need
 genetic or deep learning-based algorithms.
+
+To the authors' knowledge, the first application of SR in astronomy was 
+the rediscovery of classical astronomical relationships, such as the fundamental
+plane of elliptical galaxies\cite{Graham2013}. Since then, recent works 
+have focused on using SR to uncover new physical relations, for instance,
+identifying possible inflationary potentials\cite{Sousa2024} and predicting
+$\Omegam$ from halo catalogs\cite{Shao2023}. For additional examples of 
+SR-driven discoveries, interested readers are directed to
+\url{https://astroautomata.com/PySR/papers/}.
+
+
 In this work, we use the \texttt{PySR} package \cite{Cranmer2020b,
 Cranmer2023} which performs SR optimizations using a multi-population
 genetic algorithm.
 \YLtodo[inline]{Miles, it'd be great if you can refine/rewrite the SR
-and PySR intro}
-
+and PySR intro} 
 With \texttt{PySR}, we search for symbolic expressions that take the 6
 parameters in \Cref{fig:sobol} as inputs and output $\ln\ap$ or $\tilt$,
 to minimize the MSE loss.
