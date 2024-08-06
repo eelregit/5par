@@ -222,10 +222,9 @@ $\Omegam$ from halo catalogs\cite{Shao2023}. For additional examples of
 SR-driven discoveries, interested readers are directed to
 \url{https://astroautomata.com/PySR/papers/}.
 
-
 In this work, we use the \texttt{PySR} package \cite{Cranmer2020b,
 Cranmer2023} which performs SR optimizations using a multi-population
-genetic algorithm.
+genetic algorithm and using the BFGS algorithm for optimizing constants\cite{Wright2006}. 
 \YLtodo[inline]{Miles, it'd be great if you can refine/rewrite the SR
 and PySR intro} 
 With \texttt{PySR}, we search for symbolic expressions that take the 6
@@ -235,7 +234,11 @@ Here, the search space is the set of expressions composed of 5 binary
 operators ($+$, $-$, $\cdot$, $/$, and power function) and 2 unary
 operators ($\exp$ and $\ln$).
 Each expression naturally takes the form of a binary tree, and the total
-number of nodes is a measure of its complexity.
+number of nodes is used as a coarse heuristic for the \emph{complexity}
+of a symbolic expression. Note that since we make a choice for the 
+operators used in our search, we are implicitly generating a prior over
+the space of expressions, such that it looks similar to existing models 
+described with these operators -- as is much of physics.
 We use 512 \texttt{PySR} populations each having 33 expressions, and
 optimize for 20000 iterations each with 10000 cycles.
 \YLtodo[inline]{Miles, could you translate this into some brief
@@ -254,8 +257,9 @@ favorably in power-law trade-offs of the form
 \mathrm{loss}^{1 - \gamma} \cdot \mathrm{complexity}^\gamma
 = \mathrm{const}, \quad \forall \gamma \in (0, 1).
 \end{equation}
-All such expressions lie on the lower convex hull of the Pareto front,
-as illustrated in \Cref{fig:pareto}.
+All such expressions lie on the lower convex hull\footnote{This aid for model 
+selection is similar to the concept of hypervolume of the Pareto front used in 
+\cite{Cao2015}.} of the Pareto front, as illustrated in \Cref{fig:pareto}.
 
 For the pivot $\ln\ap$, we find complexity 22 is enough for the MSE loss
 to reach $1.6 \times 10^{-5}$ (lower than sub-percent level error on
@@ -317,6 +321,8 @@ primarily leads to earlier reionization, while larger $\Omegab$ delays
 it.
 The ratio of matter densities appears in the pivot expression again.
 Notably, the role of $h$ generally shows the opposite trend in $\alpha$.
+We note that these parameter trends are also generally present in 
+lower complexity expressions in the Pareto front.  
 Furthermore, \cref{eq:SRHalf_b} excludes $\ns$ and $\sigma_8$ because of
 our choice of complexity for SRHalf, which, despite having a larger
 loss, still achieves mean squared errors comparable to SRFull when
