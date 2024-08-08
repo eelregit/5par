@@ -280,6 +280,21 @@ def dtau_SR2(z, s8, ns, h, Ob, Om, zt):
 def tau_SR2(s8, ns, h, Ob, Om, zt):
     return quad(dtau_SR2, 0.000, 15, args=(s8, ns, h, Ob, Om, zt), limit=100, epsabs=1.49e-05, epsrel=1.49e-05)[0]
 
+#  for robust gomp we want to see fit tau too, add it here
+def dtau_fi(z, i_sim):
+    aa = z_to_a(z)
+    piv = pivot_a[i]
+    til = tilt_a[i]
+    xHI = fit_xHI(np.log(aa), piv, til)
+    if xHI >= 0.990:
+        xHI = 1.
+    E_z = np.sqrt(Om[i_sim, 0] * (1. + z)**3 + (1 - Om[i_sim, 0]))
+    dtau = (1. - xHI) * 0.0691 * (Ob[i_sim, 0] * h[i_sim, 0]**2) * (1. + z)**2 / (MU * h[i_sim, 0] * E_z)
+    return dtau
+
+def tau_fi(i_sim):
+    return quad(dtau_fi, 0.000, 15, args=(i_sim), limit=100, epsabs=1.49e-05, epsrel=1.49e-05)[0]
+
 
 # we also need the x values
 def dtau_x(z, i_sim):
@@ -304,23 +319,29 @@ def tau_x(i_sim):
 tau_gomp1 = np.zeros(num_sim)
 tau_gomp2 = np.zeros(num_sim)
 tau_xx = np.zeros(num_sim)
+tau_fit = np.zeros(num_sim)
 MSE_gomp1 = 0
 MSE_gomp2 = 0
+MSE_fit = 0
 MAE_gomp1 = 0
 MAE_gomp2 = 0
-c_gomp1 = np.zeros(num_sim)
-c_gomp2 = np.zeros(num_sim)
+MAE_fit = 0
+#c_gomp1 = np.zeros(num_sim)
+#c_gomp2 = np.zeros(num_sim)
 for i in range(0, num_sim):
     tau_gomp1[i] = tau_SR1(s8[i,0], ns[i,0], h[i,0], Ob[i,0], Om[i,0], zt[i,0])
     tau_gomp2[i] = tau_SR2(s8[i,0], ns[i,0], h[i,0], Ob[i,0], Om[i,0], zt[i,0])
     tau_xx[i] = tau_x(i)
+    tau_fit[i] = tau_fi(i)
     MSE_gomp1 += (tau_gomp1[i] - tau_xx[i])**2 / tau_xx[i]**2
     MAE_gomp1 += np.abs(tau_gomp1[i] - tau_xx[i]) / tau_xx[i]
     MSE_gomp2 += (tau_gomp2[i] - tau_xx[i])**2 / tau_xx[i]**2
     MAE_gomp2 += np.abs(tau_gomp2[i] - tau_xx[i]) / tau_xx[i]
+    MSE_fit += (tau_fit[i] - tau_xx[i])**2 / tau_xx[i]**2
+    MAE_fit += np.abs(tau_fit[i] - tau_xx[i]) / tau_xx[i]
     # fishing for outliers
-    c_gomp1[i] = np.abs(tau_gomp1[i] - tau_xx[i]) / tau_xx[i]
-    c_gomp2[i] = np.abs(tau_gomp2[i] - tau_xx[i]) / tau_xx[i]
+#    c_gomp1[i] = np.abs(tau_gomp1[i] - tau_xx[i]) / tau_xx[i]
+#    c_gomp2[i] = np.abs(tau_gomp2[i] - tau_xx[i]) / tau_xx[i]
 #    
 #    if (i != 85 and i != 87 and i != 108 and i!= 118 and i!=26 and i!=44 and i!=100 and i!=104 and i!=127):
 #        MSE_gomp1 += (tau_gomp1[i] - tau_xx[i])**2 / tau_xx[i]**2
@@ -335,11 +356,14 @@ for i in range(0, num_sim):
  
 print('App. tau for gomp1 is ', tau_gomp1)
 print('App. tau for gomp2 is ', tau_gomp2)
+print('App. tau for fit is ', tau_fit)
 print('App. tau for x is ', tau_xx)
 print('sq. MSE rel. error for gomp1 is ', np.sqrt(MSE_gomp1 / (1. * num_sim)) )
 print('sq. MSE rel. error for gomp2 is ', np.sqrt(MSE_gomp2 / (1. * num_sim)) )
+print('sq. MSE rel. error for fit is ', np.sqrt(MSE_fit / (1. * num_sim)) )
 print('MAE rel. error for gomp1 is ', MAE_gomp1 / (1. * num_sim) )
 print('MAE rel. error for gomp2 is ', MAE_gomp2 / (1. * num_sim) )
+print('MAE rel. error for fit is ', MAE_fit / (1. * num_sim) )
 
 # fishing for outliers
 #print('sq. MSE rel. error for gomp1 is ', np.sqrt(MSE_gomp1 / (1. * num_sim-9)) )
