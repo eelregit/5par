@@ -177,8 +177,11 @@ As for the transformation parameters, as in the PDF approach, we use an
 affine transformation $\ln\ar = \tilt (\ln a - \ln\ap)$, or equivalently
 a power law in \cref{eq:map}.
 Because each $x_\HI$ has its own parameters of $\ap$ and $\tilt$, we
-have in total $518 = 6 + 2 \times 256$ parameters to determine in the
+have in total $516 = 4 + 2 \times 256$ parameters to determine in the
 joint fit.
+$P_5$ only needs 4 instead of 6 parameters, because the constant and the
+linear coefficients are fully degenerate with $\ln\ap$ and $\tilt$, and
+therefore are fixed to be 0 and 1, respectively.
 \Cref{fig:shape} shows all 256 $x_\HI$ timelines and their universality
 after transformations.
 We can then use the fitted $\ap$ and $\tilt$ as the target for symbolic
