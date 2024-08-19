@@ -52,16 +52,17 @@ kwargs = dict(
     #    'exp':{'exp':0, 'log':1},
     #    'log':{'exp':1, 'log':0},
     #},
-    maxsize=45,
+    maxsize=54,
     #maxdepth=8,
     #warmup_maxsize_by=1e-2,
-    parsimony=5e-3,
+    parsimony=1e-3,
     adaptive_parsimony_scaling=1000,
 
     # Search Size
-    niterations=20000,
+    niterations=40000,
     early_stop_condition=('stop_if(loss, complexity) = loss < 1e-5 && complexity < 21'),
     populations=num_cores*4,
+    population_size=49,
     ncyclesperiteration=10000,
 
     # Mutations
