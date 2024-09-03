@@ -49,7 +49,7 @@ def plot(lna, lna_pivot, tilt, x):
     axes[1].plot(a_, poly6(np.log(a_), lna_pivot, tilt), c='C0', ls='--')
     axes[1].set_ylabel(r'$\ln(-\ln x_\mathrm{HI})$')
     axes[1].set_ylim(-9, 4)
-    axes[1].set_xlabel(r'$\tilde{a}$')
+    axes[1].set_xlabel(r'$a$')
     axes[1].set_xscale('log')
     axes[1].set_xlim(a.min(), a.max())
 
