@@ -38,10 +38,12 @@ def plot(lna, lna_pivot, tilt, x):
     fig, axes = plt.subplots(nrows=2, sharex=True,
                              gridspec_kw={'wspace': 0, 'hspace': 0}, figsize=(4, 5))
 
-    axes[0].plot(a, x, c='gray')
-    axes[0].plot(a_, gomppoly6(np.log(a_), lna_pivot, tilt), c='C0', ls='--')
+    axes[0].plot(a, x, c='gray', label='THESAN simulation')
+    axes[0].plot(a_, gomppoly6(np.log(a_), lna_pivot, tilt), c='C0', ls='--',
+                 label='fit with universal shape')
     axes[0].set_ylabel(r'$x_\mathrm{HI}$')
     axes[0].set_ylim(-0.1, 1.1)
+    axes[0].legend()
 
     axes[1].plot(a, np.log(-np.log(x)), c='gray')
     axes[1].plot(a_, poly6(np.log(a_), lna_pivot, tilt), c='C0', ls='--')
