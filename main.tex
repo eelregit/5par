@@ -318,7 +318,9 @@ function often used to analyze age-dependent human mortality
 hydrogen too.
 Its expected accelerated increase in mortality with age resembles the
 expectation for the percolation of ionized hydrogen bubbles during the
-end stages of reionization.
+end stages of reionization. Notably, this universality is also present 
+in more sophisticated reionization simulations, such as the THESAN simulations
+(see \Cref{fig:thesan} in the Extended data).
 
 One way to uncover the universality is to view each $x_\HI$ scenario as
 a cumulative probability distribution (CDF) in $- \ln a$.
@@ -574,7 +576,9 @@ Additionally, a valuable exercise to refine the inherent relationship
 between cosmological parameters and reionization history would involve
 using more realistic, albeit slower, reionization models.
 One such option is to use the THESAN simulations \cite{Kannan2022},
-which are hydrodynamical simulations incorporating radiative transfer.
+which are hydrodynamical simulations incorporating radiative transfer. 
+These simulations also display the universal $x_\HI$ shape, as shown in
+\Cref{fig:thesan} of the Extended data.
 
 Throughout this work we considered only DW for astrophysical data,
 but including current luminosity function constraints can already halve
@@ -778,6 +782,32 @@ We can then use the fitted $\ap$ and $\tilt$ as the target for symbolic
 regression, to model their dependences on the independent cosmological
 and astrophysical parameters.
 
+\begin{figure}[tb]
+\centering
+\includegraphics[width=0.7\linewidth]{figs/thesan_fit.pdf}
+\caption{\textbf{Universal shape of $x_\HI$ in THESAN simulation.} 
+\emph{(Top)} Simulated timeline from the THESAN1 simulation (gray line) 
+exhibit universality after the same power-law transformation 
+$\tilde{a} = (a / \alpha)^\beta$. The blue dashed line corresponds to our
+fitted analytic shape model, a composition of the Gompertz curve
+with a 5th-degree polynomial. \emph{(Bottom)} The absolute difference
+between the universal shape and the simulated data. }
+\label{fig:thesan}
+\end{figure}
+
+We emphasize that the universality discovered in this work is not exclusive
+to the semi-numerical approach or to the astrophysical
+assumptions made by \texttt{21cmFAST} . Using the publicly available
+THESAN1 \cite{Kannan2022} data\footnote{\url{https://www.thesan-project.com/data.html}} ,
+we demonstrate that more sophisticated simulations, which employ
+different prescriptions for reionization astrophysics and incorporate
+radiative transfer, also exhibit this universal behavior. 
+This consistency across various models is not unexpected, as most 
+simulations of the epoch of reionization converge on a similar overall shape
+for the reionization timeline\footnote{This feature is currently being exploited 
+by the SKA collaboration in their Science data challenge 3,
+\url{https://sdc3.skao.int/challenges/inference}.}. In \Cref{fig:thesan} , we 
+show that our universal shape effectively fits the THESAN1 simulation data.
 
 \subsection*{Symbolic regression}
 \label{sec:pysr}
