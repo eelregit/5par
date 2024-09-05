@@ -117,7 +117,7 @@ def plot(lna, c, lna_pivot, tilt, lna_pivot_ts, tilt_ts, x, xp):
 
     axes[0].plot(a_rescaled.T, x.T, c='gray', lw=0.3, alpha=0.2, zorder=1.8)
     axes[0].plot(ar, gomppoly(np.log(ar), c).T, c='C0', lw=1, zorder=2)
-    axes[0].plot(a_ts_rescaled[0], x_ts[0], c='C1', ls=':', lw=2, alpha=0.5, zorder=1.9)
+    #axes[0].plot(a_ts_rescaled[0], x_ts[0], c='C1', ls=':', lw=2, alpha=0.5, zorder=1.9)
     axes[0].set_ylabel(r'$x_\mathrm{HI}$')
     axes[0].set_ylim(-0.1, 1.1)
 
