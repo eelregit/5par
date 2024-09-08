@@ -10,6 +10,7 @@ Using Planck PR3 TTTEEE ϕϕ, low-ell data, and optionally quasar data:
 * `gomp_1 <gomp_1>`_ finds tau_reio using alpha(cosmo) and beta(cosmo)
 * `gomp_1dw <gomp_1dw>`_ finds tau_reio using alpha(cosmo) and
   beta(cosmo), using additionally quasar damping wing data
+* `gomp_1dw_logprior <gomp_1dw_logprior>`_ is similar but with log prior
 * `gomp_1dwlf <gomp_1dwlf>`_ finds tau_reio using alpha(cosmo) and
   beta(cosmo), using additionally quasar damping wing and luminosity
   function data
