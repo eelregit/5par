@@ -43,7 +43,6 @@
 \def\astropart{{Astro-particle Phys.~}}
 \def\rvmp{{Rev.\ Mod.\ Phys.\ }}
 
-% useful commands
 \newcommand{\sampled}{*}
 \newcommand{\vtheta}{\boldsymbol{\theta}}
 \newcommand{\As}{A_\mathrm{s}}
@@ -246,7 +245,7 @@ Finally, combining CMB and astrophysical data, we marginalize over
 reionization astrophysics to compute $\tau_\reio$ as a derived parameter
 using SR, quantifying the gains compared to sampling over $\tau_\reio$
 utilizing the conventional $\tanh$ model \cite{Lewis2008}.
-We summarize our strategy in Figure.~\ref{fig:big}.
+We summarize our strategy in Figure~\ref{fig:big}.
 
 We construct the universal $x_\HI$ shape using 256 Sobol samples
 of \textsc{21cmFAST} simulations, varying 5 cosmological parameters
@@ -270,6 +269,11 @@ hydrogen too.
 Its expected accelerated increase in mortality with age resembles the
 expectation for the percolation of ionized hydrogen bubbles during the
 end stages of reionization.
+Remarkably, this universality works beyond the semi-numerical
+\textsc{21cmFAST} predictions and even for the state-of-the-art THESAN
+simulations \cite{Kannan2022} (see Figure~\ref{fig:thesan} in
+\cite{methods}), where accurate radiation transport and realistic
+galaxy formation physics are included.
 
 One way to uncover the universality is to view each $x_\HI$ scenario as
 a cumulative probability distribution (CDF) in $- \ln a$.
@@ -329,7 +333,7 @@ Using Planck PR3 likelihoods `TTTEEE' \cite{Planck2020c} and CMB lensing
 \textsc{Cobaya} \cite{Torrado2020}, including $\tau_\reio$.
 Given a proposal for $\tau_\reio$, we determine the corresponding
 reionization timeline using bisection by varying $\ln\ap$ for gomp
-while fixing $\beta$ to its mean value,
+while fixing $\tilt$ to its mean value,
 meanwhile for $\tanh$, the reionization midpoint $z_\re$ is the tuning
 parameter.
 The sampler runs until the Gelman-Rubin statistic \cite{Gelman1992}
@@ -376,7 +380,7 @@ Using \textsc{PySR} we derived the following mapping
   - \Omegam - \ns, \\
 %
 \label{eq:SR_b}
-\beta(\vtheta) &= \Bigl( \frac{0.005660^{\Omegam}}{0.6015}
+\tilt(\vtheta) &= \Bigl( \frac{0.005660^{\Omegam}}{0.6015}
     - \ln\bigl(\zetaUV - (\Omegam + \ns h)^{15.05}\bigr) + h \Bigr)
   \ln{\Omegab} + \frac{h}{\sigma_8},
 \end{align}
@@ -399,15 +403,16 @@ galaxies are the primary drivers of reionization.
 Surprisingly, Equations~\eqref{eq:SR_a} and \eqref{eq:SR_b} suggests that higher $\Omegab$
 delays reionization, likely due to more HI in the intergalactic medium
 requiring additional ionizing photons.
-The ratio $\Omegab/\Omegam$ in $\alpha$ supports this view.
+The ratio $\Omegab/\Omegam$ in $\ap$ supports this view.
 Moreover, increasing $h$ slightly delays reionization, consistent with
 an increase in physical baryon density and
 the expectation that galaxies and ionizing photons will be more spread
 out.
 
 We note that within the prior range of our \textsc{21cmFAST} simulations
-(see Simulations in \cite{methods}) and their corresponding astrophysics of
-reionization, the mapping derived from SR is not unique.
+(see Simulations in \cite{methods}) and their
+corresponding astrophysics of reionization, the mapping derived from SR
+is not unique.
 Additional details and results using an alternative mapping -- SRHalf --
 are presented in Alternative mapping of \cite{methods}.
 Nonetheless, our results are robust and independent of the choice of
@@ -481,15 +486,16 @@ while efficient and swift, could bias our findings.
 Moreover, our exploration within the astrophysical framework of
 \textsc{21cmFAST} has been limited to varying the ionization efficiency
 (see Simulation in \cite{methods}).
-Therefore, a more comprehensive exploration is warranted to ensure, for
-instance, that our findings for $\alpha$ and $\beta$ will not bias
+A valuable test to validate our reionization history involves using
+simulations with accurate radiation transport and realistic galaxy
+formation physics.
+One state-of-the-art option is the THESAN simulations \cite{Kannan2022},
+which also display the universal $x_\HI$ shape, as shown in
+Figure~\ref{fig:thesan} of \cite{methods}.
+Additionally, a more comprehensive exploration is warranted to ensure,
+for instance, that our findings for $\ap$ and $\tilt$ will not bias
 cosmological analyses when incorporating additional astrophysical
 parameters, such as the minimum halo mass that host ionizing sources.
-Additionally, a valuable exercise to refine the inherent relationship
-between cosmological parameters and reionization history would involve
-using more realistic, albeit slower, reionization models.
-One such option is to use the THESAN simulations \cite{Kannan2022},
-which are hydrodynamical simulations incorporating radiative transfer.
 
 Throughout this work we considered only DW for astrophysical data,
 but including current luminosity function constraints can already halve
@@ -505,8 +511,7 @@ cosmological gains with our framework.
 \centering
 \includegraphics[width=0.6\textwidth]{figs/tau_fig.pdf}
 \caption{\textbf{\boldmath Current constraints on the optical depth to
-reionization ($\tau_\reio$) from Cosmic Microwave Background (CMB)
-data.}
+reionization $\tau_\reio$ from Cosmic Microwave Background (CMB) data.}
 The error bars indicate the 1$\sigma$ uncertainties.
 Various analyses may employ distinct data sets or vary in the parameters
 considered.
@@ -835,6 +840,22 @@ We can then use the fitted $\ap$ and $\tilt$ as the target for symbolic
 regression, to model their dependences on the independent cosmological
 and astrophysical parameters.
 
+We emphasize that the universality discovered in this work is not
+exclusive to the semi-numerical approach or to the astrophysical
+assumptions made by \textsc{21cmFAST}.
+Using the publicly available THESAN1 \cite{Kannan2022}
+data\footnote{\url{https://www.thesan-project.com/data.html}}, we
+demonstrate that more sophisticated simulations, which employ different
+prescriptions for reionization astrophysics and incorporate radiative
+transfer, also exhibit this universal behavior.
+This consistency across various models is not unexpected, as most
+simulations of the epoch of reionization converge on a similar overall
+shape for the reionization timeline\footnote{This feature is currently
+being exploited by the SKA collaboration in their Science data challenge
+3, \url{https://sdc3.skao.int/challenges/inference}.}.
+In Figure~\ref{fig:thesan}, we show that our universal shape accurately fits
+the THESAN1 simulation data.
+
 
 \subsubsection*{Symbolic regression}
 \label{sec:pysr}
@@ -887,7 +908,7 @@ favorably in power-law trade-offs of the form
 %
 \begin{equation}
 \mathrm{loss}^{1 - \gamma} \cdot \mathrm{complexity}^\gamma
-= \mathrm{const}, \quad \forall \gamma \in (0, 1).
+= \mathrm{const}, \quad \exists \gamma \in (0, 1).
 \end{equation}
 All such expressions lie on the lower convex hull\footnote{A related aid
 for model selection uses the concept of hypervolume of the Pareto front
@@ -932,7 +953,7 @@ For the pivot and tilt, we obtain
   - \ns^{1.834}, \\
 %
 \label{eq:SRHalf_b}
-\beta(\vtheta) &= \biggl(\frac{\zetaUV - \Omegam^{-1.583}}{\Omegab h}
+\tilt(\vtheta) &= \biggl(\frac{\zetaUV - \Omegam^{-1.583}}{\Omegab h}
   \biggr)^{0.3163},
 \end{align}
 %
@@ -953,7 +974,7 @@ Specifically, increasing $\zetaUV$, $\ns$, $\Omegam$, and $\sigma_8$
 primarily leads to earlier reionization, while larger $\Omegab$ delays
 it.
 The ratio of matter densities appears in the pivot expression again.
-Notably, the role of $h$ generally shows the opposite trend in $\alpha$.
+Notably, the role of $h$ generally shows the opposite trend in $\ap$.
 We note that these parameter trends are also generally present in lower
 complexity expressions in the Pareto front.
 Furthermore, Equation~\eqref{eq:SRHalf_b} excludes $\ns$ and $\sigma_8$ because of
@@ -1020,8 +1041,8 @@ When considering only CMB data, we sample the typical 6 cosmological
 parameters (see shaded parameters in Table~\ref{tab:uber-table}), sampling
 $\tau_\reio$ and using bisection to obtain the reionization timeline.
 For $\tanh$, the bisection varies $z_\re$, while for Gompertz we fix
-$\beta$ to the mean value (7.66, the complexity 1 expression from
-\textsc{PySR}) and vary $\alpha$.
+$\tilt$ to the mean value (7.66, the complexity 1 expression from
+\textsc{PySR}) and vary $\ap$.
 Therefore, we do not use the SR mapping from physical parameters to
 reionization -- Equations~\eqref{eq:SR_a} and \eqref{eq:SR_b} or alternatively
 Equations~\eqref{eq:SRHalf_a} and \eqref{eq:SRHalf_b}.
@@ -1040,7 +1061,7 @@ in Table~\ref{tab:uber-table}.
 
 There is an apparent discrepancy between the different models in
 $\theta_\mathrm{x}$, a proxy for the angular scale of the acoustic
-oscillations ($\theta_*$).
+oscillations $\theta_*$.
 The difference is due to our use of $100\theta_\mathrm{s}$, which
 corresponds to the peak scale parameter defined exactly as the ratio of
 the sound horizon divided by the angular diameter at decoupling, with
@@ -1114,6 +1135,21 @@ We use the latter as target of symbolic regression.
 function, modeled in blue curve with a 5th-degree polynomial in
 Equation~\eqref{eq:poly}.}
 \label{fig:shape}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{figs/thesan_fit.pdf}
+\caption{\textbf{Universal shape of $x_\HI$ in THESAN simulation.}
+(\textbf{Top}) Simulated timeline from the THESAN1 simulation (gray line)
+exhibits the same universality, as it can be accurately fitted by the
+same analytic shape in Equations~\eqref{eq:uni} and \eqref{eq:poly}, with the same coefficients
+$\mathbf{c}$, the same power-law transformation $\tilde{a} = (a /
+\ap)^\tilt$, and only $\{\ap, \tilt\}$ as the free parameters.
+The blue dashed line is the fitted analytic shape model.
+(\textbf{Bottom}) The absolute difference between the universal shape and
+the simulated data.}
+\label{fig:thesan}
 \end{figure}
 
 \begin{figure}
