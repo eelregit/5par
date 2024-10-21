@@ -1,0 +1,1 @@
+../../symb/activate.sh

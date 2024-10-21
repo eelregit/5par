@@ -23,8 +23,8 @@ print(f'{num_cores} cores on each of {num_nodes} nodes', flush=True)
 num_cores *= num_nodes
 
 
-var_names = ['s8', 'ns', 'h', 'Ob', 'Om', 'zt', 'Tv', 'E0', 'LX']
-var_cols = [2, 3, 4, 5, 6, 7, 8, 9, 10]
+var_names = ['s8', 'ns', 'h', 'Ob', 'Om', 'zt', 'Tv', 'LX']
+var_cols = [2, 3, 4, 5, 6, 7, 8, 9]
 var_edge = np.loadtxt('../xHI.txt', dtype='f4', usecols=var_cols)
 var_core = np.loadtxt('../xHI_core.txt', dtype='f4', usecols=var_cols)
 var = np.concatenate((var_edge, var_core), axis=0)
