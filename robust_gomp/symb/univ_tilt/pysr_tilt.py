@@ -28,15 +28,17 @@ var_cols = [2, 3, 4, 5, 6, 7, 8, 9]
 var_edge = np.loadtxt('../xHI.txt', dtype='f4', usecols=var_cols)
 var_core = np.loadtxt('../xHI_core.txt', dtype='f4', usecols=var_cols)
 var = np.concatenate((var_edge, var_core), axis=0)
-num_sim = 512 + 512
+num_sim_half = 512
+num_sim = 2 * num_sim_half
+num_sim_qtr = num_sim_half // 2
 num_a = 127
 var = var.reshape(num_sim, num_a, len(var_cols))
 var = var[:, 0, :]  # ignore the time dimension
 
 tilt = np.loadtxt('../pivottilt_6.txt', dtype='f4', usecols=1)
 
-#var_train = var.reshape(2, num_sim//2, len(var_cols))[:, :64].reshape(128, -1)
-#tilt_train = tilt.reshape(2, num_sim//2)[:, :64].ravel()
+#var_train = var.reshape(2, num_sim_half, len(var_cols))[:, :num_sim_qtr].reshape(2 * num_sim_qtr, -1)
+#tilt_train = tilt.reshape(2, num_sim_half)[:, :num_sim_qtr].ravel()
 var_train = var
 tilt_train = tilt
 
