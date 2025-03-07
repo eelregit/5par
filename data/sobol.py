@@ -5,7 +5,7 @@ from scipy.stats.qmc import Sobol, discrepancy, scale
 import matplotlib.pyplot as plt
 
 
-def gen_sobol(params, l_bounds, u_bounds, filename=None, d=6, m=7, extra=7, seed=0,
+def gen_sobol(l_bounds, u_bounds, filename=None, params=None, d=6, m=7, extra=7, seed=0,
               seed_max=65536):
 
     nicer_seed = seed
@@ -92,13 +92,13 @@ if __name__ == '__main__':
     u_bounds = (.90, 1.00, .73, .06, .40, 35)
     filename = 'sobol.txt'
     if not os.path.exists(filename):
-        gen_sobol(params, l_bounds, u_bounds, filename=filename)
+        gen_sobol(l_bounds, u_bounds, filename=filename, params=params)
 
     l_bounds = (.7811, .9436, .6466, .04508, .2788, 20)
     u_bounds = (.8411, .9856, .7066, .05358, .3518, 35)
     filename = 'sobol_core.txt'
     if not os.path.exists(filename):
-        gen_sobol(params, l_bounds, u_bounds, filename=filename)
+        gen_sobol(l_bounds, u_bounds, filename=filename, params=params)
 
     plt.style.use('../5par.mplstyle')
 
