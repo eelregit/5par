@@ -1,0 +1,161 @@
+field.shape=(512, 512, 512), dens=0.001, b=0.5
+sowing 134219 bubble seeds with a_e=198147000000.0
+r_e_min=0, r_e_max=445
+
+field.shape=(512, 512, 512), dens=0.001, b=1.0
+sowing 134219 bubble seeds with a_e=198147000.0
+r_e_min=1, r_e_max=445
+
+field.shape=(512, 512, 512), dens=0.001, b=2.0
+sowing 134219 bubble seeds with a_e=6265958.315293839
+r_e_min=23, r_e_max=445
+
+field.shape=(512, 512, 512), dens=0.0001, b=0.5
+sowing 13423 bubble seeds with a_e=19814700000000.0
+r_e_min=0, r_e_max=445
+
+field.shape=(512, 512, 512), dens=0.0001, b=1.0
+sowing 13423 bubble seeds with a_e=1981470000.0
+r_e_min=4, r_e_max=445
+
+field.shape=(512, 512, 512), dens=0.0001, b=2.0
+sowing 13423 bubble seeds with a_e=19814700.0
+r_e_min=41, r_e_max=445
+
+field.shape=(512, 512, 512), dens=1e-05, b=0.5
+sowing 1344 bubble seeds with a_e=1981469999999999.8
+r_e_min=0, r_e_max=446
+
+field.shape=(512, 512, 512), dens=1e-05, b=1.0
+sowing 1344 bubble seeds with a_e=19814700000.0
+r_e_min=12, r_e_max=445
+
+field.shape=(512, 512, 512), dens=1e-05, b=2.0
+sowing 1344 bubble seeds with a_e=62659583.15293839
+r_e_min=74, r_e_max=445
+
+field.shape=(512, 512, 512), dens=0.001, b=0.5
+sowing 134219 bubble seeds with a_e=198147000000.0
+r_e_min=0, r_e_max=445
+
+field.shape=(512, 512, 512), dens=0.001, b=1.0
+sowing 134219 bubble seeds with a_e=198147000.0
+r_e_min=1, r_e_max=445
+
+field.shape=(512, 512, 512), dens=0.001, b=2.0
+sowing 134219 bubble seeds with a_e=6265958.315293839
+r_e_min=23, r_e_max=445
+
+field.shape=(512, 512, 512), dens=0.0001, b=0.5
+sowing 13423 bubble seeds with a_e=19814700000000.0
+r_e_min=0, r_e_max=445
+
+field.shape=(512, 512, 512), dens=0.0001, b=1.0
+sowing 13423 bubble seeds with a_e=1981470000.0
+r_e_min=4, r_e_max=445
+
+field.shape=(512, 512, 512), dens=0.0001, b=2.0
+sowing 13423 bubble seeds with a_e=19814700.0
+r_e_min=41, r_e_max=445
+
+field.shape=(512, 512, 512), dens=1e-05, b=0.5
+sowing 1344 bubble seeds with a_e=1981469999999999.8
+r_e_min=0, r_e_max=446
+
+field.shape=(512, 512, 512), dens=1e-05, b=1.0
+sowing 1344 bubble seeds with a_e=19814700000.0
+r_e_min=12, r_e_max=445
+
+field.shape=(512, 512, 512), dens=1e-05, b=2.0
+sowing 1344 bubble seeds with a_e=62659583.15293839
+r_e_min=74, r_e_max=445
+
+field.shape=(512, 512, 512), dens=0.001, b=0.5
+sowing 134219 bubble seeds with a_e=198147000000.0
+r_e_min=0, r_e_max=445
+
+field.shape=(512, 512, 512), dens=0.001, b=1.0
+sowing 134219 bubble seeds with a_e=198147000.0
+r_e_min=1, r_e_max=445
+
+field.shape=(512, 512, 512), dens=0.001, b=2.0
+sowing 134219 bubble seeds with a_e=6265958.315293839
+r_e_min=23, r_e_max=445
+
+field.shape=(512, 512, 512), dens=0.0001, b=0.5
+sowing 13423 bubble seeds with a_e=19814700000000.0
+r_e_min=0, r_e_max=445
+
+field.shape=(512, 512, 512), dens=0.0001, b=1.0
+sowing 13423 bubble seeds with a_e=1981470000.0
+r_e_min=4, r_e_max=445
+
+field.shape=(512, 512, 512), dens=0.0001, b=2.0
+sowing 13423 bubble seeds with a_e=19814700.0
+r_e_min=41, r_e_max=445
+
+field.shape=(512, 512, 512), dens=1e-05, b=0.5
+sowing 1344 bubble seeds with a_e=1981469999999999.8
+r_e_min=0, r_e_max=446
+
+field.shape=(512, 512, 512), dens=1e-05, b=1.0
+sowing 1344 bubble seeds with a_e=19814700000.0
+r_e_min=12, r_e_max=445
+
+field.shape=(512, 512, 512), dens=1e-05, b=2.0
+sowing 1344 bubble seeds with a_e=62659583.15293839
+r_e_min=74, r_e_max=445
+
+/mnt/home/llu/miniforge3/lib/python3.12/site-packages/scipy/stats/_qmc.py:958: UserWarning: The balance properties of Sobol' points require n to be a power of 2.
+  sample = self._random(n, workers=workers)
+field.shape=(512, 512, 512), dens=0.001, b=0.5
+sowing 134219 bubble seeds with a_e=198147000000.0
+r_e_min=0, r_e_max=445
+
+/mnt/home/llu/miniforge3/lib/python3.12/site-packages/scipy/stats/_qmc.py:958: UserWarning: The balance properties of Sobol' points require n to be a power of 2.
+  sample = self._random(n, workers=workers)
+field.shape=(512, 512, 512), dens=0.001, b=1.0
+sowing 134219 bubble seeds with a_e=198147000.0
+r_e_min=1, r_e_max=445
+
+/mnt/home/llu/miniforge3/lib/python3.12/site-packages/scipy/stats/_qmc.py:958: UserWarning: The balance properties of Sobol' points require n to be a power of 2.
+  sample = self._random(n, workers=workers)
+field.shape=(512, 512, 512), dens=0.001, b=2.0
+sowing 134219 bubble seeds with a_e=6265958.315293839
+r_e_min=23, r_e_max=445
+
+/mnt/home/llu/miniforge3/lib/python3.12/site-packages/scipy/stats/_qmc.py:958: UserWarning: The balance properties of Sobol' points require n to be a power of 2.
+  sample = self._random(n, workers=workers)
+field.shape=(512, 512, 512), dens=0.0001, b=0.5
+sowing 13423 bubble seeds with a_e=19814700000000.0
+r_e_min=0, r_e_max=445
+
+/mnt/home/llu/miniforge3/lib/python3.12/site-packages/scipy/stats/_qmc.py:958: UserWarning: The balance properties of Sobol' points require n to be a power of 2.
+  sample = self._random(n, workers=workers)
+field.shape=(512, 512, 512), dens=0.0001, b=1.0
+sowing 13423 bubble seeds with a_e=1981470000.0
+r_e_min=4, r_e_max=445
+
+/mnt/home/llu/miniforge3/lib/python3.12/site-packages/scipy/stats/_qmc.py:958: UserWarning: The balance properties of Sobol' points require n to be a power of 2.
+  sample = self._random(n, workers=workers)
+field.shape=(512, 512, 512), dens=0.0001, b=2.0
+sowing 13423 bubble seeds with a_e=19814700.0
+r_e_min=41, r_e_max=445
+
+/mnt/home/llu/miniforge3/lib/python3.12/site-packages/scipy/stats/_qmc.py:958: UserWarning: The balance properties of Sobol' points require n to be a power of 2.
+  sample = self._random(n, workers=workers)
+field.shape=(512, 512, 512), dens=1e-05, b=0.5
+sowing 1344 bubble seeds with a_e=1981469999999999.8
+r_e_min=0, r_e_max=446
+
+/mnt/home/llu/miniforge3/lib/python3.12/site-packages/scipy/stats/_qmc.py:958: UserWarning: The balance properties of Sobol' points require n to be a power of 2.
+  sample = self._random(n, workers=workers)
+field.shape=(512, 512, 512), dens=1e-05, b=1.0
+sowing 1344 bubble seeds with a_e=19814700000.0
+r_e_min=12, r_e_max=445
+
+/mnt/home/llu/miniforge3/lib/python3.12/site-packages/scipy/stats/_qmc.py:958: UserWarning: The balance properties of Sobol' points require n to be a power of 2.
+  sample = self._random(n, workers=workers)
+field.shape=(512, 512, 512), dens=1e-05, b=2.0
+sowing 1344 bubble seeds with a_e=62659583.15293839
+r_e_min=74, r_e_max=445
