@@ -23,13 +23,13 @@ import jax.numpy as jnp
 #
 # Bubble emerging from seeds, during matter domination
 # box size, L = N l
-# seed emergence rate, SFR psi * galaxy luminosity function phi?
+# seed emergence rate
+# TODO understand 21cmFAST on this
 #   say f a^b, per e-fold in a and per Mpc^3
 #   b>=0, or the integral diverges at a=0. Take b>0 below
 # f a^b l^3 d lna = (f l^3 / b) d a^b = d[(R^2 / a_e)^b]
 #   so we can use a_e and b as the code parameters
 #   a_e^-b = f l^3 a_g^b / b. Note the volume scaling in l^3 and in a_g
-# FIXME how is a_e, b related to alpha, beta used in Gompertz?
 #
 # Code "time" in particle horizon (in unit of grid spacing)
 # if b > 1/2, bubble seeds emerge faster
@@ -39,7 +39,7 @@ import jax.numpy as jnp
 # we don't care which bubble ionizes which cell
 #
 # Algorithm
-# Monte Carlo (FIXME or QMC, shuffled grid points (Grid), mass-ordered halos (LSS)) the
+# Monte Carlo, mass-ordered halos (LSS), shuffled grid points, and Quasi-Monte Carlo
 # spatial distribution of bubble seeds time stepping loop till reionization completes
 #   bubbles emerge from seeds
 #   bubbles grows spherically around their seeds
@@ -55,7 +55,7 @@ def sow_bubble_seeds(size, kind, dens, b):
     a_e = 3 * (size//2 + 1)**2 / dens ** (1/b)
     # heuristic, this many should always be enough because the first bubble should have
     # ionized the whole field when the last bubble emerges
-    # FIXME/HACK first bubble can have r_e>0, maybe not worth fixing unless problematic
+    # HACK ignored that 1st bubbles can have r_e>0, not worth fixing unless problematic
     num = 1 + ceil(size**3 * (3 * (size//2 + 1)**2 / a_e)**b)
     print(f'sowing {num} bubble seeds with {a_e=}')
 
@@ -109,7 +109,7 @@ def sow_bubble_seeds(size, kind, dens, b):
     return pos, r_e
 
 
-@partial(jax.jit, static_argnames=('r'))
+@partial(jax.jit, static_argnames='r')
 def add_shell(field, pos, r):
     """Add a spherical shell for one bubble at one step."""
     with jax.ensure_compile_time_eval():
