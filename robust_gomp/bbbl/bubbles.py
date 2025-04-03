@@ -40,13 +40,16 @@ import jax.numpy as jnp
 #
 # Algorithm
 # Monte Carlo, mass-ordered halos (LSS), shuffled grid points, and Quasi-Monte Carlo
-# spatial distribution of bubble seeds time stepping loop till reionization completes
-#   bubbles emerge from seeds
+# spatial distribution of bubble seeds
+# time stepping loop from R=0 till reionization completes
+#   bubbles emerge from seeds at r_e
 #   bubbles grows spherically around their seeds
-#       each bubble grow by one shell per step, from r to r+1
+#       each bubble grow by one shell per step, from r to r+1, with r = R - r_e
 #       mark the grid points in [r, r+1) as ionized
 #       jitted function keeps a list of relative indices of cells in the shell
 #   count neutral fraction
+#
+# TODO simple description in paper
 
 
 def sow_bubble_seeds(size, kind, dens, b):
