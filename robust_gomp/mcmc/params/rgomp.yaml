@@ -1,0 +1,30 @@
+zt:
+  prior:
+    min: 20.
+    max: 35.
+  ref:
+    dist: norm
+    loc: 24.
+    scale: 1.
+  proposal: 0.5
+  latex: \zeta_\mathrm{UV}
+Tv:
+  prior:
+    min: 4.3
+    max: 4.7
+  ref:
+    dist: norm
+    loc: 4.4
+    scale: 1.
+  proposal: 0.5
+  latex: T_\mathrm{vir}
+LX:
+  prior:
+    min: 39.
+    max: 41.
+  ref:
+    dist: norm
+    loc: 40.
+    scale: 1.
+  proposal: 0.5
+  latex: L_\mathrm{X}

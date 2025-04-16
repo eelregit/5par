@@ -1,0 +1,4 @@
+xHI:
+  external: import_module('xHI').gomp_dw
+  requires:
+    H0: None

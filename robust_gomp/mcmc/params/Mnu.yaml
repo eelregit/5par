@@ -1,0 +1,8 @@
+m_ncdm:
+  prior:
+    min: 0.00
+    max: 0.80
+  ref: 0.06
+  proposal: 0.01
+  renames: mnu
+  latex: M_\nu
