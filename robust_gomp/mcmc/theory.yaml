@@ -13,6 +13,7 @@ classy:
     # to compute P_m to a large max k, but this only manages to 
     # add uncertainty (nonlinear model not well-suited to this regime)
     # while making the evaluations slower
+    # see https://github.com/lesgourg/class_public/issues/494
     
     # accurate lensing settings based on 2109.04451
     l_max_scalars: 10000.
