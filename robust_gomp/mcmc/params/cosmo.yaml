@@ -56,7 +56,7 @@ omegamh2:
   latex: \Omega_\mathrm{m} h^2
 YHe:
   latex: Y_\mathrm{P}
-z_reio:  # FIXME what's this again?
+z_reio:  # NOTE useless but mandatory to CLASS
   value: 20
   latex: z_\mathrm{re}
 tau_reio:
