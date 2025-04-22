@@ -5,8 +5,9 @@ classy:
     reio_parametrization: reio_gomp_noSR
     N_ncdm: 1
     N_ur: 2.0328
-    # non linear
-    non linear: hmcode
+    # non linear, halofit recommended since there is no
+    # "hmcode_k_per_decade"
+    non linear: halofit
     #P_k_max_1/Mpc: 600
     # note that to high-ell lensing kernel does go over high-k and z, 
     # deep in the nonlinear regime, then one would need to ask classy
