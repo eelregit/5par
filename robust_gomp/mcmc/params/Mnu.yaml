@@ -1,8 +1,11 @@
 m_ncdm:
   prior:
     min: 0.00
-    max: 0.80
-  ref: 0.06
-  proposal: 0.01
+    max: 5.0
+  ref:
+    dist: halfnorm
+    loc: 0.0
+    scale: 0.2
+  proposal: 0.15
   renames: mnu
-  latex: M_\nu
+  latex: \Sigma m_\nu
