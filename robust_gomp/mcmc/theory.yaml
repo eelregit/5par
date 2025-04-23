@@ -2,7 +2,8 @@ classy:
   stop_at_error: true
 
   extra_args:
-    reio_parametrization: reio_gomp_noSR
+    reio_parametrization: reio_gomp_noSR # FIX ME: this only allows for the gomp implementation
+    # shall we have two theory yamls?
     N_ncdm: 1
     N_ur: 2.0328
     # non linear, halofit recommended since there is no
