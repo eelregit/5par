@@ -1,3 +1,15 @@
+A_s: 
+  latex: A_\mathrm{s}
+sigma8:
+  prior:
+    min: 0.74
+    max: 0.90
+  ref:
+    dist: norm
+    loc: 0.8111
+    scale: 0.006
+  proposal: 0.006
+  latex: \sigma_8
 zt:
   prior:
     min: 20.
