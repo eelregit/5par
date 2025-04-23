@@ -1,14 +1,12 @@
-A_s:  # FIXME sample this not sigma8?
-  latex: A_\mathrm{s}
 n_s:
   prior:
     min: 0.92
     max: 1.0
   ref:
     dist: norm
-    loc: 0.965
-    scale: 0.004
-  proposal: 0.002
+    loc: 0.9729
+    scale: 0.061
+  proposal: 0.0033
   latex: n_\mathrm{s}
 theta_s_100:
   latex: 100\theta_\mathrm{s}
@@ -24,23 +22,23 @@ H0:
   latex: H_0
 omega_b:
   prior:
-    min: 0.005
-    max: 0.1
+    min: 0.017
+    max: 0.027
   ref:
     dist: norm
-    loc: 0.0224
-    scale: 0.0001
-  proposal: 0.0001
+    loc: 2.239e-2
+    scale: 2.1e-3
+  proposal: 6.5e-5
   latex: \Omega_\mathrm{b} h^2
 omega_cdm:
   prior:
-    min: 0.001
-    max: 0.99
+    min: 0.09
+    max: 0.15
   ref:
     dist: norm
     loc: 0.12
-    scale: 0.001
-  proposal: 0.0005
+    scale: 2.6e-2
+  proposal: 0.0011
   latex: \Omega_\mathrm{c} h^2
 Omega_m:
   min: 0.24
@@ -61,16 +59,6 @@ z_reio:  # NOTE useless but mandatory to CLASS
   latex: z_\mathrm{re}
 tau_reio:
   latex: \tau_\mathrm{reio}
-sigma8:  # FIXME sample A_s not this?
-  prior:
-    min: 0.74
-    max: 0.9
-  ref:
-    dist: norm
-    loc: 0.8111
-    scale: 0.006
-  proposal: 0.006
-  latex: \sigma_8
 s8h5:
   derived: 'lambda sigma8, H0: sigma8*(H0*1e-2)**(-0.5)'
   latex: \sigma_8/h^{0.5}
