@@ -1,0 +1,4 @@
+m_ncdm:
+  value: 0.06
+  renames: mnu
+  latex: \Sigma m_\nu
