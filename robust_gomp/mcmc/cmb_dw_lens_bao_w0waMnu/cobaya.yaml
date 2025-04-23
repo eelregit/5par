@@ -12,3 +12,8 @@ sampler:
 theory: !defaults [../theory]
 likelihood: !defaults [../likelihood/cmb, ../likelihood/dw, ../likelihood/lens, ../likelihood/bao]
 params: !defaults [../params/cosmo, ../params/gomp, ../params/w0wa, ../params/Mnu]
+
+# one of the instrument parameters needs to be added as follows:
+# see https://github.com/ACTCollaboration/DR6-ACT-lite/blob/main/yamls/act-lcdm.yaml
+prior: 
+  cal_dip_prior: 'lambda A_act: stats.norm.logpdf(A_act, loc = 1.0, scale = 0.003)'
