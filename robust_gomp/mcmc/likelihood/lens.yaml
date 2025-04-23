@@ -1,6 +1,5 @@
 act_dr6_lenslike.ACTDR6LensLike:
-  variant: actplanck_extended
-  no_like_corrections: False
   lens_only: False
-  trim_lmax: 4000
-  limber: False
+  lmax: 4000
+  variante: actplanck_baseline
+  # matches https://github.com/ACTCollaboration/DR6-ACT-lite/blob/main/yamls/likelihoods/lensing_desi.yaml
