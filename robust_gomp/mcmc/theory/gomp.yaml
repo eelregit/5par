@@ -1,0 +1,31 @@
+classy:
+  stop_at_error: true
+
+  extra_args:
+    reio_parametrization: reio_gomp_noSR
+    N_ncdm: 1
+    N_ur: 2.0328
+    # non linear, halofit recommended since there is no
+    # "hmcode_k_per_decade"
+    non linear: halofit
+    #P_k_max_1/Mpc: 600
+    # note that to high-ell lensing kernel does go over high-k and z,
+    # deep in the nonlinear regime, then one would need to ask classy
+    # to compute P_m to a large max k, but this only manages to
+    # add uncertainty (nonlinear model not well-suited to this regime)
+    # while making the evaluations slower
+    # see https://github.com/lesgourg/class_public/issues/494
+
+    # accurate lensing settings based on 2109.04451
+    l_max_scalars: 10000.
+    neglect_CMB_sources_below_visibility: 1.e-30
+    transfer_neglect_late_source: 3000.
+    halofit_k_per_decade: 3000.
+    accurate_lensing: 1
+    num_mu_minus_lmax: 1000.
+    delta_l_max: 1000.
+    k_min_tau0: 0.002
+    k_max_tau0_over_l_max: 3.
+    k_step_sub: 0.015
+    k_step_super: 0.0001
+    k_step_super_reduction: 0.1
