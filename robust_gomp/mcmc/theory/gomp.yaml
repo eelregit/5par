@@ -1,7 +1,4 @@
 classy:
-  # why do we have a stop at error here? 
-  stop_at_error: true
-
   extra_args:
     # reionization model
     reio_parametrization: reio_gomp_noSR

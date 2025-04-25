@@ -1,6 +1,4 @@
 classy:
-  stop_at_error: true
-
   extra_args:
     reio_parametrization: reio_robustgomp1
     # high accuracy settings described in Figure 48 of 2503.14454
