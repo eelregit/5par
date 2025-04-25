@@ -8,6 +8,7 @@ logA:
     scale: 0.24
   proposal: 0.0036
   latex: \log(10^{10} A_\mathrm{s})
+  drop: true
 A_s:
   value: "lambda logA: 1e-10*np.exp(logA)"
   latex: A_\mathrm{s}
