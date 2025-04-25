@@ -7,11 +7,11 @@ w0_fld:
     max: 1.0
   ref: -1.0
   proposal: 0.0063
-  latex: \omega_0
+  latex: w_0
 wa_fld:
   prior:
     min: -3.0
     max: 2.0
   ref: 0.0
   proposal: 0.025
-  latex: \omega_a
+  latex: w_a
