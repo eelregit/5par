@@ -2,30 +2,44 @@ classy:
   stop_at_error: true
 
   extra_args:
+    # reionization model
     reio_parametrization: reio_gomp_noSR
+    # high accuracy settings described in Figure 48 of 2503.14454
     N_ncdm: 1
-    N_ur: 2.0328
-    # non linear, halofit recommended since there is no
-    # "hmcode_k_per_decade"
-    non linear: halofit
-    #P_k_max_1/Mpc: 600
-    # note that to high-ell lensing kernel does go over high-k and z,
-    # deep in the nonlinear regime, then one would need to ask classy
-    # to compute P_m to a large max k, but this only manages to
-    # add uncertainty (nonlinear model not well-suited to this regime)
-    # while making the evaluations slower
-    # see https://github.com/lesgourg/class_public/issues/494
-
-    # accurate lensing settings based on 2109.04451
-    l_max_scalars: 10000.
-    neglect_CMB_sources_below_visibility: 1.e-30
-    transfer_neglect_late_source: 3000.
-    halofit_k_per_decade: 3000.
+    N_ur: 2.0308
+    T_cmb: 2.7255
+    YHe: BBN
+    non_linear: hmcode
+    hmcode_version: ’2020’
+    recombination: HyRec
+    lensing: ’yes’
+    output: lCl,tCl,pCl,mPk
+    modes: s
+    l_max_scalars: 9500
+    delta_l_max: 1800
+    P_k_max_h/Mpc: 100.
+    l_logstep: 1.025
+    l_linstep: 20
+    perturbations_sampling_stepsize: 0.05
+    l_switch_limber: 30.
+    hyper_sampling_flat: 32.
+    l_max_g: 40
+    l_max_ur: 35
+    l_max_pol_g: 60
+    ur_fluid_approximation: 2
+    ur_fluid_trigger_tau_over_tau_k: 130.
+    radiation_streaming_approximation: 2
+    radiation_streaming_trigger_tau_over_tau_k: 240.
+    hyper_flat_approximation_nu: 7000.
+    transfer_neglect_delta_k_S_t0: 0.17
+    transfer_neglect_delta_k_S_t1: 0.05
+    transfer_neglect_delta_k_S_t2: 0.17
+    transfer_neglect_delta_k_S_e: 0.17
     accurate_lensing: 1
-    num_mu_minus_lmax: 1000.
-    delta_l_max: 1000.
-    k_min_tau0: 0.002
-    k_max_tau0_over_l_max: 3.
-    k_step_sub: 0.015
-    k_step_super: 0.0001
-    k_step_super_reduction: 0.1
+    start_small_k_at_tau_c_over_tau_h: 0.0004
+    start_large_k_at_tau_h_over_tau_k: 0.05
+    tight_coupling_trigger_tau_c_over_tau_h: 0.005
+    tight_coupling_trigger_tau_c_over_tau_k: 0.008
+    start_sources_at_tau_c_over_tau_h: 0.006
+    l_max_ncdm: 30
+    tol_ncdm_synchronous: 1.e-6
