@@ -10,6 +10,8 @@ sigma8:
     scale: 0.006
   proposal: 0.006
   latex: \sigma_8
+tau_reio:
+  latex: \tau_\mathrm{reio}
 z_reio:  # NOTE useless but mandatory to CLASS
   value: 20
   latex: z_\mathrm{re}
