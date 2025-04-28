@@ -1,2 +1,5 @@
 xHI:
   external: import_module('xHI').gomp_dw
+  requires:
+    alpha_gomp: null
+    beta_gomp: null
