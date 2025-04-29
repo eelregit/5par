@@ -1,11 +1,4 @@
 xHI:
   external: import_module('xHI').rgomp_1dw
   requires:
-    H0: null
-    omega_b: null
-    omega_cdm: null
-    sigma8: null
-    n_s: null
-    zt: null
-    Tv: null
-    LX: null
+    H0: null  # HACK workaround cobaya+class OOM problem

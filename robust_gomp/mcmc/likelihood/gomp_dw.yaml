@@ -1,5 +1,4 @@
 xHI:
   external: import_module('xHI').gomp_dw
   requires:
-    alpha_gomp: null
-    beta_gomp: null
+    H0: null  # HACK workaround cobaya+class OOM problem
