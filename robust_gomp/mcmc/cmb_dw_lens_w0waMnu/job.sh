@@ -2,18 +2,21 @@
 
 #SBATCH --job-name=cobaya
 #SBATCH --output=%x-%j.out
-#SBATCH --partition=deimos
-#SBATCH --mem-per-cpu=7200M
+#SBATCH --partition=ccm
+#SBATCH --constraint=genoa
+#SBATCH --ntasks=24
+#SBATCH --cpus-per-task=4
+#SBATCH --mem-per-cpu=15G
 #SBATCH --time=7-00:00:00
 
 
 export OMP_NUM_THREADS=4
 
-source $HOME/Projects/gomp/activate.sh
+source $HOME/ceph/universe/gomp/activate.sh
 
 
 hostname; pwd; date
 
-time mpirun -n 16 -ppn 4 cobaya run --resume cobaya.yaml
+time srun cobaya run --resume cobaya.yaml
 
 date
