@@ -5,13 +5,13 @@ sampler:
     #drag: true
     oversample_power: 0.4
     learn_proposal_Rminus1_max: 30
-    covmat: serial.covmat
+    covmat: auto
     Rminus1_stop: 0.01
     Rminus1_cl_stop: 0.2
 
 theory: !defaults [../theory/gomp]
-likelihood: !defaults [../likelihood/cmb, ../likelihood/gomp_dw, ../likelihood/lens, ../likelihood/bao]
-params: !defaults [../params/cosmo, ../params/gomp, ../params/w0wa, ../params/Mnu]
+likelihood: !defaults [../likelihood/cmb, ../likelihood/gomp_dw, ../likelihood/bao]
+params: !defaults [../params/cosmo, ../params/gomp, ../params/Mnu]
 
 # one of the instrument parameters needs to be added as follows:
 # see https://github.com/ACTCollaboration/DR6-ACT-lite/blob/main/yamls/act-lcdm.yaml
