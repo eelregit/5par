@@ -20,7 +20,6 @@ hostname; pwd; date
 #srun --exact -n 1 ...
 
 srun -n 1 cobaya run --resume --output cmb_dw_bao_LCDM/serial cmb_dw_bao_LCDM/serial_covmat.yaml > cmb_dw_bao_LCDM/serial-$SLURM_JOB_ID.out 2>&1 &
-srun -n 1 cobaya run --resume --output cmb_dw_bao_LCDM/serial cmb_dw_bao_LCDM/serial_covmat.yaml > cmb_dw_bao_LCDM/serial-$SLURM_JOB_ID.out 2>&1 &
 srun -n 1 cobaya run --resume --output cmb_dw_bao_Mnu/serial cmb_dw_bao_Mnu/serial_covmat.yaml > cmb_dw_bao_Mnu/serial-$SLURM_JOB_ID.out 2>&1 &
 srun -n 1 cobaya run --resume --output cmb_dw_bao_w0wa/serial cmb_dw_bao_w0wa/serial_covmat.yaml > cmb_dw_bao_w0wa/serial-$SLURM_JOB_ID.out 2>&1 &
 srun -n 1 cobaya run --resume --output cmb_dw_bao_w0waMnu/serial cmb_dw_bao_w0waMnu/serial_covmat.yaml > cmb_dw_bao_w0waMnu/serial-$SLURM_JOB_ID.out 2>&1 &
