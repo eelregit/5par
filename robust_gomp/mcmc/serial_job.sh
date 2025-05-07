@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-#SBATCH --job-name=cobaya
+#SBATCH --job-name=serial
 #SBATCH --output=%x-%j.out
 #SBATCH --partition=ccm
 #SBATCH --constraint=genoa
@@ -19,23 +19,23 @@ hostname; pwd; date
 
 #srun --exact -n 1 ...
 
-srun -n 1 cobaya run --resume --output cmb_dw_bao_LCDM/serial cmb_dw_bao_LCDM/serial_covmat.yaml > cmb_dw_bao_LCDM/serial.out 2>&1 &
-srun -n 1 cobaya run --resume --output cmb_dw_bao_LCDM/serial cmb_dw_bao_LCDM/serial_covmat.yaml > cmb_dw_bao_LCDM/serial.out 2>&1 &
-srun -n 1 cobaya run --resume --output cmb_dw_bao_Mnu/serial cmb_dw_bao_Mnu/serial_covmat.yaml > cmb_dw_bao_Mnu/serial.out 2>&1 &
-srun -n 1 cobaya run --resume --output cmb_dw_bao_w0wa/serial cmb_dw_bao_w0wa/serial_covmat.yaml > cmb_dw_bao_w0wa/serial.out 2>&1 &
-srun -n 1 cobaya run --resume --output cmb_dw_bao_w0waMnu/serial cmb_dw_bao_w0waMnu/serial_covmat.yaml > cmb_dw_bao_w0waMnu/serial.out 2>&1 &
-srun -n 1 cobaya run --resume --output cmb_dw_LCDM/serial cmb_dw_LCDM/serial_covmat.yaml > cmb_dw_LCDM/serial.out 2>&1 &
-srun -n 1 cobaya run --resume --output cmb_dw_lens_bao_LCDM/serial cmb_dw_lens_bao_LCDM/serial_covmat.yaml > cmb_dw_lens_bao_LCDM/serial.out 2>&1 &
-srun -n 1 cobaya run --resume --output cmb_dw_lens_bao_Mnu/serial cmb_dw_lens_bao_Mnu/serial_covmat.yaml > cmb_dw_lens_bao_Mnu/serial.out 2>&1 &
-srun -n 1 cobaya run --resume --output cmb_dw_lens_bao_w0wa/serial cmb_dw_lens_bao_w0wa/serial_covmat.yaml > cmb_dw_lens_bao_w0wa/serial.out 2>&1 &
-srun -n 1 cobaya run --resume --output cmb_dw_lens_bao_w0waMnu/serial cmb_dw_lens_bao_w0waMnu/serial_covmat.yaml > cmb_dw_lens_bao_w0waMnu/serial.out 2>&1 &
-srun -n 1 cobaya run --resume --output cmb_dw_lens_LCDM/serial cmb_dw_lens_LCDM/serial_covmat.yaml > cmb_dw_lens_LCDM/serial.out 2>&1 &
-srun -n 1 cobaya run --resume --output cmb_dw_lens_Mnu/serial cmb_dw_lens_Mnu/serial_covmat.yaml > cmb_dw_lens_Mnu/serial.out 2>&1 &
-srun -n 1 cobaya run --resume --output cmb_dw_lens_w0wa/serial cmb_dw_lens_w0wa/serial_covmat.yaml > cmb_dw_lens_w0wa/serial.out 2>&1 &
-srun -n 1 cobaya run --resume --output cmb_dw_lens_w0waMnu/serial cmb_dw_lens_w0waMnu/serial_covmat.yaml > cmb_dw_lens_w0waMnu/serial.out 2>&1 &
-srun -n 1 cobaya run --resume --output cmb_dw_Mnu/serial cmb_dw_Mnu/serial_covmat.yaml > cmb_dw_Mnu/serial.out 2>&1 &
-srun -n 1 cobaya run --resume --output cmb_dw_w0wa/serial cmb_dw_w0wa/serial_covmat.yaml > cmb_dw_w0wa/serial.out 2>&1 &
-srun -n 1 cobaya run --resume --output cmb_dw_w0waMnu/serial cmb_dw_w0waMnu/serial_covmat.yaml > cmb_dw_w0waMnu/serial.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_bao_LCDM/serial cmb_dw_bao_LCDM/serial_covmat.yaml > cmb_dw_bao_LCDM/serial-$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_bao_LCDM/serial cmb_dw_bao_LCDM/serial_covmat.yaml > cmb_dw_bao_LCDM/serial-$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_bao_Mnu/serial cmb_dw_bao_Mnu/serial_covmat.yaml > cmb_dw_bao_Mnu/serial-$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_bao_w0wa/serial cmb_dw_bao_w0wa/serial_covmat.yaml > cmb_dw_bao_w0wa/serial-$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_bao_w0waMnu/serial cmb_dw_bao_w0waMnu/serial_covmat.yaml > cmb_dw_bao_w0waMnu/serial-$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_LCDM/serial cmb_dw_LCDM/serial_covmat.yaml > cmb_dw_LCDM/serial-$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_lens_bao_LCDM/serial cmb_dw_lens_bao_LCDM/serial_covmat.yaml > cmb_dw_lens_bao_LCDM/serial-$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_lens_bao_Mnu/serial cmb_dw_lens_bao_Mnu/serial_covmat.yaml > cmb_dw_lens_bao_Mnu/serial-$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_lens_bao_w0wa/serial cmb_dw_lens_bao_w0wa/serial_covmat.yaml > cmb_dw_lens_bao_w0wa/serial-$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_lens_bao_w0waMnu/serial cmb_dw_lens_bao_w0waMnu/serial_covmat.yaml > cmb_dw_lens_bao_w0waMnu/serial-$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_lens_LCDM/serial cmb_dw_lens_LCDM/serial_covmat.yaml > cmb_dw_lens_LCDM/serial-$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_lens_Mnu/serial cmb_dw_lens_Mnu/serial_covmat.yaml > cmb_dw_lens_Mnu/serial-$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_lens_w0wa/serial cmb_dw_lens_w0wa/serial_covmat.yaml > cmb_dw_lens_w0wa/serial-$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_lens_w0waMnu/serial cmb_dw_lens_w0waMnu/serial_covmat.yaml > cmb_dw_lens_w0waMnu/serial-$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_Mnu/serial cmb_dw_Mnu/serial_covmat.yaml > cmb_dw_Mnu/serial-$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_w0wa/serial cmb_dw_w0wa/serial_covmat.yaml > cmb_dw_w0wa/serial-$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_w0waMnu/serial cmb_dw_w0waMnu/serial_covmat.yaml > cmb_dw_w0waMnu/serial-$SLURM_JOB_ID.out 2>&1 &
 wait
 
 date
