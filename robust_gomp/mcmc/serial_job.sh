@@ -5,13 +5,13 @@
 #SBATCH --partition=ccm
 #SBATCH --constraint=genoa
 #SBATCH --nodes=1
-#SBATCH --cpus-per-task=6
+#SBATCH --cpus-per-task=24
 #SBATCH --mem=0
 #SBATCH --mem-bind=none
 #SBATCH --time=7-00:00:00
 
 
-export OMP_NUM_THREADS=24
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
 source $HOME/ceph/universe/gomp/activate.sh
 
