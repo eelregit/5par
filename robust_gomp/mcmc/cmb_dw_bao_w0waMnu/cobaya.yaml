@@ -5,7 +5,7 @@ sampler:
     #drag: true
     oversample_power: 0.4
     learn_proposal_Rminus1_max: 30
-    covmat: serial.covmat
+    covmat: auto
     Rminus1_stop: 0.01
     Rminus1_cl_stop: 0.2
 
