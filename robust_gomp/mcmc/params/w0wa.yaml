@@ -6,12 +6,12 @@ w0_fld:
     min: -3.0
     max: 1.0
   ref: -1.0
-  proposal: 0.0063
+  proposal: 0.05
   latex: w_0
 wa_fld:
   prior:
     min: -3.0
     max: 2.0
   ref: 0.0
-  proposal: 0.025
+  proposal: 0.2
   latex: w_a
