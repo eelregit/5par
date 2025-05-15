@@ -1,4 +1,3 @@
-xHI:
-  external: import_module('xHI').gomp_dw
-  requires:
-    H0: null  # HACK workaround cobaya+class OOM problem
+dw_like.Gomp:
+  package_install: pip
+  stop_at_error: true

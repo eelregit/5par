@@ -1,7 +1,6 @@
 from functools import partial
 
 import numpy as np
-from numpy import exp, log
 from numpy.polynomial import Polynomial
 
 
@@ -27,7 +26,7 @@ def poly6(lna, lna_pivot=None, tilt=None, params=None):
 
 
 def gomppoly6(lna, lna_pivot=None, tilt=None, params=None):
-    return exp(- exp(poly6(lna, lna_pivot=lna_pivot, tilt=tilt, params=params)))
+    return np.exp(- np.exp(poly6(lna, lna_pivot=lna_pivot, tilt=tilt, params=params)))
 
 
 def pivot_sr(h, omega_b, omega_cdm, sigma8, n_s, zt, Tv, LX, fit):
@@ -65,6 +64,8 @@ def tanh(z, z_reio):
     return x_HI
 
 
+# NOTE this causes problems, such stuck chains again resuming, giving unexpected chi2
+# switching to ./dw_like/
 def xHI_like(_self=None, type='dw', fit='rgomp1'):
     data = np.array([
         [7.29, 0.49, -0.11, 0.11],  # combined quasars daming wing
@@ -86,7 +87,7 @@ def xHI_like(_self=None, type='dw', fit='rgomp1'):
         raise ValueError(f'{type=} not recognized')
 
     z, m, l, h = data.T
-    lna = - log(1 + z)
+    lna = - np.log(1 + z)
     mean = m + (l + h) / 2  # symmetrized
     var = ((h - l) / 2) ** 2  # symmetrized
 
@@ -137,7 +138,7 @@ if __name__ == '__main__':
 
     import matplotlib.pyplot as plt
     z = np.linspace(5, 16, num=111, endpoint=True)
-    lna = - log(1 + z)
+    lna = - np.log(1 + z)
     for fit in fits:
         params['fit'] = fit
         plt.plot(z, gomppoly6(lna, params=params), label=fit, lw=1, alpha=.5)

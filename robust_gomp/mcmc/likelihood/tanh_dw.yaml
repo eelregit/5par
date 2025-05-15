@@ -1,4 +1,3 @@
-xHI:
-  external: import_module('xHI').tanh_dw
-  requires:
-    z_reio: null
+dw_like.Tanh:
+  package_install: pip
+  stop_at_error: true
