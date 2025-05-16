@@ -4,8 +4,8 @@
 #SBATCH --output=%x.%j.out
 #SBATCH --partition=ccm
 #SBATCH --constraint=genoa
-#SBATCH --ntasks=24
-#SBATCH --cpus-per-task=4
+#SBATCH --ntasks=16
+#SBATCH --cpus-per-task=6
 #SBATCH --mem=0
 #SBATCH --mem-bind=none
 #SBATCH --time=7-00:00:00
@@ -20,7 +20,7 @@ hostname; pwd; date
 
 while true
 do
-  srun --mem=0 --time=08:00:00 cobaya run --resume --allow-changes cobaya.yaml
+  srun --mem=0 --time=00:15:00 cobaya run --resume --allow-changes cobaya.yaml
 done
 
 date
