@@ -18,9 +18,6 @@ source $HOME/ceph/universe/gomp/activate.sh
 
 hostname; pwd; date
 
-while true
-do
-  srun --mem=0 --time=08:00:00 cobaya run --resume --allow-changes cobaya.yaml
-done
+srun --mem=0 cobaya run --resume --allow-changes cobaya.yaml
 
 date
