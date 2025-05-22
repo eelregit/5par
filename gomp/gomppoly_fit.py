@@ -2,8 +2,8 @@ from functools import partial
 
 import numpy as np
 from numpy.polynomial import Polynomial
-import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
+import matplotlib.pyplot as plt
 
 
 a_edge, x_edge = np.loadtxt('../data/xHI.txt', unpack=True)[:2]
@@ -30,23 +30,23 @@ lna_ts = np.log(a_ts)
 def rescale_lna(lna, lna_pivot, tilt):
     if lna_pivot is None or tilt is None:
         return lna
-    if lna.ndim == 2:  # shape = num_sim, num_a
-        if lna_pivot.ndim == 1:  # shape = num_sim
+    if np.ndim(lna) == 2:  # shape = num_sim, num_a
+        if np.ndim(lna_pivot) == 1:  # shape = num_sim
             lna_pivot = lna_pivot[:, None]
-        if tilt.ndim == 1:  # shape = num_sim
+        if np.ndim(tilt) == 1:  # shape = num_sim
             tilt = tilt[:, None]
     return (lna - lna_pivot) * tilt
 
 
-def poly(lna, c, lna_pivot=None, tilt=None):
+def poly(lna, c, lna_pivot=None, tilt=None, deriv=0):
     # the const and linear coeffs can be absorbed by the pivot and tilt of each curve
     c = np.concatenate([[0, 1], c])
-    return Polynomial(c)(rescale_lna(lna, lna_pivot, tilt))  # shape = num_sim, num_a
+    P = Polynomial(c)
+    lna_rescaled = rescale_lna(lna, lna_pivot, tilt)
 
-
-def poly_deriv(lna, c, lna_pivot=None, tilt=None):
-    c = np.concatenate([[0, 1], c])
-    return Polynomial(c).deriv()(rescale_lna(lna, lna_pivot, tilt))  # shape = num_sim, num_a
+    if deriv > 0:
+        return P.deriv(m=deriv)(lna_rescaled)  # shape = num_sim, num_a
+    return P(lna_rescaled)  # shape = num_sim, num_a
 
 
 def unpack_params(p):
@@ -75,28 +75,38 @@ def gomppoly(lna, c, lna_pivot=None, tilt=None):
 
 
 def gomppoly_deriv(lna, c, lna_pivot=None, tilt=None):
-    """- dx / dlna."""
+    """- dx / dlna_rescaled."""
     exponentials = np.exp(poly(lna, c, lna_pivot, tilt))
     gompertz = np.exp(- exponentials)
-    derivatives = gompertz * exponentials * poly_deriv(lna, c, lna_pivot, tilt)
+    derivatives = gompertz * exponentials * poly(lna, c, lna_pivot, tilt, deriv=1)
+    derivatives[np.isnan(exponentials)] = 0
     return derivatives  # shape = num_sim, num_a
 
 
-def fit(degree, lna, x):
+def fit(num_coeffs, lna, x):
     # fit to 21cmFAST simulations
-    c = np.zeros(degree - 2)
-    lna_pivot = np.zeros(num_sim)
-    tilt = np.ones(num_sim)
+    lna_pivot = np.full(num_sim, -2, dtype=float)
+    tilt = np.full(num_sim, 7, dtype=float)
+    c = np.zeros(num_coeffs - 2)
     p0 = np.concatenate([lna_pivot, tilt, c])
     popt, pcov = curve_fit(gomppoly_ravel, lna, x.ravel(), p0)
     c, lna_pivot, tilt = unpack_params(popt)
 
+    print(f'{c = }')
+    print('lna_pivot =', lna_pivot, sep='\n')
+    print('tilt =', tilt, sep='\n')
+
+    chi2 = np.square(gomppoly(lna, c, lna_pivot, tilt) - x).sum()
+    print('chi-squared =', chi2)
+
     # fit to THESAN-1 simulation
-    gomppoly_thesan = gomppoly_ravel_fixing_c(c)
     lna_pivot_ts, tilt_ts = 0, 1
     p0 = lna_pivot_ts, tilt_ts
-    popt, pcov = curve_fit(gomppoly_thesan, lna_ts, x_ts.ravel(), p0)
+    popt, pcov = curve_fit(gomppoly_ravel_fixing_c(c), lna_ts, x_ts.ravel(), p0)
     lna_pivot_ts, tilt_ts = popt
+
+    print(f'{lna_pivot_ts = }')
+    print(f'{tilt_ts = }')
 
     return c, lna_pivot, tilt, lna_pivot_ts, tilt_ts
 
@@ -140,18 +150,11 @@ def plot(lna, c, lna_pivot, tilt, lna_pivot_ts, tilt_ts, x, xp):
 
 
 if __name__ == '__main__':
-    for degree in range(2, 9, 2):
-        print('#'*32, 'degree =', degree, '#'*32)
+    for num_coeffs in range(2, 9, 2):
+        print('#'*32, 'num_coeffs =', num_coeffs, '#'*32)
 
-        c, lna_pivot, tilt, lna_pivot_ts, tilt_ts = fit(degree, lna, x)
-        print('c =', c)
-        print('lna_pivot =', lna_pivot, sep='\n')
-        print('tilt =', tilt, sep='\n')
-        print(f'{lna_pivot_ts=}, {tilt_ts=}')
+        c, lna_pivot, tilt, lna_pivot_ts, tilt_ts = fit(num_coeffs, lna, x)
 
-        chi2 = np.square(gomppoly(lna, c, lna_pivot, tilt) - x).sum()
-        print('chi-squared =', chi2)
-
-        np.savetxt(f'pivottilt_{degree}.txt', np.stack([lna_pivot, tilt], axis=1))
+        np.savetxt(f'pivottilt_{num_coeffs}.txt', np.stack([lna_pivot, tilt], axis=1))
 
         plot(lna, c, lna_pivot, tilt, lna_pivot_ts, tilt_ts, x, xp)

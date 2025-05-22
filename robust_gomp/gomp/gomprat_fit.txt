@@ -1,0 +1,22 @@
+lna.min()=np.float64(-3.593743471299208), lna.max()=np.float64(-1.0986123886681147)
+prepending x_HI=1 at lna=(-200, -100, -50, -20, -10) and appending x_HI=0 at lna=(1, 2, 5, 10)
+################################ rational function of the form (x + c0 x^2 + c1 x^3) / (1 + c2 x + c3 x^2) ################################
+c = array([ 0.12748899,  0.10220648, -0.00604965,  0.0815222 ])
+lna_pivot = array([-2.09295055, -2.02192694, -2.21205257, ..., -2.20847529,
+       -2.1795263 , -1.91138073], shape=(1024,))
+tilt = array([7.69508131, 7.08357084, 7.55660953, ..., 8.35972504, 7.98607935,
+       6.74628991], shape=(1024,))
+res.success = True
+res.status = 0
+res.message = 'Optimization terminated successfully.'
+res.fun = np.float64(0.7227191251072762)  # chi-squared
+res.nfev = 1426
+res.nit = 839
+lna_pivot_ts = np.float64(-2.0636087341989993)
+tilt_ts = np.float64(7.140327617575272)
+res_ts.success = True
+res_ts.status = 0
+res_ts.message = 'Optimization terminated successfully.'
+res_ts.fun = np.float64(0.020437100382607345)  # chi-squared
+res_ts.nfev = 228
+res_ts.nit = 120

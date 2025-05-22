@@ -145,5 +145,5 @@ if __name__ == '__main__':
     plt.plot(z, tanh(z, z_reio=7.67), label='tanh', lw=1, alpha=.5)
     plt.legend()
     plt.xlabel('$z$')
-    plt.ylabel('$x_\mathrm{HI}$')
+    plt.ylabel(r'$x_\mathrm{HI}$')
     plt.show()
