@@ -2,8 +2,8 @@ from functools import partial
 
 import numpy as np
 from numpy.polynomial import Polynomial
+from scipy.optimize import minimize
 import matplotlib.pyplot as plt
-from scipy.optimize import curve_fit
 
 
 a_edge, x_edge = np.loadtxt('../data/xHI.txt', unpack=True)[:2]
@@ -16,7 +16,12 @@ num_a = 127
 a = a.reshape(num_sim, num_a)
 x = x.reshape(num_sim, num_a)
 lna = np.log(a)
+print(f'{lna.min()=}, {lna.max()=}')
 xp = - np.gradient(x, lna[0], axis=1)  # - dx/dlna
+print(f'prepending x_HI=1 at lna=(-200, -100, -50, -20, -10) and appending x_HI=0 at lna=(1, 2, 5, 10)')
+_lna_ = np.concatenate([np.full((num_sim, 5), (-200, -100, -50, -20, -10)), lna, np.full((num_sim, 4), (1, 2, 5, 10))], axis=1)
+_x_ = np.concatenate([np.ones((num_sim, 5)), x, np.zeros((num_sim, 4))], axis=1)
+num_a += 9
 
 # THESAN reionization history is available at
 # https://www.thesan-project.com/quantities/reion_history_Thesan1.dat
@@ -30,43 +35,71 @@ lna_ts = np.log(a_ts)
 def rescale_lna(lna, lna_pivot, tilt):
     if lna_pivot is None or tilt is None:
         return lna
-    if lna.ndim == 2:  # shape = num_sim, num_a
-        if lna_pivot.ndim == 1:  # shape = num_sim
+    if np.ndim(lna) == 2:  # shape = num_sim, num_a
+        if np.ndim(lna_pivot) == 1:  # shape = num_sim
             lna_pivot = lna_pivot[:, None]
-        if tilt.ndim == 1:  # shape = num_sim
+        if np.ndim(tilt) == 1:  # shape = num_sim
             tilt = tilt[:, None]
     return (lna - lna_pivot) * tilt
 
 
-def poly(lna, c, lna_pivot=None, tilt=None):
+def poly(lna, c, lna_pivot=None, tilt=None, deriv=0):
     # the const and linear coeffs can be absorbed by the pivot and tilt of each curve
     c = np.concatenate([[0, 1], c])
-    return Polynomial(c)(rescale_lna(lna, lna_pivot, tilt))  # shape = num_sim, num_a
+    P = Polynomial(c)
+    lna_rescaled = rescale_lna(lna, lna_pivot, tilt)
+
+    if deriv > 0:
+        return P.deriv(m=deriv)(lna_rescaled)  # shape = num_sim, num_a
+    return P(lna_rescaled)  # shape = num_sim, num_a
 
 
-def poly_deriv(lna, c, lna_pivot=None, tilt=None):
-    c = np.concatenate([[0, 1], c])
-    return Polynomial(c).deriv()(rescale_lna(lna, lna_pivot, tilt))  # shape = num_sim, num_a
-
-
-def unpack_params(p):
-    lna_pivot = np.array(p[:num_sim])  # curve_fit probably cannot handle array params
-    tilt = np.array(p[num_sim:2*num_sim])
-    c = np.array(p[2*num_sim:])
+def unpack_params(x):
+    """Unpack concatenated local pivots, local tilts, and global polynomial coeffs."""
+    lna_pivot = np.array(x[:num_sim])
+    tilt = np.array(x[num_sim:2*num_sim])
+    c = np.array(x[2*num_sim:])
     return c, lna_pivot, tilt
 
 
-def gomppoly_ravel(lna, *p):
-    c, lna_pivot, tilt = unpack_params(p)
-    return gomppoly(lna, c, lna_pivot, tilt).ravel()
+def gomppoly_obj(x, *args):
+    c, lna_pivot, tilt = unpack_params(x)
+    lna, x = args
+    return np.square(gomppoly(lna, c, lna_pivot, tilt) - x).sum()
 
 
-def gomppoly_ravel_fixing_c(c):
-    """A factory returning gomppoly_ravel's similar to above but allowing c to be fixed
+def gomppoly_objjac(x, *args):
+    c, lna_pivot, tilt = unpack_params(x)
+    lna, x = args
+
+    exponentials = np.exp(poly(lna, c, lna_pivot, tilt))
+    gompertz = np.exp(- exponentials)
+    poly_deriv = poly(lna, c, lna_pivot, tilt, deriv=1)
+    fac = 2 * (x - gomppoly(lna, c, lna_pivot, tilt))
+    fac *= gompertz * exponentials
+    fac[np.isnan(fac)] = 0
+
+    lna_pivot_deriv = fac * poly_deriv * rescale_lna(np.zeros((1, 1)), 1, tilt)  # HACK
+    lna_pivot_deriv = lna_pivot_deriv.sum(axis=1)
+    tilt_deriv = fac * poly_deriv * rescale_lna(lna, lna_pivot, 1)  # HACK
+    tilt_deriv = tilt_deriv.sum(axis=1)
+
+    exponents = np.arange(2, 2+len(c))[:, None, None]
+    c_deriv = fac * rescale_lna(lna, lna_pivot, tilt) ** exponents
+    c_deriv = c_deriv.sum(axis=(1, 2))
+
+    derivatives = np.concatenate([lna_pivot_deriv, tilt_deriv, c_deriv])
+    return derivatives
+
+
+def gomppoly_obj_fixing_c(c):
+    """A factory returning gomppoly_obj's similar to above but allowing c to be fixed
     and only fitting to the other 2. Useful for fitting to THESAN-1 simulation."""
-    def gomppoly_ravel(lna, lna_pivot, tilt):
-        return gomppoly(lna, c, lna_pivot, tilt).ravel()
-    return gomppoly_ravel
+    def gomppoly_obj(x, *args):
+        lna_pivot, tilt = x
+        lna, x = args
+        return np.square(gomppoly(lna, c, lna_pivot, tilt) - x).sum()
+    return gomppoly_obj
 
 
 def gomppoly(lna, c, lna_pivot=None, tilt=None):
@@ -75,28 +108,47 @@ def gomppoly(lna, c, lna_pivot=None, tilt=None):
 
 
 def gomppoly_deriv(lna, c, lna_pivot=None, tilt=None):
-    """- dx / dlna."""
+    """- dx / dlna_rescaled."""
     exponentials = np.exp(poly(lna, c, lna_pivot, tilt))
     gompertz = np.exp(- exponentials)
-    derivatives = gompertz * exponentials * poly_deriv(lna, c, lna_pivot, tilt)
+    derivatives = gompertz * exponentials * poly(lna, c, lna_pivot, tilt, deriv=1)
+    derivatives[np.isnan(exponentials)] = 0
     return derivatives  # shape = num_sim, num_a
 
 
-def fit(degree, lna, x):
+def fit(num_coeffs, _lna_, _x_):
     # fit to 21cmFAST simulations
-    c = np.zeros(degree - 2)
-    lna_pivot = np.zeros(num_sim)
-    tilt = np.ones(num_sim)
-    p0 = np.concatenate([lna_pivot, tilt, c])
-    popt, pcov = curve_fit(gomppoly_ravel, lna, x.ravel(), p0)
-    c, lna_pivot, tilt = unpack_params(popt)
+    lna_pivot = np.full(num_sim, -2)
+    tilt = np.full(num_sim, 7)
+    c = np.zeros(num_coeffs - 2)
+    x0 = np.concatenate([lna_pivot, tilt, c])
+    res = minimize(gomppoly_obj, x0, args=(_lna_, _x_), method='BFGS', jac=gomppoly_objjac)
+    c, lna_pivot, tilt = unpack_params(res.x)
+
+    print(f'{c = }')
+    print(f'{lna_pivot = }')
+    print(f'{tilt = }')
+    print(f'{res.success = }')
+    print(f'{res.status = }')
+    print(f'{res.message = }')
+    print(f'{res.fun = }  # chi-squared')
+    print(f'{res.nfev = }')
+    print(f'{res.nit = }')
 
     # fit to THESAN-1 simulation
-    gomppoly_thesan = gomppoly_ravel_fixing_c(c)
     lna_pivot_ts, tilt_ts = 0, 1
-    p0 = lna_pivot_ts, tilt_ts
-    popt, pcov = curve_fit(gomppoly_thesan, lna_ts, x_ts.ravel(), p0)
-    lna_pivot_ts, tilt_ts = popt
+    x0 = lna_pivot_ts, tilt_ts
+    res_ts = minimize(gomppoly_obj_fixing_c(c), x0, args=(lna_ts, x_ts), method='Nelder-Mead')
+    lna_pivot_ts, tilt_ts = res_ts.x
+
+    print(f'{lna_pivot_ts = }')
+    print(f'{tilt_ts = }')
+    print(f'{res_ts.success = }')
+    print(f'{res_ts.status = }')
+    print(f'{res_ts.message = }')
+    print(f'{res_ts.fun = }  # chi-squared')
+    print(f'{res_ts.nfev = }')
+    print(f'{res_ts.nit = }')
 
     return c, lna_pivot, tilt, lna_pivot_ts, tilt_ts
 
@@ -140,18 +192,11 @@ def plot(lna, c, lna_pivot, tilt, lna_pivot_ts, tilt_ts, x, xp):
 
 
 if __name__ == '__main__':
-    for degree in range(2, 9, 2):
-        print('#'*32, 'degree =', degree, '#'*32)
+    for num_coeffs in range(2, 9, 2):
+        print('#'*32, 'num_coeffs =', num_coeffs, '#'*32)
 
-        c, lna_pivot, tilt, lna_pivot_ts, tilt_ts = fit(degree, lna, x)
-        print('c =', c)
-        print('lna_pivot =', lna_pivot, sep='\n')
-        print('tilt =', tilt, sep='\n')
-        print(f'{lna_pivot_ts=}, {tilt_ts=}')
+        c, lna_pivot, tilt, lna_pivot_ts, tilt_ts = fit(num_coeffs, _lna_, _x_)
 
-        chi2 = np.square(gomppoly(lna, c, lna_pivot, tilt) - x).sum()
-        print('chi-squared =', chi2)
-
-        np.savetxt(f'pivottilt_{degree}.txt', np.stack([lna_pivot, tilt], axis=1))
+        np.savetxt(f'pivottilt_{num_coeffs}.txt', np.stack([lna_pivot, tilt], axis=1))
 
         plot(lna, c, lna_pivot, tilt, lna_pivot_ts, tilt_ts, x, xp)
