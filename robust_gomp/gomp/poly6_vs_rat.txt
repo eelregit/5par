@@ -1,0 +1,5 @@
+Comparing 1024 pivots and tilts, from fitting using polynomial vs rational function
+max of (ln) pivot diff is 0.00025048236057667594
+std of (ln) pivot diff is 1.868337454847174e-05
+max of tilt abs diff is 0.12282601882676758
+std of tilt abs diff is 0.006333362310330283
