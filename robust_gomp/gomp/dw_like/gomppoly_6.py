@@ -1,1 +1,0 @@
-../gomppoly_6.py

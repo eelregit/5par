@@ -148,4 +148,4 @@ if __name__ == '__main__':
     plt.legend()
     plt.xlabel('$z$')
     plt.ylabel(r'$x_\mathrm{HI}$')
-    plt.savefig('gomppoly_6.pdf')
+    plt.show()

@@ -1,7 +1,7 @@
 import numpy as np
 from cobaya.likelihood import Likelihood
 
-from dw_like.gomppoly_6 import gomppoly6, tanh
+from dw_like.gomprat import gomprat, tanh
 
 
 class Gomp(Likelihood):
@@ -29,7 +29,7 @@ class Gomp(Likelihood):
 
     def get_xHI(self, params_values):
         lna_pivot, tilt = params_values['alpha_gomp'], params_values['beta_gomp']
-        xHI = gomppoly6(self.lna, lna_pivot=lna_pivot, tilt=tilt)
+        xHI = gomprat(self.lna, lna_pivot=lna_pivot, tilt=tilt)
         return xHI
 
     def logp(self, **params_values):
@@ -68,7 +68,7 @@ class RGomp(Gomp):
             'LX': params_values['LX'],
             'fit': self.SR_fit,
         }
-        xHI = gomppoly6(self.lna, params=params)
+        xHI = gomprat(self.lna, params=params)
         return xHI
 
 
