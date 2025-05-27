@@ -7,7 +7,6 @@
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=6
 #SBATCH --mem=0
-#SBATCH --mem-bind=none
 #SBATCH --time=7-00:00:00
 
 
@@ -20,73 +19,22 @@ hostname; pwd; date
 
 #srun --exact -n 1 ...
 
-while true
-do
-  srun -n 1 --mem=0 --time=00:15:00 cobaya run --resume --allow-changes --output cmb_dw_bao_LCDM/serial cmb_dw_bao_LCDM/serial_covmat.yaml
-done > cmb_dw_bao_LCDM/serial.$SLURM_JOB_ID.out 2>&1 &
-while true
-do
-  srun -n 1 --mem=0 --time=00:15:00 cobaya run --resume --allow-changes --output cmb_dw_bao_Mnu/serial cmb_dw_bao_Mnu/serial_covmat.yaml
-done > cmb_dw_bao_Mnu/serial.$SLURM_JOB_ID.out 2>&1 &
-while true
-do
-  srun -n 1 --mem=0 --time=00:15:00 cobaya run --resume --allow-changes --output cmb_dw_bao_w0wa/serial cmb_dw_bao_w0wa/serial_covmat.yaml
-done > cmb_dw_bao_w0wa/serial.$SLURM_JOB_ID.out 2>&1 &
-while true
-do
-  srun -n 1 --mem=0 --time=00:15:00 cobaya run --resume --allow-changes --output cmb_dw_bao_w0waMnu/serial cmb_dw_bao_w0waMnu/serial_covmat.yaml
-done > cmb_dw_bao_w0waMnu/serial.$SLURM_JOB_ID.out 2>&1 &
-while true
-do
-  srun -n 1 --mem=0 --time=00:15:00 cobaya run --resume --allow-changes --output cmb_dw_LCDM/serial cmb_dw_LCDM/serial_covmat.yaml
-done > cmb_dw_LCDM/serial.$SLURM_JOB_ID.out 2>&1 &
-while true
-do
-  srun -n 1 --mem=0 --time=00:15:00 cobaya run --resume --allow-changes --output cmb_dw_lens_bao_LCDM/serial cmb_dw_lens_bao_LCDM/serial_covmat.yaml
-done > cmb_dw_lens_bao_LCDM/serial.$SLURM_JOB_ID.out 2>&1 &
-while true
-do
-  srun -n 1 --mem=0 --time=00:15:00 cobaya run --resume --allow-changes --output cmb_dw_lens_bao_Mnu/serial cmb_dw_lens_bao_Mnu/serial_covmat.yaml
-done > cmb_dw_lens_bao_Mnu/serial.$SLURM_JOB_ID.out 2>&1 &
-while true
-do
-  srun -n 1 --mem=0 --time=00:15:00 cobaya run --resume --allow-changes --output cmb_dw_lens_bao_w0wa/serial cmb_dw_lens_bao_w0wa/serial_covmat.yaml
-done > cmb_dw_lens_bao_w0wa/serial.$SLURM_JOB_ID.out 2>&1 &
-
-sleep 450  # start the other 8 after 7.5 minutes when the first 8 already have some mem leaks
-
-while true
-do
-  srun -n 1 --mem=0 --time=00:15:00 cobaya run --resume --allow-changes --output cmb_dw_lens_bao_w0waMnu/serial cmb_dw_lens_bao_w0waMnu/serial_covmat.yaml
-done > cmb_dw_lens_bao_w0waMnu/serial.$SLURM_JOB_ID.out 2>&1 &
-while true
-do
-  srun -n 1 --mem=0 --time=00:15:00 cobaya run --resume --allow-changes --output cmb_dw_lens_LCDM/serial cmb_dw_lens_LCDM/serial_covmat.yaml
-done > cmb_dw_lens_LCDM/serial.$SLURM_JOB_ID.out 2>&1 &
-while true
-do
-  srun -n 1 --mem=0 --time=00:15:00 cobaya run --resume --allow-changes --output cmb_dw_lens_Mnu/serial cmb_dw_lens_Mnu/serial_covmat.yaml
-done > cmb_dw_lens_Mnu/serial.$SLURM_JOB_ID.out 2>&1 &
-while true
-do
-  srun -n 1 --mem=0 --time=00:15:00 cobaya run --resume --allow-changes --output cmb_dw_lens_w0wa/serial cmb_dw_lens_w0wa/serial_covmat.yaml
-done > cmb_dw_lens_w0wa/serial.$SLURM_JOB_ID.out 2>&1 &
-while true
-do
-  srun -n 1 --mem=0 --time=00:15:00 cobaya run --resume --allow-changes --output cmb_dw_lens_w0waMnu/serial cmb_dw_lens_w0waMnu/serial_covmat.yaml
-done > cmb_dw_lens_w0waMnu/serial.$SLURM_JOB_ID.out 2>&1 &
-while true
-do
-  srun -n 1 --mem=0 --time=00:15:00 cobaya run --resume --allow-changes --output cmb_dw_Mnu/serial cmb_dw_Mnu/serial_covmat.yaml
-done > cmb_dw_Mnu/serial.$SLURM_JOB_ID.out 2>&1 &
-while true
-do
-  srun -n 1 --mem=0 --time=00:15:00 cobaya run --resume --allow-changes --output cmb_dw_w0wa/serial cmb_dw_w0wa/serial_covmat.yaml
-done > cmb_dw_w0wa/serial.$SLURM_JOB_ID.out 2>&1 &
-while true
-do
-  srun -n 1 --mem=0 --time=00:15:00 cobaya run --resume --allow-changes --output cmb_dw_w0waMnu/serial cmb_dw_w0waMnu/serial_covmat.yaml
-done > cmb_dw_w0waMnu/serial.$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_bao_LCDM/serial cmb_dw_bao_LCDM/serial_covmat.yaml > cmb_dw_bao_LCDM/serial.$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_bao_Mnu/serial cmb_dw_bao_Mnu/serial_covmat.yaml > cmb_dw_bao_Mnu/serial.$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_bao_w0wa/serial cmb_dw_bao_w0wa/serial_covmat.yaml > cmb_dw_bao_w0wa/serial.$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_bao_w0waMnu/serial cmb_dw_bao_w0waMnu/serial_covmat.yaml > cmb_dw_bao_w0waMnu/serial.$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_LCDM/serial cmb_dw_LCDM/serial_covmat.yaml > cmb_dw_LCDM/serial.$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_lens_bao_LCDM/serial cmb_dw_lens_bao_LCDM/serial_covmat.yaml > cmb_dw_lens_bao_LCDM/serial.$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_lens_bao_Mnu/serial cmb_dw_lens_bao_Mnu/serial_covmat.yaml > cmb_dw_lens_bao_Mnu/serial.$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_lens_bao_w0wa/serial cmb_dw_lens_bao_w0wa/serial_covmat.yaml > cmb_dw_lens_bao_w0wa/serial.$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_lens_bao_w0waMnu/serial cmb_dw_lens_bao_w0waMnu/serial_covmat.yaml > cmb_dw_lens_bao_w0waMnu/serial.$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_lens_LCDM/serial cmb_dw_lens_LCDM/serial_covmat.yaml > cmb_dw_lens_LCDM/serial.$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_lens_Mnu/serial cmb_dw_lens_Mnu/serial_covmat.yaml > cmb_dw_lens_Mnu/serial.$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_lens_w0wa/serial cmb_dw_lens_w0wa/serial_covmat.yaml > cmb_dw_lens_w0wa/serial.$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_lens_w0waMnu/serial cmb_dw_lens_w0waMnu/serial_covmat.yaml > cmb_dw_lens_w0waMnu/serial.$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_Mnu/serial cmb_dw_Mnu/serial_covmat.yaml > cmb_dw_Mnu/serial.$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_w0wa/serial cmb_dw_w0wa/serial_covmat.yaml > cmb_dw_w0wa/serial.$SLURM_JOB_ID.out 2>&1 &
+srun -n 1 cobaya run --resume --output cmb_dw_w0waMnu/serial cmb_dw_w0waMnu/serial_covmat.yaml > cmb_dw_w0waMnu/serial.$SLURM_JOB_ID.out 2>&1 &
 
 wait
 
