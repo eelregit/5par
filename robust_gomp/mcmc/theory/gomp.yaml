@@ -1,4 +1,7 @@
 classy:
+  requires:
+    alpha_gomp: null
+    beta_gomp: null
   extra_args:
     # reionization model
     reio_parametrization: reio_gomp_noSR
