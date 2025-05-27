@@ -10,6 +10,10 @@
 #SBATCH --time=7-00:00:00
 
 
+# NOTE unlike serial_job.sh, this is symlinked into each job directory
+# and should be submitted there!
+
+
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
 source $HOME/ceph/universe/gomp/activate.sh
