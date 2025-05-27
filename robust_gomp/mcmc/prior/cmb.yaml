@@ -1,0 +1,3 @@
+# one of the instrument parameters needs to be added as follows:
+# see https://github.com/ACTCollaboration/DR6-ACT-lite/blob/main/yamls/act-lcdm.yaml
+cal_dip_prior: 'lambda A_act: stats.norm.logpdf(A_act, loc = 1.0, scale = 0.003)'
