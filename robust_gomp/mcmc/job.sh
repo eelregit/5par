@@ -21,6 +21,6 @@ source $HOME/ceph/universe/gomp/activate.sh
 
 hostname; pwd; date
 
-srun --mem=0 cobaya run --resume cobaya.yaml
+srun cobaya run --resume cobaya.yaml
 
 date

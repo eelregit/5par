@@ -1,13 +1,6 @@
 output: mcmc
 
-sampler:
-  mcmc:
-    #drag: true
-    oversample_power: 0.4
-    learn_proposal_Rminus1_max: 30
-    covmat: auto
-    Rminus1_stop: 0.01
-    Rminus1_cl_stop: 0.2
+sampler: !defaults [../sampler/mcmc]
 
 theory: !defaults [../theory/gomp]
 likelihood: !defaults [../likelihood/cmb, ../likelihood/gomp_dw]

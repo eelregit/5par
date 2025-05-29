@@ -1,0 +1,16 @@
+# unable to get this working
+sampler.EMCEE:
+  package_install: pip
+  nwalkers: 96
+  nsteps: 4
+  thin_by: 1
+  moves:
+    kind: StretchMove
+    args:
+      a: 2.0
+  parallel:
+    kind: multiprocessing  # mpi not working either
+    args:
+      threads: 96
+  progress: false
+  output_format: hdf5
