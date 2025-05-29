@@ -1,0 +1,13 @@
+cobaya_emcee:
+  package_install: pip
+  nwalkers: 128
+  nsteps: 4
+  thin_by: 1
+  moves:
+    kind: StretchMove
+    args:
+      a: 2.0
+  parallel:
+    kind: mpi
+  progress: false
+  output_format: hdf5
