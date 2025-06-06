@@ -12,7 +12,6 @@ logA:
 A_s:
   value: "lambda logA: 1e-10*np.exp(logA)"
   latex: A_\mathrm{s}
-  derived: True
 sigma8:
   latex: \sigma_8
 tau_reio:
@@ -30,13 +29,18 @@ alpha_gomp:
   ref: -2.
   proposal: 0.01
   latex: \alpha
-beta_gomp:
+threehalves_over_beta:
+  # logGamma(1 - 1.5 / beta) ~ 1.5 gamma / beta, for large beta
   prior:
     # Obviously beta should be positive to not "flip" the reionization.
     # Moreover, we requires it to be greater than 3/2, below which tau
     # diverges when integrated towards a->0 assuming matter domination
-    min: 1.5
-    max: 15.
-  ref: 7.
-  proposal: 0.5
+    min: 0.  # max beta is inf
+    max: 1.  # min beta is 1.5
+  ref: 0.25  # ref beta is 6
+  proposal: 0.02
+  latex: \frac{3}{2\beta}
+  drop: true
+beta_gomp:
+  value: "lambda threehalves_over_beta: 1.5 / threehalves_over_beta"
   latex: \beta
