@@ -32,7 +32,10 @@ alpha_gomp:
   latex: \alpha
 beta_gomp:
   prior:
-    min: 0.
+    # Obviously beta should be positive to not "flip" the reionization.
+    # Moreover, we requires it to be greater than 3/2, below which tau
+    # diverges when integrated towards a->0 assuming matter domination
+    min: 1.5
     max: 15.
   ref: 7.
   proposal: 0.5
