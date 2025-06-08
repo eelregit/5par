@@ -1,1 +1,0 @@
-../../gomp/gomprat.py
