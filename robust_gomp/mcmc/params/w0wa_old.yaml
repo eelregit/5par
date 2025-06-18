@@ -1,0 +1,17 @@
+Omega_fld:
+  value: -1.0
+  latex: \Omega_\Lambda
+w0_fld:
+  prior:
+    min: -3.0
+    max: 1.0
+  ref: -1.0
+  proposal: 0.05
+  latex: w_0
+wa_fld:
+  prior:
+    min: -3.0
+    max: 2.0
+  ref: 0.0
+  proposal: 0.2
+  latex: w_a

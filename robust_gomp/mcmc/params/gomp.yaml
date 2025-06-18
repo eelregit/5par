@@ -10,7 +10,7 @@ logA:
   latex: \log(10^{10} A_\mathrm{s})
   drop: true
 A_s:
-  value: "lambda logA: 1e-10*np.exp(logA)"
+  value: 'lambda logA: 1e-10*np.exp(logA)'
   latex: A_\mathrm{s}
 sigma8:
   latex: \sigma_8
@@ -42,5 +42,5 @@ threehalves_over_beta:
   latex: \frac{3}{2\beta}
   drop: true
 beta_gomp:
-  value: "lambda threehalves_over_beta: 1.5 / threehalves_over_beta"
+  value: 'lambda threehalves_over_beta: 1.5 / threehalves_over_beta'
   latex: \beta
