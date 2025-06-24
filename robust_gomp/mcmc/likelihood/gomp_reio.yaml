@@ -1,0 +1,6 @@
+reio_like.GompQDM:
+  package_install: pip
+  stop_at_error: true
+reio_like.GompLybDG:
+  package_install: pip
+  stop_at_error: true

@@ -1,3 +1,0 @@
-dw_like.RGomp:
-  package_install: pip
-  stop_at_error: true
