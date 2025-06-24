@@ -102,9 +102,17 @@ class Island(Likelihood):
     """Island likelihood."""
 
     def initialize(self):
-        self.z = 5.5                                 # TODO is this the right redshift?
+        self.z = 5.55                                
         self.lna = - np.log(1 + self.z)
-        self.upper_bound = 0.05                                 # TODO is this the right number for HI or total?
+        self.upper_bound = 0.05                                 # TODO is this the right number for HI or total? # HI
+
+        # The data comes from 2205.04569. Specifically, the constraint comes from Lyman-beta forest dark gaps
+        # they also have a couple more points that are not as useful but we could include them
+        # [z, xHI upper bound]
+        # [5.75, 0.17],
+        # [5.95, 0.29]
+
+
 
     def logp(self, **params_values):
         xHI = self.get_xHI(params_values)
