@@ -72,16 +72,16 @@ class Tanh(Likelihood):
         return xHI
 
 
-class DampingWing(Likelihood):
+class QuasarDampingWing(Likelihood):
     """Quasar damping wing likelihood."""
 
     def initialize(self):
         data = np.array([
             [7.29, 0.49, -0.11, 0.11],  # combined quasars daming wing
-            [6.15, 0.20, -0.12, 0.14],  # 2404.12585 damping wing
+            [6.15, 0.20, -0.12, 0.14],  # 2404.12585
             [6.35, 0.29, -0.13, 0.14],
-            [5.60, 0.19, -0.16, 0.11],  # 2405.12273 damping wing
-            [6.10, 0.21, -0.07, 0.17],  # 2401.10328 damping wing
+            [5.60, 0.19, -0.16, 0.11],  # 2405.12273
+            [6.10, 0.21, -0.07, 0.17],  # 2401.10328
             [6.46, 0.21, -0.07, 0.33],
             [6.87, 0.37, -0.17, 0.17],
         ])
@@ -98,68 +98,62 @@ class DampingWing(Likelihood):
         return half_neg_chi2
 
 
-class Island(Likelihood):
-    """Island likelihood."""
+class LymanbetaDarkGap(Likelihood):
+    """Lyman-beta dark gap likelihood, as conservative upper bounds."""
 
     def initialize(self):
-        self.z = 5.55                                
+        # from Lyman-beta forest dark gaps 2205.04569
+        self.z = np.array([5.55, 5.75, 5.95])
         self.lna = - np.log(1 + self.z)
-        self.upper_bound = 0.05                                 # TODO is this the right number for HI or total? # HI
-
-        # The data comes from 2205.04569. Specifically, the constraint comes from Lyman-beta forest dark gaps
-        # they also have a couple more points that are not as useful but we could include them
-        # [z, xHI upper bound]
-        # [5.75, 0.17],
-        # [5.95, 0.29]
-
+        self.upper_bound = np.array([0.05 + 0.04, 0.17 + 0.05, 0.29 + 0.09])  # for HI
 
 
     def logp(self, **params_values):
         xHI = self.get_xHI(params_values)
-        return 0 if xHI < self.upper_bound else - np.inf
+        return 0 if xHI <= self.upper_bound else - np.inf
 
 
-class GompDW(Gomp, DampingWing):
+class GompQDW(Gomp, QuasarDampingWing):
     """Quasar damping wing likelihood on Gompertzian reionization history."""
 
 
-class RGompDW(RGomp, DampingWing):
+class RGompQDW(RGomp, QuasarDampingWing):
     """Quasar damping wing likelihood on Gompertzian reionization history, in symbolic
     regressed 21cmFAST parameters."""
 
 
-RGomp1DW = RGompDW
+RGomp1QDW = RGompQDW
 
 
-class RGomp2DW(RGompDW, DampingWing):
+class RGomp2QDW(RGompQDW, QuasarDampingWing):
     """Quasar damping wing likelihood on Gompertzian reionization history, in symbolic
     regressed 21cmFAST parameters using half of training set."""
 
     SR_fit = 'rgomp2'
 
 
-class TanhDW(Tanh, DampingWing):
+class TanhQDW(Tanh, QuasarDampingWing):
     """Quasar damping wing likelihood on logistic reionization history."""
 
 
-class GompIs(Gomp, Island):
-    """Island likelihood on Gompertzian reionization history."""
+class GompLybDG(Gomp, LymanbetaDarkGap):
+    """Lyman-beta dark gap likelihood on Gompertzian reionization history."""
 
 
-class RGompIs(RGomp, Island):
-    """Island likelihood on Gompertzian reionization history, in symbolic regressed
-    21cmFAST parameters."""
+class RGompLybDG(RGomp, LymanbetaDarkGap):
+    """Lyman-beta dark gap likelihood on Gompertzian reionization history, in symbolic
+    regressed 21cmFAST parameters."""
 
 
-RGomp1Is = RGompIs
+RGomp1LybDG = RGompLybDG
 
 
-class RGomp2Is(RGompIs, Island):
-    """Island likelihood on Gompertzian reionization history, in symbolic regressed
-    21cmFAST parameters using half of training set."""
+class RGomp2LybDG(RGompLybDG, LymanbetaDarkGap):
+    """Lyman-beta dark gap likelihood on Gompertzian reionization history, in symbolic
+    regressed 21cmFAST parameters using half of training set."""
 
     SR_fit = 'rgomp2'
 
 
-class TanhIs(Tanh, Island):
-    """Island likelihood on logistic reionization history."""
+class TanhLybDG(Tanh, LymanbetaDarkGap):
+    """Lyman-beta dark gap likelihood on logistic reionization history."""
