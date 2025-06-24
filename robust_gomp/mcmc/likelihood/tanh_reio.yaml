@@ -1,6 +1,8 @@
-reio_like.TanhQDW:
+QDW:
+  class: reio_like.TanhQDW
   package_install: pip
   stop_at_error: true
-reio_like.TanhLybDG:
+LybDG:
+  class: reio_like.TanhLybDG
   package_install: pip
   stop_at_error: true

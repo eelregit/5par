@@ -1,6 +1,8 @@
-reio_like.GompQDM:
+QDW:
+  class: reio_like.GompQDW
   package_install: pip
   stop_at_error: true
-reio_like.GompLybDG:
+LybDG:
+  class: reio_like.GompLybDG
   package_install: pip
   stop_at_error: true
