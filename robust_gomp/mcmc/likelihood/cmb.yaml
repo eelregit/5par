@@ -1,6 +1,9 @@
-planck_2018_lowl.TT: null
-planck_2018_lowl.EE_sroll2: null
-act_dr6_cmbonly.PlanckActCut:
+lowlTT:
+  class: planck_2018_lowl.TT
+lowlEE:
+  class: planck_2018_lowl.EE_sroll2
+Planck:
+  class: act_dr6_cmbonly.PlanckActCut
   dataset_params:
     use_cl: tt te ee
     lmin_cuts: 0 0 0
@@ -9,5 +12,6 @@ act_dr6_cmbonly.PlanckActCut:
     A_planck:
       value: 'lambda A_act: A_act'
       latex: A_{\rm Planck}
-act_dr6_cmbonly:
+ACT:
+  class: act_dr6_cmbonly
   stop_at_error: true
