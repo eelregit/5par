@@ -1,0 +1,4 @@
+LybDG:
+  class: reio_like.TanhLybDG
+  package_install: pip
+  stop_at_error: true
