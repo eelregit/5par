@@ -3,6 +3,6 @@ output: mcmc
 sampler: !defaults [../sampler/mcmc]
 
 theory: !defaults [../theory/tanh]
-likelihood: !defaults [../likelihood/cmb, ../likelihood/tanh_dw, ../likelihood/lens, ../likelihood/bao]
+likelihood: !defaults [../likelihood/cmb, ../likelihood/tanh_reio, ../likelihood/lens, ../likelihood/bao]
 prior: !defaults [../prior/cmb]
 params: !defaults [../params/cosmo, ../params/tanh, ../params/w0wa, ../params/Mnu_fixed]
