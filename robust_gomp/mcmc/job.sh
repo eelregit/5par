@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 #SBATCH --job-name=cobaya
-#SBATCH --output=%x.%j.out
+#SBATCH --output=%x-%j.out
 #SBATCH --partition=ccm
 #SBATCH --constraint=genoa
 #SBATCH --ntasks=16
