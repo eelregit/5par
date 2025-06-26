@@ -21,6 +21,8 @@ source $HOME/ceph/universe/gomp/activate.sh
 
 hostname; pwd; date
 
-srun cobaya run --resume cobaya.yaml
+[[ -f cobaya.covmat ]] && SCRIPT=cobaya_covmat.yaml || SCRIPT=cobaya.yaml
+
+srun cobaya run --resume $SCRIPT
 
 date

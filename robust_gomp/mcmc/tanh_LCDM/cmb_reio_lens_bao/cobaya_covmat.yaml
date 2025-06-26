@@ -1,0 +1,8 @@
+output: mcmc
+
+sampler: !defaults [../../sampler/mcmc_covmat]
+
+theory: !defaults [../../theory/tanh]
+likelihood: !defaults [../../likelihood/cmb, ../../likelihood/tanh_reio, ../../likelihood/lens, ../../likelihood/bao]
+prior: !defaults [../../prior/cmb]
+params: !defaults [../../params/cosmo, ../../params/tanh, ../../params/Mnu_fixed]
