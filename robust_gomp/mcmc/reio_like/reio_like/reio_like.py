@@ -126,11 +126,9 @@ class RGompQDW(RGomp, QuasarDampingWing):
 RGomp1QDW = RGompQDW
 
 
-class RGomp2QDW(RGompQDW, QuasarDampingWing):
+class RGomp2QDW(RGomp2, QuasarDampingWing):
     """Quasar damping wing likelihood on Gompertzian reionization history, in symbolic
     regressed 21cmFAST parameters using half of training set."""
-
-    SR_fit = 'rgomp2'
 
 
 class TanhQDW(Tanh, QuasarDampingWing):
@@ -149,11 +147,9 @@ class RGompLybDG(RGomp, LymanbetaDarkGap):
 RGomp1LybDG = RGompLybDG
 
 
-class RGomp2LybDG(RGompLybDG, LymanbetaDarkGap):
+class RGomp2LybDG(RGomp2, LymanbetaDarkGap):
     """Lyman-beta dark gap likelihood on Gompertzian reionization history, in symbolic
     regressed 21cmFAST parameters using half of training set."""
-
-    SR_fit = 'rgomp2'
 
 
 class TanhLybDG(Tanh, LymanbetaDarkGap):
