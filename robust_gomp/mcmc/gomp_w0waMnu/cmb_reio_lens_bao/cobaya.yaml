@@ -1,8 +1,8 @@
 output: mcmc
 
-sampler: !defaults [../sampler/mcmc]
+sampler: !defaults [../../sampler/mcmc]
 
-theory: !defaults [../theory/gomp]
-likelihood: !defaults [../likelihood/cmb, ../likelihood/gomp_reio, ../likelihood/lens, ../likelihood/bao]
-prior: !defaults [../prior/cmb]
-params: !defaults [../params/cosmo, ../params/gomp, ../params/w0wa, ../params/Mnu]
+theory: !defaults [../../theory/gomp]
+likelihood: !defaults [../../likelihood/cmb, ../../likelihood/gomp_reio, ../../likelihood/lens, ../../likelihood/bao]
+prior: !defaults [../../prior/cmb]
+params: !defaults [../../params/cosmo, ../../params/gomp, ../../params/w0wa, ../../params/Mnu]
