@@ -1,0 +1,692 @@
+\documentclass[12pt,]{article}
+
+
+\usepackage{newtxtext, newtxmath}
+\usepackage[letterpaper, margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{bm}
+\usepackage[dvipsnames]{xcolor}
+
+
+\usepackage{setspace}
+  \setstretch{1.1}
+
+
+
+
+
+
+\usepackage{booktabs}
+\usepackage{colortbl}
+  \newcommand{\sampled}{\cellcolor{gray!20}}
+\usepackage{placeins}
+
+\usepackage{hyperref}
+  \hypersetup{
+    colorlinks=true,
+    linkcolor=RoyalBlue,
+    filecolor=RoyalBlue,
+    citecolor=RoyalBlue,
+    urlcolor=RoyalBlue,
+  }
+
+
+
+\usepackage{authblk}
+  \renewcommand\Affilfont{\itshape\normalsize}
+
+
+
+% journals
+\newcommand{\mnras}{{\em Mon. Not. Roy. Astron. Soc. }}
+\newcommand{\apjl}{{\em Astrophys. J. Let. }}
+\newcommand{\apjs}{ApJS}
+\newcommand{\jcap}{JCAP}
+\newcommand{\nat}{{\em Nature}}
+\newcommand{\physrep}{{\em Phys. Rept. }}
+\newcommand{\aap}{{\em Astron. Astrophys. }}
+\newcommand{\aj}{AJ }
+\newcommand{\apj}{ApJ}
+\newcommand{\pasp}{PASP}
+\newcommand{\pasj}{PASJ}
+\newcommand{\prl}{\em Phys. Rev. Lett. }
+\newcommand{\ssr}{\em Space Sci. Rev.}
+\newcommand{\araa}{Annual Review of Astron and Astrophys}
+\def\prd{{\em Phys. Rev. }{\bf D }}
+\def\pr{{Phys.\ Rev.\ }}
+\def\astropart{{Astro-particle Phys.~}}
+\def\rvmp{{Rev.\ Mod.\ Phys.\ }}
+
+\bmdefine{\vtheta}{\theta}
+\newcommand{\As}{A_\mathrm{s}}
+\newcommand{\ns}{n_\mathrm{s}}
+\newcommand{\Omegam}{\Omega_\mathrm{m}}
+\newcommand{\Omegac}{\Omega_\mathrm{c}}
+\newcommand{\Omegab}{\Omega_\mathrm{b}}
+\newcommand{\OmegaL}{\Omega_\Lambda}
+\newcommand{\zetaUV}{\zeta_\mathrm{UV}}
+\newcommand{\HI}{\mathrm{HI}}
+\newcommand{\He}{\mathrm{He}}
+\newcommand{\HeII}{\mathrm{HeII}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\re}{\mathrm{re}}
+\newcommand{\reio}{\mathrm{reio}}
+\newcommand{\rec}{\mathrm{rec}}
+\newcommand{\ap}{\alpha}
+\newcommand{\tilt}{\beta}
+\newcommand{\ar}{\tilde{a}}
+\newcommand{\gomp}{\mathrm{gomp}}
+
+\newcommand{\paulo}[1]{{\bfseries\textcolor{cyan}{[PMC: #1]}}}
+\newcommand{\PMCtodo}[2][]{\todo[backgroundcolor=Green!20, linecolor=Green!50, #1]{PMC: #2}}
+\newcommand{\YL}[1]{\textcolor{Bittersweet}{\textbf{#1}}}
+\newcommand{\YLtodo}[2][]{\todo[backgroundcolor=Bittersweet!20, linecolor=Bittersweet!50, #1]{#2}}
+
+
+\title{Supplementary Material \\ \Large Five parameters are all you need\\(in $\Lambda$CDM)\vspace{2em}}
+
+
+\author[1]{Paulo Montero-Camacho\thanks{\texttt{pmontero@pcl.ac.cn},
+with equal contribution}}
+\author[1]{Yin Li\thanks{\texttt{eelregit@gmail.com}, with equal
+contribution}}
+\author[2]{Miles Cranmer}
+\affil[1]{Department of Mathematics and Theory, Peng Cheng Laboratory,
+\newline Shenzhen, Guangdong, China}
+\affil[2]{Institute of Astronomy, University of Cambridge, Madingley
+Road, Cambridge, UK \& \newline
+Department of Applied Mathematics and Theoretical Physics, University of
+Cambridge, Wilberforce Road, Cambridge, UK}
+
+
+\date{}
+
+
+
+\begin{document}
+
+
+\maketitle
+
+
+\newpage
+
+
+
+\subsection*{Simulations}
+\label{sec:sims}
+
+To establish the universality of our proposed Gompertzian model for the
+neutral hydrogen reionization and its relationship with the cosmological
+parameters, we conducted 256 \texttt{21cmFASTv3} simulations to generate
+the corresponding $x_\HI(z; \vtheta)$ profiles.
+Our parameter space include $\vtheta = \{\sigma_8, \ns, h, \Omegab,
+\Omegam, \zetaUV\}$, comprising five cosmological and one astrophysical
+parameters.
+The selection of $\sigma_8$ instead of $\As$ is imposed by the input
+requirements of \texttt{21cmFAST}\footnote{Alternatively, one could use
+\texttt{21cmFirstCLASS} \cite{Flitter2024} to avoid $\sigma_8$.}.
+We first use a scrambled Sobol sequence \cite{Sobol1967, Owen1998} of
+length 128 to sample quasi-uniformly within the following
+$\vtheta$-ranges:
+%
+\begin{alignat}{3}
+\label{eq:prior}
+\sigma_8 &\in (0.74, 0.90), &\quad
+\ns &\in (0.92, 1.00), &\quad
+h &\in (0.61, 0.73), \nonumber\\
+\Omegab &\in (0.04, 0.06), &\quad
+\Omegam &\in (0.24, 0.40), &\quad
+\zetaUV &\in (20, 35).
+\end{alignat}
+%
+Their 1D and 2D projections in Fig.~\ref{fig:sobol} illustrate the sample
+uniformity in parameter space.
+Because most of the 6D hypercube volume lies near its surface, we name
+the above 128 simulations the \emph{edge} samples and let the other 128
+simulations sample its \emph{core} within the 5$\sigma$ range of Planck
+PR3 constraint \cite{Planck2020a}, reusing the same Sobol design in
+Fig.~\ref{fig:sobol}.
+This helps to improve the accuracy of symbolic regression where the
+final posterior mass are expected to lie.
+
+Our \texttt{21cmFAST} simulations have a 300 comoving Mpc box size and
+$768^3$ ($256^3$) cells for the matter (HI) field.
+We maintain most options in their default values and extract the
+neutral hydrogen fraction using \texttt{lightcone.global\_xH}.
+
+\begin{figure}[tb]
+\centering
+\includegraphics[width=0.7\textwidth]{figs/sobol128.pdf}
+\caption{\textbf{\boldmath Sobol design for our $x_\HI$ edge and core
+samples},
+in 6D parameter space of $\sigma_8$, $\ns$, $h$, $\Omegab$, $\Omegam$,
+and $\zetaUV$.
+Each of the 128 points in the lower triangular panels corresponds to the
+2D projection of one core and one edge \texttt{21cmFAST} runs, while the
+diagonal panels show the 1D cumulative histograms for each parameter.
+These 1D and 2D projections demonstrate the uniformity of our sampling
+of the parameter space within the edge prior range of Eq.~(\ref{eq:prior}),
+as well as in the core area surrounding the Planck PR3 constraint.}
+\label{fig:sobol}
+\end{figure}
+
+The ionization efficiency $\zetaUV$ governs the ability of ultraviolet
+photons to escape their parent galaxies and ionize the IGM. An increase
+in $\zetaUV$ leads to an earlier completion of HI reionization.
+Due to significant uncertainties surrounding $\zetaUV$, we opted to use
+a constant value in each simulation.
+Note that this choice was made for simplicity, and a more realistic
+assumption could be that $\zetaUV$ is a function of halo mass
+\cite{Park2019} or redshift, which we will investigate in future
+work.
+
+
+\subsection*{Helium reionization}
+\label{sec:helium}
+
+The early intergalactic medium is primarily composed by neutral hydrogen
+and helium.
+Neutral helium (HeI) loses is first electron at the same time as neutral
+hydrogen (HI) gets ionized \cite{Trac2007}.
+However, there is a second reionization that occurs around $z\sim3$
+where Helium (HeII) loses its remaining electron.
+
+CMB photons will scatter off any free electrons, therefore both helium
+reionizations contribute to the Thomson optical depth to reionization
+$\tau_\reio$, although HeII ionization contribute relatively little in
+comparison to HI and HeI ionizations \cite{Liu2016}.
+
+To include the impact of the first helium reionization in our Gompertz
+\texttt{CLASS}, we assume it follows that of HI as done in the $\tanh$
+model, i.e., the free electron fraction $x_\e$ is given by
+%
+\begin{align}
+\label{eq:xe_H_He}
+x_\e
+&= \Bigl(1 + \frac{n_\He}{n_\mathrm{H}} - x^\rec_\e\Bigr) x_\e^\gomp
+  + x^\rec_\e
+\nonumber\\
+%
+&= \Bigl(1 + \frac{Y_\He}{C (1 - Y_\He)} - x^\rec_\e\Bigr) x_\e^\gomp
+  + x^\rec_\e,
+\end{align}
+%
+where $n_\He / n_\mathrm{H}$ is the helium to hydrogen number density
+ratio, $C \equiv m_\He / m_\mathrm{H} \approx 4$ is their mass ratio,
+$Y_\He$ is the helium mass fraction, $x_\e^\gomp$ corresponds to the
+contribution of free electrons due to the Gompertzian contribution -- Eq.~(1) of the main body -- and $x^\rec_\e
+\approx 10^{-4}$ is the leftover free electrons from after
+recombination.
+
+Given the relatively small impact of the HeII reionization on
+$\tau_\reio$, the current uncertainties regarding its timeline, and the
+difficulty involved with its accurate modeling \cite{Hotinli2023,
+Upton2020}, we opt to follow the conventional approach and include the
+second Helium reionization using the $\tanh$ model
+%
+\begin{equation}
+\label{eq:xe_tot}
+x_\e^\mathrm{Tot} = x_\e + \frac{Y_\He}{2C(1 - Y_\He)}
+  \biggl(\tanh{\Bigl(\frac{z_\re^\HeII - z}{\Delta z^\HeII}\Bigr)} + 1\biggr),
+\end{equation}
+%
+where $z_\re^\HeII = 3.5$ and $\Delta z^\HeII = 0.5$ are the midpoint
+and duration of the second helium reionization, respectively.
+These choices are also the default values used by \texttt{CLASS}.
+
+
+\subsection*{Shape universality and modeling}
+\label{sec:shape}
+
+\begin{figure}[tb]
+\centering
+\includegraphics[width=0.6\linewidth]{figs/shape_6.pdf}
+\caption{\textbf{\boldmath Universal shape of $x_\HI$.}
+\emph{(Top)} 256 simulated $x_\HI$ timelines (thin light gray lines)
+exhibit universality, after power-law transformations $\ar =
+(a/\ap)^\tilt$.
+The blue curves in all panels show our fitted analytic shape model, a
+composition of the Gompertzian curve with a 5th-degree polynomial in Eqs.~(1) and (2) of the main article.
+\emph{(Middle)} Time derivative of $x_\HI$, can be interpreted as a PDF
+if we view $x_\HI$ itself as the CDF.
+We first discovered the universality by translating and rescaling each
+$x_\HI$ using the mean and variance of its PDF, though now switch to the
+better approach that jointly fits the global shape and individual
+power-law parameters.
+We use the latter as target of symbolic regression.
+\emph{(Bottom)} Timelines transformed by the inverse of Gompertzian
+function, modeled in blue curve with a 5th-degree polynomial in
+Eq.~(2) of the main article.}
+\label{fig:shape}
+\end{figure}
+
+We discovered the universality in the shape of $x_\HI$ timelines before
+attempting to build analytic model for it.
+Because $x_\HI$ varies monotonically between 1 and 0, we can view it as
+a CDF and derive its PDF, with which we can weigh the logarithmic scale
+factor $\ln a$ to compute its mean and standard deviations.
+It was immediately obvious to us that the $x_\HI$'s had a common shape
+to percent level, after translation by their means and rescaling by
+their standard deviations.
+However, given our broad parameter range in Eq.~(\ref{eq:prior}), some
+$x_\HI$'s have not reached 0 by the end of simulations, resulting in
+imperfect transformations hurting the universality.
+
+To address this, we construct flexible models for the universal shape,
+and fit it jointly with individual transformation parameters of each
+$x_\HI$ timeline.
+We compose the Gompertz function $\gomp$, defined in Eq.~(1) of the main article, with
+a low-degree polynomial $P_m$, where $m = 1, 3, 5, 7$ progressively.
+We fit the composed shape to minimize the mean squared error (MSE) in
+256 $x_\HI$'s and at 127 time points in each, and find the objective
+value improve with $m$ but only marginally from $P_5$ to $P_7$.
+Therefore, our final shape model is a composition of $\gomp$ and $P_5$,
+(see the lower panel of Fig.~\ref{fig:shape}), and has 6 parameters to fit.
+
+As for the transformation parameters, as in the PDF approach, we use an
+affine transformation $\ln\ar = \tilt (\ln a - \ln\ap)$, or equivalently
+a power law in Eq.~(3) of the main article.
+Because each $x_\HI$ has its own parameters of $\ap$ and $\tilt$, we
+have in total $516 = 4 + 2 \times 256$ parameters to determine in the
+joint fit.
+$P_5$ only needs 4 instead of 6 parameters, because the constant and the
+linear coefficients are fully degenerate with $\ln\ap$ and $\tilt$, and
+therefore are fixed to be 0 and 1, respectively.
+Fig.~\ref{fig:shape} shows all 256 $x_\HI$ timelines and their universality
+after transformations.
+We can then use the fitted $\ap$ and $\tilt$ as the target for symbolic
+regression, to model their dependences on the independent cosmological
+and astrophysical parameters.
+
+\begin{figure}[tb]
+\centering
+\includegraphics[width=0.7\linewidth]{figs/thesan_fit.pdf}
+\caption{\textbf{Universal shape of $x_\HI$ in THESAN simulation.}
+\emph{(Top)} Simulated timeline from the THESAN1 simulation (gray line)
+exhibits the same universality, as it can be accurately fitted by the
+same analytic shape in Eqs.~(1) and (2) of the main article, with the same coefficients
+$\bm{c}$, the same power-law transformation $\tilde{a} = (a /
+\ap)^\tilt$, and only $\{\ap, \tilt\}$ as the free parameters.
+The blue dashed line is the fitted analytic shape model.
+\emph{(Bottom)} The absolute difference between the universal shape and
+the simulated data.}
+\label{fig:thesan}
+\end{figure}
+
+We emphasize that the universality discovered in this work is not
+exclusive to the semi-numerical approach or to the astrophysical
+assumptions made by \texttt{21cmFAST}.
+Using the publicly available THESAN1 \cite{Kannan2022}
+data\footnote{\url{https://www.thesan-project.com/data.html}}, we
+demonstrate that more sophisticated simulations, which employ different
+prescriptions for reionization astrophysics and incorporate radiative
+transfer, also exhibit this universal behavior.
+This consistency across various models is not unexpected, as most
+simulations of the epoch of reionization converge on a similar overall
+shape for the reionization timeline\footnote{This feature is currently
+being exploited by the SKA collaboration in their Science data challenge
+3, \url{https://sdc3.skao.int/challenges/inference}.}.
+In Fig.~\ref{fig:thesan}, we show that our universal shape accurately fits
+the THESAN1 simulation data.
+
+
+\subsection*{Symbolic regression}
+\label{sec:pysr}
+
+\begin{figure}[tb]
+\centering
+\includegraphics[width=0.8\linewidth]{figs/pareto.pdf}
+\caption{\textbf{Pareto front for symbolic regression} (blue solid
+steps) illustrates the trade-off between regression accuracy and
+expression complexity.
+We further add the lower convex hull to aid model selection: each
+segment of the orange dotted line represents a power-law trade-off in
+this log-log plot, and every model that touches the convex hull is more
+economic -- in the sense of accuracy gain at cost of complexity -- than
+the nearby models above the segments.
+As an example, here we show the results of $\ln\ap(\vtheta)$, where the
+complexity 22 point gives Eq.~(4) in the main article.}
+\label{fig:pareto}
+\end{figure}
+
+SR learns a model of data in the form of analytic expressions.
+Unlike traditional fittings that are restricted by their specific
+parameterization, SR searches in the vast function space of all
+expressions composed of specified operations, input variables, and free
+constants.
+It is NP-hard \cite{SongEtAl2024, VirgolinPissis2022} and typically need
+genetic or deep learning-based algorithms.
+
+To the authors' knowledge, the first application of SR in astronomy was
+the rediscovery of classical astronomical relationships, such as the
+fundamental plane of elliptical galaxies \cite{Graham2013}.
+Since then, recent works have focused on using SR to uncover new
+physical relations, for instance, identifying possible inflationary
+potentials \cite{Sousa2024} and predicting $\Omegam$ from halo catalogs
+\cite{Shao2023}.
+For additional examples of SR-driven discoveries, interested readers are
+directed to \url{https://astroautomata.com/PySR/papers/}.
+
+In this work, we use the \texttt{PySR} package \cite{Cranmer2020b,
+Cranmer2023} which performs SR optimizations using a multi-population
+genetic algorithm and using the BFGS algorithm for optimizing constants
+\cite{NocedalWright2006}.
+With \texttt{PySR}, we search for symbolic expressions that take the 6
+parameters in Fig.~\ref{fig:sobol} as inputs and output $\ln\ap$ or $\tilt$,
+to minimize the MSE loss.
+Here, the search space is the set of expressions composed of 5 binary
+operators ($+$, $-$, $\cdot$, $/$, and power function) and 2 unary
+operators ($\exp$ and $\ln$).
+Each expression naturally takes the form of a binary tree, and the total
+number of nodes is used as a coarse heuristic for the \emph{complexity}
+of a symbolic expression.
+Note that since we make a choice for the operators used in our search,
+we are implicitly generating a prior over the space of expressions, such
+that it looks similar to existing models described with these operators
+-- as is much of physics.
+We use 512 \texttt{PySR} populations each having 33 expressions, and
+optimize for 20000 iterations each with 10000 cycles.
+
+More complex expressions tend to fit more accurately, a trade-off
+typically visualized by the Pareto front, as shown in Fig.~\ref{fig:pareto}.
+Better and more economic expressions can achieve a lower loss at
+moderate increase of complexity.
+To aid model selection, we use a heuristic that compares all expressions
+on the Pareto front globally, and only considers models that fare
+favorably in power-law trade-offs of the form
+%
+\begin{equation}
+\mathrm{loss}^{1 - \gamma} \cdot \mathrm{complexity}^\gamma
+= \mathrm{const}, \quad \exists \gamma \in (0, 1).
+\end{equation}
+All such expressions lie on the lower convex hull\footnote{A related aid
+for model selection uses the concept of hypervolume of the Pareto front
+\cite{Cao2015}.} of the Pareto front, as illustrated in
+Fig.~\ref{fig:pareto}.
+
+For the pivot $\ln\ap$, we find complexity 22 is enough for the MSE loss
+to reach $1.6 \times 10^{-5}$ (lower than sub-percent level error on
+average), so there is no need to use expressions more complex that that.
+For the tilt $\tilt$, complexity 25, corresponds to a loss $\approx
+1.2\times10^{-3}$ ($\lesssim 0.05\%$ error on average), while higher
+complexities can help but very slowly.
+Therefore, based on the economic heuristic, we choose expressions of
+complexity 22 and 25, for $\ln\ap$ and $\tilt$, respectively.
+
+Our current selection for tilt and pivot could be a consequence of the
+astrophysical assumptions of reionization in \texttt{21cmFAST}.
+A more complex simulation, such as one involving radiative transfer or
+different X-ray preheating \cite{Montero2024}, might reveal a different
+mapping between physical parameters and $x_\HI$ profiles.
+
+
+\subsection*{Alternative mapping}
+\label{sec:SRHalf}
+
+The mapping between neutral hydrogen profiles and cosmology is not
+unique.
+This is because symbolic regression algorithms can be non-convergent.
+Moreover, the resulting symbolic expressions can depend on the data used
+for training, i.e., overfitting.
+
+To investigate the impact of overfitting, we train an alternative
+mapping of reionization with cosmology using only half of the
+\texttt{21cmFAST} $x_\HI$ profiles, which we refer as SRHalf.
+For the pivot and tilt, we obtain
+%
+\begin{align}
+\label{eq:SRHalf_a}
+\ln\ap(\vtheta) &= \Bigl(\frac{\Omegab}{\Omegam}\Bigr)^{\Omegam}
+  - \ln^{0.5271} \Bigl(h \bigl(\zetaUV
+    + \Omegab^{-0.4982}\bigr)^{\sigma_8}\Bigr)
+  - \ns^{1.834}, \\
+%
+\label{eq:SRHalf_b}
+\tilt(\vtheta) &= \biggl(\frac{\zetaUV - \Omegam^{-1.583}}{\Omegab h}
+  \biggr)^{0.3163},
+\end{align}
+%
+with a training loss (complexity) of $1.1 \times 10^{-5}$ (22) and $3.7
+\times 10^{-3}$ (11), respectively.
+Overall, we obtain a relative root mean squared error of 0.9\% when
+reproducing the simulated optical depths from the $x_\HI$ (edge + core)
+with SRHalf.
+Now we can test this on the other half of our $x_\HI$ sample and get a
+validation loss of $2.2 \times 10^{-5}$ and $6.5 \times 10^{-3}$
+respectively, only slightly larger than the training loss on absolute
+scales, which implies that we are safe from overfitting, supported by
+consistency of their MCMC results.
+
+Unsurprisingly, Eqs.~(\ref{eq:SRHalf_a}) and (\ref{eq:SRHalf_b}) recover the cosmological
+trends discovered with SRFull.
+Specifically, increasing $\zetaUV$, $\ns$, $\Omegam$, and $\sigma_8$
+primarily leads to earlier reionization, while larger $\Omegab$ delays
+it.
+The ratio of matter densities appears in the pivot expression again.
+Notably, the role of $h$ generally shows the opposite trend in $\ap$.
+We note that these parameter trends are also generally present in lower
+complexity expressions in the Pareto front.
+Furthermore, Eq.~(\ref{eq:SRHalf_b}) excludes $\ns$ and $\sigma_8$ because of
+our choice of complexity for SRHalf, which, despite having a larger
+loss, still achieves mean squared errors comparable to SRFull when
+reproducing the simulated data.
+
+Replacing Eqs~(4) and (5) of the main article with Eqs.~(\ref{eq:SRHalf_a}) and (\ref{eq:SRHalf_b}), we
+rerun the analysis following the same approach, and summarize the
+results using CMB jointly with astrophysical data in
+Table~\ref{tab:uber-table}.
+Comparing these findings to our previous results, we observe strikingly
+similar values for all cosmological parameters.
+The consistency between our results using the full $x_\HI$ sample and
+those using only half of it indicates that our symbolic expression
+mappings perform robustly and are not biasing the parameter inferences.
+
+
+\subsection*{Astrophysical data}
+\label{sec:xHI}
+
+The increasing number of direct constraints on the reionization timeline
+enhances CMB analyses.
+Fig. 4 in the main article includes upper limits from dark pixel
+constraints \cite{Jin2023} (high-$z$ quasars), a lower bound from the
+Ly$\alpha$ emission fraction \cite{Mesinger2015} (high-$z$ galaxies), and
+an upper limit from the clustering of Ly$\alpha$
+emitters \cite{Sobacchi2015} (high-$z$ galaxies).
+It also presents constraints by Ly$\alpha$ equivalent width of
+Ly$\alpha$ emitters \cite{Mason2018, Mason2019, Hoag2019} (high-$z$
+galaxies) and quasar damping wings \cite{Greig2022, Greig2024, Spina2024,
+Durovcikova2024} (high-$z$ quasars).
+Furthermore, it includes the indirect constraints on $x_\HI$ through the
+evolution of the galaxy Ly$\alpha$ luminosity
+function \cite{Morales2021}.
+
+In this work, we supplement Planck CMB data with quasar damping wing
+(DW) constraints on $x_\HI$ (green pentagons in Fig. 4 of the main article),
+reflecting our confidence in their robustness.
+Future studies could include luminosity function (LF) constraints as
+more data becomes available, particularly since we find including them
+could already halve the error on $\tau_\reio$, and because more data
+will enhance our ability to constrain and marginalize over reionization
+astrophysics.
+We opt not to include the LF constraints on $x_\HI$ in this work as they
+are in slight tension with the DW data at the current stage
+(see Fig. 4 of the main article).
+
+
+%\begin{landscape}
+%\begin{sidewaystable}  % instead of table
+\begin{table}[!t]
+\centering
+\caption{\textbf{Parameter constraints from Planck CMB and astrophysical
+(DW) data.}
+Summary table of the constraints for representative parameters of the
+universal shape (Gompertz) and $\tanh$ reionization models.
+The constraints use CMB `TTTEEE' + lensing information alone or jointly
+with quasar damping wing $x_\HI$ constraints.
+The results from Planck analysis \cite{Planck2020a} are included for
+comparison.
+The validation models are gomp and $\tanh$, gomp does not include the
+cosmological and astrophysical dependences present in the timeline
+of reionization.
+In contrast, gomp + SRFull, and the alternative mapping gomp + SRHalf,
+both include the additional parameter dependences in the reionization
+timeline.
+The shaded cells highlight the parameters that are sampled over by MCMC
+for the different models.
+The numbers in parentheses give the marginalized 1$\sigma$ uncertainty
+in the last two significant digits.
+We highlight the best constraints in boldface, with improvements by
+factors of 5 and 2.3 on $\tau_\reio$ and $A_s$, respectively.
+We also highlight our extremely competitive $\zetaUV$ constraint.
+The age of the Universe and $H_0$ are in unit of Gyr and km/s/Mpc,
+respectively, and $S_8 \equiv \sigma_8 \sqrt{\Omegam/0.3}$ as usual.}
+\makebox[\textwidth][c]{\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{c *{3}{r} !{\hspace{.5em}} *{2}{r} }% !{\hspace{.5em}} *{1}{r}}
+\toprule
+ & \multicolumn{3}{c}{CMB} & \multicolumn{2}{c}{CMB + DW} \\% & CMB + DW + LF \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-6} % \cmidrule(lr){7-7}
+Parameter & Planck PR3\cite{Planck2020a} & $\tanh$ & gomp & gomp + SRFull & gomp + SRHalf \\% & gomp + SRFull \\
+\midrule
+$10^{9} \As$ & \sampled 2.100(30) & \sampled 2.099(30) & \sampled 2.101(31) & \textbf{2.094(13)} & \textbf{2.094(13)} \\% & 2.112(12) \\
+$\ns$ & \sampled 0.9649(42) & \sampled 0.9641(42) & \sampled 0.9640(42) & \sampled 0.9636(39) & \sampled 0.9637(39) \\% & \sampled 0.9646(38) \\
+$\Omegac h^2$ & \sampled 0.1200(12) & \sampled 0.1201(12) & \sampled 0.1200(12) & \sampled 0.1202(11) & \sampled 0.1202(11) \\% & \sampled 0.1202(10) \\
+$\Omegab h^2$ & \sampled 0.02237(15) & \sampled 0.02235(15) & \sampled 0.02235(15) & \sampled 0.02234(14) & \sampled 0.02234(14) \\% & \sampled 0.02234(14) \\
+$\Omegam$ & 0.3153(73) & 0.3157(76) & 0.3155(75) & 0.3166(69) & 0.3163(69) \\% & 0.3162(63) \\
+$\Omegam h^2$ & 0.1430(11) & 0.1430(11) & 0.1430(11) & 0.1432(10) & 0.1431(10) ) \\% & 0.14314(96) \\
+$\OmegaL$ & 0.6847(73) & 0.6842(76) & 0.6845(75) & 0.6833(69) & 0.6836(69) \\% & 0.6837(63) \\
+Age & 13.797(23) & 13.800(23) & 13.799(23) & 13.802(22) & 13.801(22) \\% & 13.801(21) \\
+$H_0$ & 67.36(54) & 67.32(55) & 67.34(55) & \sampled 67.26(50) & \sampled 67.28(50) \\% & \sampled 67.29(46) \\
+$100 \theta_\mathrm{X}$ & \sampled 1.04092(31) & \sampled 1.04185(29) & \sampled 1.04185(29) & 1.04184(29) & 1.04184(29) \\% & 1.04185(29) \\
+$\sigma_8$ & 0.8111(60) & 0.8108(60) & 0.8109(60) & \sampled 0.8100(44) & \sampled 0.8099(44) \\% & \sampled 0.8138(40) \\
+$S_8$ & 0.832(13) & 0.832(13) & 0.832(13) & 0.832(13) & 0.832(13) \\% & 0.836(12) \\
+$\tau_\reio$ & \sampled 0.0544(73) & \sampled 0.0543(75) & \sampled 0.0547(76) & \textbf{0.0526(15)} & $\mathbf{0.0527^{+(14)}_{-(16)}}$ \\% & $0.05720_{(77)}^{(88)}$ \\
+$z_\re$ & 7.67(73) & 7.67(75) & 6.76(67) & 6.98 & 6.99 \\% & 7.45 \\
+$\zetaUV$ & & & & \sampled $\mathbf{26.9^{+2.1}_{-2.5}}$ & \sampled $\mathbf{27.0^{+2.1}_{-2.5}}$ \\% & \sampled $>32.8$ \\
+\bottomrule
+\end{tabular}}
+\label{tab:uber-table}
+\end{table}
+%\end{sidewaystable}  % instead of table
+%\end{landscape}
+
+
+\subsection*{MCMC inference}
+\label{sec:fits}
+
+Our inference combines CMB with astrophysical data.
+Table~\ref{tab:uber-table} summarizes the results obtained by performing MCMC
+Bayesian inference with \texttt{Cobaya} for the models considered
+throughout this work.
+We also include the Planck results \cite{Planck2020a} for reference.
+In total, we run one Gompertz and one $\tanh$ reionization models with
+CMB data and two extra Gompertz models using SR and astrophysical data
+jointly with CMB to infer cosmology while constraining and
+marginalizing over $\zetaUV$.
+
+When considering only CMB data, we sample the typical 6 cosmological
+parameters (see shaded parameters in Table~\ref{tab:uber-table}), sampling
+$\tau_\reio$ and using bisection to obtain the reionization timeline.
+For $\tanh$, the bisection varies $z_\re$, while for Gompertz we fix
+$\tilt$ to the mean value (7.66, the complexity 1 expression from
+\texttt{PySR}) and vary $\ap$.
+Therefore, we do not use the SR mapping from physical parameters to
+reionization -- Eqs.~(4) and (5) of the main article or alternatively
+Eqs.~(\ref{eq:SRHalf_a}) and (\ref{eq:SRHalf_b}).
+
+In contrast, when astrophysical data is included, $\tanh$ samples over
+$z_\re$ instead of $\tau_\reio$ and an additional likelihood component
+is calculated in \texttt{Cobaya}.
+For Gompertz, we do not sample any reionization parameter.
+Instead, we use SRFull or SRHalf to map physical parameters to
+reionization timeline and include the astrophysical likelihood
+component.
+Perhaps unsurprisingly, $\tanh$ reionization does a poor job of fitting
+the astrophysical data, with a $\chi^2$ larger than Gompertz's by an
+order of magnitude, hence we do not show the $\tanh$ + CMB + DW results
+in Table~\ref{tab:uber-table}.
+
+There is an apparent discrepancy between the different models in
+$\theta_\mathrm{x}$, a proxy for the angular scale of the acoustic
+oscillations $\theta_*$.
+The difference is due to our use of $100\theta_\mathrm{s}$, which
+corresponds to the peak scale parameter defined exactly as the ratio of
+the sound horizon divided by the angular diameter at decoupling, with
+decoupling time given by the maximum of the visibility function, i.e.,
+the standard choice for CLASS.
+In contrast, the Planck collaboration reports $100\theta_\mathrm{MC}$,
+which is given by Eq.~(6) in \cite{Planck2014}, and corresponds to the
+standard choice in \texttt{CosmoMC}\cite{Lewis2002}.
+Unsurprisingly, different reionization scenarios give similar values of
+$100\theta_\mathrm{s}$.
+
+Although Table~\ref{tab:uber-table} does not display an error in the midpoint
+of reionization for gomp + SRFull + CMB + DW nor gomp + SRHalf + CMB +
+DW models, it is important to note that an error does exist.
+Unfortunately, it cannot be automatically computed with \texttt{Cobaya}
+because SRFull and SRHalf models do not sample over reionization
+parameters.
+Therefore, $z_\re$ has no meaning in our Gompertz
+\texttt{CLASS}\footnote{This oversight can be corrected; however, it
+would require re-running the chains.} for models that take advantage of
+the mapping between physical parameters and reionization timeline.
+
+Remarkably, the inferred value of $S_8$ remains consistent across all
+reionization models, even when $\sigma_8$ and $\Omegam$ show small
+variations between models.
+This trend suggests that different reionization models neither alleviate
+nor exacerbate the $S_8$ tension.
+While this observation holds for the Planck PR3 data and for CMB + DW,
+we anticipate that incorporating low-redshift Baryon Acoustic
+Oscillation (BAO) data may affect this conclusion.
+Future work will explore the implications of Gompertzian reionization for
+the joint analysis of CMB and low-redshift data.
+
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figs/gomp1dw_tanh_triangle_kill_full.pdf}
+\caption{\textbf{\boldmath Analysis of CMB data and astrophysical data
+treating $\tau_\reio$ as a derived parameter using
+Eqs.~(1) to (5) in the main article vs.\ sampling it with the
+conventional $\tanh$ model.}
+Here gomp + SRFull combines our Gompertzian universal shape with the
+rescaling pivot and tilt obtained via symbolic regression.
+Note that for gomp + SRFull we do not sample over $z_\re$, since
+Eq.~(1) of the main article does not depend on it but we use the astrophysical data to
+constrain and marginalize over reionization astrophysics.
+The green (blue) contours correspond to the constraints obtained with
+our Gompertzian universal shape ($\tanh$ model).}
+\label{fig:unleashed_gomp}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figs/gomp_tanh_triangle_tau.pdf}
+\caption{\textbf{\boldmath Validation of our universal shape for $x_\HI$
+in Eqs.~(1) and (2) of the main article vs.\ the conventional $\tanh$ model using CMB
+data with sampling over $\tau_\reio$.}
+Note that we have not use our mapping from physical parameters to
+$\tau_\reio$.
+Here, we use the standard choice of sampling over optical depth and
+obtain the corresponding reionization history via bisection.
+The green (blue) contours correspond to the constraints obtained with
+our gomp ($\tanh$) model.}
+\label{fig:tg}
+\end{figure}
+
+\FloatBarrier
+
+
+
+
+\bibliographystyle{JHEP}
+{\singlespacing
+\bibliography{main}
+}
+
+
+
+\end{document}
