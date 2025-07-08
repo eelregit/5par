@@ -1,0 +1,4 @@
+QDW:
+  class: reio_like.TanhQDW
+  package_install: pip
+  stop_at_error: true

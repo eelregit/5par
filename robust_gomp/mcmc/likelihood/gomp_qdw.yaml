@@ -1,0 +1,4 @@
+QDW:
+  class: reio_like.GompQDW
+  package_install: pip
+  stop_at_error: true
