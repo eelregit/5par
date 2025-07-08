@@ -1,5 +1,5 @@
-Omega_fld:
-  value: -1.0
+Omega_Lambda:
+  value: 0
   latex: \Omega_\Lambda
 w0_fld:
   prior:
