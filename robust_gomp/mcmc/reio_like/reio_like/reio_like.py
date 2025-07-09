@@ -101,13 +101,16 @@ class QuasarDampingWing(Likelihood):
 class LymanbetaDarkGap(Likelihood):
     """Lyman-beta dark gap likelihood, as extra conservative upper bounds."""
 
+    conservative: True  # if taking the more conservative 1σ side of the upper bound
+
     def initialize(self):
         # points from Lyman-beta forest dark gaps 2205.04569
         # *plus* their errors to be extra conservative
         self.z = np.array([5.55, 5.75, 5.95])
         self.lna = - np.log(1 + self.z)
-        self.upper_bound = np.array([0.05 + 0.04, 0.17 + 0.05, 0.29 + 0.09])  # for HI
-
+        self.upper_bound = np.array([0.05, 0.17, 0.29])  # for HI
+        if self.conservative:
+            self.upper_bound += np.array([0.04, 0.05, 0.09])
 
     def logp(self, **params_values):
         xHI = self.get_xHI(params_values)
