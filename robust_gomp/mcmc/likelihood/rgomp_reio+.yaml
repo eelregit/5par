@@ -1,9 +1,0 @@
-QDW:
-  class: reio_like.RGompQDW
-  package_install: pip
-  stop_at_error: true
-LybDG:
-  class: reio_like.RGompLybDG
-  package_install: pip
-  stop_at_error: true
-  conservative: false

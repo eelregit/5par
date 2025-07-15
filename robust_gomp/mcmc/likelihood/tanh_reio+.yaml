@@ -1,9 +1,0 @@
-QDW:
-  class: reio_like.TanhQDW
-  package_install: pip
-  stop_at_error: true
-LybDG:
-  class: reio_like.TanhLybDG
-  package_install: pip
-  stop_at_error: true
-  conservative: false
