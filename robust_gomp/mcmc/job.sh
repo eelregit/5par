@@ -4,7 +4,7 @@
 #SBATCH --output=%x-%j.out
 #SBATCH --partition=deimos
 #SBATCH --ntasks=16
-#SBATCH --cpus-per-task=6
+#SBATCH --cpus-per-task=4
 #SBATCH --mem=0
 #SBATCH --time=7-00:00:00
 
