@@ -2,7 +2,7 @@ QDW:
   class: reio_like.GompQDW
   package_install: pip
   stop_at_error: true
-LybDG:
-  class: reio_like.GompLybDG
+DP:
+  class: reio_like.GompDP
   package_install: pip
   stop_at_error: true

@@ -2,7 +2,7 @@ QDW:
   class: reio_like.TanhQDW
   package_install: pip
   stop_at_error: true
-LybDG:
-  class: reio_like.TanhLybDG
+DP:
+  class: reio_like.TanhDP
   package_install: pip
   stop_at_error: true
