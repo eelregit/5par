@@ -1,4 +1,7 @@
 import numpy as np
+from scipy.integrate import dblquad
+from scipy.stats import truncnorm, halform
+from scipy.optimize import fsolve
 from cobaya.likelihood import Likelihood
 
 from reio_like.gomprat import gomprat, tanh
@@ -108,13 +111,51 @@ class LymanbetaDarkGap(Likelihood):
         # *plus* their errors to be extra conservative
         self.z = np.array([5.55, 5.75, 5.95])
         self.lna = - np.log(1 + self.z)
-        self.upper_bound = np.array([0.05, 0.17, 0.29])  # for HI
+        self.upper_bound = np.array([0.05, 0.17, 0.29])
         if self.conservative:
             self.upper_bound += np.array([0.04, 0.05, 0.09])
 
     def logp(self, **params_values):
         xHI = self.get_xHI(params_values)
         return 0 if np.all(xHI <= self.upper_bound) else - np.inf
+
+
+class DarkPixel(Likelihood):
+    """Lyman-alpha & Lyman-beta dark pixel likelihood, as extra conservative upper bounds."""
+
+    def _set_sigma(self):
+        """Approximate intractable PDFs by half-normal distributions, by matching 95% CI"""
+
+        def integrand(upplim, xHI, rv):
+            return rv.pdf(upplim) / upplim
+
+        def ccdf(xHI, rv):
+            """Complementary cumulative distribution function, faster than CDF (for the median)."""
+            return dblquad(integrand, xHI, np.inf, lambda xHI: xHI, lambda xHI: np.inf,
+                           args=(rv,))[0]
+
+        # inf as upper bounds is accurate here and above
+        rvs = [truncnorm(-mean / std, np.inf, loc=mean, scale=std)
+               for mean, std in zip(self.mean, self.std)]
+
+        CCL = 1 - 0.95
+
+        self.sigma = np.array([
+            fsolve(lambda xHI, rv: ccdf(xHI, rv) - CCL, 0.1, args=(rv,)).item()
+            for rv in rvs
+        ]) / halfnorm.isf(CCL)
+        print(f'{dark pixel likelihood half-normal sigma = }')
+
+    def initialize(self):
+        self.z = np.array([5.58, 5.87, 6.07])  # Mcgreer et al. 2015
+        self.lna = - np.log(1 + self.z)
+        self.mean = [0.04, 0.06, 0.38]  # Mcgreer et al. 2015
+        self.std = [0.05, 0.05, 0.20]  # Mcgreer et al. 2015
+        self._set_sigma()
+
+    def logp(self, **params_values):
+        xHI = self.get_xHI(params_values)
+        return halfnorm.logpdf(xHI, scale=self.sigma).sum()
 
 
 class GompQDW(Gomp, QuasarDampingWing):
@@ -157,3 +198,26 @@ class RGomp2LybDG(RGomp2, LymanbetaDarkGap):
 
 class TanhLybDG(Tanh, LymanbetaDarkGap):
     """Lyman-beta dark gap likelihood on logistic reionization history."""
+
+
+class GompDP(Gomp, DarkPixel):
+    """Lyman-alpha & Lyman-beta dark pixel likelihood on Gompertzian reionization
+    history."""
+
+
+class RGompDP(RGomp, DarkPixel):
+    """Lyman-alpha & Lyman-beta dark pixel likelihood on Gompertzian reionization
+    history, in symbolic regressed 21cmFAST parameters."""
+
+
+RGomp1DP = RGompDP
+
+
+class RGomp2DP(RGomp2, DarkPixel):
+    """Lyman-alpha & Lyman-beta dark pixel likelihood on Gompertzian reionization
+    history, in symbolic regressed 21cmFAST parameters using half of training set."""
+
+
+class TanhDP(Tanh, DarkPixel):
+    """Lyman-alpha & Lyman-beta dark pixel likelihood on logistic reionization
+    history."""
