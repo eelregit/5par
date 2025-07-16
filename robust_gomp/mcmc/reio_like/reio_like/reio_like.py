@@ -140,11 +140,12 @@ class DarkPixel(Likelihood):
 
         CCL = 1 - 0.95
 
-        self.sigma = np.array([
+        sigma = np.array([
             fsolve(lambda xHI, rv: ccdf(xHI, rv) - CCL, 0.1, args=(rv,)).item()
             for rv in rvs
         ]) / halfnorm.isf(CCL)
         print(f'dark pixel likelihood half-normal {sigma = }')
+        self.sigma = sigma
 
     def initialize(self):
         self.z = np.array([5.58, 5.87, 6.07])  # Mcgreer et al. 2015
