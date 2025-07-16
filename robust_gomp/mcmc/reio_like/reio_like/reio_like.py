@@ -80,7 +80,7 @@ class QuasarDampingWing(Likelihood):
 
     def initialize(self):
         data = np.array([
-            [7.29, 0.49, -0.11, 0.11],  # combined quasars daming wing
+            [7.29, 0.49, -0.11, 0.11],  # combined quasars damping wing
             [6.15, 0.20, -0.12, 0.14],  # 2404.12585
             [6.35, 0.29, -0.13, 0.14],
             [5.60, 0.19, -0.16, 0.11],  # 2405.12273
@@ -121,7 +121,7 @@ class LymanbetaDarkGap(Likelihood):
 
 
 class DarkPixel(Likelihood):
-    """Lyman-alpha & Lyman-beta dark pixel likelihood, as extra conservative upper bounds."""
+    """Lyman-alpha & Lyman-beta dark pixel likelihood, as conservative upper bounds."""
 
     def _set_sigma(self):
         """Approximate intractable PDFs by half-normal distributions, by matching 95% CI"""
