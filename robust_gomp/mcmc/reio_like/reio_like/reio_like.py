@@ -1,6 +1,6 @@
 import numpy as np
 from scipy.integrate import dblquad
-from scipy.stats import truncnorm, halform
+from scipy.stats import truncnorm, halfnorm
 from scipy.optimize import fsolve
 from cobaya.likelihood import Likelihood
 
