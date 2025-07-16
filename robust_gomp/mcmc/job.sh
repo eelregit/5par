@@ -22,6 +22,6 @@ hostname; pwd; date
 
 [[ -f cobaya.covmat ]] && SCRIPT=cobaya_covmat.yaml || SCRIPT=cobaya.yaml
 
-time mpirun -n $SLURM_NTASKS -ppn $SLURM_CPUS_PER_TASK cobaya run --resume $SCRIPT
+time mpirun -n $SLURM_NTASKS cobaya run --resume $SCRIPT
 
 date
