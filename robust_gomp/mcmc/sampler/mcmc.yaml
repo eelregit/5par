@@ -2,6 +2,7 @@
     covmat: auto
     output_every: 600s
     learn_proposal_Rminus1_max: 100
+    learn_proposal_Rminus1_max_early: 100
     Rminus1_stop: 0.01
     Rminus1_cl_stop: 0.2
     oversample_power: 0.4
