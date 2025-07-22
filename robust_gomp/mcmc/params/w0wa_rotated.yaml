@@ -15,6 +15,7 @@ w_half:  # w(z=0.5) = w0 + wa/3
   ref: -1.0
   proposal: 0.05
   latex: w_{0.5}
+  drop: true
 wa_fld:
-  derived: 'lambda w_half, w0_fld: 3 * (w_half - w0_fld)'
+  value: 'lambda w_half, w0_fld: 3 * (w_half - w0_fld)'
   latex: w_a

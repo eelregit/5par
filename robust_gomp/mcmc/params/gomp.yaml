@@ -40,6 +40,7 @@ threehalves_over_beta:
   ref: 0.25  # ref beta is 6
   proposal: 0.05
   latex: \frac{3}{2\beta}
+  drop: true
 beta_gomp:
-  derived: 'lambda threehalves_over_beta: 1.5 / threehalves_over_beta'
+  value: 'lambda threehalves_over_beta: 1.5 / threehalves_over_beta'
   latex: \beta
