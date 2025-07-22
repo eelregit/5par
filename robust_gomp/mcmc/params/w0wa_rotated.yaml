@@ -6,16 +6,15 @@ w0_fld:
     min: -3.0
     max: 1.0
   ref: -1.0
-  proposal: 0.05
+  proposal: 0.2
   latex: w_0
-w_half:  # w(z=1/2) = w0 + wa/3
+w_half:  # w(z=0.5) = w0 + wa/3
   prior:
     min: -4.0
     max: 1.7
   ref: -1.0
-  proposal: 0.02
-  latex: w_{1/2}
-  drop: true
+  proposal: 0.05
+  latex: w_{0.5}
 wa_fld:
-  value: 'lambda w_half, w0_fld: 3 * (w_half - w0_fld)'
+  derived: 'lambda w_half, w0_fld: 3 * (w_half - w0_fld)'
   latex: w_a

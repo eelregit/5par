@@ -6,7 +6,7 @@ n_s:
     dist: norm
     loc: 0.9729
     scale: 0.061
-  proposal: 0.0033
+  proposal: 0.003
   latex: n_\mathrm{s}
 theta_s_100:
   latex: 100\theta_\mathrm{s}
@@ -18,7 +18,7 @@ H0:
     dist: norm
     loc: 67.4
     scale: 0.5
-  proposal: 0.5
+  proposal: 0.3
   latex: H_0
 omega_b:
   prior:
@@ -28,7 +28,7 @@ omega_b:
     dist: norm
     loc: 2.239e-2
     scale: 2.1e-3
-  proposal: 6.5e-5
+  proposal: 1e-4
   latex: \Omega_\mathrm{b} h^2
 omega_cdm:
   prior:
@@ -38,7 +38,7 @@ omega_cdm:
     dist: norm
     loc: 0.12
     scale: 2.6e-2
-  proposal: 0.0011
+  proposal: 6e-4
   latex: \Omega_\mathrm{c} h^2
 Omega_m:
   min: 0.24

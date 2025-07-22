@@ -6,6 +6,6 @@ m_ncdm:
     dist: halfnorm
     loc: 0.0
     scale: 0.2
-  proposal: 0.1
+  proposal: 0.03
   renames: mnu
   latex: \Sigma m_\nu
