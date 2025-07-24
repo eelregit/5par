@@ -21,6 +21,8 @@ source $HOME/Projects/gomp/activate.sh
 hostname; pwd; date
 
 [[ -f cobaya.covmat ]] && SCRIPT=cobaya_covmat.yaml || SCRIPT=cobaya.yaml
+NAME=$(awk '$1=="output:"{print $2}' $SCRIPT)
+[[ -f $NAME.input.yaml ]] && SCRIPT=$NAME.input.yaml
 
 time mpirun -n $SLURM_NTASKS cobaya run --resume $SCRIPT
 
