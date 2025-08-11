@@ -2,11 +2,6 @@ MCMC with Cobaya and CLASS
 ==========================
 
 
-title:
-
-* MΛGA: Make ΛCDM Good/Great Again?
-
-
 Reionization Models:
 
 * gomp: Gompertzian universal shape with alpha and beta shape params
