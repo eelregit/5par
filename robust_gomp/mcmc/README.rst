@@ -5,6 +5,8 @@ MCMC with Cobaya and CLASS
 Reionization Models:
 
 * gomp: Gompertzian universal shape with alpha and beta shape params
+* gompα: Gompertzian universal shape with only the alpha shape param and
+  fixed beta
 * rgomp: Gompertzian shape with parameters symbolically regressed on
   LCDM + 3 astrophysical parameters
   + rgomp1: same as rgomp
