@@ -11,12 +11,16 @@ from getdist import plots
 import matplotlib.pyplot as plt
 
 
+plt.switch_backend('pgf')
+
+
 def triangle_plot(*roots):
     assert len(roots) > 0
 
     samples, labels, paths, models, data = [], [], [], [], []
     for root in roots:
-        s = loadMCSamples(root, settings={'ignore_rows': 0.2})
+        s = loadMCSamples(root, settings={'ignore_rows': 0.2,
+                                          'credible_interval_threshold': float('inf')})
         p = s.getParamNames().list()
         if 'S8' not in p:
             s.addDerived(s.getParams().s8omegamp5 / math.sqrt(0.3), name='S8',
@@ -52,22 +56,21 @@ def triangle_plot(*roots):
         filepath = (commonpath + '/' + '_'.join(sorted(commondata)) + '_triangle'
                     + '_V'.join(modeldata) + '.pdf')
 
-    params = ['A_s', 'n_s', 'theta_s_100', 'omega_cdm', 'omega_b', 'Omega_m',
-              'omegamh2', 'H0', 'sigma8', 'S8', 'tau_reio']
-    for param in ['m_ncdm', 'w0_fld', 'wa_fld', 'z_reio', 'alpha_gomp', 'beta_gomp',
-                  'zt', 'Tv', 'LX',
-                  'chi2__planck_2018_lowl.EE_sroll2',
-                  'chi2__bao.desi_dr2.desi_bao_all',
-                  'chi2__xHI']:
+    params = ['logA', 'n_s', 'theta_s_100', 'omega_cdm', 'omega_b', 'Omega_m',
+              'omegamh2', 'H0', 'sigma8', 'S8']
+    for param in ['alpha_gomp', 'threehalves_over_beta', 'beta_gomp', 'tau_reio',
+                  'w0_fld', 'w_half', 'wa_fld', 'm_ncdm',
+                  'chi2__lowlTT', 'chi2__lowlEE', 'chi2__Planck', 'chi2__ACT',
+                  'chi2__QDW', 'chi2__DP', 'chi2__lens', 'chi2__bao']:
         for s in samples:
             if param in s.getParamNames().list():
                 params.append(param)
                 break
 
     g = plots.get_subplot_plotter(subplot_size=1)
-    g.settings.line_styles = ['-C2', '--C0', '-.C1', ':C3']
+    g.settings.line_styles = ['-C0', '--C1', '-.C3', ':C2']
     g.settings.linewidth = 3
-    g.settings.solid_colors = ['C2', 'C0', 'C1', 'C3']
+    g.settings.solid_colors = ['C0', 'C1', 'C3', 'C2']
     g.settings.alpha_filled_add = 0.5
     g.settings.figure_legend_frame = False
     g.settings.figure_legend_loc = 'upper right'
@@ -79,13 +82,13 @@ def triangle_plot(*roots):
     g.triangle_plot(
         samples,
         params,
-        filled=True,
+        #filled=True,
         legend_labels=labels,
         markers={
-            'A_s': 2.100e-9, 'n_s': 0.9649, 'theta_s_100': 1.04092, 'omega_cdm': 0.1200,
-            'omega_b': 0.02237, 'Omega_m': 0.3153, 'omegamh2': 0.1430, 'H0': 67.36,
-            'sigma8': 0.8111, 'S8': 0.832, 'tau_reio': 0.0544,
-        },
+            'logA': 3.060, 'n_s': 0.9743, 'theta_s_100': 1.04086, 'omega_cdm': 0.1179,
+            'omega_b': 0.02256, 'Omega_m': 0.3032, 'omegamh2': 0.1411, 'H0': 68.22,
+            'sigma8': 0.8126, 'S8': 0.8169, 'tau_reio': 0.0632,
+        },  # ACT DR6 2503.14452 Table 5 P-ACT-LB
     )
 
     g.export(filepath)
